@@ -2,7 +2,9 @@
 /* DBMS name:      Microsoft SQL Server 2008                    */
 /* Created on:     4/19/2020 11:32:17 AM                        */
 /*==============================================================*/
+Create database QL_SieuThi
 
+use QL_SieuThi
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
