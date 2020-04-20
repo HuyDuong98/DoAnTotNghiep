@@ -1,0 +1,106 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'Quicksand-Medium';
+    src: url('font/Quicksand-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Quicksand-Regular';
+    src: url('font/Quicksand-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('font/OpenSans-Regular.ttf') format('truetype');
+}
+body {
+    font-family: 'OpenSans-Regular', sans-serif;
+    /*font-family: 'Quicksand-Regular', sans-serif;*/
+    font-weight: 400;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.75;
+    width: 100%;
+    background: #fff;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a {
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a, span {
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+}
+.pt-10{
+    padding-top: 10px !important;
+}
+.pb-10{
+    padding-bottom:10px !important;
+}
+.font-weight-bold {
+    font-weight: 700;
+}
+ul {
+    list-style: none;
+    margin: 0;
+}
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+button, input {
+    overflow: visible;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+    [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+        cursor: pointer;
+    }
+.bg-ghost-white {
+    background: #f5f4fa;
+}
+.carousel-control.left {
+    background: none;
+}
+.carousel-control.right {
+    background: none;
+}

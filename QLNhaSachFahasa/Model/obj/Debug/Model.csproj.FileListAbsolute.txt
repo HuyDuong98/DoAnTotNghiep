@@ -1,0 +1,24 @@
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\Model.dll.config
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\Model.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\Model.pdb
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.xml
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\obj\Debug\Model.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\obj\Debug\Model.pdb
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\SourceCode\QLNhaSachFahasa\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\Model.dll.config
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\Model.dll
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\Model.pdb
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.dll
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.SqlServer.dll
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.xml
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\bin\Debug\EntityFramework.SqlServer.xml
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\obj\Debug\Model.csproj.CopyComplete
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\obj\Debug\Model.dll
+D:\Đồ án tốt nghiệp\SoureCode\DoAnTotNghiep\QLNhaSachFahasa\Model\obj\Debug\Model.pdb
