@@ -6,29 +6,23 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("PHANLOAI")]
-    public partial class PHANLOAI
+    [Table("PHANLOAIVPP")]
+    public partial class PHANLOAIVPP
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PHANLOAI()
+        public PHANLOAIVPP()
         {
-            SACHes = new HashSet<SACH>();
+            VANPHONGPHAMs = new HashSet<VANPHONGPHAM>();
         }
 
         [Key]
         [StringLength(20)]
-        public string MAPL { get; set; }
+        public string MAPLVPP { get; set; }
 
-        [StringLength(20)]
-        public string IDGROUPPL { get; set; }
-
-        [Required]
-        [StringLength(500)]
-        public string TENPL { get; set; }
-
-        public virtual GROUPPHANLOAI GROUPPHANLOAI { get; set; }
+        [StringLength(10)]
+        public string TENPLVPP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SACH> SACHes { get; set; }
+        public virtual ICollection<VANPHONGPHAM> VANPHONGPHAMs { get; set; }
     }
 }

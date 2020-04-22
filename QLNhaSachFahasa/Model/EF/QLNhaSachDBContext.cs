@@ -5,10 +5,10 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class QLNhaSachFahasaDBContext : DbContext
+    public partial class QLNhaSachDBContext : DbContext
     {
-        public QLNhaSachFahasaDBContext()
-            : base("name=QLNhaSachFahasa")
+        public QLNhaSachDBContext()
+            : base("name=QLNhaSachDBContext")
         {
         }
 
@@ -18,7 +18,7 @@ namespace Model.EF
         public virtual DbSet<CT_PHIEUNHAP> CT_PHIEUNHAP { get; set; }
         public virtual DbSet<CT_PHIEUXUAT> CT_PHIEUXUAT { get; set; }
         public virtual DbSet<GIABAN> GIABANs { get; set; }
-        public virtual DbSet<GROUPPHANLOAI> GROUPPHANLOAIs { get; set; }
+        public virtual DbSet<GROUPPHANLOAISACH> GROUPPHANLOAISACHes { get; set; }
         public virtual DbSet<HINHSANPHAM> HINHSANPHAMs { get; set; }
         public virtual DbSet<HINHTHUCSACH> HINHTHUCSACHes { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
@@ -27,31 +27,29 @@ namespace Model.EF
         public virtual DbSet<MATHANGKINHDOANH> MATHANGKINHDOANHs { get; set; }
         public virtual DbSet<NGONNGU> NGONNGUs { get; set; }
         public virtual DbSet<NHACUNGCAP> NHACUNGCAPs { get; set; }
+        public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<NHASANXUAT> NHASANXUATs { get; set; }
-        public virtual DbSet<PHANLOAI> PHANLOAIs { get; set; }
+        public virtual DbSet<PHANLOAISACH> PHANLOAISACHes { get; set; }
+        public virtual DbSet<PHANLOAIVPP> PHANLOAIVPPs { get; set; }
         public virtual DbSet<PHIEUNHAP> PHIEUNHAPs { get; set; }
         public virtual DbSet<PHIEUXUAT> PHIEUXUATs { get; set; }
         public virtual DbSet<PHUONGTHUCTHANHTOAN> PHUONGTHUCTHANHTOANs { get; set; }
         public virtual DbSet<ROLE> ROLEs { get; set; }
         public virtual DbSet<SACH> SACHes { get; set; }
+        public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<THOIGIAN> THOIGIANs { get; set; }
         public virtual DbSet<USERGROUP> USERGROUPs { get; set; }
         public virtual DbSet<VANPHONGPHAM> VANPHONGPHAMs { get; set; }
+        public virtual DbSet<XUATXU> XUATXUs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CHUONGTRINH_KHUYENMAI>()
                 .Property(e => e.IDCTKM)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<CHUONGTRINH_KHUYENMAI>()
                 .Property(e => e.IDTG)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<CHUONGTRINH_KHUYENMAI>()
-                .Property(e => e.TENCTKM)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<CHUONGTRINH_KHUYENMAI>()
@@ -60,16 +58,15 @@ namespace Model.EF
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CT_CHUONGTRINH_KHUYENMAI>()
-                .Property(e => e.ID)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_CHUONGTRINH_KHUYENMAI>()
                 .Property(e => e.IDCTKM)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_HOADON>()
-                .Property(e => e.ID)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_HOADON>()
@@ -85,11 +82,11 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_PHIEUNHAP>()
-                .Property(e => e.ID)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_PHIEUXUAT>()
-                .Property(e => e.ID)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CT_PHIEUXUAT>()
@@ -101,15 +98,15 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<GIABAN>()
-                .Property(e => e.GIAGIABAN)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<GROUPPHANLOAI>()
-                .Property(e => e.IDGROUPPL)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<GROUPPHANLOAI>()
-                .Property(e => e.TENGROUPTHELOAI)
+            modelBuilder.Entity<GIABAN>()
+                .Property(e => e.DONGIABAN)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<GROUPPHANLOAISACH>()
+                .Property(e => e.IDGROUPPL)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HINHSANPHAM>()
@@ -117,23 +114,11 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<HINHSANPHAM>()
-                .Property(e => e.MASACH)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HINHSANPHAM>()
-                .Property(e => e.MASP)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HINHSANPHAM>()
-                .Property(e => e.TENHINHANH)
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HINHTHUCSACH>()
                 .Property(e => e.MAHINHTHUC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<HINHTHUCSACH>()
-                .Property(e => e.HINHTHUC)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HOADON>()
@@ -145,7 +130,7 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<HOADON>()
-                .Property(e => e.MAKHO)
+                .Property(e => e.MANV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<HOADON>()
@@ -170,14 +155,6 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.HOKH)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.TENKH)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.EMAIL)
                 .IsUnicode(false);
 
@@ -186,80 +163,24 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.QUOCGIA)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.THANHPHO)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.QUAN)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.PHUONG)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
-                .Property(e => e.DIACHI)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.USERNAME)
                 .IsUnicode(false);
 
             modelBuilder.Entity<KHACHHANG>()
                 .Property(e => e.PASSWORD)
-                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<KHOHANG>()
                 .Property(e => e.MAKHO)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<KHOHANG>()
-                .Property(e => e.TENKHO)
+            modelBuilder.Entity<MATHANGKINHDOANH>()
+                .Property(e => e.IDLOAI)
+                .IsFixedLength()
                 .IsUnicode(false);
-
-            modelBuilder.Entity<KHOHANG>()
-                .Property(e => e.DIACHIKHO)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .Property(e => e.ID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .Property(e => e.TENMATHANG)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .HasMany(e => e.CT_CHUONGTRINH_KHUYENMAI)
-                .WithRequired(e => e.MATHANGKINHDOANH)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .HasMany(e => e.CT_HOADON)
-                .WithRequired(e => e.MATHANGKINHDOANH)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .HasMany(e => e.CT_PHIEUNHAP)
-                .WithRequired(e => e.MATHANGKINHDOANH)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<MATHANGKINHDOANH>()
-                .HasMany(e => e.CT_PHIEUXUAT)
-                .WithRequired(e => e.MATHANGKINHDOANH)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<NGONNGU>()
                 .Property(e => e.MANGONNGU)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NGONNGU>()
-                .Property(e => e.NGONNGU1)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NHACUNGCAP>()
@@ -267,47 +188,48 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<NHACUNGCAP>()
-                .Property(e => e.TENNCC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NHACUNGCAP>()
-                .Property(e => e.DIACHINSX)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NHACUNGCAP>()
                 .Property(e => e.EMAIL)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NHACUNGCAP>()
-                .Property(e => e.SDT)
+                .Property(e => e.SDTNV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NHANVIEN>()
+                .Property(e => e.MANV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NHANVIEN>()
+                .Property(e => e.USERNAMENV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NHANVIEN>()
+                .Property(e => e.PASSWORDNV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NHANVIEN>()
+                .Property(e => e.SDTNV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NHASANXUAT>()
                 .Property(e => e.MANSX)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<NHASANXUAT>()
-                .Property(e => e.TENNSX)
+            modelBuilder.Entity<PHANLOAISACH>()
+                .Property(e => e.MAPLSACH)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<NHASANXUAT>()
-                .Property(e => e.DIACHINSX)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<NHASANXUAT>()
-                .Property(e => e.THONGTINTHEM)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PHANLOAI>()
-                .Property(e => e.MAPL)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PHANLOAI>()
+            modelBuilder.Entity<PHANLOAISACH>()
                 .Property(e => e.IDGROUPPL)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<PHANLOAI>()
-                .Property(e => e.TENPL)
+            modelBuilder.Entity<PHANLOAIVPP>()
+                .Property(e => e.MAPLVPP)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PHANLOAIVPP>()
+                .Property(e => e.TENPLVPP)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<PHIEUNHAP>()
@@ -315,7 +237,11 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<PHIEUNHAP>()
-                .Property(e => e.MAKHO)
+                .Property(e => e.MANCC)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PHIEUNHAP>()
+                .Property(e => e.MANV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PHIEUNHAP>()
@@ -332,7 +258,7 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<PHIEUXUAT>()
-                .Property(e => e.MAKHO)
+                .Property(e => e.MANV)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PHIEUXUAT>()
@@ -348,24 +274,22 @@ namespace Model.EF
                 .Property(e => e.MAPT)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<PHUONGTHUCTHANHTOAN>()
-                .Property(e => e.TENPT)
-                .IsUnicode(false);
-
             modelBuilder.Entity<ROLE>()
                 .Property(e => e.IDROLE)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ROLE>()
-                .Property(e => e.TENROLE)
-                .IsUnicode(false);
+                .HasMany(e => e.USERGROUPs)
+                .WithMany(e => e.ROLEs)
+                .Map(m => m.ToTable("CREDENTIAL").MapLeftKey("IDROLE").MapRightKey("IDGROUP"));
 
             modelBuilder.Entity<SACH>()
                 .Property(e => e.MASACH)
                 .IsUnicode(false);
 
             modelBuilder.Entity<SACH>()
-                .Property(e => e.MAPL)
+                .Property(e => e.IDLOAI)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<SACH>()
@@ -373,19 +297,7 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<SACH>()
-                .Property(e => e.ID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.MANSX)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.MANCC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.IDGIA)
+                .Property(e => e.MAPLSACH)
                 .IsUnicode(false);
 
             modelBuilder.Entity<SACH>()
@@ -393,24 +305,49 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<SACH>()
-                .Property(e => e.TENSACH)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.TACGIA)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<SACH>()
                 .Property(e => e.GIASACH)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.KICHTHUOC)
+            modelBuilder.Entity<SANPHAM>()
+                .Property(e => e.IDSANPHAM)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<SACH>()
-                .Property(e => e.TOMTAC)
+            modelBuilder.Entity<SANPHAM>()
+                .Property(e => e.MANSX)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .Property(e => e.IDLOAI)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .Property(e => e.MAKHO)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .Property(e => e.DONGIA)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<SANPHAM>()
+                .HasMany(e => e.CT_CHUONGTRINH_KHUYENMAI)
+                .WithRequired(e => e.SANPHAM)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .HasMany(e => e.CT_HOADON)
+                .WithRequired(e => e.SANPHAM)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .HasMany(e => e.CT_PHIEUNHAP)
+                .WithRequired(e => e.SANPHAM)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SANPHAM>()
+                .HasMany(e => e.CT_PHIEUXUAT)
+                .WithRequired(e => e.SANPHAM)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<THOIGIAN>()
                 .Property(e => e.IDTG)
@@ -421,52 +358,31 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<USERGROUP>()
-                .Property(e => e.TENGROUP)
+                .Property(e => e.MANV)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<USERGROUP>()
-                .HasMany(e => e.ROLEs)
-                .WithMany(e => e.USERGROUPs)
-                .Map(m => m.ToTable("CREDENTIAL").MapLeftKey("IDGROUP").MapRightKey("IDROLE"));
 
             modelBuilder.Entity<VANPHONGPHAM>()
                 .Property(e => e.MASP)
                 .IsUnicode(false);
 
             modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.MANCC)
+                .Property(e => e.IDLOAI)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.MANSX)
+                .Property(e => e.MAQUOCGIA)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.ID)
+                .Property(e => e.MAPLVPP)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.DONGIAVPP)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.KICHTHUOC)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.TENSP)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.GIOITHIEUSP)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<VANPHONGPHAM>()
-                .Property(e => e.CHATLIEU)
+            modelBuilder.Entity<XUATXU>()
+                .Property(e => e.MAQUOCGIA)
+                .IsFixedLength()
                 .IsUnicode(false);
         }
-
-
-        //public System.Data.Entity.DbSet<QLNhaSachFahasaDBContext.Models.LoginModel> LoginModels { get; set; }
     }
 }

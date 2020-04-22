@@ -14,16 +14,11 @@ namespace Model.EF
         public string LINKHINHANH { get; set; }
 
         [StringLength(20)]
-        public string MASACH { get; set; }
+        public string IDSANPHAM { get; set; }
 
-        [StringLength(20)]
-        public string MASP { get; set; }
-
-        [StringLength(200)]
+        [StringLength(1024)]
         public string TENHINHANH { get; set; }
 
-        public virtual SACH SACH { get; set; }
-
-        public virtual VANPHONGPHAM VANPHONGPHAM { get; set; }
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

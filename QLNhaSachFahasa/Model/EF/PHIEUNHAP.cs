@@ -20,7 +20,10 @@ namespace Model.EF
         public string IDHDNHAP { get; set; }
 
         [StringLength(20)]
-        public string MAKHO { get; set; }
+        public string MANCC { get; set; }
+
+        [StringLength(20)]
+        public string MANV { get; set; }
 
         public DateTime NGAYNHAP { get; set; }
 
@@ -32,6 +35,8 @@ namespace Model.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAP> CT_PHIEUNHAP { get; set; }
 
-        public virtual KHOHANG KHOHANG { get; set; }
+        public virtual NHACUNGCAP NHACUNGCAP { get; set; }
+
+        public virtual NHANVIEN NHANVIEN { get; set; }
     }
 }

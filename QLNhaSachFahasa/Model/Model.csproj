@@ -57,7 +57,7 @@
     <Compile Include="EF\CT_PHIEUNHAP.cs" />
     <Compile Include="EF\CT_PHIEUXUAT.cs" />
     <Compile Include="EF\GIABAN.cs" />
-    <Compile Include="EF\GROUPPHANLOAI.cs" />
+    <Compile Include="EF\GROUPPHANLOAISACH.cs" />
     <Compile Include="EF\HINHSANPHAM.cs" />
     <Compile Include="EF\HINHTHUCSACH.cs" />
     <Compile Include="EF\HOADON.cs" />
@@ -66,17 +66,21 @@
     <Compile Include="EF\MATHANGKINHDOANH.cs" />
     <Compile Include="EF\NGONNGU.cs" />
     <Compile Include="EF\NHACUNGCAP.cs" />
+    <Compile Include="EF\NHANVIEN.cs" />
     <Compile Include="EF\NHASANXUAT.cs" />
-    <Compile Include="EF\PHANLOAI.cs" />
+    <Compile Include="EF\PHANLOAISACH.cs" />
+    <Compile Include="EF\PHANLOAIVPP.cs" />
     <Compile Include="EF\PHIEUNHAP.cs" />
     <Compile Include="EF\PHIEUXUAT.cs" />
     <Compile Include="EF\PHUONGTHUCTHANHTOAN.cs" />
-    <Compile Include="EF\QLNhaSachFahasaDBContext.cs" />
+    <Compile Include="EF\QLNhaSachDBContext.cs" />
     <Compile Include="EF\ROLE.cs" />
     <Compile Include="EF\SACH.cs" />
+    <Compile Include="EF\SANPHAM.cs" />
     <Compile Include="EF\THOIGIAN.cs" />
     <Compile Include="EF\USERGROUP.cs" />
     <Compile Include="EF\VANPHONGPHAM.cs" />
+    <Compile Include="EF\XUATXU.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

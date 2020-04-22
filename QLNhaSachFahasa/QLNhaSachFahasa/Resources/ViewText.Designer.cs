@@ -61,6 +61,33 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đăng nhập.
+        /// </summary>
+        public static string BUTTON_LOGIN {
+            get {
+                return ResourceManager.GetString("BUTTON_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PLACEHOLDER_PASSWORD {
+            get {
+                return ResourceManager.GetString("PLACEHOLDER_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserName.
+        /// </summary>
+        public static string PLACEHOLDER_USERNAME {
+            get {
+                return ResourceManager.GetString("PLACEHOLDER_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free Support 24/7.
         /// </summary>
         public static string TITLE_FREE_SUPPORT {

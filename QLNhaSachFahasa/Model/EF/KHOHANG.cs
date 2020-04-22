@@ -12,9 +12,7 @@ namespace Model.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KHOHANG()
         {
-            HOADONs = new HashSet<HOADON>();
-            PHIEUNHAPs = new HashSet<PHIEUNHAP>();
-            PHIEUXUATs = new HashSet<PHIEUXUAT>();
+            SANPHAMs = new HashSet<SANPHAM>();
         }
 
         [Key]
@@ -34,12 +32,6 @@ namespace Model.EF
         public int? SLHANGTRONGKHO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HOADON> HOADONs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUNHAP> PHIEUNHAPs { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUXUAT> PHIEUXUATs { get; set; }
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

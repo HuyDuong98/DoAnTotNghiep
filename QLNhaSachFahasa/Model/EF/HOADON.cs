@@ -23,7 +23,7 @@ namespace Model.EF
         public string MAKH { get; set; }
 
         [StringLength(20)]
-        public string MAKHO { get; set; }
+        public string MANV { get; set; }
 
         [StringLength(20)]
         public string MAPT { get; set; }
@@ -38,7 +38,7 @@ namespace Model.EF
 
         public virtual PHUONGTHUCTHANHTOAN PHUONGTHUCTHANHTOAN { get; set; }
 
-        public virtual KHOHANG KHOHANG { get; set; }
+        public virtual NHANVIEN NHANVIEN { get; set; }
 
         public virtual KHACHHANG KHACHHANG { get; set; }
     }

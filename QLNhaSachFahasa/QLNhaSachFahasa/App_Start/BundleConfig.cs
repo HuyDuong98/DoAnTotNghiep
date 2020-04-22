@@ -29,6 +29,13 @@ namespace QLNhaSachFahasa
                           "~/Content/main.css",
                      "~/Content/font-awesome-4.7.0/css/font-awesome.min.css",
                      "~/Content/custom/HomePage.css"));
+           
+            bundles.Add(new StyleBundle("~/Login/css").Include(
+                       "~/Content/bootstrap-4.4.1/css/bootstrap.css",
+                       "~/Content/bootstrap.css",
+                         "~/Content/main.css",
+                    "~/Content/font-awesome-4.7.0/css/font-awesome.min.css",
+                    "~/Content/custom/LoginPage.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

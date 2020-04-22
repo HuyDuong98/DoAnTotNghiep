@@ -20,12 +20,17 @@ namespace Model.EF
         [StringLength(20)]
         public string IDGROUP { get; set; }
 
+        [StringLength(20)]
+        public string MANV { get; set; }
+
         [Required]
         [StringLength(200)]
         public string TENGROUP { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHACHHANG> KHACHHANGs { get; set; }
+
+        public virtual NHANVIEN NHANVIEN { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ROLE> ROLEs { get; set; }

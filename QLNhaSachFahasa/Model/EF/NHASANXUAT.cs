@@ -12,8 +12,7 @@ namespace Model.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHASANXUAT()
         {
-            SACHes = new HashSet<SACH>();
-            VANPHONGPHAMs = new HashSet<VANPHONGPHAM>();
+            SANPHAMs = new HashSet<SANPHAM>();
         }
 
         [Key]
@@ -31,9 +30,6 @@ namespace Model.EF
         public string THONGTINTHEM { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SACH> SACHes { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VANPHONGPHAM> VANPHONGPHAMs { get; set; }
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

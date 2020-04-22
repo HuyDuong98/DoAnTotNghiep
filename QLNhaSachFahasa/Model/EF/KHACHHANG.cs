@@ -23,11 +23,11 @@ namespace Model.EF
         public string IDGROUP { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(1024)]
         public string HOKH { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(1024)]
         public string TENKH { get; set; }
 
         [Required]
@@ -38,30 +38,29 @@ namespace Model.EF
         [StringLength(10)]
         public string DIENTHOAI { get; set; }
 
-        [Required]
-        [StringLength(500)]
+        [StringLength(1024)]
         public string QUOCGIA { get; set; }
 
-        [Required]
-        [StringLength(300)]
+        [StringLength(1024)]
         public string THANHPHO { get; set; }
 
-        [StringLength(300)]
+        [StringLength(1024)]
         public string QUAN { get; set; }
 
-        [Required]
         [StringLength(300)]
         public string PHUONG { get; set; }
 
-        [Required]
         [StringLength(1024)]
         public string DIACHI { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         public string USERNAME { get; set; }
 
-        [StringLength(20)]
+        [StringLength(1024)]
         public string PASSWORD { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? NGAYTAO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }

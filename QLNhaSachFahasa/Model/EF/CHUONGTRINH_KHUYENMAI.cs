@@ -15,14 +15,14 @@ namespace Model.EF
         }
 
         [Key]
-        [StringLength(10)]
+        [StringLength(20)]
         public string IDCTKM { get; set; }
 
         [StringLength(20)]
         public string IDTG { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(1024)]
         public string TENCTKM { get; set; }
 
         public virtual THOIGIAN THOIGIAN { get; set; }

@@ -9,7 +9,13 @@ namespace QLNhaSachFahasa.Models
     public class RegisterModel
     {
         [Key]
-        public string ID { get; set; }
+        public string MAKH { get; set; }
+        [Display(Name = "Họ")]
+        [Required(ErrorMessage = "Họ không được để trống")]
+        public string HoKH { get; set; }
+        [Display(Name = "Tên")]
+        [Required(ErrorMessage = "Tên không được để trống")]
+        public string TenKH { get; set; }
         [Display(Name="Tên đăng nhập")]
         [Required(ErrorMessage ="Tên đăng nhập không được để trống")]
         public string UserName { get; set; }
@@ -20,9 +26,6 @@ namespace QLNhaSachFahasa.Models
         [Display(Name = "Xác nhận mật khẩu")]
         [Compare("Password", ErrorMessage ="Xác nhận mật khẩu không đúng.")]
         public string ConfimPassword { get; set; }
-        [Display(Name = "Họ tên")]
-        [Required(ErrorMessage = "Yêu cầu nhập họ tên")]
-        public string name { get; set; }
         [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
         [Display(Name = "Email")]
@@ -30,6 +33,14 @@ namespace QLNhaSachFahasa.Models
         public string Email { get; set; }
         [Display(Name = "Điện thoại")]
         public string Phone { get; set; }
+        [Display(Name = "Quốc gia")]
+        public string QuocGia { get; set; }
+        [Display(Name = "Thành phố")]
+        public string ThanhPho { get; set; }
+        [Display(Name = "Quận")]
+        public string Quan { get; set; }
+        [Display(Name = "Phường")]
+        public string Phuong { get; set; }
 
     }
 }

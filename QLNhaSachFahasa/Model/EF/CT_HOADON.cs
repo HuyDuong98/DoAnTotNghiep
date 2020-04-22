@@ -11,7 +11,7 @@ namespace Model.EF
         [Key]
         [Column(Order = 0)]
         [StringLength(20)]
-        public string ID { get; set; }
+        public string IDSANPHAM { get; set; }
 
         [Key]
         [Column(Order = 1)]
@@ -25,6 +25,6 @@ namespace Model.EF
 
         public virtual HOADON HOADON { get; set; }
 
-        public virtual MATHANGKINHDOANH MATHANGKINHDOANH { get; set; }
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

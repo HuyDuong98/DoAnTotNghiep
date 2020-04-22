@@ -1,4 +1,5 @@
 ﻿using Model.Dao;
+using Model.EF;
 using QLNhaSachFahasa.Common;
 using QLNhaSachFahasa.Models;
 using System;
@@ -12,23 +13,10 @@ namespace QLNhaSachFahasa.Controllers
     public class UserController : Controller
     {
         // GET: User
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
+
         public ActionResult Index()
         {
             return View();
-        }
-        [HttpPost]
-        public ActionResult Register(RegisterModel model)
-        {
-            if(ModelState.IsValid)
-            {
-
-            }    
-            return View(model);
         }
         public ActionResult Login(LoginModel model)
         {
@@ -36,7 +24,7 @@ namespace QLNhaSachFahasa.Controllers
             {
                 var dao = new UserDao();
                 var result = dao.Login(model.UseeName, Encryptor.MD5Hash( model.Password));
-                if (result)
+                if (result==1)
                 {
                     var user = dao.GetById(model.UseeName);
                     var userSession = new UserLogin();
@@ -44,6 +32,13 @@ namespace QLNhaSachFahasa.Controllers
                     userSession.UserID = user.MAKH;
                     Session.Add(CommonConstants.USER_SEESION, userSession);
                     return RedirectToAction("Index", "Home");
+                }else if(result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng.");
                 }
                 else
                 {
@@ -52,6 +47,53 @@ namespace QLNhaSachFahasa.Controllers
             }
             return View("Index"); 
         }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                if(dao.CheckUserName(model.UserName))
+                {
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại.");
+                }else if(dao.CheckEmail(model.Email))
+                {
+                    ModelState.AddModelError("", "Email đã tồn tại.");
 
+                }
+                else
+                {
+                    var user = new KHACHHANG();
+                    user.MAKH = "KH0003";
+                    user.HOKH = model.HoKH;
+                    user.TENKH = model.TenKH;
+                    user.EMAIL = model.Email;
+                    user.DIENTHOAI = model.Phone;
+                    user.QUOCGIA = model.QuocGia;
+                    user.THANHPHO = model.ThanhPho;
+                    user.QUAN = model.Quan;
+                    user.PHUONG = model.Phuong;
+                    user.DIACHI = model.Address;
+                    user.USERNAME = model.UserName;
+                    user.PASSWORD = Encryptor.MD5Hash(model.Password);
+                    user.NGAYTAO = DateTime.Now;
+                    var result = dao.Insert(user);
+                    if (result != null)
+                    {
+                        ViewBag.Success = "Đăng ký thành công";
+                        model = new RegisterModel();
+                    }else
+                    {
+                        ModelState.AddModelError("", "Đăng ký không thành công.");
+                    }    
+                }
+            }
+            return View(model);
+        }
     }
 }

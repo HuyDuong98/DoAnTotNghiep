@@ -16,12 +16,12 @@ namespace Model.EF
         [Key]
         [Column(Order = 1)]
         [StringLength(20)]
-        public string ID { get; set; }
+        public string IDSANPHAM { get; set; }
 
         public int SOLUONGNHAP { get; set; }
 
-        public virtual MATHANGKINHDOANH MATHANGKINHDOANH { get; set; }
-
         public virtual PHIEUNHAP PHIEUNHAP { get; set; }
+
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

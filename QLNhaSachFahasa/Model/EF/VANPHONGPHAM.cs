@@ -9,50 +9,41 @@ namespace Model.EF
     [Table("VANPHONGPHAM")]
     public partial class VANPHONGPHAM
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VANPHONGPHAM()
-        {
-            HINHSANPHAMs = new HashSet<HINHSANPHAM>();
-        }
-
         [Key]
         [StringLength(20)]
         public string MASP { get; set; }
 
         [StringLength(20)]
-        public string MANCC { get; set; }
+        public string IDLOAI { get; set; }
 
         [StringLength(20)]
-        public string MANSX { get; set; }
+        public string MAQUOCGIA { get; set; }
 
         [StringLength(20)]
-        public string ID { get; set; }
+        public string MAPLVPP { get; set; }
 
-        [Column(TypeName = "money")]
-        public decimal DONGIAVPP { get; set; }
+        [Required]
+        [StringLength(1024)]
+        public string TENSP { get; set; }
 
         public double? TRONGLUONG { get; set; }
 
-        [StringLength(200)]
+        [StringLength(1024)]
         public string KICHTHUOC { get; set; }
-
-        [Required]
-        [StringLength(500)]
-        public string TENSP { get; set; }
 
         [StringLength(1024)]
         public string GIOITHIEUSP { get; set; }
 
-        [StringLength(200)]
+        [StringLength(1024)]
         public string CHATLIEU { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HINHSANPHAM> HINHSANPHAMs { get; set; }
+        [StringLength(20)]
+        public string MAUSAC { get; set; }
 
         public virtual MATHANGKINHDOANH MATHANGKINHDOANH { get; set; }
 
-        public virtual NHACUNGCAP NHACUNGCAP { get; set; }
+        public virtual PHANLOAIVPP PHANLOAIVPP { get; set; }
 
-        public virtual NHASANXUAT NHASANXUAT { get; set; }
+        public virtual XUATXU XUATXU { get; set; }
     }
 }

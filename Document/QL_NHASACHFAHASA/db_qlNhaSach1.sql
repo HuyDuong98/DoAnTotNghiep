@@ -2,7 +2,7 @@
 /* DBMS name:      Microsoft SQL Server 2008                    */
 /* Created on:     4/21/2020 12:44:40 PM                        */
 /*==============================================================*/
-
+Create database QLNhaSachFahasa
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -915,7 +915,7 @@ go
 /* Table: HINHSANPHAM                                           */
 /*==============================================================*/
 create table HINHSANPHAM (
-   LINKHINHANH          varchar(1024)        not null,
+   LINKHINHANH          varchar(900)        not null,
    IDSANPHAM            varchar(20)          null,
    TENHINHANH           nvarchar(1024)       null,
    constraint PK_HINHSANPHAM primary key nonclustered (LINKHINHANH)

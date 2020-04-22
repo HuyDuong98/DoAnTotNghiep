@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BUTTON_LOGIN" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="PLACEHOLDER_PASSWORD" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
+    <value>UserName</value>
+  </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Free Support 24/7</value>
   </data>

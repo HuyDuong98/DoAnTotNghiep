@@ -9,42 +9,27 @@ namespace Model.EF
     [Table("SACH")]
     public partial class SACH
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SACH()
-        {
-            HINHSANPHAMs = new HashSet<HINHSANPHAM>();
-        }
-
         [Key]
         [StringLength(20)]
         public string MASACH { get; set; }
 
         [StringLength(20)]
-        public string MAPL { get; set; }
+        public string IDLOAI { get; set; }
 
         [StringLength(20)]
         public string MANGONNGU { get; set; }
 
         [StringLength(20)]
-        public string ID { get; set; }
-
-        [StringLength(20)]
-        public string MANSX { get; set; }
-
-        [StringLength(20)]
-        public string MANCC { get; set; }
-
-        [StringLength(20)]
-        public string IDGIA { get; set; }
+        public string MAPLSACH { get; set; }
 
         [StringLength(20)]
         public string MAHINHTHUC { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(1024)]
         public string TENSACH { get; set; }
 
-        [StringLength(100)]
+        [StringLength(1024)]
         public string TACGIA { get; set; }
 
         [Column(TypeName = "money")]
@@ -54,16 +39,14 @@ namespace Model.EF
 
         public int? SOTRANG { get; set; }
 
-        [StringLength(200)]
+        [StringLength(1024)]
         public string KICHTHUOC { get; set; }
 
-        [StringLength(500)]
+        [StringLength(1024)]
         public string TOMTAC { get; set; }
 
-        public virtual GIABAN GIABAN { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HINHSANPHAM> HINHSANPHAMs { get; set; }
+        [StringLength(1024)]
+        public string NHAXUATBAN { get; set; }
 
         public virtual HINHTHUCSACH HINHTHUCSACH { get; set; }
 
@@ -71,10 +54,6 @@ namespace Model.EF
 
         public virtual NGONNGU NGONNGU { get; set; }
 
-        public virtual NHACUNGCAP NHACUNGCAP { get; set; }
-
-        public virtual NHASANXUAT NHASANXUAT { get; set; }
-
-        public virtual PHANLOAI PHANLOAI { get; set; }
+        public virtual PHANLOAISACH PHANLOAISACH { get; set; }
     }
 }

@@ -12,8 +12,7 @@ namespace Model.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHACUNGCAP()
         {
-            SACHes = new HashSet<SACH>();
-            VANPHONGPHAMs = new HashSet<VANPHONGPHAM>();
+            PHIEUNHAPs = new HashSet<PHIEUNHAP>();
         }
 
         [Key]
@@ -31,12 +30,9 @@ namespace Model.EF
         public string EMAIL { get; set; }
 
         [StringLength(11)]
-        public string SDT { get; set; }
+        public string SDTNV { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SACH> SACHes { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VANPHONGPHAM> VANPHONGPHAMs { get; set; }
+        public virtual ICollection<PHIEUNHAP> PHIEUNHAPs { get; set; }
     }
 }
