@@ -39,6 +39,7 @@ namespace QLNhaSachFahasa
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                        "~/Content/Custom-kendo.css",
                         "~/Content/main.css",
                       "~/Content/site.css"));
         }

@@ -32,7 +32,7 @@ ul.main-menu {
         padding-bottom: 25px;
         font-size: 16px;
         text-transform: uppercase;
-        font-weight: 400;
+        font-weight: 700;
         color: #333;
     }
 
@@ -69,6 +69,10 @@ ul.main-menu {
         line-height: 1;
         margin-bottom: 5px;
     }
+
+.site-brand{
+    padding-bottom:25px
+}
 
 .site-brand > img {
     height: 39px;
@@ -227,9 +231,11 @@ ul.main-menu {
         padding: 6px 0;
         text-align: left;
     }
+
 .home-slide {
     height: 410px
 }
+
 .cart-block {
     cursor: pointer;
     -webkit-box-align: center;
@@ -250,14 +256,17 @@ ul.main-menu {
     padding: 8px 11px;
     /*border-radius: 4px;*/
 }
+
     .cart-block > i {
         font-size: 24px;
         margin-right: 12px;
     }
+
     .cart-block > span {
         font-size: 15px;
         font-weight: 700;
     }
+
 .count-number {
     color: rgb(74, 74, 74);
     height: 20px;
@@ -270,4 +279,55 @@ ul.main-menu {
     background: rgb(253, 216, 53);
     border-radius: 2px;
     padding: 0px 6px;
+}
+
+@media (min-width: 992px) {
+    ul.main-menu .has-children.mega-menu > .sub-menu {
+        width: 1000px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        left: auto;
+        right: 0;
+    }
+    ul.main-menu > li.menu-item:first-child {
+        padding-left: 0;
+    }
+    ul.main-menu .has-children:hover {
+        z-index: 200;
+    }
+}
+/*@media (min-width: 992px)  {
+    ul.main-menu.menu-right .mega-menu .sub-menu {
+
+    }
+}*/
+@media (min-width: 1200px) and (min-width: 992px) {
+    ul.main-menu > li .sub-menu {
+        padding: 30px;
+    }
+
+}
+@media (min-width: 992px)  {
+    ul.main-menu > li .sub-menu {
+        padding: 20px 25px;
+    }
+}
+@media (min-width: 992px)  {
+    ul.main-menu > li .sub-menu {
+        width: 200px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        border: 2px solid #eee;
+        margin-top: -1px;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.menu-item:hover.sub-menu{
+    display:block;
 }

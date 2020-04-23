@@ -118,7 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BUTTON_LOGIN" xml:space="preserve">
-    <value>Đăng nhập</value>
+    <value>Login</value>
+  </data>
+  <data name="BUTTON_REGISTER" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="BUTTON_UPDATE" xml:space="preserve">
+    <value>Update</value>
   </data>
   <data name="PLACEHOLDER_PASSWORD" xml:space="preserve">
     <value>Password</value>
@@ -126,7 +132,25 @@
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>UserName</value>
   </data>
+  <data name="TITLE_EMPLOYEE" xml:space="preserve">
+    <value>Employee</value>
+  </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Free Support 24/7</value>
+  </data>
+  <data name="TITLE_LAST_NAME" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="TITLE_LIST_EMPLOYEE" xml:space="preserve">
+    <value>The list of employee</value>
+  </data>
+  <data name="TITLE_LOGIN" xml:space="preserve">
+    <value>LOGIN</value>
+  </data>
+  <data name="TITLE_REGISTER" xml:space="preserve">
+    <value>REGISTER</value>
+  </data>
+  <data name="TITLE_SDT_CONTACT" xml:space="preserve">
+    <value>+84 353 033 933</value>
   </data>
 </root>

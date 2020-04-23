@@ -120,13 +120,37 @@
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
+  <data name="BUTTON_REGISTER" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="BUTTON_UPDATE" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
   <data name="PLACEHOLDER_PASSWORD" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>Tên đăng nhập</value>
   </data>
+  <data name="TITLE_EMPLOYEE" xml:space="preserve">
+    <value>Nhân viên</value>
+  </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Hỗ trợ miễn phí 24/7</value>
+  </data>
+  <data name="TITLE_LAST_NAME" xml:space="preserve">
+    <value>Họ</value>
+  </data>
+  <data name="TITLE_LIST_EMPLOYEE" xml:space="preserve">
+    <value>Danh Sách Nhân Viên</value>
+  </data>
+  <data name="TITLE_LOGIN" xml:space="preserve">
+    <value>ĐĂNG NHẬP</value>
+  </data>
+  <data name="TITLE_REGISTER" xml:space="preserve">
+    <value>ĐĂNG KÝ</value>
+  </data>
+  <data name="TITLE_SDT_CONTACT" xml:space="preserve">
+    <value>+84 353 033 933</value>
   </data>
 </root>

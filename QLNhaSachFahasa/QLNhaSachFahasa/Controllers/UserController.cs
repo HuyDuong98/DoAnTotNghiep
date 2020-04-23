@@ -69,7 +69,7 @@ namespace QLNhaSachFahasa.Controllers
                 else
                 {
                     var user = new KHACHHANG();
-                    user.MAKH = "KH0003";
+                    user.MAKH = dao.CreateIDAuto("KH");
                     user.HOKH = model.HoKH;
                     user.TENKH = model.TenKH;
                     user.EMAIL = model.Email;
@@ -87,6 +87,7 @@ namespace QLNhaSachFahasa.Controllers
                     {
                         ViewBag.Success = "Đăng ký thành công";
                         model = new RegisterModel();
+
                     }else
                     {
                         ModelState.AddModelError("", "Đăng ký không thành công.");

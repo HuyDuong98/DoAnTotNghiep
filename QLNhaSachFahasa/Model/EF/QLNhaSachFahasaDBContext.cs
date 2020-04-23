@@ -5,10 +5,10 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class QLNhaSachDBContext : DbContext
+    public partial class QLNhaSachFahasaDBContext : DbContext
     {
-        public QLNhaSachDBContext()
-            : base("name=QLNhaSachDBContext")
+        public QLNhaSachFahasaDBContext()
+            : base("name=QLNhaSachFahasaDBContext")
         {
         }
 
@@ -209,6 +209,10 @@ namespace Model.EF
 
             modelBuilder.Entity<NHANVIEN>()
                 .Property(e => e.SDTNV)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NHANVIEN>()
+                .Property(e => e.EMAIL)
                 .IsUnicode(false);
 
             modelBuilder.Entity<NHASANXUAT>()

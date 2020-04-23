@@ -21,7 +21,7 @@ namespace QLNhaSachFahasa.Models
         public string UserName { get; set; }
         [Display(Name = "Mật khẩu")]
         [StringLength(20,MinimumLength = 6,ErrorMessage ="Độ dài mật khẩu ít nhất 6 ký tự")]
-        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         public string Password { get; set; }
         [Display(Name = "Xác nhận mật khẩu")]
         [Compare("Password", ErrorMessage ="Xác nhận mật khẩu không đúng.")]

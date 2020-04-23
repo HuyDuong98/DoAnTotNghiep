@@ -1,0 +1,94 @@
+﻿@model IEnumerable<QLNhaSachFahasa.Areas.Admin.ViewModels.EmployeeViewModel>
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="container">
+    <div class="panel-title">@ViewText.TITLE_LIST_EMPLOYEE</div>
+    <div class="row mt-3">
+        <div class="col-12 col-custom-100 mt-2">
+            <div id="gridMonthEmloyee"></div>
+        </div>
+    </div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+
+@section scripts{
+    <script id="status-template" type="text/x-kendo-template">
+        <div class="d-flex w-100 text-center">
+            <a onclick='popupEditEmployee("#:MANV#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+    </script>
+    <script type="text/javascript">
+        $("#popupEditWindows").kendoWindow({
+            title: "Chỉnh sửa",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        function popupEditEmployee(id) {
+            $('#wndEditContent').load("/Admin/Emloyee/EditEmloyee/" + id, function () {
+                $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        var data = @Html.Raw(Json.Encode(Model));
+
+
+
+        console.log(data);
+        $(document).ready(function () {
+            $("#gridMonthEmloyee").kendoGrid({
+                dataSource: data,
+                height: 550,
+                groupable: false,
+                sortable: true,
+                filterable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true
+                },
+                columns: [
+                    {
+                        field: "MANV",
+                        title: "ID",
+                    }, {
+                        field: "TENNV",
+                        title: "Tên nhân viên",
+                    }, {
+                        field: "DIACHINV",
+                        title: "Địa chỉ",
+                    }, {
+                        field: "SDTNV",
+                        title: "Số điện thoại",
+                    }, {
+                        field: "EMAIL",
+                        title: "Email",
+                    },
+                    //{
+                    //    field: "NGAYTAO",
+                    //    title: "Ngày đăng ký",
+                    //},
+                    {
+                        field: "TRANGTHAI",
+                        title: "Trạng thái",
+                    },{
+                        template: kendo.template($("#status-template").html())
+                    }
+                ]
+            });
+        });
+
+    </script>
+
+}
+

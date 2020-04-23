@@ -61,11 +61,29 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Đăng nhập.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string BUTTON_LOGIN {
             get {
                 return ResourceManager.GetString("BUTTON_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string BUTTON_REGISTER {
+            get {
+                return ResourceManager.GetString("BUTTON_REGISTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string BUTTON_UPDATE {
+            get {
+                return ResourceManager.GetString("BUTTON_UPDATE", resourceCulture);
             }
         }
         
@@ -88,11 +106,65 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee.
+        /// </summary>
+        public static string TITLE_EMPLOYEE {
+            get {
+                return ResourceManager.GetString("TITLE_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free Support 24/7.
         /// </summary>
         public static string TITLE_FREE_SUPPORT {
             get {
                 return ResourceManager.GetString("TITLE_FREE_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string TITLE_LAST_NAME {
+            get {
+                return ResourceManager.GetString("TITLE_LAST_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The list of employee.
+        /// </summary>
+        public static string TITLE_LIST_EMPLOYEE {
+            get {
+                return ResourceManager.GetString("TITLE_LIST_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LOGIN.
+        /// </summary>
+        public static string TITLE_LOGIN {
+            get {
+                return ResourceManager.GetString("TITLE_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGISTER.
+        /// </summary>
+        public static string TITLE_REGISTER {
+            get {
+                return ResourceManager.GetString("TITLE_REGISTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +84 353 033 933.
+        /// </summary>
+        public static string TITLE_SDT_CONTACT {
+            get {
+                return ResourceManager.GetString("TITLE_SDT_CONTACT", resourceCulture);
             }
         }
     }

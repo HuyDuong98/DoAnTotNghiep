@@ -38,6 +38,13 @@ namespace Model.EF
         [StringLength(11)]
         public string SDTNV { get; set; }
 
+        [StringLength(500)]
+        public string EMAIL { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime? NGAYTAO { get; set; }
+        public bool TRANGTHAI { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
 

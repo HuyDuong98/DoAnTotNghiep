@@ -20,16 +20,20 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dao = new UserDao();
+                var dao = new AdminDao();
                 var result = dao.LoginAdmin(model.UseeName, Encryptor.MD5Hash(model.Password));
                 if (result == 1)
                 {
-                    var user = dao.GetById(model.UseeName);
+                    var user = dao.GetByIdEmloyee(model.UseeName);
                     var userSession = new UserLogin();
-                    userSession.UserName = user.USERNAME;
-                    userSession.UserID = user.MAKH;
+                    userSession.UserName = user.USERNAMENV;
+                    userSession.UserID = user.MANV;
                     Session.Add(CommonConstants.USER_SEESION, userSession);
                     return RedirectToAction("Index", "AdHome");
+                }
+                else if (result == 2)
+                {
+                    ModelState.AddModelError("", "Tài khoản bị khóa.");
                 }
                 else if (result == 0)
                 {
