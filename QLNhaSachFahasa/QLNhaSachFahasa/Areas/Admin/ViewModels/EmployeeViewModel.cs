@@ -13,7 +13,7 @@ namespace QLNhaSachFahasa.Areas.Admin.ViewModels
         {
             //GetCategory();
         }
-        public EmployeeViewModel(string id, string name, string diaChi, string sdt, string email, DateTime? ngayTao, bool trangThai)
+        public EmployeeViewModel(string id, string name,string userName,string passWord, string diaChi, string sdt, string email, DateTime? ngayTao, bool trangThai)
         {
             MANV = id;
             TENNV = name;
@@ -21,16 +21,21 @@ namespace QLNhaSachFahasa.Areas.Admin.ViewModels
             SDTNV = sdt;
             EMAIL = email;
             NGAYTAO = ngayTao;
-            if(trangThai)
+            USERNAME = userName;
+            PASSWORD = passWord;
+            TRANGTHAI = trangThai;
+            if (trangThai)
             {
-                TRANGTHAI = "Làm việc";
+                StringTRANGTHAI = "Làm việc";
             }
             else
             {
-                TRANGTHAI = "Thôi việc";
+                StringTRANGTHAI = "Thôi việc";
             }
-           
+
         }
+        public string USERNAME { get; set; }
+        public string PASSWORD { get; set; }
         public string MANV { get; set; }
         [Display(Name = "Tên nhân viên")]
         public string TENNV { get; set; }
@@ -42,6 +47,7 @@ namespace QLNhaSachFahasa.Areas.Admin.ViewModels
         public string EMAIL { get; set; }
         [Display(Name = "Ngày tạo")]
         public DateTime? NGAYTAO { get; set; }
-        public String TRANGTHAI { get; set; }
+        public bool TRANGTHAI { get; set; }
+        public String StringTRANGTHAI { get; set; }
     }
 }

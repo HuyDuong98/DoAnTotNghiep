@@ -1,0 +1,47 @@
+﻿@model Model.EF.NHANVIEN
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm("UpdateStatusEmployee", "Emloyee", FormMethod.Post))
+{
+    @Html.HiddenFor(x => x.MANV)
+    <div class="row">
+        <div class="col-12 d-flex">
+            <span class="pr-2 d-block" style="min-width:120px">Trạng thái:</span>
+            <input id="status-employee" style="width: 100%" />
+        </div>
+        <div class="col-md-12 text-right mt-3">
+            <a href="javascript:void(0)" onclick="updateStatus(@Html.Value("MANV"))" data-id="@Html.Value("MANV")" value="@ViewText.BUTTON_UPDATE" class="btn-success btn">@ViewText.BUTTON_UPDATE</a>
+            @*@Html.DropDownListFor(x => x.TRANGTHAI, (SelectList)ViewBag.TRANGTHAI, new { @class = "form-control" }, @id="");*@
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        var data = @Html.Raw(Json.Encode(Model));
+        console.log(data);
+        $("#status-employee").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource:
+            [
+                { text: "--Chọn--", value: "2"},
+                { text: "Làm việc", value: "1" },
+                    { text: "Thôi việc", value: "0" },
+                ],
+            index: 0,
+            //transport: {
+            //    read: {
+            //        url: "https://demos.telerik.com/kendo-ui/service/products",
+            //        dataType: "jsonp"
+            //    }
+            //},
+
+        });
+        function updateStatus(value) {
+
+        }
+    })
+</script>
+
+
+

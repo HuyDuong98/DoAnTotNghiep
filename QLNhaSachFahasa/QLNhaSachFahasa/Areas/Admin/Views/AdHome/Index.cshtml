@@ -1,5 +1,36 @@
-﻿@{
+﻿@using QLNhaSachFahasa.Resources
+@using QLNhaSachFahasa.Common;
+@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+    var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
 }
 
+@section slider{
+    <li class="menu-item has-children">
+        <a href="@Url.Action("Index","Emloyee")">@ViewText.TITLE_EMPLOYEE</a>
+        @*<ul class="sub-menu">
+                <li><a href="#">Danh sách nhân viên</a></li>
+                <li><a href="#">Tạo mới nhân viên</a></li>
+            </ul>*@
+
+    </li>
+    <li class="menu-item has-children mega-menu">
+        <a href="javascript:void(0)">Sách <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+    </li>
+    <li class="menu-item has-children">
+        <a href="javascript:void(0)">Văn phòng phẩm <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+    </li>
+    <li class="menu-item">
+        <a href="contact.html">Liên hệ</a>
+    </li>
+}
+@if(session==null)
+{
+    <div>Chưa đăng nhập</div>
+}
+else 
+{
+    <div>Xin chào: @session.Name</div>
+}

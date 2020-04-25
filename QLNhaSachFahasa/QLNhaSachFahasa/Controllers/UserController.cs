@@ -30,6 +30,7 @@ namespace QLNhaSachFahasa.Controllers
                     var userSession = new UserLogin();
                     userSession.UserName = user.USERNAME;
                     userSession.UserID = user.MAKH;
+                    userSession.Name = user.TENKH+" "+user.HOKH;
                     Session.Add(CommonConstants.USER_SEESION, userSession);
                     return RedirectToAction("Index", "Home");
                 }else if(result == 0)
@@ -46,6 +47,11 @@ namespace QLNhaSachFahasa.Controllers
                 }
             }
             return View("Index"); 
+        }
+        public ActionResult Logout()
+        {
+            Session[CommonConstants.USER_SEESION] = null;
+            return Redirect("/");
         }
         [HttpGet]
         public ActionResult Register()

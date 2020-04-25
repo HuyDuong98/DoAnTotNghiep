@@ -4,89 +4,252 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
 }
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Emloyee")">@ViewText.TITLE_LIST_EMPLOYEE</a>
+    </li>
+    <li class="menu-item">
+        <a href="@Url.Action("Create","Emloyee")">@ViewText.TITLE_ADD_EMPLOYEE</a>
+    </li>
+}
 <div class="container">
-    <div class="panel-title">@ViewText.TITLE_LIST_EMPLOYEE</div>
+    <div class="panel-title mb-3">@ViewText.TITLE_LIST_EMPLOYEE</div>
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-employee">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                    <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-employee','#ico-search','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+        <div class="col-6 text-right">
+            <a href="@Url.Action("Create","Emloyee")" class="btn btn-success text-white">
+                <i class="fa fa-plus" aria-hidden="true"></i> @ViewText.BUTTON_ADD
+            </a>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="col-12 col-custom-100 mt-2">
-            <div id="gridMonthEmloyee"></div>
+            <div id="gridEmloyee"></div>
         </div>
     </div>
 </div>
 <div id="popupEditWindows">
     <div id="wndEditContent"></div>
 </div>
+<div id="popupStatusWindows">
+    <div id="wndStatusContent"></div>
+</div>
 
 @section scripts{
     <script id="status-template" type="text/x-kendo-template">
         <div class="d-flex w-100 text-center">
             <a onclick='popupEditEmployee("#:MANV#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a href="javascript:void(0)" class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick='funcDeleteEmployee("#:MANV#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         </div>
     </script>
     <script type="text/javascript">
+        addclassFocus("#txtSearchDataTable", "#search-employee");
+        initKeydownNumber();
+        @*var data = @Html.Raw(Json.Encode(Model));*@
+        var dataSource = new kendo.data.DataSource();
+       
         $("#popupEditWindows").kendoWindow({
             title: "Chỉnh sửa",
             visible: false,
             modal: true,
             maxHeight: 600,
-            minWidth: 600,
+            minWidth: 400,
+            draggable: true,
+            scrollable: true
+        });
+        $("#popupStatusWindows").kendoWindow({
+            title: "Chỉnh sửa",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            width: 360,
             draggable: true,
             scrollable: true
         });
 
         function popupEditEmployee(id) {
-            $('#wndEditContent').load("/Admin/Emloyee/EditEmloyee/" + id, function () {
+            $('#wndEditContent').load("/Admin/Emloyee/EditEmloyee?id=" + id, function () {
                 $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
             });
         }
-    </script>
-    <script type="text/javascript">
-        var data = @Html.Raw(Json.Encode(Model));
 
+        //function fnUpdateStatusEmp(id) {
+        //    $('#wndStatusContent').load("/Admin/Emloyee/UpdateStatusEmployee?id=" + id, function () {
+        //        $("#popupStatusWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+        //    });
+        //}
 
-
-        console.log(data);
-        $(document).ready(function () {
-            $("#gridMonthEmloyee").kendoGrid({
-                dataSource: data,
-                height: 550,
-                groupable: false,
-                sortable: true,
-                filterable: true,
-                pageable: {
-                    refresh: true,
-                    pageSizes: true
-                },
-                columns: [
-                    {
-                        field: "MANV",
-                        title: "ID",
-                    }, {
-                        field: "TENNV",
-                        title: "Tên nhân viên",
-                    }, {
-                        field: "DIACHINV",
-                        title: "Địa chỉ",
-                    }, {
-                        field: "SDTNV",
-                        title: "Số điện thoại",
-                    }, {
-                        field: "EMAIL",
-                        title: "Email",
-                    },
-                    //{
-                    //    field: "NGAYTAO",
-                    //    title: "Ngày đăng ký",
-                    //},
-                    {
-                        field: "TRANGTHAI",
-                        title: "Trạng thái",
-                    },{
-                        template: kendo.template($("#status-template").html())
+        function fnUpdateStatusEmp(id) {
+            $.ajax({
+                url: "/Emloyee/ChangeStatusEmployee",
+                data: { id: id },
+                dataType: "json",
+                type: "POST",
+                success: function (response) {
+                    if (response.status == true) {
+                        $("#" + id).text("Làm việc");
+                        $("#" + id).removeClass("status-inactive");
+                        $("#" + id).addClass("status-active");
+                    } else {
+                        $("#" + id).text("Thôi việc");
+                        $("#" + id).addClass("status-inactive");
+                        $("#" + id).removeClass("status-active");
                     }
-                ]
+                },
+
+
+            })
+        }
+        function funcDeleteEmployee(id) {
+            $.ajax({
+                url: "/Emloyee/DeleteEmployee",
+                data: { id: id },
+                dataType: "json",
+                type: "POST",
+                success: function (response) {
+                    if (response.result == true) {
+                        GetData();
+                    } else {
+                        GetData();
+                    }
+                },
+            })
+        }
+
+
+        var GridData = $("#gridEmloyee").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            height: 480,
+            groupable: false,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MANV",
+                    title: "ID",
+                    template: "<span>#=MANV#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 80,
+                }, {
+                    field: "TENNV",
+                    title: "Tên nhân viên",
+                    template: "<span>#=TENNV#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "DIACHINV",
+                    title: "Địa chỉ",
+                    template: "<span>#=DIACHINV#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "SDTNV",
+                    title: "Số điện thoại",
+                    template: "<span>#=SDTNV#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "EMAIL",
+                    title: "Email",
+                    //template: "<span>#=EMAIL#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    //width: "auto",
+                },
+                //{
+                //    field: "NGAYTAO",
+                //    title: "Ngày đăng ký",
+                //},
+                {
+                    field: "TRANGTHAI",
+                    title: "Trạng thái",
+                    template: "<div class='text-center'>" +
+                        "<a href='javascript:void(0)' data-id='#:MANV#'  onclick='return fnUpdateStatusEmp(\"#= MANV #\");'><span style='width:89px;padding:5px' id='#:MANV#' title='Cập nhật trạng thái' class=\"badge badge-pill badge-status-size #= TRANGTHAI ? 'status-active' : 'status-inactive' #\">#:TRANGTHAI?'Làm việc':'Thôi việc'#</span></a>" +
+                            "</div>",
+                    attributes: {
+
+                    },
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                 {
+                    template: kendo.template($("#status-template").html()),
+                    width: 110,
+                }],
+            //change: onChange,
+            sortable: true,
+            pageable: {
+                pageSizes: true,
+                pageSizes: [5, 10, 25, 100],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        function timKiemNhanVien() {
+            $("#txtSearchDataTable").keyup(_.debounce(function () {
+                GetData();
+            }, 1000));
+        }
+        GetData();
+        function GetData() {
+            var keywork = $('#txtSearchDataTable').val();
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '/Emloyee/GetList',
+                            data: { keywork: keywork}  ,
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+                pageSize: 25
             });
-        });
+            GridData.setDataSource(dataSource);
+        }
+
 
     </script>
 

@@ -162,6 +162,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewText.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ViewText.vi1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewText.vi.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-4.4.1\css\bootstrap-grid.css" />
@@ -191,7 +196,13 @@
     <Content Include="Content\images\bg-01.jpg" />
     <Content Include="Content\images\icon\246x0w.jpg" />
     <Content Include="Content\images\icon\logoFahasa.png" />
+    <Content Include="Content\images\icon\Logout-WF.png" />
+    <Content Include="Content\images\istockphoto-626890070-640x640.jpg" />
     <Content Include="Content\images\sach.jpg" />
+    <Content Include="Content\images\unnamed.jpg" />
+    <Content Include="Content\images\wallpaper2you_322438.png" />
+    <Content Include="Content\images\wallpaper2you_322456.jpg" />
+    <Content Include="Content\images\wallpaper2you_322470.jpg" />
     <Content Include="Content\main.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
@@ -265,6 +276,11 @@
     <Content Include="Areas\Admin\Views\Emloyee\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Emloyee\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Emloyee\_EditEmloyee.cshtml" />
+    <Content Include="Mvc.sitemap" />
+    <Content Include="Areas\Admin\Views\Emloyee\_UpdateStatusEmployee.cshtml" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -272,11 +288,14 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\QLFahasa.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -316,7 +335,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\ViewText.vi.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ViewText.vi.Designer.cs</LastGenOutput>
+      <LastGenOutput>ViewText.vi1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ViewText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

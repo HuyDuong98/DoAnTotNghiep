@@ -1,8 +1,9 @@
 ﻿@using QLNhaSachFahasa.Resources
-<!DOCTYPE html>
-
-
-<html>
+@using QLNhaSachFahasa.Common;
+@{
+    var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+}
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,23 +33,27 @@
                                 <img src="~/Content/images/icon/logoFahasa.png" />
                             </a>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="header-phone">
-                                <div class="icon">
-                                    @*<i class="fa fa-headphones" aria-hidden="true"></i>*@
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                </div>
-                                <div class="text">
-                                    <p> @ViewText.TITLE_FREE_SUPPORT</p>
-                                    <p class="font-weight-bold number">+84 353 033 933</p>
-                                </div>
+                        <div class="col-lg-5">
+                            @*<div class="header-phone">
+                                    <div class="icon">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="text">
+                                        <p> @ViewText.TITLE_FREE_SUPPORT</p>
+                                        <p class="font-weight-bold number">@ViewText.PHONE_CONTACT</p>
+                                    </div>
+                                </div>*@
+                            <div class="header-search-block">
+                                <input type="text" placeholder="Search entire store here">
+                                <button>@ViewText.BUTTON_SEARCH</button>
                             </div>
+
                         </div>
-                        <div class="col-lg-6">
-                            <div class="main-navigation flex-lg-right">
+                        <div class="col-lg-4">
+                            @*<div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right ">
                                     <li class="menu-item has-children">
-                                        <a href="@Url.Action("Index","Home")">Trang chủ </a>
+                                        <a href="@Url.Action("Index","Home")">@ViewText.TITLE_HOME</a>
 
                                     </li>
                                     <li class="menu-item has-children mega-menu">
@@ -62,15 +67,7 @@
                                         <a href="contact.html">Liên hệ</a>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="header-bottom pb-10">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-3">
+                            </div>*@
                             <nav class="category-nav">
                                 <div>
                                     <a href="javascript:void(0)" class="category-trigger">
@@ -87,73 +84,98 @@
                                                 <li><a href="#">Lighting &amp; Studio</a></li>
                                             </ul>
                                         </li>
-                                        <li class="cat-item has-children mega-menu">
-                                            <a href="#">Biographies</a>
-                                            <ul class="sub-menu">
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags &amp; Cases</a></li>
-                                                        <li><a href="#">Binoculars &amp; Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting &amp; Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags &amp; Cases</a></li>
-                                                        <li><a href="#">Binoculars &amp; Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting &amp; Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags &amp; Cases</a></li>
-                                                        <li><a href="#">Binoculars &amp; Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting &amp; Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="single-block">
-                                                    <h3 class="title">WHEEL SIMULATORS</h3>
-                                                    <ul>
-                                                        <li><a href="#">Bags &amp; Cases</a></li>
-                                                        <li><a href="#">Binoculars &amp; Scopes</a></li>
-                                                        <li><a href="#">Digital Cameras</a></li>
-                                                        <li><a href="#">Film Photography</a></li>
-                                                        <li><a href="#">Lighting &amp; Studio</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </div>
                             </nav>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom pb-10">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <div class="header-phone">
+                                <div class="icon">
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="text">
+                                    <p> @ViewText.TITLE_FREE_SUPPORT</p>
+                                    <p class="font-weight-bold number">@ViewText.PHONE_CONTACT</p>
+                                </div>
+                            </div>
+                            @*<nav class="category-nav">
+                                <div>
+                                    <a href="javascript:void(0)" class="category-trigger">
+                                        <i class="fa fa-bars"></i> Danh mục sản phẩm
+                                    </a>
+                                    <ul class="category-menu">
+                                        <li class="cat-item has-children">
+                                            <a href="#">Arts &amp; Photography</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#">Bags &amp; Cases</a></li>
+                                                <li><a href="#">Binoculars &amp; Scopes</a></li>
+                                                <li><a href="#">Digital Cameras</a></li>
+                                                <li><a href="#">Film Photography</a></li>
+                                                <li><a href="#">Lighting &amp; Studio</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>*@
+                        </div>
 
 
                         <div class="col-5">
-                            <div class="header-search-block">
+                            @*<div class="header-search-block">
                                 <input type="text" placeholder="Search entire store here">
-                                <button>Search</button>
+                                <button>@ViewText.BUTTON_SEARCH</button>
+                            </div>*@
+                            <div class="main-navigation flex-lg-right">
+                                <ul class="main-menu menu-right ">
+                                    <li class="menu-item has-children">
+                                        <a href="@Url.Action("Index","Home")">@ViewText.TITLE_HOME</a>
+
+                                    </li>
+                                    <li class="menu-item has-children mega-menu">
+                                        <a href="javascript:void(0)">Sách <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="menu-item has-children">
+                                        <a href="javascript:void(0)">Văn phòng phẩm <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="contact.html">Liên hệ</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="main-navigation flex-lg-right">
                                 <div class="cart-widget">
-                                    <div class="login-block">
-                                        <a href="@Url.Action("Index","User")" class="font-weight-bold">Login</a> <br>
-                                        <span>or&nbsp</span><a href="@Url.Action("Register","User")">Register</a>
-                                    </div>
+                                    @if (session == null)
+                                    {
+                                        <div class="login-block">
+                                            <a href="@Url.Action("Index","User")" class="font-weight-bold">@ViewText.LABLE_LOGIN</a> <br>
+                                            <span>@ViewText.LABLE_OR&nbsp</span><a href="@Url.Action("Register","User")">@ViewText.LABLE_REGISTER</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="info-user">
+                                            @ViewText.LABLE_HELLO,
+                                            <span class="font-weight-bold">
+                                                @session.Name&nbsp
+                                            </span>
+                                        </div>
+                                        <a href="@Url.Action("Logout","User")" alt="@ViewText.TITLE_LOGOUT">
+                                            <img src="/Content/images/icon/Logout-WF.png" />
+                                        </a>
+                                    }
                                     <div class="cart-block">
                                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <span>Giỏ hàng
+                                        <span>
+                                            @ViewText.TITLE_CART
                                             <span class="count-number">0</span>
                                         </span>
                                     </div>
@@ -167,6 +189,34 @@
     </div>
     <div>
         @RenderBody()
+        <footer class="container">
+            <div class="row mt-5">
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <img src="~/Content/images/icon/logoFahasa.png" style="width:60%" />
+                    <p>
+                        <span class="font-weight-bold">@ViewText.TITLE_ADDRESS: </span>
+                        <span class="text"> 140 Lê Trọng Tấn, Tân Phú, Hồ Chí Minh</span>
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">@ViewText.TITLE_PHONE: </span>
+                        <span class="text"> @ViewText.PHONE_CONTACT</span>
+                    </p>
+                    <p>
+                        <span class="font-weight-bold">@ViewText.TITLE_EMAIL: </span>
+                        <span class="text"></span>
+                    </p>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+
+                </div>
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+
+                </div>
+            </div>
+        </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

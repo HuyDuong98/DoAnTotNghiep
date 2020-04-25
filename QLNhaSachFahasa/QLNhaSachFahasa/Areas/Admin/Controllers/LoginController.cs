@@ -28,6 +28,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.UserName = user.USERNAMENV;
                     userSession.UserID = user.MANV;
+                    userSession.Name = user.TENNV;
                     Session.Add(CommonConstants.USER_SEESION, userSession);
                     return RedirectToAction("Index", "AdHome");
                 }
@@ -49,6 +50,11 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 }
             }
             return View("Index");
+        }
+        public ActionResult Logout()
+        {
+            Session[CommonConstants.USER_SEESION] = null;
+            return Redirect("/Admin");
         }
     }
 }

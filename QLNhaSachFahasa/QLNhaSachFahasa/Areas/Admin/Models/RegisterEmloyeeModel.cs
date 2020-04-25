@@ -29,6 +29,9 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Số điện thoại không hợp lệ")]
         public string SDT { get; set; }
         [Display(Name = "Email")]
+        [Required(ErrorMessage = "Email không được để trống")]
         public string Email { get; set; }
+        [Display(Name = "Trạng thái")]
+        public bool TRANGTHAI { get; set; }
     }
 }
