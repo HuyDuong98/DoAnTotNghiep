@@ -233,7 +233,11 @@ ul.main-menu {
     }
 
 .home-slide {
-    height: 410px
+    height: 410px;
+    overflow:hidden;
+}
+.home-slide img{
+    width:100%;
 }
 
 .cart-block {
@@ -330,4 +334,11 @@ ul.main-menu {
 }
 .menu-item:hover.sub-menu{
     display:block;
+}
+.info-user {
+    width: 150px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

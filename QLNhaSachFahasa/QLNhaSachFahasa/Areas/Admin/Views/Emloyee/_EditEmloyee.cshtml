@@ -1,7 +1,8 @@
-﻿@model IEnumerable<QLNhaSachFahasa.Areas.Admin.Models.RegisterEmloyeeModel>
+﻿@*@model IEnumerable<QLNhaSachFahasa.Areas.Admin.Models.RegisterEmloyeeModel>*@
+@model Model.EF.NHANVIEN
 @using QLNhaSachFahasa.Resources
 
-@using (Html.BeginForm("EditEmloyee", "Emloyee", FormMethod.Post,new { @id = ""}))
+@using (Html.BeginForm("EditEmloyee", "Emloyee", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -11,53 +12,61 @@
         {
             <div class="alert alert-success">@ViewBag.Success</div>
         }
-        <div class="row">
-            @Html.LabelFor(model => model.TenNV, new { @class = "control-label col-md-4" })
+        @*<div class="row mb-3">
+            <div class="col-md-4">
+                @ViewText.TITLE_ID_EMPLOYEE
+            </div>
             <div class="col-md-8">
-                @Html.TextBoxFor(model => model.TenNV, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+                @Html.DisplayTextFor(model => model.MANV)
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-md-4">
+                @ViewText.TITLE_NAME_EMPLOYEE
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TENNV, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TENNV, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @ViewText.TITLE_ADDRESS
+            </div>
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.DIACHINV, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DIACHINV, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="row">
-            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @ViewText.TITLE_PHONE
+            </div>
             <div class="col-md-8">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.SDTNV, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber" })
+                @Html.ValidationMessageFor(model => model.SDTNV, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="row">
-            @Html.LabelFor(model => model.ConfimPassword, new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @ViewText.TITLE_EMAIL
+            </div>
             <div class="col-md-8">
-                @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ConfimPassword, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.DiaChi, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MANV)
+        @*<div class="row">
+            <div class="col-md-4">
+                @ViewText.TITLE_STATUS
             </div>
-        </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.SDT, new { @class = "control-label col-md-4" })
             <div class="col-md-8">
-                @Html.TextBoxFor(model => model.SDT, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                @Html.CheckBoxFor(model => model.TRANGTHAI, new { @style = "height:20px" })
             </div>
-        </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        </div>*@
 
         <div class="row">
             <div class="col-md-12 text-right">
@@ -66,3 +75,6 @@
         </div>
     </div>
 }
+<script>
+    initKeydownNumber();
+</script>

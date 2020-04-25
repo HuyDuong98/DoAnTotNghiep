@@ -61,7 +61,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
+        ///   Looks up a localized string similar to Thêm mới.
+        /// </summary>
+        public static string BUTTON_ADD {
+            get {
+                return ResourceManager.GetString("BUTTON_ADD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đăng nhập.
         /// </summary>
         public static string BUTTON_LOGIN {
             get {
@@ -70,7 +79,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register.
+        ///   Looks up a localized string similar to Đăng ký.
         /// </summary>
         public static string BUTTON_REGISTER {
             get {
@@ -79,7 +88,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update.
+        ///   Looks up a localized string similar to Tìm kiếm.
+        /// </summary>
+        public static string BUTTON_SEARCH {
+            get {
+                return ResourceManager.GetString("BUTTON_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cập nhật.
         /// </summary>
         public static string BUTTON_UPDATE {
             get {
@@ -88,7 +106,61 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to Hello.
+        /// </summary>
+        public static string LABLE_HELLO {
+            get {
+                return ResourceManager.GetString("LABLE_HELLO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đăng nhập.
+        /// </summary>
+        public static string LABLE_LOGIN {
+            get {
+                return ResourceManager.GetString("LABLE_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string LABLE_OR {
+            get {
+                return ResourceManager.GetString("LABLE_OR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đăng ký.
+        /// </summary>
+        public static string LABLE_REGISTER {
+            get {
+                return ResourceManager.GetString("LABLE_REGISTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm kiếm....
+        /// </summary>
+        public static string LABLE_SEARCH {
+            get {
+                return ResourceManager.GetString("LABLE_SEARCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to +84 353 033 933.
+        /// </summary>
+        public static string PHONE_CONTACT {
+            get {
+                return ResourceManager.GetString("PHONE_CONTACT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu.
         /// </summary>
         public static string PLACEHOLDER_PASSWORD {
             get {
@@ -97,7 +169,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UserName.
+        ///   Looks up a localized string similar to Tên đăng nhập.
         /// </summary>
         public static string PLACEHOLDER_USERNAME {
             get {
@@ -106,7 +178,52 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Employee.
+        ///   Looks up a localized string similar to Thêm mới nhân viên.
+        /// </summary>
+        public static string TITLE_ADD_EMPLOYEE {
+            get {
+                return ResourceManager.GetString("TITLE_ADD_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Địa chỉ.
+        /// </summary>
+        public static string TITLE_ADDRESS {
+            get {
+                return ResourceManager.GetString("TITLE_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cart.
+        /// </summary>
+        public static string TITLE_CART {
+            get {
+                return ResourceManager.GetString("TITLE_CART", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác nhận mật khẩu.
+        /// </summary>
+        public static string TITLE_CONFIM_PASSWORD {
+            get {
+                return ResourceManager.GetString("TITLE_CONFIM_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string TITLE_EMAIL {
+            get {
+                return ResourceManager.GetString("TITLE_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhân viên.
         /// </summary>
         public static string TITLE_EMPLOYEE {
             get {
@@ -124,6 +241,24 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trang chủ.
+        /// </summary>
+        public static string TITLE_HOME {
+            get {
+                return ResourceManager.GetString("TITLE_HOME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên.
+        /// </summary>
+        public static string TITLE_ID_EMPLOYEE {
+            get {
+                return ResourceManager.GetString("TITLE_ID_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         public static string TITLE_LAST_NAME {
@@ -133,7 +268,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The list of employee.
+        ///   Looks up a localized string similar to Danh sách nhân viên.
         /// </summary>
         public static string TITLE_LIST_EMPLOYEE {
             get {
@@ -151,6 +286,42 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đăng xuất.
+        /// </summary>
+        public static string TITLE_LOGOUT {
+            get {
+                return ResourceManager.GetString("TITLE_LOGOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên nhân viên.
+        /// </summary>
+        public static string TITLE_NAME_EMPLOYEE {
+            get {
+                return ResourceManager.GetString("TITLE_NAME_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu.
+        /// </summary>
+        public static string TITLE_PASSWORD {
+            get {
+                return ResourceManager.GetString("TITLE_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại.
+        /// </summary>
+        public static string TITLE_PHONE {
+            get {
+                return ResourceManager.GetString("TITLE_PHONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to REGISTER.
         /// </summary>
         public static string TITLE_REGISTER {
@@ -160,11 +331,20 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to +84 353 033 933.
+        ///   Looks up a localized string similar to Trạng thái.
         /// </summary>
-        public static string TITLE_SDT_CONTACT {
+        public static string TITLE_STATUS {
             get {
-                return ResourceManager.GetString("TITLE_SDT_CONTACT", resourceCulture);
+                return ResourceManager.GetString("TITLE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên đăng nhập.
+        /// </summary>
+        public static string TITLE_USERNAME {
+            get {
+                return ResourceManager.GetString("TITLE_USERNAME", resourceCulture);
             }
         }
     }

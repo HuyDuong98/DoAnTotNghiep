@@ -12,14 +12,15 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
 {
     public class EmloyeeController : BaseController
     {
-        QLNhaSachFahasaDBContext db =  new QLNhaSachFahasaDBContext();
+        QLNhaSachFahasaDBContext db = new QLNhaSachFahasaDBContext();
         // GET: Admin/Emloyee
         public ActionResult Index()
         {
             var employee = new List<EmployeeViewModel>();
+            ViewBag.Title = "Employee";
             db.NHANVIENs.ToList().ForEach(p =>
             {
-                employee.Add(new EmployeeViewModel(p.MANV, p.TENNV, p.DIACHINV, p.SDTNV, p.EMAIL, p.NGAYTAO, p.TRANGTHAI));
+                employee.Add(new EmployeeViewModel(p.MANV, p.TENNV, p.USERNAMENV, p.PASSWORDNV, p.DIACHINV, p.SDTNV, p.EMAIL, p.NGAYTAO, p.TRANGTHAI));
             });
             return View(employee);
         }
@@ -27,7 +28,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         {
             return View();
         }
-      
+
         [HttpPost]
         public ActionResult Create(RegisterEmloyeeModel model)
         {
@@ -54,11 +55,13 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                     user.EMAIL = model.Email;
                     user.SDTNV = model.SDT;
                     user.NGAYTAO = DateTime.Now;
+                    user.TRANGTHAI = true;
                     var result = dao.InsertEmloyee(user);
                     if (result != null)
                     {
                         ViewBag.Success = "Đăng ký thành công";
-                        model = new RegisterEmloyeeModel();
+                        return RedirectToAction("Index", "Emloyee");
+                        //model = new RegisterEmloyeeModel();
                     }
                     else
                     {
@@ -68,39 +71,66 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             }
             return View(model);
         }
+        [HttpGet]
         public ActionResult EditEmloyee(string id)
         {
             var model = new AdminDao().ViewDetail(id);
             return PartialView("~/Areas/Admin/Views/Emloyee/_EditEmloyee.cshtml", model);
         }
+        
+      
+        public ActionResult GetListEmloyee(string keywork)
+        {
+            var res = new AdminDao().GetDataEmloyee(keywork);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
-        public ActionResult EditEmloyee(RegisterEmloyeeModel model)
+        public ActionResult GetList(string keywork)
+        {
+            var res = new AdminDao().GetDataEmloyee(keywork);
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteEmployee(string id)
+        {
+            var result = new AdminDao().DeleteEmployee(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpdateStatusEmployee(string id)
+        {
+            var model = new AdminDao().ViewDetail(id);
+            var dao = new AdminDao();
+            ViewBag.TRANGTHAI = new SelectList(dao.ListEmployeeAll(), "TRANGTHAI", "TRANGTHAI", "--Chọn--");
+
+            return PartialView("~/Areas/Admin/Views/Emloyee/_UpdateStatusEmployee.cshtml", model);
+        }
+        [HttpPost] 
+        public JsonResult ChangeStatusEmployee(string id)
+        {
+            var result = new AdminDao().ChangeStatus(id);
+            return Json(new
+            {
+                status = result
+            }) ;
+
+        }
+        [HttpPost]
+        public ActionResult EditEmloyee(NHANVIEN employee)
         {
             if (ModelState.IsValid)
             {
                 var dao = new AdminDao();
-                var user = new NHANVIEN();
-                //user.TENNV = model.TenNV;
-                //user.PASSWORDNV = Encryptor.MD5Hash(model.Password);
-                //user.DIACHINV = model.DiaChi;
-                //user.EMAIL = model.Email;
-                //user.SDTNV = model.SDT;
-                //user.NGAYTAO = DateTime.Now;
-                if(!string.IsNullOrEmpty(user.PASSWORDNV))
-                {
-                    user.PASSWORDNV = Encryptor.MD5Hash(model.Password);
-                }
-                var result = dao.UpdateEmloyee(user);
+                var result = dao.UpdateEmloyee(employee);
                 if (result)
                 {
-                    return RedirectToAction("Edit", "Emloyee");
+                    return RedirectToAction("Index", "Emloyee");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật thành công.");
+                    ModelState.AddModelError("", "Cập nhật không thành công.");
                 }
             }
-                return View("Edit");
-            }
+            return RedirectToAction("Index", "Emloyee");
         }
     }
+}

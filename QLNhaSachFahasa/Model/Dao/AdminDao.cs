@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.EF;
-using PagedList;
-using PagedList;
 
 namespace Model.Dao
 {
@@ -36,22 +36,45 @@ namespace Model.Dao
             try
             {
                 var emloyee = db.NHANVIENs.Find(entity.MANV);
-                emloyee.TENNV = entity.TENNV;
-                if(!string.IsNullOrEmpty(entity.PASSWORDNV))
-                {
-                    emloyee.PASSWORDNV = entity.PASSWORDNV;
-                }
+                //if(!string.IsNullOrEmpty(entity.PASSWORDNV))
+                //{
+                //    emloyee.PASSWORDNV = entity.PASSWORDNV;
+                //}
                 emloyee.DIACHINV = entity.DIACHINV;
                 emloyee.SDTNV = entity.SDTNV;
                 emloyee.EMAIL = entity.EMAIL;
+                emloyee.TENNV = entity.TENNV;
+                //emloyee.NGAYTAO = DateTime.Now;
+                //emloyee.TRANGTHAI = entity.TRANGTHAI;
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }
           
+        }
+        public bool DeleteEmployee(string id)
+        {
+            try
+            {
+                var employee = db.NHANVIENs.Find(id);
+                db.NHANVIENs.Remove(employee);
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+        public bool ChangeStatus(string id)
+        {
+            var emp = db.NHANVIENs.Find(id);
+            emp.TRANGTHAI = !emp.TRANGTHAI;
+            db.SaveChanges();
+            return emp.TRANGTHAI;
         }
         public NHANVIEN GetByIdEmloyee(string userName)
         {
@@ -62,7 +85,21 @@ namespace Model.Dao
         {
             return db.NHANVIENs.Find(id);
         }
-
+        
+        public List<NHANVIEN> ListEmployeeAll()
+        {
+            return db.NHANVIENs.ToList<NHANVIEN>();
+        }
+        public List<NHANVIEN> GetDataEmloyee(string keyWord)
+        {
+            if(string.IsNullOrEmpty(keyWord))
+            {
+                return db.NHANVIENs.OrderByDescending(x => x.NGAYTAO).ToList<NHANVIEN>();
+            }else
+            {
+                return db.NHANVIENs.Where(x=>x.TENNV.Contains(keyWord)).OrderByDescending(x=>x.NGAYTAO).ToList<NHANVIEN>();
+            }    
+        }
         public int LoginAdmin(string userName, string passWord)
         {
             var resuft = db.NHANVIENs.SingleOrDefault(x => x.USERNAMENV == userName);

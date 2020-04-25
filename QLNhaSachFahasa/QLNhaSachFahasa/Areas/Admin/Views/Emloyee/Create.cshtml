@@ -1,86 +1,112 @@
 ﻿@model QLNhaSachFahasa.Areas.Admin.Models.RegisterEmloyeeModel
-
+@using QLNhaSachFahasa.Resources
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Emloyee")">@ViewText.TITLE_LIST_EMPLOYEE</a>
+    </li>
+    <li class="menu-item">
+        <a href="@Url.Action("Create","Emloyee")">@ViewText.TITLE_ADD_EMPLOYEE</a>
+    </li>
+}
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
 }
-
-@using (Html.BeginForm("Create","Emloyee",FormMethod.Post)) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>RegisterEmloyeeModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @if (ViewBag.Success != null)
+<div class="container row ">
+    <div class="col-12">
+        @using (Html.BeginForm("Create", "Emloyee", FormMethod.Post))
         {
-            <div class="alert alert-success">@ViewBag.Success</div>
+            @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="panel-title mb-4">@ViewText.TITLE_ADD_EMPLOYEE</div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @if (ViewBag.Success != null)
+            {
+                <div class="alert alert-success">@ViewBag.Success</div>
+            }
+            <div class="form-group row">
+                <div class="col-md-3 title-input ">
+                    @ViewText.TITLE_NAME_EMPLOYEE
+                    <span class="requit">*</span>
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.TenNV, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_USERNAME
+                    <span class="requit">*</span>
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_PASSWORD
+                    <span class="requit">*</span>
+                </div>
+                <div class="col-md-9">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_CONFIM_PASSWORD
+                    <span class="requit">*</span>
+                </div>
+                <div class="col-md-9">
+                    @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ConfimPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_EMAIL
+                    <span class="requit">*</span>
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_PHONE
+                </div>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber" })
+                    @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_ADDRESS
+                </div>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
         }
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenNV, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenNV, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfimPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.ConfimPassword, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ConfimPassword, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DiaChi, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SDT, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+</div>
+@section scripts{
+    <script>
+        initKeydownNumber();
+    </script>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

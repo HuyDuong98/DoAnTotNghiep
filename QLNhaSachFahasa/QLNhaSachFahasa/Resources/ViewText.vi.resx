@@ -117,14 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BUTTON_ADD" xml:space="preserve">
+    <value>Thêm mới</value>
+  </data>
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
   <data name="BUTTON_REGISTER" xml:space="preserve">
     <value>Đăng ký</value>
   </data>
+  <data name="BUTTON_SEARCH" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
   <data name="BUTTON_UPDATE" xml:space="preserve">
     <value>Cập nhật</value>
+  </data>
+  <data name="LABLE_HELLO" xml:space="preserve">
+    <value>Xin chào</value>
+  </data>
+  <data name="LABLE_LOGIN" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="LABLE_OR" xml:space="preserve">
+    <value>hoặc</value>
+  </data>
+  <data name="LABLE_REGISTER" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="LABLE_SEARCH" xml:space="preserve">
+    <value>Tìm kiếm...</value>
+  </data>
+  <data name="PHONE_CONTACT" xml:space="preserve">
+    <value>+84 353 033 933</value>
   </data>
   <data name="PLACEHOLDER_PASSWORD" xml:space="preserve">
     <value>Mật khẩu</value>
@@ -132,11 +156,32 @@
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>Tên đăng nhập</value>
   </data>
+  <data name="TITLE_ADDRESS" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="TITLE_ADD_EMPLOYEE" xml:space="preserve">
+    <value>Thêm mới nhân viên</value>
+  </data>
+  <data name="TITLE_CART" xml:space="preserve">
+    <value>Giỏ hàng</value>
+  </data>
+  <data name="TITLE_CONFIM_PASSWORD" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="TITLE_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="TITLE_EMPLOYEE" xml:space="preserve">
     <value>Nhân viên</value>
   </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Hỗ trợ miễn phí 24/7</value>
+  </data>
+  <data name="TITLE_HOME" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="TITLE_ID_EMPLOYEE" xml:space="preserve">
+    <value>Mã nhân viên</value>
   </data>
   <data name="TITLE_LAST_NAME" xml:space="preserve">
     <value>Họ</value>
@@ -147,10 +192,25 @@
   <data name="TITLE_LOGIN" xml:space="preserve">
     <value>ĐĂNG NHẬP</value>
   </data>
+  <data name="TITLE_LOGOUT" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="TITLE_NAME_EMPLOYEE" xml:space="preserve">
+    <value>Tên nhân viên</value>
+  </data>
+  <data name="TITLE_PASSWORD" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
+  <data name="TITLE_PHONE" xml:space="preserve">
+    <value>Số điện thoại</value>
+  </data>
   <data name="TITLE_REGISTER" xml:space="preserve">
     <value>ĐĂNG KÝ</value>
   </data>
-  <data name="TITLE_SDT_CONTACT" xml:space="preserve">
-    <value>+84 353 033 933</value>
+  <data name="TITLE_STATUS" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="TITLE_USERNAME" xml:space="preserve">
+    <value>Tên đăng nhập</value>
   </data>
 </root>
