@@ -1,0 +1,175 @@
+﻿
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = ViewText.TITLE_CART;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@*<div class="header-cart">Giỏ Hàng</div>*@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-7">
+            <div id="listCartItem"></div>
+            <script type="text/x-kendo-template" id="templateCart">
+                <div class="item-cart">
+                    <div class="image">
+                        <img src="/UploadFile/#:LINKHINHANH#" alt="#:TENSANPHAM#" height="100px" />
+                    </div>
+                    <div class="info-cart">
+                        <div class="title-cart-item d-flex align-items-center">
+                            <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''# mr-2">#:CHUONGTRINHKHUYENMAI#</span>
+                            #:TENSANPHAM#
+                        </div>
+                        <div class="color">#:MAUSAC||""#</div>
+                        <small class="content-cart-item">
+                            #:TACGIA#
+                        </small>
+                        <div class="text-price">#:DONGIA# vnd</div>
+
+                    </div>
+                    <div class="quantity-box d-flex">
+                        <span>Số lượng:</span>
+                        <div class="quantity-wapper ml-3">
+                            <span class="btn-quatity quantity-down"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <input type="number" step="1" value="#:SOLUONGMUA#" min="1" max="#:SOLUONGTON#" id="quantity-#:MASANPHAM#" data-id="#:MASANPHAM#" class="quantity" />
+                            <span class="btn-quatity quantity-up"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+
+                    <a href="javascript:void(0)" class="btn btn-danger btn-delete-product" onclick='fnDeleteProduct("#:MASANPHAM#")'><i class="far fa-trash-alt"></i>@Html.Raw(ViewText.BUTTON_DELETE)</a>
+                </div>
+            </script>
+        </div>
+        <div class="col-md-5">
+            <div class="box-info-customer card p-3">
+                @Html.Partial("_OrderBox")
+            </div>
+        </div>
+    </div>
+</div>
+<div id="popupUpdateInfo">
+    <div id="contentUpdateInfo"></div>
+</div>
+
+@section scripts{
+    <script>
+        var listCart = $("#listCartItem").kendoListView({
+            template: kendo.template($("#templateCart").html()),
+            dataSource: { type: "json" },
+            dataBound: function (e) {
+                if (this.dataSource.data().length == 0) {
+                    $("#listCartItem").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
+                }
+            },
+        }).data("kendoListView");
+        dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetListCart","Cart")',
+                        dataType: "json",
+                        type: "POST",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+        listCart.setDataSource(dataSource);
+        function fnDeleteProduct(idProduct) {
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteProductInSession", "Cart")',
+                            data: {
+                                idProduct: idProduct,
+                            },
+                            dataType: "json",
+                            success: function (result) {
+                                var numbercart = document.getElementById("sumcart");
+                                numbercart.innerHTML = "" + result.length;
+                                templateProductOrder();
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+            });
+            listCart.setDataSource(dataSource);
+        }
+
+        $("#popupUpdateInfo").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_UPDATE_INFO_CUSTOMER)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 400,
+            draggable: false,
+            scrollable: false,
+        });
+        function fnPopupUpdateInfo(){
+            $('#contentUpdateInfo').load("/Cart/UpdateInfoOrderView", function () {
+                $("#popupUpdateInfo").data("kendoWindow").center().open().element.closest(".k-window");
+            });
+        }
+        //function submit update info cart
+        function fnSubmitUpdate() {
+            initValidForm();
+            var formUpdate = $("#frmInfoCustomer");
+            if (formUpdate.valid()) {
+                $.ajax({
+                    url: "/Cart/UpdateInfo",
+                    data: formUpdate.serialize(),
+                    dataType: "json",
+                    success: function (res) {
+                        templateInfoOrder();
+                    },
+                    complete: function () {
+                        $("#popupUpdateInfo").data("kendoWindow").close();
+                    }
+                })
+            }
+        }
+
+        $(document).ready(function () {
+            debugger;
+            setTimeout(function () {
+                $(".quantity-up").click(function () {
+                    var spinner = $(this),
+                        input = spinner.parent().find('input[type="number"]'),
+                        max = input.attr('max');
+                    var oldValue = parseInt(input.val());
+                    if (oldValue >= max) {
+                        var newVal = oldValue;
+                    } else {
+                        var newVal = oldValue + 1;
+                    }
+                    input.val(newVal);
+                    input.trigger("change");
+                });
+                $(".quantity-down").click(function () {
+                    debugger;
+                    var spinner = $(this),
+                        input = spinner.parent().find('input[type="number"]'),
+                        min = input.attr('min');
+                    var oldValue = parseInt(input.val());
+                    if (oldValue <= min) {
+                        var newVal = oldValue;
+                    } else {
+                        var newVal = oldValue - 1;
+                    }
+                    input.val(newVal);
+                    input.trigger("change");
+                });
+            }, 1000);
+        });
+    </script>
+}

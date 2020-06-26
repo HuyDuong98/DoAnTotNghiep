@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<h2>@ViewBag.ProductID</h2>
+<div class="container mt-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-8"></div>
+    <div class="demo-section wide">
+        <ul id="homes">
+            <li><a id="thumb1" class="img-thumb" data-index="0" href="#" style="background: url('/UploadFile/637274163493780773.jpg')"></a></li>
+            <li><a id="thumb2" class="img-thumb" data-index="1" href="#" style="background: url('/UploadFile/637274163493780773.jpg')"></a></li>
+            <li><a id="thumb3" class="img-thumb" data-index="2" href="#" style="background: url('/UploadFile/637274163493780773.jpg')"></a></li>
+        </ul>
+        <div id="placeholder">
+            <img id="home0" src="/UploadFile/637274163493780773.jpg" />
+            <img id="home1" style="display: none" src="/UploadFile/637274163493780773.jpg" />
+            <img id="home2" style="display: none" src="/UploadFile/637274163493780773.jpg" />
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        var index = 0,
+            currentEffect;
+
+        $("#homes a").click(function (e) {
+            e.preventDefault();
+            var target = parseInt($(this).data("index"));
+            if (target === index) {
+                return;
+            }
+
+            if (currentEffect) {
+                currentEffect.stop();
+            }
+            $("#home" + target).show();
+            currentEffect = kendo.fx("#home" + target).replace("#home" + index, "swap");
+            currentEffect.run();
+            index = target;
+        });
+    });
+
+</script>
+@section scripts{
+    <style>
+       
+    </style>
+}

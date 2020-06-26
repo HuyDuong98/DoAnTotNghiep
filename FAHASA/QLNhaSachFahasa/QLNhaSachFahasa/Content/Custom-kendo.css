@@ -1,0 +1,207 @@
+﻿.k-tabstrip:focus {
+    box-shadow: unset;
+}
+
+.k-reset .k-floats .k-tiles .k-widget .k-listview .k-selectable {
+    height: 260px;
+}
+
+.k-window > div.k-popup-edit-form {
+    height: 600px;
+}
+
+.k-chart-crosshair-tooltip, .k-chart-shared-tooltip, .k-widget.k-tooltip {
+    background-color: #ccc;
+}
+
+.na-color-tooltip {
+    color: #000000;
+    font-weight: normal;
+    font-family: Quicksand, sans-serif;
+    font-size: 15px;
+}
+
+#moudule-create {
+    background-color: #ccc;
+}
+
+/*.update_em_sub:hover {
+    background-color: #BEBEBE;
+}*/
+.permis_em_sub:hover {
+    background-color: #BEBEBE;
+}
+
+.position_em_sub:hover {
+    background-color: #BEBEBE;
+}
+
+.delete_em_sub:hover {
+    background-color: #BEBEBE;
+}
+
+#add_new_em:hover {
+    cursor: pointer;
+}
+
+#import_file_em:hover {
+    cursor: pointer;
+}
+
+#export_file_em:hover {
+    cursor: pointer;
+}
+
+.k-callout-n {
+    border-bottom-color: #fff;
+}
+
+/*.k-tooltip-content i:hover {
+    background-color: rgba(188, 190, 192, 0.22) !important;
+}*/
+.k-animation-container {
+    /*box-shadow: rgb(195, 195, 195) 3px 5px 14px;*/
+    border-radius: 0 0 .25rem .25rem !important;
+}
+
+.k-icon.k-i-close {
+    color: #b3b3b3 !important;
+}
+
+.k-dropdown .k-dropdown-wrap {
+    background-color: unset !important;
+    border-radius: 0px;
+}
+
+.k-widget.k-tooltip {
+    /*background-color: rgba(10, 20, 30, 0.89) !important;*/
+    /*background-color: rgb(226, 238, 251) !important;*/
+    /*background-color: rgb(187, 220, 255) !important;*/
+    color: #fff !important;
+}
+
+.k-tooltip-content {
+    color: #fff !important;
+    font-size: 14px
+}
+/* .k-i-expand, .k-i-collapse { */
+/*     position: absolute; */
+/*     top: 10px; */
+/* } */
+.k-i-expand:before, .k-i-collapse:before {
+    color: #676777;
+    font-size: 15px;
+}
+
+
+/*=======================Custom treeview=========================*/
+
+.k-i-expand:before {
+    content: "\e014" !important;
+}
+
+.k-i-collapse:before {
+    content: "\e015" !important;
+}
+
+.k-treeview .k-item {
+    border-bottom: solid 1px #ecebeb !important;
+    padding-left: 20px !important;
+}
+
+.k-item .k-group {
+    border-top: solid 1px #ecebeb !important;
+}
+
+.k-treeview .k-item:last-child {
+    border-bottom: solid 0px #ecebeb !important;
+}
+
+.k-treeview .k-in {
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+    display: block !important;
+}
+
+    .k-treeview .k-in.k-state-selected {
+        border: 1px solid #7babd3 !important;
+        color: inherit !important;
+        background-color: #dde9f2 !important;
+    }
+
+        .k-treeview .k-in.k-state-selected.k-state-focused {
+            box-shadow: unset !important;
+        }
+
+    .k-treeview .k-in.k-state-hover {
+        background-color: #f2f2f2;
+    }
+
+.k-state-focused {
+    box-shadow: unset !important;
+}
+
+.k-pager-wrap .k-link, .k-pager-wrap .k-pager-nav {
+    border-radius: 0px;
+}
+
+.k-tabstrip > .k-content {
+    border-radius: 0px;
+}
+
+.k-pager-wrap .k-pager-numbers {
+    border-radius: 0px !important;
+}
+
+.k-tabstrip-top > .k-tabstrip-items .k-item.k-state-active {
+    border-radius: 0px;
+}
+
+.k-grid-footer, .k-grid-header {
+    padding-right: unset
+}
+
+.k-editor-toolbar .k-tool-group.k-button-group .k-tool {
+    margin: 3px;
+}
+/*.k-last {
+    border-bottom: unset !important;
+}*/
+/*================================================================*/
+.k-prompt-container, .k-window-content {
+    overflow-x: hidden;
+}
+
+.k-picker-wrap {
+    border-radius: 0;
+}
+
+.k-icon {
+    width: 1.75rem;
+    height: 1rem;
+}
+@font-face {
+    font-family: 'Quicksand-Regular';
+    src: url('font/Quicksand-Regular.ttf') format('truetype');
+}
+.k-widget {
+    font-family: "Quicksand-Regular";
+    border:none
+}
+.k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
+    border: 1px solid #ced4da;
+}
+.k-dateinput .k-dateinput-wrap, .k-dateinput .k-picker-wrap, .k-datepicker .k-dateinput-wrap, .k-datepicker .k-picker-wrap, .k-datetimepicker .k-dateinput-wrap, .k-datetimepicker .k-picker-wrap, .k-timepicker .k-dateinput-wrap, .k-timepicker .k-picker-wrap {
+    border-radius:0
+}
+.k-datepicker .k-picker-wrap, .k-datetimepicker .k-picker-wrap, .k-timepicker .k-picker-wrap {
+    border-color: #ced4da
+}
+    .k-dateinput .k-dateinput-wrap .k-select, .k-dateinput .k-picker-wrap .k-select, .k-datepicker .k-dateinput-wrap .k-select, .k-datepicker .k-picker-wrap .k-select, .k-datetimepicker .k-dateinput-wrap .k-select, .k-datetimepicker .k-picker-wrap .k-select, .k-timepicker .k-dateinput-wrap .k-select, .k-timepicker .k-picker-wrap .k-select {
+        border-radius: 0
+    }
+
+.k-upload .k-file-name, .k-upload  .k-file-name, .k-i-file-image::before {
+    color: #03a114 !important
+}

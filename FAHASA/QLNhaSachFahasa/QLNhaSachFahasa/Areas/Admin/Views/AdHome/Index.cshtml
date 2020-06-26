@@ -1,0 +1,31 @@
+﻿@model List<Model.EF.MANHINHTRANGCHU>
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content">
+    <div class="cal row" id="render-item-content">
+        @foreach (var item in Model)
+        {
+            <a class="day-home p-2 col-lg-3 col-md-4 col-sm-2" title="" href="@item.LINK" >
+                <div class="d-flex">
+                    <img src="@Url.Content("/Content/images/MenuHome/" + @item.ICON + "")" title="@item.TITLE" width="40" height="40" />
+                    <div class="ml-3">
+                        <h5 class="title-itemHome text-left">@item.TITLE</h5>
+                        <small class="text-small text-left mt-10 d-block grayy-color description-home" title="@item.DESCRIPTION"> @item.DESCRIPTION</small>
+
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+@section scripts{
+    <script>
+        TweenMax.staggerFrom($('.day-home'), 0.6, {  opacity: 0}, 0.3);
+        var widthContent = $(".cal").width();
+        console.log(widthContent);
+        $(".container-header").css("width", widthContent);
+    </script>
+}

@@ -1,0 +1,208 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Book")">@ViewText.TITLE_LIST_BOOK</a>
+    </li>
+    <li class="menu-item">
+        <a href="@Url.Action("Create","Book")">@ViewText.TITLE_CREATE_BOOK</a>
+    </li>
+}
+@section title{
+    @ViewText.TITLE_LIST_BOOK
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form>
+                    <div class="search-input w-100 search-content search-content-hover" id="search-book">
+                        @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                        <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-book','#ico-search','#txtSearchDataTable') "></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 col-custom-100 mt-2">
+                <div id="gridBook"></div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="container">
+    <div id="listView"></div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+<div id="popupViewsWindows">
+    <div id="wndViewsContent"></div>
+</div>
+@section scripts{
+    <script src="/Scripts/Custom/Books.js"></script>
+    <script id="status-template" type="text/x-kendo-template">
+        <div class="d-flex w-100 text-center">
+            <a onclick='popupEditBook("#=MASANPHAM#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick='funcDeleteBook("#=MASANPHAM#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="@Url.Content("~/UploadFile/637274163493780773.jpg")" alt="#:TENSANPHAM#" />
+            <h3>#:TENSANPHAM#</h3>
+            <p class="text-danger">#:DONGIA#</p>
+        </div>
+    </script>
+    <script>
+        $("#listView").kendoListView({
+            template: kendo.template($("#template").html()),
+        }).data("kendoListView");
+        var data = [];
+        $.ajax({
+            url: '/Home/GetListBook',
+            dataType: "json",
+            type: "POST",
+            success: function (res) {
+                data = res
+            },
+            error: function (res) {
+                data = res
+            }
+        });
+        var dataSource = new kendo.data.DataSource({
+            data: data
+        })
+        $("#listView").data("kendoListView").setDataSource(dataSource);
+    </script>
+    <script type="text/javascript">
+        addclassFocus("#txtSearchDataTable", "#search-book");
+
+        var dataSource = new kendo.data.DataSource();
+         $("#popupEditWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        $("#popupViewsWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_INFO_BOOK)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        var GridData = $("#gridBook").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            height: 480,
+            groupable: false,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MASANPHAM",
+                    title: "ID",
+                    template: "<span>#=MASANPHAM#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 80,
+                }, {
+                    field: "TENSACH",
+                    title: "Tên sách",
+                    template: "<div class='title-grid' onclick ='itemClick(\"#:MASANPHAM#\")'>#=TENSACH#</span>",
+                    attributes: {
+                        style: "cursor:pointer",
+                        "id": "item-#:TENSACH#",
+                    },
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "TACGIA",
+                    title: "Tác giả",
+                    template: "<span>#=TACGIA#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "NHAXUATBAN",
+                    title: "Nhà xuất bản",
+                    template: "<span>#=NHAXUATBAN#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                {
+                    field: "MANGONNGU",
+                    title: "Ngôn ngữ",
+                    template: "<span>#=MANGONNGU#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                {
+                    field: "GIASACH",
+                    title: "Giá sách",
+                    template: "<span>#=GIASACH# vnd</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    template: kendo.template($("#status-template").html()),
+                    width: 110,
+                }],
+            groupable: false,
+            filterable: true,
+            sortable: true,
+            pageable: {
+                pageSizes: true,
+                pageSizes: [5, 10, 25, 100],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keydown(function () {
+                GetData();
+            });
+        });
+
+        GetData();
+    </script>
+}

@@ -1,0 +1,130 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.CustomerModel
+@using QLNhaSachFahasa.Resources
+@using (Html.BeginForm("Edit", "Customer", FormMethod.Post, new { id = "frmCapNhatKhachHang" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+
+    <div class="form-group row">
+        <div class="col-md-3">
+            @ViewText.TITLE_HO
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.HOKH, new { @class = "form-control", @id = "txtHo" })
+        </div>
+    </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_TEN
+                <span class="requit">*</span>
+            </div>          
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TENKH, new { @class = "form-control", @id = "txtTen" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_EMAIL
+                <span class="requit">*</span>
+            </div>        
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", @id = "txtCustomerEmail" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_PHONE
+            </div>       
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.DIENTHOAI, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_QUOC_GIA
+            </div>          
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.QUOCGIA, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_THANH_PHO
+            </div>        
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.THANHPHO, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_QUAN
+            </div>        
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.QUAN, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_PHUONG
+            </div>        
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.PHUONG, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_ADDRESS
+                <span class="requit">*</span>
+            </div>        
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.DIACHI, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_USERNAME
+                <span class="requit">*</span>
+            </div>     
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.USERNAME, new { @class = "form-control", @id = "txtUserName", @autocomplete = "off" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                @ViewText.TITLE_PASSWORD
+            </div>
+            <div class="col-md-9">
+                @Html.PasswordFor(model => model.PASSWORD, new { @class = "form-control", @autocomplete = "off" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.MAKH)
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="@ViewText.BUTTON_UPDATE" class="btn-success btn" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        initValidation();
+    });
+</script>
