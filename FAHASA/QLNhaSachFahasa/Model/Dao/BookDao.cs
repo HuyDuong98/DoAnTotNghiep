@@ -1,0 +1,120 @@
+﻿using Model.EF;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model.Dao
+{
+    public class BookDao
+    {
+        QLNhaSachFahasaDBContext db = null;
+        public BookDao()
+        {
+            db = new QLNhaSachFahasaDBContext();
+        }
+        public List<SANPHAM> GetDataBook(string keyWord)
+        {
+            if (string.IsNullOrEmpty(keyWord))
+            {
+                return db.SANPHAMs.ToList<SANPHAM>();
+            }
+            else
+            {
+                return db.SANPHAMs.Where(x => x.TENSANPHAM.Contains(keyWord) || x.TACGIA.Contains(keyWord)).ToList<SANPHAM>();
+            }
+        }
+        public int InserBook(SANPHAM entity)
+        {
+            try
+            {
+                db.SANPHAMs.Add(entity);
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public bool UpdateBook(SANPHAM entity)
+        {
+            try
+            {
+                var book = db.SANPHAMs.Find(entity.MASANPHAM);
+                book.TENSANPHAM = entity.TENSANPHAM;
+                book.TACGIA = entity.TACGIA;
+                book.DONGIA = entity.DONGIA;
+                book.TRONGLUONG = entity.TRONGLUONG;
+                book.SOTRANG = entity.SOTRANG;
+                book.KICHTHUOC = entity.KICHTHUOC;
+                book.GHICHU = entity.GHICHU;
+                book.NHAXUATBAN = entity.NHAXUATBAN;
+                book.NGONNGU = entity.NGONNGU;
+                //book.MAPHANLOAISACH = entity.MAPHANLOAISACH;
+                book.HINHTHUC = entity.HINHTHUC;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public bool Delete(string id)
+        {
+            try
+            {
+                var book = db.SANPHAMs.Find(id);
+                db.SANPHAMs.Remove(book);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public SANPHAM ViewDetail(string id)
+        {
+            return db.SANPHAMs.Find(id);
+        }
+        public bool CheckIDBook(string id)
+        {
+            var ma = db.SANPHAMs.SingleOrDefault(x => x.MASANPHAM == id);
+            if (ma != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string CreateIDAuto(string ma)
+        {
+            int i = 1;
+            bool flag = false;
+            string idBook = "";
+            do
+            {
+                idBook = ma + i;
+                if (CheckIDBook(idBook))
+                {
+                    flag = true;
+                }
+                i++;
+            } while (flag == false);
+            return idBook;
+
+        }
+        public bool CheckBookExist(string bookName, string NXB)
+        {
+            return db.SANPHAMs.Count(x => x.TENSANPHAM == bookName && x.NHAXUATBAN == NXB) > 0;
+
+        }
+    }
+}
