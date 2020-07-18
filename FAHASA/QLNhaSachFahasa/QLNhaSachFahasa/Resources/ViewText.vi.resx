@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ALL_PRODUCTS" xml:space="preserve">
+    <value>Tất cả sản phẩm</value>
+  </data>
   <data name="BUTTON_ADD" xml:space="preserve">
     <value>Thêm mới</value>
   </data>
@@ -124,7 +127,13 @@
     <value>Giỏ hàng</value>
   </data>
   <data name="BUTTON_CART_CONFIRM" xml:space="preserve">
-    <value>Xác nhận giỏ hàng</value>
+    <value>Xác nhận đơn hàng</value>
+  </data>
+  <data name="Button_Change" xml:space="preserve">
+    <value>Thay đổi</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>Đóng</value>
   </data>
   <data name="BUTTON_DELETE" xml:space="preserve">
     <value>Xóa</value>
@@ -132,17 +141,35 @@
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
+  <data name="Button_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Button_Proceed_Order" xml:space="preserve">
+    <value>Tiến hành đặt hàng</value>
+  </data>
   <data name="BUTTON_REGISTER" xml:space="preserve">
     <value>Đăng ký</value>
   </data>
   <data name="BUTTON_SEARCH" xml:space="preserve">
     <value>Tìm kiếm</value>
   </data>
+  <data name="Button_Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
   <data name="BUTTON_SUBMIT" xml:space="preserve">
     <value>Xác nhận</value>
   </data>
   <data name="BUTTON_UPDATE" xml:space="preserve">
     <value>Cập nhật</value>
+  </data>
+  <data name="Button_Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="Decription_login" xml:space="preserve">
+    <value>Đăng nhập để theo dõi đơn hàng, lưu danh sách sản phẩm yêu thích, nhận nhiều ưu đãi hấp dẫn.</value>
   </data>
   <data name="DV_GAM" xml:space="preserve">
     <value>GAM</value>
@@ -152,6 +179,21 @@
   </data>
   <data name="EXAM_KICH_THUOC" xml:space="preserve">
     <value>00x00x00</value>
+  </data>
+  <data name="Exist_Email" xml:space="preserve">
+    <value>Email đã tồn tại</value>
+  </data>
+  <data name="Forgot_Password" xml:space="preserve">
+    <value>Quên mật khẩu? Nhấn vào</value>
+  </data>
+  <data name="Id_Orders" xml:space="preserve">
+    <value>Nhập mã đơn hàng</value>
+  </data>
+  <data name="Input_Code" xml:space="preserve">
+    <value>Nhập mã xác nhận</value>
+  </data>
+  <data name="In_Transit" xml:space="preserve">
+    <value>Đang vận chuyển</value>
   </data>
   <data name="LABLE_HELLO" xml:space="preserve">
     <value>Xin chào</value>
@@ -171,11 +213,56 @@
   <data name="LINK_UPDATE_INFO" xml:space="preserve">
     <value>Cập nhật thông tin</value>
   </data>
+  <data name="Login_name" xml:space="preserve">
+    <value>Tên đăng nhập</value>
+  </data>
+  <data name="Message_Add_Image_Failed" xml:space="preserve">
+    <value>Không thêm được hình ảnh</value>
+  </data>
+  <data name="Message_Add_Product_Failed" xml:space="preserve">
+    <value>Thêm sản phẩm thất bại</value>
+  </data>
+  <data name="Message_Add_Product_Success" xml:space="preserve">
+    <value>Thêm sản phẩm thành công</value>
+  </data>
+  <data name="Message_Confim_Password" xml:space="preserve">
+    <value>Nhập mật khẩu không trùng khớp</value>
+  </data>
+  <data name="Message_Confirm_Email" xml:space="preserve">
+    <value>Không đúng định dạng email</value>
+  </data>
+  <data name="Message_Incorrect_File_Format" xml:space="preserve">
+    <value>Không đúng định dạng file</value>
+  </data>
+  <data name="Message_Max_Length" xml:space="preserve">
+    <value>Tối đa 20 ký tự</value>
+  </data>
+  <data name="Message_Min_Length" xml:space="preserve">
+    <value>Tối thiểu 6 ký tự</value>
+  </data>
+  <data name="Message_order_success" xml:space="preserve">
+    <value>Đơn đặt hàng thành công</value>
+  </data>
+  <data name="Message_Required" xml:space="preserve">
+    <value>Trường bắt buộc nhập</value>
+  </data>
+  <data name="Message_update_infor_order" xml:space="preserve">
+    <value>Bạn chưa cập nhật thông tin đơn hàng</value>
+  </data>
   <data name="NOTE_UPLOAD_FILE_IMAGE" xml:space="preserve">
     <value>File format .jpeg, .jpg, .png. File size max 5MB. </value>
   </data>
   <data name="NOTE_VAT" xml:space="preserve">
     <value>Đã bao gồm VAT (nếu có)</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Thông báo</value>
+  </data>
+  <data name="Notification_Code" xml:space="preserve">
+    <value>Mã xác nhận chưa chính xác</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Đơn đặt hàng</value>
   </data>
   <data name="PHONE_CONTACT" xml:space="preserve">
     <value>+84 353 033 933</value>
@@ -198,6 +285,9 @@
   <data name="PLACEHOLDER_INPUT_PASSWORD" xml:space="preserve">
     <value>Nhập mật khẩu</value>
   </data>
+  <data name="PLACEHOLDER_INPUT_PASSWORD_NEW" xml:space="preserve">
+    <value>Nhập mật khẩu mới</value>
+  </data>
   <data name="PLACEHOLDER_INPUT_USERNAME" xml:space="preserve">
     <value>Nhập tên đăng nhập</value>
   </data>
@@ -206,6 +296,9 @@
   </data>
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>Tên đăng nhập</value>
+  </data>
+  <data name="Question_Delete_Employee" xml:space="preserve">
+    <value>Bạn muốn xóa nhân viên</value>
   </data>
   <data name="RANDOM_TEXT_0" xml:space="preserve">
     <value>Nếu bạn không thể xây dựng một thành phố thì hãy xây lấy một trái tim hồng.</value>
@@ -228,17 +321,59 @@
   <data name="RANDOM_TEXT_6" xml:space="preserve">
     <value>Điều quan trọng không phải vị trí đứng mà là hướng đi.</value>
   </data>
+  <data name="Register_member" xml:space="preserve">
+    <value>Đăng ký để trở thành thành viên</value>
+  </data>
+  <data name="Resend_Code" xml:space="preserve">
+    <value>Gửi lại mã</value>
+  </data>
+  <data name="Status_Cancel" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
+  <data name="Status_New" xml:space="preserve">
+    <value>Mới cập nhật</value>
+  </data>
+  <data name="Status_Shipping" xml:space="preserve">
+    <value>Đang vân chuyển</value>
+  </data>
+  <data name="Status_Success" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="Text_code" xml:space="preserve">
+    <value>Mã đã gửi tới email của bạn.</value>
+  </data>
+  <data name="Text_Forgot_Password" xml:space="preserve">
+    <value>Vui lòng cung cấp email đã đăng ký để lấy lại mật khẩu.</value>
+  </data>
+  <data name="Text_Here" xml:space="preserve">
+    <value>đây</value>
+  </data>
+  <data name="Text_Login_Now" xml:space="preserve">
+    <value>Đăng nhập ngay</value>
+  </data>
+  <data name="Text_Member" xml:space="preserve">
+    <value>Bạn đã là thành viên?</value>
+  </data>
   <data name="TEXT_NO_DATA_FOUND" xml:space="preserve">
     <value>Không có dữ liệu</value>
   </data>
   <data name="TEXT_PAGE_ERROR" xml:space="preserve">
     <value>Từ chối truy cập. Liên hệ với ban quản trị để được hỗ trợ.</value>
   </data>
+  <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
+    <value>Thông tin tài khoản</value>
+  </data>
   <data name="TITLE_ADDRESS" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
+  <data name="TITLE_ADDRESS_ORDER" xml:space="preserve">
+    <value>Địa chỉ giao hàng</value>
+  </data>
   <data name="TITLE_ADD_EMPLOYEE" xml:space="preserve">
     <value>Thêm mới nhân viên</value>
+  </data>
+  <data name="TITLE_ADD_NEW_STATIONERY" xml:space="preserve">
+    <value>Thêm mới văn phòng phẩm</value>
   </data>
   <data name="TITLE_ALL" xml:space="preserve">
     <value>Tất cả</value>
@@ -246,26 +381,53 @@
   <data name="TITLE_BOOK" xml:space="preserve">
     <value>Sách</value>
   </data>
+  <data name="TITLE_BRAND" xml:space="preserve">
+    <value>Thương hiệu</value>
+  </data>
+  <data name="Title_cancel" xml:space="preserve">
+    <value>Đã hủy</value>
+  </data>
   <data name="TITLE_CART" xml:space="preserve">
     <value>Giỏ hàng</value>
   </data>
   <data name="TITLE_CHUC_DANH" xml:space="preserve">
     <value>Chức danh</value>
   </data>
+  <data name="TITLE_CLASSIFICATION" xml:space="preserve">
+    <value>Sơ đồ phân loại sản phẩm</value>
+  </data>
   <data name="TITLE_CMND" xml:space="preserve">
-    <value>Số chứng minh nhân dân</value>
+    <value>Số CMND</value>
+  </data>
+  <data name="Title_Code" xml:space="preserve">
+    <value>Mã xác nhận</value>
+  </data>
+  <data name="TITLE_COLOR" xml:space="preserve">
+    <value>Màu sắc</value>
   </data>
   <data name="TITLE_CONFIM_PASSWORD" xml:space="preserve">
     <value>Xác nhận mật khẩu</value>
   </data>
+  <data name="Title_Confirm" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="Title_Confirm_Order" xml:space="preserve">
+    <value>Xác nhận đơn đặt hàng</value>
+  </data>
   <data name="TITLE_CONTACT" xml:space="preserve">
     <value>Liên hệ</value>
+  </data>
+  <data name="TITLE_COUNTRY" xml:space="preserve">
+    <value>Quốc gia</value>
   </data>
   <data name="TITLE_CREATE_BOOK" xml:space="preserve">
     <value>Thêm mới sách</value>
   </data>
   <data name="TITLE_CREATE_DATE" xml:space="preserve">
     <value>Ngày tạo</value>
+  </data>
+  <data name="TITLE_CREATE_STATIONERY" xml:space="preserve">
+    <value>Thêm mới sản phẩm</value>
   </data>
   <data name="TITLE_CUSTOMER" xml:space="preserve">
     <value>Khách hàng</value>
@@ -278,6 +440,9 @@
   </data>
   <data name="TITLE_DELIVERY_CHARGES" xml:space="preserve">
     <value>Phí giao hàng</value>
+  </data>
+  <data name="Title_Detail_Order" xml:space="preserve">
+    <value>Chi tiết đơn hàng</value>
   </data>
   <data name="TITLE_EDIT" xml:space="preserve">
     <value>Chỉnh sửa</value>
@@ -293,6 +458,9 @@
   </data>
   <data name="TITLE_FAHASA" xml:space="preserve">
     <value>Nhà sách trực tuyến</value>
+  </data>
+  <data name="Title_Forgot_Password" xml:space="preserve">
+    <value>Quên mật khẩu</value>
   </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Hỗ trợ miễn phí 24/7</value>
@@ -349,10 +517,25 @@
     <value>Danh Sách Nhân Viên</value>
   </data>
   <data name="TITLE_LOGIN" xml:space="preserve">
-    <value>ĐĂNG NHẬP</value>
+    <value>Đăng nhập</value>
   </data>
   <data name="TITLE_LOGOUT" xml:space="preserve">
     <value>Đăng xuất</value>
+  </data>
+  <data name="Title_Lookup_Order" xml:space="preserve">
+    <value>Tra cứu đơn hàng</value>
+  </data>
+  <data name="TITLE_MATERIAL" xml:space="preserve">
+    <value>Chất liệu</value>
+  </data>
+  <data name="TITLE_MESSAGE_NO_PRODUCT" xml:space="preserve">
+    <value>Không có sản phẩm nào trong giỏ hàng của bạn.</value>
+  </data>
+  <data name="TITLE_MORE_INFORMATION" xml:space="preserve">
+    <value>Thông tin thêm</value>
+  </data>
+  <data name="TITLE_MY_ACCOUNT" xml:space="preserve">
+    <value>Tài khoản của tôi</value>
   </data>
   <data name="TITLE_NAME" xml:space="preserve">
     <value>Họ và Tên</value>
@@ -363,14 +546,23 @@
   <data name="TITLE_NAME_EMPLOYEE" xml:space="preserve">
     <value>Tên nhân viên</value>
   </data>
+  <data name="Title_New" xml:space="preserve">
+    <value>Mới</value>
+  </data>
   <data name="TITLE_NGON_NGU" xml:space="preserve">
     <value>Ngôn ngữ</value>
   </data>
   <data name="TITLE_NHA_XUAT_BAN" xml:space="preserve">
     <value>Nhà xuất bản</value>
   </data>
+  <data name="Title_Notification" xml:space="preserve">
+    <value>Thông báo</value>
+  </data>
   <data name="TITLE_PASSWORD" xml:space="preserve">
     <value>Mật khẩu</value>
+  </data>
+  <data name="Title_Payments" xml:space="preserve">
+    <value>Hình thức thanh toán</value>
   </data>
   <data name="TITLE_PHAN_LOAI" xml:space="preserve">
     <value>Phân loại</value>
@@ -384,11 +576,26 @@
   <data name="TITLE_PHUONG" xml:space="preserve">
     <value>Phường/Xã</value>
   </data>
+  <data name="TITLE_PRICE" xml:space="preserve">
+    <value>Đơn giá</value>
+  </data>
+  <data name="Title_Process_Order" xml:space="preserve">
+    <value>Tiến hành đặt hàng</value>
+  </data>
+  <data name="TITLE_PRODUCT_NAME" xml:space="preserve">
+    <value>Tên sản phẩm</value>
+  </data>
+  <data name="Title_Provider" xml:space="preserve">
+    <value>Nhà cung cấp</value>
+  </data>
   <data name="TITLE_PROVISIONAL" xml:space="preserve">
     <value>Tạm tính</value>
   </data>
   <data name="TITLE_QUAN" xml:space="preserve">
     <value>Quận/Huyện</value>
+  </data>
+  <data name="TITLE_QUANTITY" xml:space="preserve">
+    <value>Số lượng</value>
   </data>
   <data name="TITLE_QUOC_GIA" xml:space="preserve">
     <value>Quốc gia</value>
@@ -397,10 +604,16 @@
     <value>Quyền truy cập</value>
   </data>
   <data name="TITLE_REGISTER" xml:space="preserve">
-    <value>ĐĂNG KÝ</value>
+    <value>Đăng ký</value>
+  </data>
+  <data name="Title_Search_Orders" xml:space="preserve">
+    <value>Tìm kiếm đơn hàng</value>
   </data>
   <data name="TITLE_SEE_ALL" xml:space="preserve">
     <value>Xem tất cả</value>
+  </data>
+  <data name="TITLE_SHOPPING" xml:space="preserve">
+    <value>Tiếp tục mua sắm</value>
   </data>
   <data name="TITLE_SO_TRANG" xml:space="preserve">
     <value>Số trang</value>
@@ -408,8 +621,32 @@
   <data name="TITLE_STATIONERY" xml:space="preserve">
     <value>Văn phòng phẩm</value>
   </data>
+  <data name="TITLE_STATIONERY_LIST" xml:space="preserve">
+    <value>Danh sách văn phòng phẩm</value>
+  </data>
+  <data name="Title_Statistics" xml:space="preserve">
+    <value>Thống kê</value>
+  </data>
+  <data name="Title_Statistics_Orders" xml:space="preserve">
+    <value>Thống kê đơn đặt hàng</value>
+  </data>
+  <data name="Title_Statistic_Order_By_Day" xml:space="preserve">
+    <value>Đơn đặt hàng theo ngày</value>
+  </data>
+  <data name="Title_Statistic_Order_By_Month" xml:space="preserve">
+    <value>Đơn đặt hàng theo tháng</value>
+  </data>
   <data name="TITLE_STATUS" xml:space="preserve">
     <value>Trạng thái</value>
+  </data>
+  <data name="Title_Succeed" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="TITLE_SUPPORT" xml:space="preserve">
+    <value>Hỗ trợ</value>
+  </data>
+  <data name="Title_Surname" xml:space="preserve">
+    <value>Họ</value>
   </data>
   <data name="TITLE_TEN" xml:space="preserve">
     <value>Tên</value>
@@ -440,6 +677,9 @@
   </data>
   <data name="TXT_CHOOSE_STATUS" xml:space="preserve">
     <value>--Chọn--</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Cập nhật không thành công</value>
   </data>
   <data name="VND" xml:space="preserve">
     <value>₫</value>

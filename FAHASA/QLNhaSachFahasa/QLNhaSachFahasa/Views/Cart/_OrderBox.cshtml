@@ -1,7 +1,11 @@
 ﻿@using QLNhaSachFahasa.Resources
-<div id="infoCustomerBox"></div>
+@*<div id="infoCustomerBox"></div>*@
 <div id="orderBox"></div>
 <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
+    <div class="header-box-order pt-0">
+        @Html.Raw(ViewText.TITLE_ADDRESS_ORDER)
+        
+    </div>
     <div class="info-orderer">
         <a href="javascript:void(0)" class="link-edit-info" onclick="fnPopupUpdateInfo()">@Html.Raw(ViewText.LINK_UPDATE_INFO)</a>
         <div class="row">
@@ -15,7 +19,7 @@
                 @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:Email||"@Html.Raw(ViewText.TITLE_DATA_NOT_FOUND)"#</span>
             </div>
             <div class="col-12 checkout-summary-label d-flex">
-                @Html.Raw(ViewText.TITLE_ADDRESS): <span class="location-value ml-1">#:Address||"@Html.Raw(ViewText.TITLE_DATA_NOT_FOUND)"#</span>
+                @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:Address||"@Html.Raw(ViewText.TITLE_DATA_NOT_FOUND)"#</span>
             </div>
         </div>
     </div>
@@ -30,28 +34,29 @@
                 @Html.Raw(ViewText.TITLE_PROVISIONAL)
             </div>
             <div class="col-6 checkout-summary-value">
-                #:Provisional# ₫
+                #:kendo.toString(Provisional,"n0")# @Html.Raw(ViewText.VND)
             </div>
             <div class="col-6 checkout-summary-label">
                 @Html.Raw(ViewText.TITLE_DELIVERY_CHARGES)
             </div>
             <div class="col-6 checkout-summary-value">
-                #:DeliveryCharges#
+                #:kendo.toString(DeliveryCharges,"n0")# @Html.Raw(ViewText.VND)
             </div>
             <div class="col-6 checkout-order-total-title">
                 @Html.Raw(ViewText.TITLE_TOTAL)
             </div>
             <div class="col-6 checkout-total-order">
-                #:Total# ₫
+                #:kendo.toString(Total,"n0")# @Html.Raw(ViewText.VND)
                 <small class="checkout-order-total-fee-tip">@Html.Raw(ViewText.NOTE_VAT)</small>
             </div>
 
         </div>
-        <button type="button" class="btn btn-submit-order">@Html.Raw(ViewText.BUTTON_CART_CONFIRM)</button>
+        @*<button type="button" class="btn btn-submit-order" onclick="fnSaveOrder()">@Html.Raw(ViewText.BUTTON_CART_CONFIRM)</button>*@
+        <a href="@Url.Action("ProcessOrder","Cart")" class="btn btn-submit-order" >@Html.Raw(ViewText.Button_Proceed_Order)</a>
     </div>
 </script>
 <script>
-    templateInfoOrder();
+    //templateInfoOrder();
     templateProductOrder();
     function templateInfoOrder() {
         $.ajax({
@@ -75,4 +80,5 @@
             },
         });
     }
+    
 </script>

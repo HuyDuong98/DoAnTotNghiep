@@ -25,7 +25,7 @@ function addclassFocus(idInput, idSearch) {
     })
 }
 function initKeydownNumber() {
-    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number", "#CMND", ".quantity", function (e) {
+    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number", "#CMND", function (e) {
         if (e.keyCode === 110 || e.keyCode === 190)
             e.preventDefault();
 
@@ -94,20 +94,43 @@ function fixedHeaderBg() {
     if (winWidth > 999) {
         if (top >= 1) {
             $headerOfPage.addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
+            $(".header-of-page-mobie").addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
             $('.en-link').css({ "color": "#5C5758" });
             $head.removeClass('black-bg');
+            $('.header-of-page .header-content').css("padding", "12px 0");
         } else {
             $headerOfPage.removeClass('bg-color').css({ "boxShadow": "none" });
+            $(".header-of-page-mobie").removeClass('bg-color').css({ "boxShadow": "none" });
             $head.addClass('black-bg');
             $('.en-link').css({ "color": "#fff" });
+            $('.header-of-page .header-content').css("padding", "22px 0");
         }
     } else {
         if (top >= 1) {
             $headerOfPage.addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
+            $(".header-of-page-mobie").addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
             $head.removeClass('black-bg');
+            $('.header-of-page .header-content').css("padding","12px 0");
         } else {
             $headerOfPage.removeClass('bg-color').css({ "boxShadow": "none" });
+            $(".header-of-page-mobie").removeClass('bg-color').css({ "boxShadow": "none" });
             $head.addClass('black-bg');
+            $('.header-of-page .header-content').css("padding", "22px 0");
         }
     }
+}
+function initDialog(title, content, contentBtnCancel = '') {
+    
+    $('#dialog').kendoDialog({
+        width: "450px",
+        title: title,
+        closable: false,
+        visible: false,
+        content: " <span class='k-icon k-i-info'></span>" +content,
+        buttonLayout: "normal",
+        actions: [
+            { text: contentBtnCancel },
+        ]
+    });
+    $('#dialog').data("kendoDialog").open().element.closest(".k-window").css({ top: 40 });
 }

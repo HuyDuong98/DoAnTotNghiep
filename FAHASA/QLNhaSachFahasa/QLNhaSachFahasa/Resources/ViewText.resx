@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ALL_PRODUCTS" xml:space="preserve">
+    <value>All products</value>
+  </data>
   <data name="BUTTON_ADD" xml:space="preserve">
     <value>Add new</value>
   </data>
@@ -126,11 +129,23 @@
   <data name="BUTTON_CART_CONFIRM" xml:space="preserve">
     <value>Cart confirmation</value>
   </data>
+  <data name="Button_Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="BUTTON_DELETE" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Button_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Button_Proceed_Order" xml:space="preserve">
+    <value>Proceed order</value>
   </data>
   <data name="BUTTON_REGISTER" xml:space="preserve">
     <value>Register</value>
@@ -138,11 +153,23 @@
   <data name="BUTTON_SEARCH" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Button_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="BUTTON_SUBMIT" xml:space="preserve">
     <value>Submit</value>
   </data>
   <data name="BUTTON_UPDATE" xml:space="preserve">
     <value>Update</value>
+  </data>
+  <data name="Button_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="Decription_login" xml:space="preserve">
+    <value>Log in to track orders, save a list of favorite products, receive many attractive deals.</value>
   </data>
   <data name="DV_GAM" xml:space="preserve">
     <value>GAM</value>
@@ -152,6 +179,21 @@
   </data>
   <data name="EXAM_KICH_THUOC" xml:space="preserve">
     <value>00x00x00</value>
+  </data>
+  <data name="Exist_Email" xml:space="preserve">
+    <value>Email already exists</value>
+  </data>
+  <data name="Forgot_Password" xml:space="preserve">
+    <value>Forgot Password? Click </value>
+  </data>
+  <data name="Id_Orders" xml:space="preserve">
+    <value>Enter ID Orders</value>
+  </data>
+  <data name="Input_Code" xml:space="preserve">
+    <value>Enter the verification code</value>
+  </data>
+  <data name="In_Transit" xml:space="preserve">
+    <value>In transit</value>
   </data>
   <data name="LABLE_HELLO" xml:space="preserve">
     <value>Hello</value>
@@ -171,41 +213,92 @@
   <data name="LINK_UPDATE_INFO" xml:space="preserve">
     <value>Update information</value>
   </data>
+  <data name="Login_name" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="Message_Add_Image_Failed" xml:space="preserve">
+    <value>Add Images failed</value>
+  </data>
+  <data name="Message_Add_Product_Failed" xml:space="preserve">
+    <value>Add product failed</value>
+  </data>
+  <data name="Message_Add_Product_Success" xml:space="preserve">
+    <value>Add product successfully</value>
+  </data>
+  <data name="Message_Confim_Password" xml:space="preserve">
+    <value>Enter your password incorrectly</value>
+  </data>
+  <data name="Message_Confirm_Email" xml:space="preserve">
+    <value>Incorrect email format</value>
+  </data>
+  <data name="Message_Incorrect_File_Format" xml:space="preserve">
+    <value>Incorrect file format</value>
+  </data>
+  <data name="Message_Max_Length" xml:space="preserve">
+    <value>Maximum of 20 characters</value>
+  </data>
+  <data name="Message_Min_Length" xml:space="preserve">
+    <value>Minimum of 6 characters</value>
+  </data>
+  <data name="Message_order_success" xml:space="preserve">
+    <value>The order was successful</value>
+  </data>
+  <data name="Message_Required" xml:space="preserve">
+    <value>Required field</value>
+  </data>
+  <data name="Message_update_infor_order" xml:space="preserve">
+    <value>You have not updated order information</value>
+  </data>
   <data name="NOTE_UPLOAD_FILE_IMAGE" xml:space="preserve">
     <value>File format .jpeg, .jpg, .png. File size max 5MB. </value>
   </data>
   <data name="NOTE_VAT" xml:space="preserve">
     <value>Included VAT (if any)</value>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Notification_Code" xml:space="preserve">
+    <value>The verification code is incorrect</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
   <data name="PHONE_CONTACT" xml:space="preserve">
     <value>+84 353 033 933</value>
   </data>
   <data name="PLACEHOLDER_INPUT_ADDRESS" xml:space="preserve">
-    <value>Nhập địa chỉ</value>
+    <value>Input address</value>
   </data>
   <data name="PLACEHOLDER_INPUT_COMFIRM_PASSWORD" xml:space="preserve">
-    <value>Nhập lại mật khẩu</value>
+    <value>Enter the password again</value>
   </data>
   <data name="PLACEHOLDER_INPUT_EMAIL" xml:space="preserve">
-    <value>Nhập địa chỉ email</value>
+    <value>Enter your email address</value>
   </data>
   <data name="PLACEHOLDER_INPUT_MOBILE" xml:space="preserve">
-    <value>Nhập số điện thoại</value>
+    <value>Enter your phone number</value>
   </data>
   <data name="PLACEHOLDER_INPUT_NAME" xml:space="preserve">
-    <value>Nhập họ và tên</value>
+    <value>Enter your name</value>
   </data>
   <data name="PLACEHOLDER_INPUT_PASSWORD" xml:space="preserve">
-    <value>Nhập mật khẩu</value>
+    <value>Enter password</value>
+  </data>
+  <data name="PLACEHOLDER_INPUT_PASSWORD_NEW" xml:space="preserve">
+    <value>Enter a new password</value>
   </data>
   <data name="PLACEHOLDER_INPUT_USERNAME" xml:space="preserve">
-    <value>Nhập tên đăng nhập</value>
+    <value>Enter your username</value>
   </data>
   <data name="PLACEHOLDER_PASSWORD" xml:space="preserve">
-    <value>Mật khẩu</value>
+    <value>Password</value>
   </data>
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
-    <value>Tên đăng nhập</value>
+    <value>UserName</value>
+  </data>
+  <data name="Question_Delete_Employee" xml:space="preserve">
+    <value>Do you want to delete employee</value>
   </data>
   <data name="RANDOM_TEXT_0" xml:space="preserve">
     <value>Don’t stop giving love even if you don’t receive it! Smile and have patience!</value>
@@ -228,23 +321,71 @@
   <data name="RANDOM_TEXT_6" xml:space="preserve">
     <value>Tell me who your friends are and I’ll tell you who you are</value>
   </data>
+  <data name="Register_member" xml:space="preserve">
+    <value>Register to become a member</value>
+  </data>
+  <data name="Resend_Code" xml:space="preserve">
+    <value>Resend code</value>
+  </data>
+  <data name="Status_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Status_New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Status_Shipping" xml:space="preserve">
+    <value>Shipping</value>
+  </data>
+  <data name="Status_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Text_code" xml:space="preserve">
+    <value>Code sent to your email.</value>
+  </data>
+  <data name="Text_Forgot_Password" xml:space="preserve">
+    <value>Please provide your registered email to retrieve your password.</value>
+  </data>
+  <data name="Text_Here" xml:space="preserve">
+    <value>here</value>
+  </data>
+  <data name="Text_Login_Now" xml:space="preserve">
+    <value>Login now</value>
+  </data>
+  <data name="Text_Member" xml:space="preserve">
+    <value>Are you already a member?</value>
+  </data>
   <data name="TEXT_NO_DATA_FOUND" xml:space="preserve">
     <value>No data found</value>
   </data>
   <data name="TEXT_PAGE_ERROR" xml:space="preserve">
-    <value>Từ chối truy cập. Liên hệ với ban quản trị để được hỗ trợ.</value>
+    <value>Deny access. Contact the administrator for assistance.</value>
+  </data>
+  <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
+    <value>Account information</value>
   </data>
   <data name="TITLE_ADDRESS" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="TITLE_ADDRESS_ORDER" xml:space="preserve">
+    <value>Delivery address</value>
+  </data>
   <data name="TITLE_ADD_EMPLOYEE" xml:space="preserve">
-    <value>Thêm mới nhân viên</value>
+    <value>Add new employee</value>
+  </data>
+  <data name="TITLE_ADD_NEW_STATIONERY" xml:space="preserve">
+    <value>Add new stationery</value>
   </data>
   <data name="TITLE_ALL" xml:space="preserve">
-    <value>Tất cả</value>
+    <value>All</value>
   </data>
   <data name="TITLE_BOOK" xml:space="preserve">
     <value>Book</value>
+  </data>
+  <data name="TITLE_BRAND" xml:space="preserve">
+    <value>Brand</value>
+  </data>
+  <data name="Title_cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="TITLE_CART" xml:space="preserve">
     <value>Cart</value>
@@ -252,194 +393,297 @@
   <data name="TITLE_CHUC_DANH" xml:space="preserve">
     <value>Chức danh</value>
   </data>
+  <data name="TITLE_CLASSIFICATION" xml:space="preserve">
+    <value>Product classification</value>
+  </data>
   <data name="TITLE_CMND" xml:space="preserve">
-    <value>Số chứng minh nhân dân</value>
+    <value>ID number</value>
+  </data>
+  <data name="Title_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="TITLE_COLOR" xml:space="preserve">
+    <value>Color</value>
   </data>
   <data name="TITLE_CONFIM_PASSWORD" xml:space="preserve">
-    <value>Xác nhận mật khẩu</value>
+    <value>Confirm password</value>
+  </data>
+  <data name="Title_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Title_Confirm_Order" xml:space="preserve">
+    <value>Confirm the order</value>
   </data>
   <data name="TITLE_CONTACT" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="TITLE_COUNTRY" xml:space="preserve">
+    <value>Country</value>
+  </data>
   <data name="TITLE_CREATE_BOOK" xml:space="preserve">
-    <value>Thêm mới sách</value>
+    <value>Add new books</value>
   </data>
   <data name="TITLE_CREATE_DATE" xml:space="preserve">
-    <value>Ngày tạo</value>
+    <value>Date created</value>
+  </data>
+  <data name="TITLE_CREATE_STATIONERY" xml:space="preserve">
+    <value>Create Stationery</value>
   </data>
   <data name="TITLE_CUSTOMER" xml:space="preserve">
-    <value>Khách hàng</value>
+    <value>Customer</value>
   </data>
   <data name="TITLE_DATA_NOT_FOUND" xml:space="preserve">
     <value>Data not found</value>
   </data>
   <data name="TITLE_DATEOFBIRTH" xml:space="preserve">
-    <value>Ngày sinh</value>
+    <value>Date of birth</value>
   </data>
   <data name="TITLE_DELIVERY_CHARGES" xml:space="preserve">
     <value>Delivery charges</value>
   </data>
+  <data name="Title_Detail_Order" xml:space="preserve">
+    <value>Order details</value>
+  </data>
   <data name="TITLE_EDIT" xml:space="preserve">
-    <value>Chỉnh sửa</value>
+    <value>Edit
+Edit</value>
   </data>
   <data name="TITLE_EMAIL" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="TITLE_EMPLOYEE" xml:space="preserve">
-    <value>Nhân viên</value>
+    <value>Employee</value>
   </data>
   <data name="TITLE_ERROR" xml:space="preserve">
-    <value>Lỗi 401</value>
+    <value>Error 401</value>
   </data>
   <data name="TITLE_FAHASA" xml:space="preserve">
     <value>Bookstore online</value>
+  </data>
+  <data name="Title_Forgot_Password" xml:space="preserve">
+    <value>Forgot Password</value>
   </data>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Free Support 24/7</value>
   </data>
   <data name="TITLE_GIA_SACH" xml:space="preserve">
-    <value>Giá sách</value>
+    <value>Bookshelf</value>
   </data>
   <data name="TITLE_HINH_THUC" xml:space="preserve">
-    <value>Hình thức</value>
+    <value>Form</value>
   </data>
   <data name="TITLE_HO" xml:space="preserve">
-    <value>Họ</value>
+    <value>Surname</value>
   </data>
   <data name="TITLE_HOME" xml:space="preserve">
-    <value>Trang chủ</value>
+    <value>Home</value>
   </data>
   <data name="TITLE_ID" xml:space="preserve">
-    <value>Mã</value>
+    <value>Code</value>
   </data>
   <data name="TITLE_ID_BOOK" xml:space="preserve">
-    <value>Mã sách</value>
+    <value>Book code</value>
   </data>
   <data name="TITLE_ID_EMPLOYEE" xml:space="preserve">
-    <value>Mã nhân viên</value>
+    <value>Employee code</value>
   </data>
   <data name="TITLE_IMAGE" xml:space="preserve">
-    <value>Hình ảnh</value>
+    <value>Picture</value>
   </data>
   <data name="TITLE_INFO_BOOK" xml:space="preserve">
-    <value>Thông tin sách</value>
+    <value>Book information</value>
   </data>
   <data name="TITLE_INFO_CUSTOMER" xml:space="preserve">
     <value>Customer Information</value>
   </data>
   <data name="TITLE_INFO_EMPLOYEE" xml:space="preserve">
-    <value>Thông tin nhân viên</value>
+    <value>Employee information</value>
   </data>
   <data name="TITLE_INFO_ORDER" xml:space="preserve">
     <value>Order Information</value>
   </data>
   <data name="TITLE_KICH_THUOC" xml:space="preserve">
-    <value>Kích thước</value>
+    <value>Size</value>
   </data>
   <data name="TITLE_LAST_NAME" xml:space="preserve">
     <value>Last Name</value>
   </data>
   <data name="TITLE_LIST_BOOK" xml:space="preserve">
-    <value>Danh mục sách</value>
+    <value>Book List</value>
   </data>
   <data name="TITLE_LIST_CUSTOMER" xml:space="preserve">
-    <value>Danh sách khách hàng</value>
+    <value>Customer List</value>
   </data>
   <data name="TITLE_LIST_EMPLOYEE" xml:space="preserve">
-    <value>Danh sách nhân viên</value>
+    <value>Employee List</value>
   </data>
   <data name="TITLE_LOGIN" xml:space="preserve">
-    <value>LOGIN</value>
+    <value>Login</value>
   </data>
   <data name="TITLE_LOGOUT" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="Title_Lookup_Order" xml:space="preserve">
+    <value>Look up orders</value>
+  </data>
+  <data name="TITLE_MATERIAL" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="TITLE_MESSAGE_NO_PRODUCT" xml:space="preserve">
+    <value>You have no items in your shopping cart.</value>
+  </data>
+  <data name="TITLE_MORE_INFORMATION" xml:space="preserve">
+    <value>More information</value>
+  </data>
+  <data name="TITLE_MY_ACCOUNT" xml:space="preserve">
+    <value>My account</value>
   </data>
   <data name="TITLE_NAME" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="TITLE_NAME_BOOK" xml:space="preserve">
-    <value>Tên sách </value>
+    <value>Book name</value>
   </data>
   <data name="TITLE_NAME_EMPLOYEE" xml:space="preserve">
-    <value>Tên nhân viên</value>
+    <value>Employee name</value>
+  </data>
+  <data name="Title_New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="TITLE_NGON_NGU" xml:space="preserve">
-    <value>Ngôn ngữ</value>
+    <value>Language</value>
   </data>
   <data name="TITLE_NHA_XUAT_BAN" xml:space="preserve">
-    <value>Nhà xuất bản</value>
+    <value>Publishing company</value>
+  </data>
+  <data name="Title_Notification" xml:space="preserve">
+    <value>Notification</value>
   </data>
   <data name="TITLE_PASSWORD" xml:space="preserve">
-    <value>Mật khẩu</value>
+    <value>password</value>
+  </data>
+  <data name="Title_Payments" xml:space="preserve">
+    <value>Hình thức thanh toán</value>
   </data>
   <data name="TITLE_PHAN_LOAI" xml:space="preserve">
-    <value>Phân loại</value>
+    <value>Classify</value>
   </data>
   <data name="TITLE_PHAN_QUYEN" xml:space="preserve">
-    <value>Phân Quyền Truy Cập</value>
+    <value>19/5000
+Access Permission</value>
   </data>
   <data name="TITLE_PHONE" xml:space="preserve">
     <value>Phone number</value>
   </data>
   <data name="TITLE_PHUONG" xml:space="preserve">
-    <value>Phường/Xã</value>
+    <value>Wards</value>
+  </data>
+  <data name="TITLE_PRICE" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Title_Process_Order" xml:space="preserve">
+    <value>Process Order</value>
+  </data>
+  <data name="TITLE_PRODUCT_NAME" xml:space="preserve">
+    <value>Product name</value>
+  </data>
+  <data name="Title_Provider" xml:space="preserve">
+    <value>Provider</value>
   </data>
   <data name="TITLE_PROVISIONAL" xml:space="preserve">
     <value>Provisional</value>
   </data>
   <data name="TITLE_QUAN" xml:space="preserve">
-    <value>Quận/Huyện</value>
+    <value>District</value>
+  </data>
+  <data name="TITLE_QUANTITY" xml:space="preserve">
+    <value>Quantity</value>
   </data>
   <data name="TITLE_QUOC_GIA" xml:space="preserve">
-    <value>Quốc gia</value>
+    <value>Country</value>
   </data>
   <data name="TITLE_QUYEN_TRUY_CAP" xml:space="preserve">
-    <value>Quyền truy cập</value>
+    <value>14/5000
+Access rights</value>
   </data>
   <data name="TITLE_REGISTER" xml:space="preserve">
-    <value>REGISTER</value>
+    <value>Register</value>
+  </data>
+  <data name="Title_Search_Orders" xml:space="preserve">
+    <value>Search orders</value>
   </data>
   <data name="TITLE_SEE_ALL" xml:space="preserve">
     <value>See all</value>
   </data>
+  <data name="TITLE_SHOPPING" xml:space="preserve">
+    <value>Continue shopping</value>
+  </data>
   <data name="TITLE_SO_TRANG" xml:space="preserve">
-    <value>Số trang</value>
+    <value>Number of pages</value>
   </data>
   <data name="TITLE_STATIONERY" xml:space="preserve">
     <value>Stationerry</value>
   </data>
+  <data name="TITLE_STATIONERY_LIST" xml:space="preserve">
+    <value>List of stationery</value>
+  </data>
+  <data name="Title_Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Title_Statistics_Orders" xml:space="preserve">
+    <value>Statistics orders</value>
+  </data>
+  <data name="Title_Statistic_Order_By_Day" xml:space="preserve">
+    <value>Statistics orders by day</value>
+  </data>
+  <data name="Title_Statistic_Order_By_Month" xml:space="preserve">
+    <value>Statistics orders by month</value>
+  </data>
   <data name="TITLE_STATUS" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Title_Succeed" xml:space="preserve">
+    <value>Succeed</value>
+  </data>
+  <data name="TITLE_SUPPORT" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Title_Surname" xml:space="preserve">
+    <value>Surname</value>
   </data>
   <data name="TITLE_TEN" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="TITLE_THANH_PHO" xml:space="preserve">
-    <value>Tỉnh/Thành phố</value>
+    <value>Province / City</value>
   </data>
   <data name="TITLE_TOM_TAC" xml:space="preserve">
-    <value>Tóm tắc</value>
+    <value>Summary</value>
   </data>
   <data name="TITLE_TOTAL" xml:space="preserve">
     <value>Total</value>
   </data>
   <data name="TITLE_TRONG_LUONG" xml:space="preserve">
-    <value>Trọng lượng</value>
+    <value>11/5000
+Weight</value>
   </data>
   <data name="TITLE_UPDATE_INFO_CUSTOMER" xml:space="preserve">
     <value>Update order information</value>
   </data>
   <data name="TITLE_USERNAME" xml:space="preserve">
-    <value>Tên đăng nhập</value>
+    <value>UserName</value>
   </data>
   <data name="TITLE_VIEW" xml:space="preserve">
     <value>Views</value>
   </data>
   <data name="TITTLE_TAC_GIA" xml:space="preserve">
-    <value>Tác giả</value>
+    <value>Author</value>
   </data>
   <data name="TXT_CHOOSE_STATUS" xml:space="preserve">
     <value>--Select--</value>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Update failed</value>
   </data>
   <data name="VND" xml:space="preserve">
     <value>₫</value>

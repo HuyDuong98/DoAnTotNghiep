@@ -61,6 +61,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All products.
+        /// </summary>
+        public static string ALL_PRODUCTS {
+            get {
+                return ResourceManager.GetString("ALL_PRODUCTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new.
         /// </summary>
         public static string BUTTON_ADD {
@@ -88,6 +97,24 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change.
+        /// </summary>
+        public static string Button_Change {
+            get {
+                return ResourceManager.GetString("Button_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Button_Close {
+            get {
+                return ResourceManager.GetString("Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string BUTTON_DELETE {
@@ -102,6 +129,24 @@ namespace QLNhaSachFahasa.Resources {
         public static string BUTTON_LOGIN {
             get {
                 return ResourceManager.GetString("BUTTON_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string Button_No {
+            get {
+                return ResourceManager.GetString("Button_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proceed order.
+        /// </summary>
+        public static string Button_Proceed_Order {
+            get {
+                return ResourceManager.GetString("Button_Proceed_Order", resourceCulture);
             }
         }
         
@@ -124,6 +169,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Button_Send {
+            get {
+                return ResourceManager.GetString("Button_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string BUTTON_SUBMIT {
@@ -138,6 +192,33 @@ namespace QLNhaSachFahasa.Resources {
         public static string BUTTON_UPDATE {
             get {
                 return ResourceManager.GetString("BUTTON_UPDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Button_Yes {
+            get {
+                return ResourceManager.GetString("Button_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string Change_Password {
+            get {
+                return ResourceManager.GetString("Change_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in to track orders, save a list of favorite products, receive many attractive deals..
+        /// </summary>
+        public static string Decription_login {
+            get {
+                return ResourceManager.GetString("Decription_login", resourceCulture);
             }
         }
         
@@ -165,6 +246,51 @@ namespace QLNhaSachFahasa.Resources {
         public static string EXAM_KICH_THUOC {
             get {
                 return ResourceManager.GetString("EXAM_KICH_THUOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email already exists.
+        /// </summary>
+        public static string Exist_Email {
+            get {
+                return ResourceManager.GetString("Exist_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot Password? Click .
+        /// </summary>
+        public static string Forgot_Password {
+            get {
+                return ResourceManager.GetString("Forgot_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter ID Orders.
+        /// </summary>
+        public static string Id_Orders {
+            get {
+                return ResourceManager.GetString("Id_Orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In transit.
+        /// </summary>
+        public static string In_Transit {
+            get {
+                return ResourceManager.GetString("In_Transit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the verification code.
+        /// </summary>
+        public static string Input_Code {
+            get {
+                return ResourceManager.GetString("Input_Code", resourceCulture);
             }
         }
         
@@ -223,6 +349,114 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string Login_name {
+            get {
+                return ResourceManager.GetString("Login_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Images failed.
+        /// </summary>
+        public static string Message_Add_Image_Failed {
+            get {
+                return ResourceManager.GetString("Message_Add_Image_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add product failed.
+        /// </summary>
+        public static string Message_Add_Product_Failed {
+            get {
+                return ResourceManager.GetString("Message_Add_Product_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add product successfully.
+        /// </summary>
+        public static string Message_Add_Product_Success {
+            get {
+                return ResourceManager.GetString("Message_Add_Product_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your password incorrectly.
+        /// </summary>
+        public static string Message_Confim_Password {
+            get {
+                return ResourceManager.GetString("Message_Confim_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect email format.
+        /// </summary>
+        public static string Message_Confirm_Email {
+            get {
+                return ResourceManager.GetString("Message_Confirm_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incorrect file format.
+        /// </summary>
+        public static string Message_Incorrect_File_Format {
+            get {
+                return ResourceManager.GetString("Message_Incorrect_File_Format", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum of 20 characters.
+        /// </summary>
+        public static string Message_Max_Length {
+            get {
+                return ResourceManager.GetString("Message_Max_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum of 6 characters.
+        /// </summary>
+        public static string Message_Min_Length {
+            get {
+                return ResourceManager.GetString("Message_Min_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The order was successful.
+        /// </summary>
+        public static string Message_order_success {
+            get {
+                return ResourceManager.GetString("Message_order_success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required field.
+        /// </summary>
+        public static string Message_Required {
+            get {
+                return ResourceManager.GetString("Message_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have not updated order information.
+        /// </summary>
+        public static string Message_update_infor_order {
+            get {
+                return ResourceManager.GetString("Message_update_infor_order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File format .jpeg, .jpg, .png. File size max 5MB. .
         /// </summary>
         public static string NOTE_UPLOAD_FILE_IMAGE {
@@ -241,6 +475,33 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        public static string Notification {
+            get {
+                return ResourceManager.GetString("Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The verification code is incorrect.
+        /// </summary>
+        public static string Notification_Code {
+            get {
+                return ResourceManager.GetString("Notification_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orders.
+        /// </summary>
+        public static string Orders {
+            get {
+                return ResourceManager.GetString("Orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +84 353 033 933.
         /// </summary>
         public static string PHONE_CONTACT {
@@ -250,7 +511,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập địa chỉ.
+        ///   Looks up a localized string similar to Input address.
         /// </summary>
         public static string PLACEHOLDER_INPUT_ADDRESS {
             get {
@@ -259,7 +520,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập lại mật khẩu.
+        ///   Looks up a localized string similar to Enter the password again.
         /// </summary>
         public static string PLACEHOLDER_INPUT_COMFIRM_PASSWORD {
             get {
@@ -268,7 +529,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập địa chỉ email.
+        ///   Looks up a localized string similar to Enter your email address.
         /// </summary>
         public static string PLACEHOLDER_INPUT_EMAIL {
             get {
@@ -277,7 +538,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập số điện thoại.
+        ///   Looks up a localized string similar to Enter your phone number.
         /// </summary>
         public static string PLACEHOLDER_INPUT_MOBILE {
             get {
@@ -286,7 +547,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập họ và tên.
+        ///   Looks up a localized string similar to Enter your name.
         /// </summary>
         public static string PLACEHOLDER_INPUT_NAME {
             get {
@@ -295,7 +556,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập mật khẩu.
+        ///   Looks up a localized string similar to Enter password.
         /// </summary>
         public static string PLACEHOLDER_INPUT_PASSWORD {
             get {
@@ -304,7 +565,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhập tên đăng nhập.
+        ///   Looks up a localized string similar to Enter a new password.
+        /// </summary>
+        public static string PLACEHOLDER_INPUT_PASSWORD_NEW {
+            get {
+                return ResourceManager.GetString("PLACEHOLDER_INPUT_PASSWORD_NEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your username.
         /// </summary>
         public static string PLACEHOLDER_INPUT_USERNAME {
             get {
@@ -313,7 +583,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mật khẩu.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string PLACEHOLDER_PASSWORD {
             get {
@@ -322,11 +592,20 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên đăng nhập.
+        ///   Looks up a localized string similar to UserName.
         /// </summary>
         public static string PLACEHOLDER_USERNAME {
             get {
                 return ResourceManager.GetString("PLACEHOLDER_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to delete employee.
+        /// </summary>
+        public static string Question_Delete_Employee {
+            get {
+                return ResourceManager.GetString("Question_Delete_Employee", resourceCulture);
             }
         }
         
@@ -394,6 +673,105 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register to become a member.
+        /// </summary>
+        public static string Register_member {
+            get {
+                return ResourceManager.GetString("Register_member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resend code.
+        /// </summary>
+        public static string Resend_Code {
+            get {
+                return ResourceManager.GetString("Resend_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Status_Cancel {
+            get {
+                return ResourceManager.GetString("Status_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string Status_New {
+            get {
+                return ResourceManager.GetString("Status_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping.
+        /// </summary>
+        public static string Status_Shipping {
+            get {
+                return ResourceManager.GetString("Status_Shipping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string Status_Success {
+            get {
+                return ResourceManager.GetString("Status_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code sent to your email..
+        /// </summary>
+        public static string Text_code {
+            get {
+                return ResourceManager.GetString("Text_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide your registered email to retrieve your password..
+        /// </summary>
+        public static string Text_Forgot_Password {
+            get {
+                return ResourceManager.GetString("Text_Forgot_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to here.
+        /// </summary>
+        public static string Text_Here {
+            get {
+                return ResourceManager.GetString("Text_Here", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login now.
+        /// </summary>
+        public static string Text_Login_Now {
+            get {
+                return ResourceManager.GetString("Text_Login_Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you already a member?.
+        /// </summary>
+        public static string Text_Member {
+            get {
+                return ResourceManager.GetString("Text_Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No data found.
         /// </summary>
         public static string TEXT_NO_DATA_FOUND {
@@ -403,7 +781,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Từ chối truy cập. Liên hệ với ban quản trị để được hỗ trợ..
+        ///   Looks up a localized string similar to Deny access. Contact the administrator for assistance..
         /// </summary>
         public static string TEXT_PAGE_ERROR {
             get {
@@ -412,11 +790,29 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thêm mới nhân viên.
+        ///   Looks up a localized string similar to Account information.
+        /// </summary>
+        public static string TITLE_ACCOUNT_INFORMATION {
+            get {
+                return ResourceManager.GetString("TITLE_ACCOUNT_INFORMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new employee.
         /// </summary>
         public static string TITLE_ADD_EMPLOYEE {
             get {
                 return ResourceManager.GetString("TITLE_ADD_EMPLOYEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new stationery.
+        /// </summary>
+        public static string TITLE_ADD_NEW_STATIONERY {
+            get {
+                return ResourceManager.GetString("TITLE_ADD_NEW_STATIONERY", resourceCulture);
             }
         }
         
@@ -430,7 +826,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tất cả.
+        ///   Looks up a localized string similar to Delivery address.
+        /// </summary>
+        public static string TITLE_ADDRESS_ORDER {
+            get {
+                return ResourceManager.GetString("TITLE_ADDRESS_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
         /// </summary>
         public static string TITLE_ALL {
             get {
@@ -444,6 +849,24 @@ namespace QLNhaSachFahasa.Resources {
         public static string TITLE_BOOK {
             get {
                 return ResourceManager.GetString("TITLE_BOOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brand.
+        /// </summary>
+        public static string TITLE_BRAND {
+            get {
+                return ResourceManager.GetString("TITLE_BRAND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Title_cancel {
+            get {
+                return ResourceManager.GetString("Title_cancel", resourceCulture);
             }
         }
         
@@ -466,7 +889,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Số chứng minh nhân dân.
+        ///   Looks up a localized string similar to Product classification.
+        /// </summary>
+        public static string TITLE_CLASSIFICATION {
+            get {
+                return ResourceManager.GetString("TITLE_CLASSIFICATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID number.
         /// </summary>
         public static string TITLE_CMND {
             get {
@@ -475,11 +907,47 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xác nhận mật khẩu.
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        public static string Title_Code {
+            get {
+                return ResourceManager.GetString("Title_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        public static string TITLE_COLOR {
+            get {
+                return ResourceManager.GetString("TITLE_COLOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string TITLE_CONFIM_PASSWORD {
             get {
                 return ResourceManager.GetString("TITLE_CONFIM_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Title_Confirm {
+            get {
+                return ResourceManager.GetString("Title_Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm the order.
+        /// </summary>
+        public static string Title_Confirm_Order {
+            get {
+                return ResourceManager.GetString("Title_Confirm_Order", resourceCulture);
             }
         }
         
@@ -493,7 +961,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thêm mới sách.
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string TITLE_COUNTRY {
+            get {
+                return ResourceManager.GetString("TITLE_COUNTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new books.
         /// </summary>
         public static string TITLE_CREATE_BOOK {
             get {
@@ -502,7 +979,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngày tạo.
+        ///   Looks up a localized string similar to Date created.
         /// </summary>
         public static string TITLE_CREATE_DATE {
             get {
@@ -511,7 +988,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Khách hàng.
+        ///   Looks up a localized string similar to Create Stationery.
+        /// </summary>
+        public static string TITLE_CREATE_STATIONERY {
+            get {
+                return ResourceManager.GetString("TITLE_CREATE_STATIONERY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer.
         /// </summary>
         public static string TITLE_CUSTOMER {
             get {
@@ -529,7 +1015,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngày sinh.
+        ///   Looks up a localized string similar to Date of birth.
         /// </summary>
         public static string TITLE_DATEOFBIRTH {
             get {
@@ -547,7 +1033,17 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chỉnh sửa.
+        ///   Looks up a localized string similar to Order details.
+        /// </summary>
+        public static string Title_Detail_Order {
+            get {
+                return ResourceManager.GetString("Title_Detail_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit
+        ///Edit.
         /// </summary>
         public static string TITLE_EDIT {
             get {
@@ -565,7 +1061,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhân viên.
+        ///   Looks up a localized string similar to Employee.
         /// </summary>
         public static string TITLE_EMPLOYEE {
             get {
@@ -574,7 +1070,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lỗi 401.
+        ///   Looks up a localized string similar to Error 401.
         /// </summary>
         public static string TITLE_ERROR {
             get {
@@ -592,6 +1088,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot Password.
+        /// </summary>
+        public static string Title_Forgot_Password {
+            get {
+                return ResourceManager.GetString("Title_Forgot_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free Support 24/7.
         /// </summary>
         public static string TITLE_FREE_SUPPORT {
@@ -601,7 +1106,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Giá sách.
+        ///   Looks up a localized string similar to Bookshelf.
         /// </summary>
         public static string TITLE_GIA_SACH {
             get {
@@ -610,7 +1115,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hình thức.
+        ///   Looks up a localized string similar to Form.
         /// </summary>
         public static string TITLE_HINH_THUC {
             get {
@@ -619,7 +1124,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Họ.
+        ///   Looks up a localized string similar to Surname.
         /// </summary>
         public static string TITLE_HO {
             get {
@@ -628,7 +1133,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trang chủ.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string TITLE_HOME {
             get {
@@ -637,7 +1142,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã.
+        ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string TITLE_ID {
             get {
@@ -646,7 +1151,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã sách.
+        ///   Looks up a localized string similar to Book code.
         /// </summary>
         public static string TITLE_ID_BOOK {
             get {
@@ -655,7 +1160,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên.
+        ///   Looks up a localized string similar to Employee code.
         /// </summary>
         public static string TITLE_ID_EMPLOYEE {
             get {
@@ -664,7 +1169,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hình ảnh.
+        ///   Looks up a localized string similar to Picture.
         /// </summary>
         public static string TITLE_IMAGE {
             get {
@@ -673,7 +1178,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thông tin sách.
+        ///   Looks up a localized string similar to Book information.
         /// </summary>
         public static string TITLE_INFO_BOOK {
             get {
@@ -691,7 +1196,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thông tin nhân viên.
+        ///   Looks up a localized string similar to Employee information.
         /// </summary>
         public static string TITLE_INFO_EMPLOYEE {
             get {
@@ -709,7 +1214,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kích thước.
+        ///   Looks up a localized string similar to Size.
         /// </summary>
         public static string TITLE_KICH_THUOC {
             get {
@@ -727,7 +1232,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danh mục sách.
+        ///   Looks up a localized string similar to Book List.
         /// </summary>
         public static string TITLE_LIST_BOOK {
             get {
@@ -736,7 +1241,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danh sách khách hàng.
+        ///   Looks up a localized string similar to Customer List.
         /// </summary>
         public static string TITLE_LIST_CUSTOMER {
             get {
@@ -745,7 +1250,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Danh sách nhân viên.
+        ///   Looks up a localized string similar to Employee List.
         /// </summary>
         public static string TITLE_LIST_EMPLOYEE {
             get {
@@ -754,7 +1259,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LOGIN.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string TITLE_LOGIN {
             get {
@@ -772,6 +1277,51 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Look up orders.
+        /// </summary>
+        public static string Title_Lookup_Order {
+            get {
+                return ResourceManager.GetString("Title_Lookup_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Material.
+        /// </summary>
+        public static string TITLE_MATERIAL {
+            get {
+                return ResourceManager.GetString("TITLE_MATERIAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have no items in your shopping cart..
+        /// </summary>
+        public static string TITLE_MESSAGE_NO_PRODUCT {
+            get {
+                return ResourceManager.GetString("TITLE_MESSAGE_NO_PRODUCT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More information.
+        /// </summary>
+        public static string TITLE_MORE_INFORMATION {
+            get {
+                return ResourceManager.GetString("TITLE_MORE_INFORMATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My account.
+        /// </summary>
+        public static string TITLE_MY_ACCOUNT {
+            get {
+                return ResourceManager.GetString("TITLE_MY_ACCOUNT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string TITLE_NAME {
@@ -781,7 +1331,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên sách .
+        ///   Looks up a localized string similar to Book name.
         /// </summary>
         public static string TITLE_NAME_BOOK {
             get {
@@ -790,7 +1340,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên nhân viên.
+        ///   Looks up a localized string similar to Employee name.
         /// </summary>
         public static string TITLE_NAME_EMPLOYEE {
             get {
@@ -799,7 +1349,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngôn ngữ.
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string Title_New {
+            get {
+                return ResourceManager.GetString("Title_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string TITLE_NGON_NGU {
             get {
@@ -808,7 +1367,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nhà xuất bản.
+        ///   Looks up a localized string similar to Publishing company.
         /// </summary>
         public static string TITLE_NHA_XUAT_BAN {
             get {
@@ -817,7 +1376,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mật khẩu.
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        public static string Title_Notification {
+            get {
+                return ResourceManager.GetString("Title_Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to password.
         /// </summary>
         public static string TITLE_PASSWORD {
             get {
@@ -826,7 +1394,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phân loại.
+        ///   Looks up a localized string similar to Hình thức thanh toán.
+        /// </summary>
+        public static string Title_Payments {
+            get {
+                return ResourceManager.GetString("Title_Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classify.
         /// </summary>
         public static string TITLE_PHAN_LOAI {
             get {
@@ -835,7 +1412,8 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phân Quyền Truy Cập.
+        ///   Looks up a localized string similar to 19/5000
+        ///Access Permission.
         /// </summary>
         public static string TITLE_PHAN_QUYEN {
             get {
@@ -853,11 +1431,47 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phường/Xã.
+        ///   Looks up a localized string similar to Wards.
         /// </summary>
         public static string TITLE_PHUONG {
             get {
                 return ResourceManager.GetString("TITLE_PHUONG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string TITLE_PRICE {
+            get {
+                return ResourceManager.GetString("TITLE_PRICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process Order.
+        /// </summary>
+        public static string Title_Process_Order {
+            get {
+                return ResourceManager.GetString("Title_Process_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product name.
+        /// </summary>
+        public static string TITLE_PRODUCT_NAME {
+            get {
+                return ResourceManager.GetString("TITLE_PRODUCT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider.
+        /// </summary>
+        public static string Title_Provider {
+            get {
+                return ResourceManager.GetString("Title_Provider", resourceCulture);
             }
         }
         
@@ -871,7 +1485,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quận/Huyện.
+        ///   Looks up a localized string similar to District.
         /// </summary>
         public static string TITLE_QUAN {
             get {
@@ -880,7 +1494,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quốc gia.
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string TITLE_QUANTITY {
+            get {
+                return ResourceManager.GetString("TITLE_QUANTITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
         /// </summary>
         public static string TITLE_QUOC_GIA {
             get {
@@ -889,7 +1512,8 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quyền truy cập.
+        ///   Looks up a localized string similar to 14/5000
+        ///Access rights.
         /// </summary>
         public static string TITLE_QUYEN_TRUY_CAP {
             get {
@@ -898,11 +1522,20 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REGISTER.
+        ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string TITLE_REGISTER {
             get {
                 return ResourceManager.GetString("TITLE_REGISTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search orders.
+        /// </summary>
+        public static string Title_Search_Orders {
+            get {
+                return ResourceManager.GetString("Title_Search_Orders", resourceCulture);
             }
         }
         
@@ -916,7 +1549,16 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Số trang.
+        ///   Looks up a localized string similar to Continue shopping.
+        /// </summary>
+        public static string TITLE_SHOPPING {
+            get {
+                return ResourceManager.GetString("TITLE_SHOPPING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of pages.
         /// </summary>
         public static string TITLE_SO_TRANG {
             get {
@@ -934,11 +1576,83 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to List of stationery.
+        /// </summary>
+        public static string TITLE_STATIONERY_LIST {
+            get {
+                return ResourceManager.GetString("TITLE_STATIONERY_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics orders by day.
+        /// </summary>
+        public static string Title_Statistic_Order_By_Day {
+            get {
+                return ResourceManager.GetString("Title_Statistic_Order_By_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics orders by month.
+        /// </summary>
+        public static string Title_Statistic_Order_By_Month {
+            get {
+                return ResourceManager.GetString("Title_Statistic_Order_By_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string Title_Statistics {
+            get {
+                return ResourceManager.GetString("Title_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics orders.
+        /// </summary>
+        public static string Title_Statistics_Orders {
+            get {
+                return ResourceManager.GetString("Title_Statistics_Orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string TITLE_STATUS {
             get {
                 return ResourceManager.GetString("TITLE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeed.
+        /// </summary>
+        public static string Title_Succeed {
+            get {
+                return ResourceManager.GetString("Title_Succeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        public static string TITLE_SUPPORT {
+            get {
+                return ResourceManager.GetString("TITLE_SUPPORT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string Title_Surname {
+            get {
+                return ResourceManager.GetString("Title_Surname", resourceCulture);
             }
         }
         
@@ -952,7 +1666,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tỉnh/Thành phố.
+        ///   Looks up a localized string similar to Province / City.
         /// </summary>
         public static string TITLE_THANH_PHO {
             get {
@@ -961,7 +1675,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tóm tắc.
+        ///   Looks up a localized string similar to Summary.
         /// </summary>
         public static string TITLE_TOM_TAC {
             get {
@@ -979,7 +1693,8 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Trọng lượng.
+        ///   Looks up a localized string similar to 11/5000
+        ///Weight.
         /// </summary>
         public static string TITLE_TRONG_LUONG {
             get {
@@ -997,7 +1712,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên đăng nhập.
+        ///   Looks up a localized string similar to UserName.
         /// </summary>
         public static string TITLE_USERNAME {
             get {
@@ -1015,7 +1730,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tác giả.
+        ///   Looks up a localized string similar to Author.
         /// </summary>
         public static string TITTLE_TAC_GIA {
             get {
@@ -1029,6 +1744,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TXT_CHOOSE_STATUS {
             get {
                 return ResourceManager.GetString("TXT_CHOOSE_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update failed.
+        /// </summary>
+        public static string Update_Failed {
+            get {
+                return ResourceManager.GetString("Update_Failed", resourceCulture);
             }
         }
         

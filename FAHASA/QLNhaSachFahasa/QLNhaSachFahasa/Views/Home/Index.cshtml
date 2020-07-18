@@ -4,25 +4,46 @@
     ViewBag.Title = "FAHASA - " + ViewText.TITLE_FAHASA;
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
+<div class="menu">
+    <ul class="m-0 p-0">
+        <li class="menu-child-book-hiden menu-item">
+            @ViewText.TITLE_BOOK<span class="k-icon k-i-arrow-chevron-down"></span>
+            <ul class="menu-child menu-child-book">
+                <li>
+                    <div class="w-75 m-auto">
+                        <div class="row" id="menu-child-content-book">
 
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-child-vpp-hiden menu-item">
+            @ViewText.TITLE_STATIONERY<span class="k-icon k-i-arrow-chevron-down"></span>
+            <ul class="menu-child menu-child-vpp">
+                <li>
+                    <div class="w-75 m-auto">
+                        <div class="row" id="menu-child-content-vpp">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li><a href="@Url.Action("SearchOrder","Cart")"><span class="k-icon k-i-search"></span>@ViewText.Title_Lookup_Order</a></li>
+    </ul>
+</div>
 <div class="owl-carousel owl-theme">
     <div class="item">
-        <img src="/Content/images/Banner/MCBooks-920x420.jpg" />
+        <img src="/Content/images/Banner/13244162321525ed9cc01f66d94e8a71.jpg" />
     </div>
     <div class="item">
-        <img src="/Content/images/Banner/NCC-T6-920x420.jpg" />
+        <img src="/Content/images/Banner/b4a7bb938209ea4dd290ae42b27523ab.jpg" />
     </div>
     <div class="item">
-        <img src="/Content/images/Banner/NCCt6_KC_Megabooks920x420.jpg" />
+        <img src="/Content/images/Banner/ce6be319030dbeda04f6161fe6b61384.jpg" />
     </div>
     <div class="item">
-        <img src="/Content/images/Banner/OTTH-920x420.png" />
-    </div>
-    <div class="item">
-        <img src="/Content/images/Banner/SGBooks-920x420.jpg" />
-    </div>
-    <div class="item">
-        <img src="/Content/images/Banner/ZalopayT05_920x420.jpg" />
+        <img src="/Content/images/Banner/e43843974e994c4ab18ac8e7222a70de.jpg" />
     </div>
 </div>
 <div class="box-sale background-sale">
@@ -61,114 +82,91 @@
     </div>*@
 <div class="container mt-5">
     <div class="header-box">
-        Tất cả sản phẩm
+        @ViewText.ALL_PRODUCTS
     </div>
     <div class="box-sale-content">
         <div id="listView" class="row"></div>
     </div>
+
 </div>
-@section scripts{
-    <script type="text/x-kendo-template" id="template">
-        <div class="item col-md-3">
-            <div class="t-card-book " style="width: 100%;">
-                <a href="/Home/Detail?productID=#:MASANPHAM#" class="t-card-book-img relative ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Read">
-                    <div class="book-bg-1">
-                        <img alt="#:TENSANPHAM#" title="#:TENSANPHAM#" src="@Url.Content("~/UploadFile/#:LINKHINHANH#")" height="176px" />
-                    </div><span class="view-b-icon"></span>
+<script type="text/x-kendo-template" id="template">
+    <div class="item col-md-3 col-sm-3 col-3">
+        <div class="t-card-book" style="width: 100%;">
+            <a href="/Home/Detail?productID=#:MASANPHAM#" class="t-card-book-img relative ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Read">
+                <div class="book-bg-1">
+                    <img alt="#:TENSANPHAM#" title="#:TENSANPHAM#" src="@Url.Content("~/UploadFile/#:LINKHINHANH#")" height="176px" />
+                </div><span class="view-b-icon"></span>
+            </a>
+            <div class="t-card-book-infor">
+                <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
+                    <span class="title-card">#:TENSANPHAM#</span>
                 </a>
-                <div class="t-card-book-infor">
-                    <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
-                        <span class="title-card">#:TENSANPHAM#</span>
-                    </a>
-                    <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
-                    <div class="text-price"><em>#:DONGIA#vnđ</em></div>
-                    <div class="t-card-book-infor-description">
+                <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
+                <div class="text-price"><em>#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</em></div>
+                <div class="t-card-book-infor-description">
 
-                        <p>#:GHICHU||""#</p>
-                    </div>
-                </div><div class="t-break-line"></div>
-                <div class="t-card-book-likes">
-                    <small>#:LUOTXEM# @Html.Raw(ViewText.TITLE_VIEW)</small>
+                    #= htmlDecode(GHICHU||"")#
                 </div>
-                <a href="javascript:void(0)" @*href="/Cart/AddIItem?maSanPham=#:MASANPHAM#&soluong=1"*@ onclick="fnAddToCart('#:MASANPHAM#',1)" class="t-card-detail-link bg-waka white-text rounded ga_click addtocart">@Html.Raw(ViewText.BUTTON_ADD_TO_CART)</a>
+            </div><div class="t-break-line"></div>
+            <div class="t-card-book-likes">
+                <small>#:LUOTXEM# @Html.Raw(ViewText.TITLE_VIEW)</small>
             </div>
+            <a href="javascript:void(0)" data-idCart="#:MASANPHAM#" @*onclick="fnAddToCart('#:MASANPHAM#',1)"*@ class="t-card-detail-link bg-waka white-text rounded ga_click addtocart">@Html.Raw(ViewText.BUTTON_ADD_TO_CART)</a>
         </div>
-    </script>
-
+    </div>
+</script>
+<script type="text/x-kendo-template" id="templateMenu">
+    <div class="col-12 col-md-4 mt-4">
+        <ul>
+            <li><h5>#:text#</h5></li>
+            # for (var i = 0; i < items.length; i++) { #
+            <li class="menu-item"><a href="javascrit:void(0)">#:items[i].text#</a></li>
+            #} #
+        </ul>
+    </div>
+</script>
+@section scripts{
+    <!-- Load Promise Polyfill. Required by the DialogFlow Client API.-->
+    <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+    <!-- Load DialogFlow Client API -->
+    <script src="https://cdn.rawgit.com/dialogflow/dialogflow-javascript-client/50e82e62/target/ApiAi.min.js"></script>
     <script>
-
-        var dataSource = new kendo.data.DataSource();
-        var listView = $("#listView").kendoListView({
-            template: kendo.template($("#template").html()),
-            dataSource: dataSource
-        }).data("kendoListView");
-        var listViewSale = $("#listViewSale").kendoListView({
-            template: kendo.template($("#template").html()),
-            dataSource: dataSource
-        }).data("kendoListView");
-        dataSource = new kendo.data.DataSource({
-            transport: {
-                read: function (options) {
-                    $.ajax({
-                        url: '@Url.Action("GetListBook", "Home")',
-                        dataType: "json",
-                        success: function (result) {
-                            options.success(result);
-                        },
-                        error: function (result) {
-                            options.error(result);
-                        }
-                    });
-                }
-            },
-        });
-
-        var dataSourceSale = new kendo.data.DataSource({
-            transport: {
-                read: function (options) {
-                    $.ajax({
-                        url: '@Url.Action("GetListBookSale", "Home")',
-                        data: {
-                            seeAll: false,
-                        },
-                        dataType: "json",
-                        success: function (result) {
-                            options.success(result);
-                        },
-                        error: function (result) {
-                            options.error(result);
-                        }
-                    });
-                }
-            },
-        });
-
-        listView.setDataSource(dataSource);
-        listViewSale.setDataSource(dataSourceSale);
-
-        function fnAddToCart(masanpham, soluong) {
-            $.ajax({
-                url: '@Url.Action("AddIItem", "Cart")',
-                dataType: "json",
-                data: {
-                    maSanPham: masanpham,
-                    soluong: soluong
-                },
-                success: function (res) {
-                    var numbercart = document.getElementById("sumcart");
-                    numbercart.innerHTML = "" + res.length;
+            var dataSource = new kendo.data.DataSource();
+            var listView = $("#listView").kendoListView({
+                template: kendo.template($("#template").html()),
+                dataSource: dataSource
+            }).data("kendoListView");
+            var listViewSale = $("#listViewSale").kendoListView({
+                template: kendo.template($("#template").html()),
+                dataSource: dataSource
+            }).data("kendoListView");
+        function htmlDecode(value) {
+            return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+        }
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListBook", "Home")',
+                            dataType: "json",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
                 },
             });
-        }
 
-        $("#seeAll").click(function () {
             var dataSourceSale = new kendo.data.DataSource({
                 transport: {
                     read: function (options) {
                         $.ajax({
                             url: '@Url.Action("GetListBookSale", "Home")',
                             data: {
-                                seeAll: true,
+                                seeAll: false,
                             },
                             dataType: "json",
                             success: function (result) {
@@ -181,65 +179,172 @@
                     }
                 },
             });
+
+            listView.setDataSource(dataSource);
             listViewSale.setDataSource(dataSourceSale);
-        })
 
-        function current(page) {
-            var book = $("#book"),
-                pages = book.children(),
-                pagesCount = pages.length,
-                current = pages.filter(".current"),
-                currentIndex = pagesCount - current.index(),
-                newPage;
-
-            if (!arguments.length) {
-                return currentIndex;
+            function fnAddToCart(masanpham, soluong) {
+                $.ajax({
+                    url: '@Url.Action("AddIItem", "Cart")',
+                    dataType: "json",
+                    data: {
+                        maSanPham: masanpham,
+                        soluong: soluong
+                    },
+                    success: function (res) {
+                        var numbercart = document.getElementById("sumcart");
+                        numbercart.innerHTML = "" + res.length;
+                    },
+                });
             }
 
-            if (book.data("animating")) {
-                return;
-            }
+            $("#seeAll").click(function () {
+                var dataSourceSale = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                url: '@Url.Action("GetListBookSale", "Home")',
+                                data: {
+                                    seeAll: true,
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    options.success(result);
+                                },
+                                error: function (result) {
+                                    options.error(result);
+                                }
+                            });
+                        }
+                    },
+                });
+                listViewSale.setDataSource(dataSourceSale);
+            })
 
-            $("#wrap").toggleClass("first-page", page == 1)
-                .toggleClass("last-page", page == pagesCount);
+            function current(page) {
+                var book = $("#book"),
+                    pages = book.children(),
+                    pagesCount = pages.length,
+                    current = pages.filter(".current"),
+                    currentIndex = pagesCount - current.index(),
+                    newPage;
 
-            if (page != currentIndex) {
-                current.removeClass("current");
-                newPage = pages.eq(pagesCount - page).addClass("current");
+                if (!arguments.length) {
+                    return currentIndex;
+                }
 
-                if (page > currentIndex) {
-                    kendo.fx(book).pageturnHorizontal(current, newPage).play();
-                } else {
-                    kendo.fx(book).pageturnHorizontal(newPage, current).reverse();
+                if (book.data("animating")) {
+                    return;
+                }
+
+                $("#wrap").toggleClass("first-page", page == 1)
+                    .toggleClass("last-page", page == pagesCount);
+
+                if (page != currentIndex) {
+                    current.removeClass("current");
+                    newPage = pages.eq(pagesCount - page).addClass("current");
+
+                    if (page > currentIndex) {
+                        kendo.fx(book).pageturnHorizontal(current, newPage).play();
+                    } else {
+                        kendo.fx(book).pageturnHorizontal(newPage, current).reverse();
+                    }
                 }
             }
-        }
 
-        $("#previous").click(function (e) {
-            e.preventDefault();
-            current(Math.max(1, current() - 1));
-        });
+            $("#previous").click(function (e) {
+                e.preventDefault();
+                current(Math.max(1, current() - 1));
+            });
 
-        $("#next").click(function (e) {
-            e.preventDefault();
-            current(Math.min(6, current() + 1));
-        });
+            $("#next").click(function (e) {
+                e.preventDefault();
+                current(Math.min(6, current() + 1));
+            });
 
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 10,
-            height:"200px",
-            nav: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
-            nav: false,
-            items: 1,
-            center: true,
-            dots:false,
-        })
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                height: "200px",
+                nav: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                nav: true,
+                navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+                items: 1,
+                center: true,
+                dots: false,
+            });
+            //setTimeout(function () {
+            $(document).on("click", ".addtocart", function () {
+                var idCart = $(this).attr("data-idCart");
+                fnAddToCart(idCart, 1);
+                var src = $(this).parent().find("img").attr("src");
+                $(this).parent().find("img").after("<img class='img-fake' style='position:absolute;top:0;left:0;z-index:100' src='" + src + "' width='60px'/>");
+
+                var product = $(".img-fake");
+
+                kendo.fx(product).transfer($("#cart-box")).play().then(function () {
+                    $(".img-fake").fadeOut("slow", function () {
+                        $(".img-fake").remove();
+                    });
+                });
+            });
 
 
-
+            //Menu top
+            var menu = $("#menu-child-content-book").kendoListView({
+                template: kendo.template($("#templateMenu").html()),
+            }).data("kendoListView");
+            var menuVPP = $("#menu-child-content-vpp").kendoListView({
+                template: kendo.template($("#templateMenu").html()),
+            }).data("kendoListView");
+            function getDataBookMenu() {
+                var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                url: '@Url.Action("GetListContentMenu", "Home")',
+                                data: {
+                                    id: "SACH"
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    options.success(result);
+                                },
+                                error: function (result) {
+                                    options.error(result);
+                                }
+                            });
+                        }
+                    },
+                });
+                menu.setDataSource(dataSource);
+            }
+            function getDataVPPMenu() {
+                var dataSourceVPP = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                url: '@Url.Action("GetListContentMenu", "Home")',
+                                data: {
+                                    id: "VPP"
+                                },
+                                dataType: "json",
+                                success: function (result) {
+                                    options.success(result);
+                                },
+                                error: function (result) {
+                                    options.error(result);
+                                }
+                            });
+                        }
+                    },
+                });
+                menuVPP.setDataSource(dataSourceVPP);
+            }
+            getDataBookMenu();
+            getDataVPPMenu();
     </script>
 }

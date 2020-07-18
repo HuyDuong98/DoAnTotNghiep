@@ -1,0 +1,92 @@
+﻿@using QLNhaSachFahasa.Resources
+<div class="btn-close-window"><span class="k-icon k-i-close-outline"></span></div>
+<h3>@ViewText.Title_Code</h3>
+<p>@ViewText.Text_code</p>
+<input type="password" id="txtCode" class="form-control w-100 mt-4" maxlength="6" placeholder="@ViewText.Input_Code" />
+<div class="text-center mt-2"><span class="timer" style="color:red">04:00</span></div>
+
+<input type="button" onclick="fnSendCodes()" value="@ViewText.BUTTON_SUBMIT" class="btn btn-success w-100 mt-4" />
+<div class="text-center mt-3"><a class="resend-code" href="javascript:void(0)" onclick="fnReSendCode()">@ViewText.Resend_Code</a></div>
+<script>
+    var inputNumber = 0; //Giới hạn gửi lại code 3 lần
+    TimeCountDown();
+    function TimeCountDown() {
+        var timer = new Timer();
+        timer.start({ countdown: true, startValues: { minutes: 4 } });
+        timer.addEventListener('secondsUpdated', function (e) {
+            if (timer.getTimeValues().minutes == 0 && timer.getTimeValues().seconds == 0) {
+                $.ajax({
+                    url: "@Url.Action("SubmitCode", "User")",
+                    type: "POST",
+                    dataType: "json",
+                    beforeSend: function () {
+                        $(".loading").show();
+                    },
+                    success: function (res) {
+                    },
+                    complete: function () {
+                        $(".loading").hide();
+                    },
+                });
+            }
+            $('.timer').html(timer.getTimeValues().toString(['minutes', 'seconds']));
+        });
+    }
+
+
+    function fnSendCodes() {
+        var code = $("#txtCode").val();
+        $.ajax({
+            url: "@Url.Action("SubmitCode", "User")",
+            data: {
+                code: parseInt(code)
+            },
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+                $(".loading").show();
+            },
+            success: function (res) {
+                if (res == 1)
+                {
+                    $('#contentForgotPassword').load("@Url.Action("ChangePassword", "User")");
+                }
+                if (res == -1)
+                {
+                    initDialog("@Html.Raw(ViewText.Notification)", "@Html.Raw(ViewText.Notification_Code)", "@Html.Raw(ViewText.Button_Close)");
+                }
+            },
+            complete: function () {
+                $(".loading").hide();
+            },
+        });
+    }
+
+    function fnReSendCode() {
+        inputNumber += 1;
+        if (inputNumber <= 3) {
+            $.ajax({
+                url: "@Url.Action("ResentCode", "User")",
+                type: "POST",
+                dataType: "json",
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                success: function (res) {
+                    TimeCountDown();
+                },
+                complete: function () {
+                    $(".loading").hide();
+                    if (inputNumber == 3) {
+                        $(".resend-code").remove();
+                    }
+                },
+            });
+        }
+    }
+
+    $(".btn-close-window").click(function () {
+        var popup = $("#popupForgotPassword").data("kendoWindow");
+        popup.close();
+    });
+</script>

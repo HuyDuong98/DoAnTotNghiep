@@ -70,6 +70,7 @@ function popupEditBook(id) {
         $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
     });
 }
+
 function funcDeleteBook(id) {
     var Ok = confirm('Bạn có muốn xóa sách ' + id + "?");
     if (Ok)
