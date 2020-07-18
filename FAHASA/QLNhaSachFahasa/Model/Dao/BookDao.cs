@@ -18,11 +18,11 @@ namespace Model.Dao
         {
             if (string.IsNullOrEmpty(keyWord))
             {
-                return db.SANPHAMs.ToList<SANPHAM>();
+                return db.SANPHAMs.Where(x=>x.TRANGTHAI==1).ToList<SANPHAM>();
             }
             else
             {
-                return db.SANPHAMs.Where(x => x.TENSANPHAM.Contains(keyWord) || x.TACGIA.Contains(keyWord)).ToList<SANPHAM>();
+                return db.SANPHAMs.Where(x =>( x.TENSANPHAM.Contains(keyWord) || x.TACGIA.Contains(keyWord))&& x.TRANGTHAI==1).ToList<SANPHAM>();
             }
         }
         public int InserBook(SANPHAM entity)
@@ -69,7 +69,7 @@ namespace Model.Dao
             try
             {
                 var book = db.SANPHAMs.Find(id);
-                db.SANPHAMs.Remove(book);
+                book.TRANGTHAI = -1;
                 db.SaveChanges();
                 return true;
             }
@@ -115,6 +115,25 @@ namespace Model.Dao
         {
             return db.SANPHAMs.Count(x => x.TENSANPHAM == bookName && x.NHAXUATBAN == NXB) > 0;
 
+        }
+
+        public bool DeleteImage(string id)
+        {
+            try
+            {
+                var img = db.HINHANHs.Where(x=>x.MASANPHAM==id).ToList<HINHANH>();
+                if (img.Count > 0)
+                {
+                    db.HINHANHs.RemoveRange(img);
+                    db.SaveChanges();
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

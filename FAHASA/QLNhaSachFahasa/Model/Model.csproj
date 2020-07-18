@@ -66,6 +66,7 @@
     <Compile Include="Dao\GroupPhanLoaiDao.cs" />
     <Compile Include="Dao\GroupUserDao.cs" />
     <Compile Include="Dao\MenuDao.cs" />
+    <Compile Include="Dao\OrdersDao.cs" />
     <Compile Include="Dao\SanPhamDao.cs" />
     <Compile Include="Dao\UploadHinhAnhSanPhamDao.cs" />
     <Compile Include="Dao\UserDao.cs" />

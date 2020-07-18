@@ -34,7 +34,7 @@ namespace Model.EF
 
         public string GHICHU { get; set; }
 
-        public DateTime? NGAYCAPNHAT { get; set; }
+        public DateTime NGAYCAPNHAT { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETDONHANG> CHITIETDONHANGs { get; set; }

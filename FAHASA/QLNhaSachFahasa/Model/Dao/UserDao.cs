@@ -50,7 +50,7 @@ namespace Model.Dao
         }
         public bool CheckEmail(string email)
         {
-            return db.KHACHHANGs.Count(x => x.EMAIL == email) > 0;
+            return db.KHACHHANGs.Count(x => x.EMAIL == email && x.TRANGTHAI==1) > 0;
         }
 
         public bool CheckIDCustomer(string id)
@@ -91,6 +91,20 @@ namespace Model.Dao
             else
             {
                 return false;
+            }
+        }
+        public int UpdatePasswordCustomer(string email, string newPass)
+        {
+            try
+            {
+                var cus = db.KHACHHANGs.Where(x=>x.EMAIL==email).FirstOrDefault();
+                cus.MATKHAUKHACHHANG = newPass;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
     }

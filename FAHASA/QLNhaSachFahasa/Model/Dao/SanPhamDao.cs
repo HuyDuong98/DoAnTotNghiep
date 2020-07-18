@@ -205,5 +205,13 @@ namespace Model.Dao
         {
             return db.XUATXUs.ToList();
         }
+        public NHACUNGCAP GetItemNCC(string ma)
+        {
+            return db.NHACUNGCAPs.Find(ma);
+        }
+        public NHASANXUAT GetItemNSX(string ma)
+        {
+            return db.NHASANXUATs.Find(ma);
+        }
     }
 }
