@@ -1,0 +1,382 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.ProductModel
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "" + ViewText.TITLE_CREATE_STATIONERY;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.TITLE_ADD_NEW_STATIONERY
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateStationery", enctype = "multipart/form-data" }))
+            {
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PRODUCT_NAME
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TenSanPham, new { @class = "form-input form-control", name = "TenSanPham" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PHAN_LOAI
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @*@Html.DropDownListFor(model => model.MAPHANLOAISACH, null, new { @class = "form-control" })*@
+                        @Html.TextBoxFor(model => model.PhanLoai, new { @class = "w-100 form-input", name = "TenSanPham" })
+                        <label id="PhanLoai-error" class="error" for="PhanLoai"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_QUANTITY
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.SoLuong, new { @class = "form-control form-input quantity", type = "number", min = "0", name = "SoLuong" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_MATERIAL
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.ChatLieu, new { @class = "form-control form-input", name = "ChatLieu" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input ">
+                        @ViewText.TITLE_COLOR
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.MauSac, new { @class = "form-input", name = "MauSac" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_TRONG_LUONG
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TrongLuong, new { @class = "form-control form-input", @id = "input-number", placeholder = ViewText.DV_GAM, name = "TrongLuong" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_KICH_THUOC
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.KichThuoc, new { @class = "form-control form-input", placeholder = ViewText.EXAM_KICH_THUOC, name = "KichThuoc" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY ">
+                        @ViewText.TITLE_BRAND
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NhaSanXuat, new { @class = " form-input", name = "NhaSanXuat" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY ">
+                        @ViewText.Title_Provider
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NhaCungCap, new { @class = " form-input", name = "NhaCungCap" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_COUNTRY
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.QuocGia, new { @class = "form-input", name = "QuocGia" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PRICE
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.DonGia, new { @class = "form-control form-input", @id = "input-money", placeholder = ViewText.VND, name = "DonGia" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_IMAGE
+                    </div>
+                    <div class="col-md-7">
+                        <input name="fileImage" multiple="multiple" id="files" type="file" aria-label="files" />
+                        @*@Html.TextBoxFor(x => x.File, new { @class = "form-control", type = "file" })*@
+                        <span class="text-secondary font-italic">@ViewText.NOTE_UPLOAD_FILE_IMAGE</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input">
+                        @ViewText.TITLE_MORE_INFORMATION
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextAreaFor(model => model.GhiChu, new { @class = "form-control form-input", name = "GhiChu" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-9 text-right">
+                        <button id="BtnSaveForm" class="btn btn-success">@ViewText.BUTTON_ADD </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        initKeydownNumber();
+        var editor = $("#GhiChu").kendoEditor();
+        var phanloai = $("#PhanLoai").kendoDropDownTree({
+            placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            height: "auto",
+            dataTextField: "text",
+            dataValueField: "id"
+        }).data("kendoDropDownTree");
+        var color = $("#MauSac").kendoColorPicker({
+            value: "#ffffff",
+            buttons: false,
+        });
+        var NhaSanXuat = $("#NhaSanXuat").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNSX",
+            dataValueField: "MaNSX",
+            height: 310,
+        }).data("kendoDropDownList");
+        var NhaCungCap = $("#NhaCungCap").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNCC",
+            dataValueField: "MaNCC",
+            height: 310,
+        }).data("kendoDropDownList");
+        var QuocGia = $("#QuocGia").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenQG",
+            dataValueField: "MaQG",
+            height: 310,
+        }).data("kendoDropDownList");
+        var dataSourcePL = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataPhanLoaiVPP", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    children: "items"
+                }
+            }
+        });
+
+        phanloai.setDataSource(dataSourcePL);
+        var dataSourceNSX = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNSX", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+        NhaSanXuat.setDataSource(dataSourceNSX);
+        var dataSourceNCC = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNCC", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+        NhaCungCap.setDataSource(dataSourceNCC);
+           var dataSourceQG = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataQG", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+        QuocGia.setDataSource(dataSourceQG);
+        $(".quantity").keyup(function () {
+            var value = parseInt($(this).val()),
+                min = $(this).attr("min");
+            if (value <= min) {
+                value = min;
+            }
+            $(this).val(value);
+            $(this).trigger("change");
+        });
+
+        $('input[name=fileImage]').kendoUpload({
+            async: {
+                saveUrl: "save",
+                removeUrl: "remove",
+                autoUpload: true
+            },
+            multiple: true,
+            validation: {
+                maxFileSize: 5000000,//Dung lượng file upload 5mb
+                allowedExtensions: [".jpeg", ".jpg", ".png"],//Định dạng file
+            }
+        }).data("kendoUpload");
+
+        function CheckFileUpload() {
+            if ($('input[name=fileImage]').length > 0) {
+                var upload = $('input[name=fileImage]').getKendoUpload();
+                var fileExtension = [".jpeg", ".jpg", ".png"];
+                files = upload.getFiles();
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].size > 5000000 || fileExtension.find(x => x == files[i].extension) == undefined) {
+                        return false;
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+        $("#BtnSaveForm").click(function (e) {
+            e.preventDefault;
+            initValidationCreateStationery();
+            var files = [];
+            var form = $("#frmCreateStationery");
+            var formCreate = $(".form-input");
+            var formData = new FormData();
+            debugger;
+            var lengthForm = formCreate.length;
+            console.log(lengthForm);
+            for (var i = 0; i < lengthForm; i++) {
+                formData.append(formCreate[i].name, formCreate[i].value);
+                console.log(formCreate[i].name);
+                console.log(formCreate[i].value);
+            }
+            var lengthItem = $('input[name=fileImage]').length;
+            for (var j = 0; j < lengthItem; j++) {
+                var length = $('input[name=fileImage]').get(j).files.length;
+                for (var i = 0; i < length; i++) {
+                    files.push($('input[name=fileImage]').get(j).files[i]);
+                }
+            }
+            var lengthfiles = files.length;
+            for (var i = 0; i < lengthfiles; i++) {
+                formData.append('fileImages', files[i]);
+            }
+
+            if (form.valid() && CheckFileUpload()) {
+                $.ajax({
+                    url: '@Url.Action("CreateVPP", "Book")',
+                    data: formData,
+                    enctype: 'multipart/form-data',
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function (res) {
+                        if (res == 1) {
+                            clearForms();
+                            showSuccess("@Html.Raw(ViewText.Message_Add_Product_Success)");
+                        }
+                        else if (res == -2) {
+                            showError("@Html.Raw(ViewText.Message_Add_Image_Failed)");
+                        }else {
+                            showError("@Html.Raw(ViewText.Message_Add_Product_Failed)");
+                        }
+                    },
+                    error: function () {
+                        showError("@Html.Raw(ViewText.Message_Add_Product_Failed)");
+                    }
+                });
+            } else {
+                showError("@Html.Raw(ViewText.Message_Incorrect_File_Format)")
+            }
+        });
+
+        function initValidationCreateStationery() {
+            $("#frmCreateStationery").validate({
+                ignore: '',
+                rules: {
+                    "TenSanPham": {
+                        required: true
+                    },
+                    "PhanLoai": {
+                        required: true
+                    },
+                    "SoLuong": {
+                        required: true,
+                    },
+                    "DonGia": {
+                        required: true
+                    },
+                },
+                messages:
+                {
+                    "TenSanPham": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                    "PhanLoai": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                    "SoLuong": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                    "DonGia": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                },
+                success: function (error) {
+                    error.remove();
+                }
+            });
+        }
+    </script>
+}

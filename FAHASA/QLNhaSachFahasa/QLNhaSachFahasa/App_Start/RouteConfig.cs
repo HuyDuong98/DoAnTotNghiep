@@ -22,13 +22,18 @@ namespace QLNhaSachFahasa
                 name: "Register",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "User", action = "Register", id = UrlParameter.Optional },
-                namespaces: new [] {"QLNhaSachFahasa.Controllers"} 
+                namespaces: new[] { "QLNhaSachFahasa.Controllers" }
             );
             routes.MapRoute(
                 name: "Login",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "QLNhaSachFahasa.Controllers" }
+            );
+            routes.MapRoute(
+                 name: "Order",
+                 url: "{controller}/{action}/{id}",
+                 defaults: new { controller = "Order", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

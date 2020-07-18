@@ -8,7 +8,7 @@ namespace QLNhaSachFahasa.Models
     public class ProductOrderModel
     {
         public decimal Provisional { get; set; }
-        public string DeliveryCharges { get; set; }
+        public decimal DeliveryCharges { get; set; }
         public decimal Total { get; set; }
     }
 }

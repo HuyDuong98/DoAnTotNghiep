@@ -23,6 +23,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
         public DateTime? NGAYTAO { get; set; }
+        public int TRANGTHAI { get; set; }
 
     }
 }

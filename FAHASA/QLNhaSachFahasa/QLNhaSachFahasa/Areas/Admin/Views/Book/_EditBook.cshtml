@@ -93,7 +93,7 @@
                 <span class="requit">*</span>
             </div>
             <div class="col-md-9">
-                @Html.DropDownListFor(model => model.MAPHANLOAISACH, null, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.MAPHANLOAISACH, new { @class = "form-control" })
             </div>
         </div>
 
@@ -125,3 +125,46 @@
         </div>
     </div>
 }
+<script>
+    var editor = $("#TOMTAC").kendoEditor({
+        encoded: false,
+    });
+    $("#MANGONNGU").kendoDropDownList();
+    var phanloai = $("#MAPHANLOAISACH").kendoDropDownTree({
+        placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+        height: "auto",
+        dataTextField: "text",
+        dataValueField: "id"
+    }).data("kendoDropDownTree");
+
+
+    $("#MAHINHTHUC").kendoDropDownList();
+
+    var dataSourcePL = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: function (options) {
+                $.ajax({
+                    url: '@Url.Action("GetDataPhanLoai", "Book")',
+                    dataType: "json",
+                    success: function (result) {
+                        options.success(result);
+                    },
+                    error: function (result) {
+                        options.error(result);
+                    }
+                });
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                children: "items"
+            }
+        }
+    });
+
+    phanloai.setDataSource(dataSourcePL);
+    debugger;
+    $("#MAPHANLOAISACH").data("kendoDropDownTree").value("@Model.MAPHANLOAISACH");
+    $("#MAPHANLOAISACH").data("kendoDropDownTree").trigger("change");
+</script>

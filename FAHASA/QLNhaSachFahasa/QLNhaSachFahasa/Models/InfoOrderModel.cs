@@ -7,6 +7,7 @@ namespace QLNhaSachFahasa.Models
 {
     public class InfoOrderModel
     {
+        public string id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }

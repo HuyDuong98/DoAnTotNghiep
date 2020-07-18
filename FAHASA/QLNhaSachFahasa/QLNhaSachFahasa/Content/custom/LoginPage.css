@@ -18,6 +18,7 @@
     position: relative;
     z-index: 5;
 }
+
 .container-login {
     z-index: 100;
     max-width: 320px;
@@ -30,6 +31,7 @@
     background-attachment: fixed;
     padding-top: 75px;
 }
+
 .button {
     color: #fff;
     border: 1px solid transparent;
@@ -43,8 +45,8 @@
     cursor: pointer
 }
 
-.logo{
-    margin-bottom:50px;
+.logo {
+    margin-bottom: 50px;
 }
 
 .bgLogin {
@@ -59,11 +61,12 @@
     padding: 20px 40px 40px 40px;
     border-radius: 5px;
 }
+
 .text-login {
     font-weight: 900;
     color: #007100;
-
 }
+
 .btn-login {
     text-decoration: none;
     border: 1px solid rgb(223, 108, 108);
@@ -73,10 +76,12 @@
     font-size: 1.5rem;
     padding: 0.5rem 3rem;
     font-weight: 900;
-    text-align:center;
+    text-align: center;
     color: #f4f4f4;
     text-transform: uppercase;
+    padding: 0.75rem;
 }
+
     .btn-login:hover {
         box-shadow: 1px 1px 15px 5px rgba(248, 146, 146, 0.8);
         color: #f4f4f4
@@ -97,20 +102,26 @@
     .btn-login:hover:before {
         left: 100%;
     }
+
     .btn-login:focus {
-        color: #f4f4f4
+        color: #f4f4f4;
+        background: linear-gradient(rgb(225, 18, 18), rgba(67, 31, 31, 0.8));
     }
 
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: #fff !important;
-        opacity: 1;
-        Firefox
+    .btn-login:active {
+        color: #f4f4f4;
+        background: linear-gradient(rgb(225, 18, 18), rgba(67, 31, 31, 0.8));
     }
 
-:-ms-input-placeholder {  /*Internet Explorer 10-11 */
-color: #fff !important;
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff !important;
+    opacity: 1;
 }
 
-::-ms-input-placeholder {  /*Microsoft Edge */
-color: #fff !important;
+:-ms-input-placeholder { /*Internet Explorer 10-11 */
+    color: #fff !important;
+}
+
+::-ms-input-placeholder { /*Microsoft Edge */
+    color: #fff !important;
 }

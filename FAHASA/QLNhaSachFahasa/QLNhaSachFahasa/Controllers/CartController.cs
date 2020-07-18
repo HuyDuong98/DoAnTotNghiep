@@ -19,6 +19,10 @@ namespace QLNhaSachFahasa.Controllers
         {
             return View();
         }
+        public ActionResult SearchOrder()
+        {
+            return View();
+        }
         public ActionResult GetDataOrderBox()
         {
             var cart = (List<CartModel>)Session[CartSession.CartSesstion];
@@ -31,19 +35,19 @@ namespace QLNhaSachFahasa.Controllers
                 }
                 if (order.Provisional > 300000)
                 {
-                    order.DeliveryCharges = "Free";
+                    order.DeliveryCharges = 0;
                     order.Total += order.Provisional;
                 }
                 else
                 {
-                    order.DeliveryCharges = "30000 ₫";
+                    order.DeliveryCharges = 30000;
                     order.Total = order.Provisional + 30000;
                 }
             }
             else
             {
                 order.Provisional = 0;
-                order.DeliveryCharges = "Free";
+                order.DeliveryCharges = 0;
                 order.Total = 0;
             }
             return Json(order, JsonRequestBehavior.AllowGet);
@@ -58,6 +62,7 @@ namespace QLNhaSachFahasa.Controllers
                 if (session != null)
                 {
                     var customer = new UserDao().GetById(session.UserName);
+                    order.id = customer.MAKHACHHANG;
                     order.Name = customer.TENKHACHHANG;
                     order.PhoneNumber = customer.DIENTHOAI;
                     order.Address = customer.DIACHI;
@@ -90,7 +95,7 @@ namespace QLNhaSachFahasa.Controllers
                     string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.SANPHAM.MASANPHAM);
                     list.Add(new CartItemViewModel
                     {
-                        
+
                         MASANPHAM = item.SANPHAM.MASANPHAM,
                         TENSANPHAM = item.SANPHAM.TENSANPHAM,
                         LOAIMATHANG = item.SANPHAM.LOAIMATHANG,
@@ -162,6 +167,7 @@ namespace QLNhaSachFahasa.Controllers
                 var item = new CartModel();
                 item.SANPHAM = model;
                 item.SOLUONG = soluong;
+                item.SANPHAM.GIABAN = dongiaban;
                 var list = new List<CartModel>();
                 list.Add(item);
                 //Session[CartSession.CartSesstion] = list;
@@ -200,6 +206,7 @@ namespace QLNhaSachFahasa.Controllers
                 {
                     list.Add(new CartItemViewModel
                     {
+                        
                         MASANPHAM = item.SANPHAM.MASANPHAM,
                         TENSANPHAM = item.SANPHAM.TENSANPHAM,
                         LOAIMATHANG = item.SANPHAM.LOAIMATHANG,
@@ -232,20 +239,146 @@ namespace QLNhaSachFahasa.Controllers
                     DIENTHOAI = customer.DIENTHOAI
                 };
             }
-            return PartialView("_UpdateInfoOrder",model);
+            return PartialView("_UpdateInfoOrder", model);
         }
         public ActionResult UpdateInfo(CustomerModel model)
         {
-            var info = new InfoOrderModel()
+            var isEmail = new UserDao().CheckEmail(model.EMAIL);
+            var message = 0;
+            if (isEmail)
             {
-                Name = model.TENKH,
-                PhoneNumber = model.DIENTHOAI,
-                Address = model.DIACHI,
-                Email = model.EMAIL
-            };
-            Session.Add(CartSession.OrderSesstion, info);
-            return Json(info, JsonRequestBehavior.AllowGet);
-
+                message = -1;
+            }
+            else
+            {
+                var info = new InfoOrderModel()
+                {
+                    Name = model.TENKH,
+                    PhoneNumber = model.DIENTHOAI,
+                    Address = model.DIACHI,
+                    Email = model.EMAIL
+                };
+                Session.Add(CartSession.OrderSesstion, info);
+                message = 1;
+            }
+           
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult SaveOrder()
+        {
+            int message = 0;
+            var info = (InfoOrderModel)Session[CartSession.OrderSesstion];
+            var cart = (List<CartModel>)Session[CartSession.CartSesstion];
+            var id = "";
+            var idDH = "";
+            if (info == null)
+            {
+                message = 0;
+            }
+            else
+            {
+                if (info.id == null)
+                {
+                    id = new UserDao().CreateIDAuto("KH");
+                    KHACHHANG cus = new KHACHHANG()
+                    {
+                        MAKHACHHANG = id,
+                        TENKHACHHANG = info.Name,
+                        HOKHACHHANG = "Temp",
+                        DIENTHOAI = info.PhoneNumber,
+                        DIACHI = info.Address,
+                        EMAIL = info.Email,
+                        TRANGTHAI = 0
+                    };
+                    var result = new UserDao().Insert(cus);
+                }
+                else
+                {
+                    id = info.id;
+                }
+                idDH = new SanPhamDao().IdDonHangAuto("DH");
+                var order = new DONHANG()
+                {
+                    MAHOADON = idDH,
+                    MAKHACHHANG = id,
+                    NGAYLAP = DateTime.Now,
+                    NGAYCAPNHAT = DateTime.Now,
+                    TRANGTHAI = 0,
+                    GHICHU = "",
+                };
+                var a = new SanPhamDao().InsertDonHang(order);
+
+                foreach (var item in cart)
+                {
+                    var detailorder = new CHITIETDONHANG()
+                    {
+                        MAHOADON = idDH,
+                        MASANPHAM = item.SANPHAM.MASANPHAM,
+                        SOLUONG = item.SOLUONG,
+                        THANHTIEN = item.SANPHAM.GIABAN
+                    };
+                    int res = new SanPhamDao().InsertCTDonHang(detailorder);
+                }
+                //Gửi mail
+                string smtpUserName = "duongngochuy.hufi@gmail.com";
+                string smtpPassword = "ngochuy123";
+                string smtpHost = "smtp.gmail.com";
+                int smtpPort = 587;
+
+                string emailTo = info.Email;
+                string subject = "Đơn hàng vừa mua";
+                string body = string.Format("Bạn vừa nhận được liên hê từ: <b>{0}</b><br/>Email: {1}<br/>Cảm ơn bạn đã mua hàng tại website Fahasa.</br> Mã đơn hàng của bạn là: " + idDH + ".</br>Đơn hàng của bạn đang được xử lý.", "Admin ", "");
+
+                EmailService service = new EmailService();
+                bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
+                Session[CartSession.CartSesstion] = null;
+                message = 1;
+            }
+            var oModel = new
+            {
+                message = message,
+                ID = idDH
+            };
+            return Json(oModel, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ProcessOrder()
+        {
+            return View();
+        }
+        public ActionResult OrderSuccess(string id)
+        {
+            ViewBag.ID = id;
+            return View();
+        }
+        public ActionResult GetListDH(string id)
+        {
+            var donhang = new DonHangDao().GetDonHang(id);
+            var listCT_DonHang = new DonHangDao().getListCTDH(id);
+            var model = new List<DonHangModel>();
+            decimal total = 0;
+            foreach (var item in listCT_DonHang)
+            {
+                var product = new SanPhamDao().getProduct(item.MASANPHAM);
+                var img = new SanPhamDao().getListImages(item.MASANPHAM);
+                model.Add(new DonHangModel()
+                {
+                    idDonHang = id,
+                    idProduct = item.MASANPHAM,
+                    idCustomer = donhang.MAKHACHHANG,
+                    soluong= item.SOLUONG,
+                    thanhtien = item.THANHTIEN,
+                    nameProduct = product.TENSANPHAM,
+                    linkImage = img[0].LINKHINHANH,
+                });
+                total += (item.THANHTIEN * item.SOLUONG);
+            }
+            var oModel = new
+            {
+                model = model,
+                total =total
+            };
+            return Json(oModel, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

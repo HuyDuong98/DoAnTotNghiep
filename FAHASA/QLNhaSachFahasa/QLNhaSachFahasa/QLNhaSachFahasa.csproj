@@ -67,6 +67,9 @@
     <Reference Include="ImageProcessor">
       <HintPath>D:\Downloads\ckfinder\bin\ImageProcessor.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core">
       <HintPath>D:\Downloads\ckfinder\bin\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
@@ -115,6 +118,9 @@
     </Reference>
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
     </Reference>
     <Reference Include="Pri.LongPath">
       <HintPath>D:\Downloads\ckfinder\bin\Pri.LongPath.dll</HintPath>
@@ -199,6 +205,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="WebApplication2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WebApplication2.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -224,37 +234,59 @@
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmloyeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\WareHouseController.cs" />
     <Compile Include="Areas\Admin\Models\AdminLoginModel.cs" />
     <Compile Include="Areas\Admin\Models\BookModel.cs" />
     <Compile Include="Areas\Admin\Models\CustomerModel.cs" />
     <Compile Include="Areas\Admin\Models\HinhAnhSPModel.cs" />
+    <Compile Include="Areas\Admin\Models\NhaCungCapModel.cs" />
+    <Compile Include="Areas\Admin\Models\NhaSanXuatModel.cs" />
     <Compile Include="Areas\Admin\Models\NhaVienModel.cs" />
+    <Compile Include="Areas\Admin\Models\OrdersModel.cs" />
+    <Compile Include="Areas\Admin\Models\PhanLoaiModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductModel.cs" />
+    <Compile Include="Areas\Admin\Models\QuocGiaModel.cs" />
     <Compile Include="Areas\Admin\Models\RegisterEmloyeeModel.cs" />
     <Compile Include="Areas\Admin\Models\VPPModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EmployeeViewModel.cs" />
     <Compile Include="Common\CartSession.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\EmailService.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\FahasaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaypalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CartItemViewModel.cs" />
     <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\DispalyAttribute.cs" />
+    <Compile Include="Models\DonHangModel.cs" />
+    <Compile Include="Models\ForgotPasswordModel.cs" />
+    <Compile Include="Models\ImagesModel.cs" />
     <Compile Include="Models\InfoOrderModel.cs" />
+    <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ProductOrderModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SanPhamModel.cs" />
+    <Compile Include="Onepay\vpc_dr.aspx.cs">
+      <DependentUpon>vpc_dr.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Onepay\vpc_dr.aspx.designer.cs">
+      <DependentUpon>vpc_dr.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ViewText.vi.Designer.cs">
       <DependentUpon>ViewText.vi.resx</DependentUpon>
@@ -274,8 +306,14 @@
     <Compile Include="UtilityHelpers\LanguageUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\changeMoney\money.min.js" />
     <Content Include="Content\images\background-dep.jpg" />
+    <Content Include="Content\images\background_login.png" />
+    <Content Include="Content\images\Banner\13244162321525ed9cc01f66d94e8a71.jpg" />
+    <Content Include="Content\images\Banner\b4a7bb938209ea4dd290ae42b27523ab.jpg" />
     <Content Include="Content\images\Banner\blog-banner.png" />
+    <Content Include="Content\images\Banner\ce6be319030dbeda04f6161fe6b61384.jpg" />
+    <Content Include="Content\images\Banner\e43843974e994c4ab18ac8e7222a70de.jpg" />
     <Content Include="Content\images\Banner\freudbanner.u547.d20160817.t145604.456704.jpg" />
     <Content Include="Content\images\Banner\MCBooks-920x420.jpg" />
     <Content Include="Content\images\Banner\NCC-T6-920x420.jpg" />
@@ -315,15 +353,28 @@
     <Content Include="Content\images\icon\arrow-left.png" />
     <Content Include="Content\images\icon\arrow-right.png" />
     <Content Include="Content\images\icon\book-icon.png" />
+    <Content Include="Content\images\icon\cart-success.png" />
+    <Content Include="Content\images\icon\Chat.png" />
+    <Content Include="Content\images\icon\computer-icons-send-thumbnail.jpg" />
+    <Content Include="Content\images\icon\excel_export.png" />
+    <Content Include="Content\images\icon\feb-business-color-go-34-512.png" />
     <Content Include="Content\images\icon\flag-us.png" />
     <Content Include="Content\images\icon\flag-vi.png" />
+    <Content Include="Content\images\icon\ico_fahasa.png" />
+    <Content Include="Content\images\icon\images.png" />
     <Content Include="Content\images\icon\Location-01-WF.png" />
+    <Content Include="Content\images\icon\logo-bo-cong-thuong-da-thong-bao.png" />
     <Content Include="Content\images\icon\logoFahasa.png" />
     <Content Include="Content\images\icon\Logout-WF.png" />
     <Content Include="Content\images\icon\Mail info-WF.png" />
     <Content Include="Content\images\icon\RedLogout.png" />
+    <Content Include="Content\images\icon\Report-Next.png" />
+    <Content Include="Content\images\icon\Shopping-Cart-03.png" />
     <Content Include="Content\images\icon\Telephone -04.png" />
+    <Content Include="Content\images\icon\telesale.png" />
+    <Content Include="Content\images\icon\Untitled.png" />
     <Content Include="Content\images\icon\User Profile 1-WF.png" />
+    <Content Include="Content\images\icon\User-Login.png" />
     <Content Include="Content\images\icon\user.png" />
     <Content Include="Content\images\istockphoto-626890070-640x640.jpg" />
     <Content Include="Content\images\background-Home.png" />
@@ -331,6 +382,8 @@
     <Content Include="Content\images\MenuHome\Book Close-WF.png" />
     <Content Include="Content\images\MenuHome\Data add-WF.png" />
     <Content Include="Content\images\MenuHome\Export-Chart.png" />
+    <Content Include="Content\images\MenuHome\Group-Cluster.png" />
+    <Content Include="Content\images\MenuHome\Sales Order-WF.png" />
     <Content Include="Content\images\MenuHome\Stationery-02.png" />
     <Content Include="Content\images\MenuHome\User Settings-02-WF.png" />
     <Content Include="Content\images\MenuHome\User-WF.png" />
@@ -342,6 +395,15 @@
     <Content Include="Content\images\wallpaper2you_322438.png" />
     <Content Include="Content\images\wallpaper2you_322456.jpg" />
     <Content Include="Content\images\wallpaper2you_322470.jpg" />
+    <Content Include="Content\kendo\css\kendo.bootstrap-v4.min.css" />
+    <Content Include="Content\kendo\css\kendo.mobile.all.min.css" />
+    <Content Include="Content\kendo\script\angular.min.js" />
+    <Content Include="Content\kendo\script\jszip.min.js" />
+    <Content Include="Content\kendo\script\kendo.all.min.js" />
+    <Content Include="Content\kendo\script\kendo.culture.en-US.min.js" />
+    <Content Include="Content\kendo\script\kendo.culture.vi-VN.min.js" />
+    <Content Include="Content\kendo\script\kendo.messages.en-US.min.js" />
+    <Content Include="Content\kendo\script\kendo.messages.vi-VN.min.js" />
     <Content Include="Content\main.css" />
     <Content Include="Content\owlCarousel\css\owl.carousel.css" />
     <Content Include="Content\owlCarousel\css\owl.carousel.min.css" />
@@ -354,6 +416,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Onepay\vpc_dr.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\font\Quicksand-Bold.ttf" />
@@ -433,10 +496,23 @@
     <Content Include="Areas\Admin\Views\Book\_InfoBook.cshtml" />
     <Content Include="Areas\Admin\Views\Book\_EditBook.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\Classification.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\Stationery.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\CreateStationery.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_MenuLeft.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_UploadImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\_MenuLeft.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\_ViewDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\_ChangeStatus.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\_MenuLeft.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ReportByDay.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\Custom\Books.js" />
     <Content Include="Scripts\Custom\Customer.js" />
     <Content Include="Scripts\Custom\Employee.js" />
@@ -529,12 +605,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\_Register.cshtml" />
     <Content Include="Views\Shared\_LibKendo.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\_OrderBox.cshtml" />
     <Content Include="Views\Cart\_UpdateInfoOrder.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
+    <Content Include="Views\Cart\ProcessOrder.cshtml" />
+    <Content Include="Views\Cart\OrderSuccess.cshtml" />
+    <Content Include="Views\User\_ForgotPassword.cshtml" />
+    <Content Include="Views\User\_InputCode.cshtml" />
+    <Content Include="Views\User\_ChangePassword.cshtml" />
+    <Content Include="Views\User\CustomerInformation.cshtml" />
+    <Content Include="Views\Cart\SearchOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

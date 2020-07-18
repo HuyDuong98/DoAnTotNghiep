@@ -1,0 +1,124 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.NhaVienModel
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCapNhatNhanVien" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+        <div class="form-group  row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_NAME_EMPLOYEE
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TENNHANVIEN, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 title-input centerY">
+                @ViewText.TITLE_DATEOFBIRTH
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control", placeholder = ViewText.TITLE_DATEOFBIRTH })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 title-input centerY">
+                @ViewText.TITLE_CMND
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.CMND, new { @class = "form-control", @maxlength = 12, placeholder = ViewText.TITLE_CMND })
+            </div>
+        </div>
+        <div class="form-group  row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_ADDRESS
+            </div>
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.DIACHINHANVIEN, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group  row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_PHONE
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_EMAIL
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_USERNAME
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TENDANGNHAPNHANVIEN, new { @class = "form-control", @id = "txtUserName", @autocomplete = "off" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 centerY">
+                @ViewText.TITLE_PASSWORD
+            </div>
+            <div class="col-md-8">
+                @Html.PasswordFor(model => model.MATKHAUNHANVIEN, new { @class = "form-control", @autocomplete = "off" })
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.MANHANVIEN)
+
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <a href="javascript:void(0)" id="BtnSave" class="btn-success btn">@ViewText.BUTTON_UPDATE</a>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    initValidation();
+    initKeydownNumber();
+    //$("#MANHOMNGUOIDUNG").kendoDropDownList();
+    $("#NGAYSINH").kendoDatePicker({
+        popup: {
+            position: "top right",
+            origin: "bottom right"
+        }
+    });
+    var form = $("#frmCapNhatNhanVien");
+    
+    $("#BtnSave").on("click", function () {
+        if (form.valid()) {
+            $.ajax({
+                url: "/Emloyee/EditEmloyee",
+                data: form.serialize(),
+                dataType: "json",
+                type: "POST",
+                success: function (res) {
+                    GetData();
+                    var message = "Chỉnh sửa thành công";
+                    showSuccess(message);
+                },
+                complete: function (res) {
+                    $("#popupEditWindows").data("kendoWindow").close();
+                }
+            })
+        }
+    });
+</script>

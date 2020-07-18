@@ -1,0 +1,284 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Thêm mới Sách";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.TITLE_CREATE_BOOK
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmCreateBook", enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_NAME_BOOK
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TENSACH, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITTLE_TAC_GIA
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TACGIA, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_NHA_XUAT_BAN
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NHAXUATBAN, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PHAN_LOAI
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.MAPHANLOAISACH, new { @class = "w-100" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input ">
+                        @ViewText.TITLE_NGON_NGU
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.MANGONNGU, null)
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_HINH_THUC
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.MAHINHTHUC, null)
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_TRONG_LUONG
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TRONGLUONG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_GAM })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY ">
+                        @ViewText.TITLE_SO_TRANG
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.SOTRANG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_SO_TRANG })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_KICH_THUOC
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.KICHTHUOC, new { @class = "form-control", placeholder = ViewText.EXAM_KICH_THUOC })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_GIA_SACH
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.GIASACH, new { @class = "form-control", @id = "input-money", placeholder = ViewText.VND })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input">
+                        @ViewText.TITLE_TOM_TAC
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_IMAGE
+                    </div>
+                    <div class="col-md-7">
+                        <input name="fileImage" multiple="multiple" id="files" type="file" aria-label="files" />
+                        @*@Html.TextBoxFor(x => x.File, new { @class = "form-control", type = "file" })*@
+                        <span class="text-secondary font-italic">@ViewText.NOTE_UPLOAD_FILE_IMAGE</span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-9 text-right">
+                        <button id="BtnSave" class="btn btn-success">@ViewText.BUTTON_ADD </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="/Scripts/Custom/Books.js"></script>
+    <script>
+        initKeydownNumber();
+        var editor = $("#TOMTAC").kendoEditor();
+        $("#MANGONNGU").kendoDropDownList();
+        var phanloai = $("#MAPHANLOAISACH").kendoDropDownTree({
+            placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            height: "auto",
+            dataTextField: "text",
+            dataValueField: "id"
+        }).data("kendoDropDownTree");
+
+
+        $("#MAHINHTHUC").kendoDropDownList();
+
+        var dataSourcePL = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataPhanLoai", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    children: "items"
+                }
+            }
+        });
+
+        phanloai.setDataSource(dataSourcePL);
+
+        $("#BtnSave").on("click", function (e) {
+            e.preventDefault();
+            initValidation();
+            var files = [];
+            var form = $("#frmCreateBook");
+            var formCreate = $(".form-control");
+            var formData = new FormData();
+            debugger;
+            var lengthForm = formCreate.length;
+            console.log(lengthForm);
+            for (var i = 0; i < lengthForm; i++) {
+                formData.append(formCreate[i].name, formCreate[i].value);
+                console.log(formCreate[i].name);
+                console.log(formCreate[i].value);
+            }
+            var valuePhanLoai = $("#MAPHANLOAISACH").val();
+            formData.append("MAPHANLOAISACH", valuePhanLoai );
+
+
+            var lengthItem = $('input[name=fileImage]').length;
+            for (var j = 0; j < lengthItem; j++) {
+                var length = $('input[name=fileImage]').get(j).files.length;
+                for (var i = 0; i < length; i++) {
+                    files.push($('input[name=fileImage]').get(j).files[i]);
+                }
+            }
+            var lengthfiles = files.length;
+            for (var i = 0; i < lengthfiles; i++) {
+                formData.append('fileImages', files[i]);
+            }
+
+            if (form.valid() && CheckFileUpload()) {
+                $.ajax({
+                    url: '@Url.Action("GetCreateBook", "Book")',
+                    data:  formData,
+                    enctype: 'multipart/form-data',
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function (res) {
+                        if (res == 1) {
+                            showSuccess("Thêm sách thành công");
+                            clearForms();
+                        }
+                        else if (res == -2) {
+                            showError("Không thêm được hình ảnh");
+                        } else if (res == -1) {
+                            showError("Sách đã tồn tại");
+                        } else {
+                            showError("Thêm sách thất bại");
+                        }
+                    },
+                    error: function () {
+                        showError("Thêm sách thất bại");
+                    }
+                });
+            } else {
+                showError("Không đúng định dạng file!!")
+            }
+
+        });
+
+        $('input[name=fileImage]').kendoUpload({
+            async: {
+                saveUrl: "save",
+                removeUrl: "remove",
+                autoUpload: true
+            },
+            multiple: true,
+            validation: {
+                maxFileSize: 5000000,//Dung lượng file upload 5mb
+                allowedExtensions: [".jpeg", ".jpg", ".png"],//Định dạng file
+            }
+        }).data("kendoUpload");
+
+        function CheckFileUpload() {
+            if ($('input[name=fileImage]').length > 0) {
+                var upload = $('input[name=fileImage]').getKendoUpload();
+                var fileExtension = [".jpeg", ".jpg", ".png"];
+                files = upload.getFiles();
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].size > 5000000 || fileExtension.find(x => x == files[i].extension) == undefined) {
+                        return false;
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+
+    </script>
+}
+
+

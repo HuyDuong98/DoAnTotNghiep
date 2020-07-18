@@ -21,6 +21,7 @@
     <WebStackScaffolding_DbContextTypeFullName>Model.EF.QLNhaSachFahasaDBContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
     <ProjectView>ProjectFiles</ProjectView>
+    <NameOfLastUsedPublishProfile>FolderProfile</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

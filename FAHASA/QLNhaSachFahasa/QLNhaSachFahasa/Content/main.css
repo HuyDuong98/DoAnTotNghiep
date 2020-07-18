@@ -61,9 +61,9 @@ a {
     background-color: transparent;
 }
 
-a, span {
+/*a, span {
     display: inline-block;
-}
+}*/
 
 img {
     max-width: 100%;

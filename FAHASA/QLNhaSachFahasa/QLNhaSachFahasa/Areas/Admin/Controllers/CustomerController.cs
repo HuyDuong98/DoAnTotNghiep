@@ -22,7 +22,30 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         public ActionResult GetListCustomer(string keywork)
         {
             var res = new CustomerDao().GetDataCustomer(keywork);
-            return Json(res, JsonRequestBehavior.AllowGet);
+            List<CustomerModel> model = new List<CustomerModel>();
+            foreach (var item in res)
+            {
+                model.Add(new CustomerModel
+                {
+                    MAKH = item.MAKHACHHANG,
+                    //MANHOMNGUOIDUNG= item.MANHOMNGUOIDUNG,
+                    HOKH = item.HOKHACHHANG,
+                    TENKH = item.TENKHACHHANG,
+                    EMAIL = item.EMAIL,
+                    DIENTHOAI = item.DIENTHOAI,
+                    QUOCGIA = item.QUOCGIA,
+                    THANHPHO = item.THANHPHO,
+                    QUAN = item.QUAN,
+                    PHUONG = item.PHUONG,
+                    DIACHI = item.DIACHI,
+                    USERNAME = item.TENDANGNHAPKHACHHANG,
+                    PASSWORD = item.MATKHAUKHACHHANG,
+                    NGAYTAO = item.NGAYTAO
+
+                });
+            }
+           
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         [HasCredential(RoleId = "EDIT_CUSTOMER")]
