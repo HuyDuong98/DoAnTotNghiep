@@ -12,7 +12,7 @@
                 #if(i < 3){#
                 <li><a id="thumb#:i+1#" class="img-thumb" data-index="#:i#" href="javascrpt:void(0)" style="background: url('/UploadFile/#=HINHANH[i].LINKHINHANH#')"></a></li>
                 #}else{#
-                <li><span onclick="fnClickMore()"  class="img-plus">+#:HINHANH.length-2#</span></li>
+                <li><span onclick="fnClickMore()" class="img-plus">+#:HINHANH.length-2#</span></li>
                 #break;#
                 #}#
                 #}#
@@ -20,11 +20,11 @@
             <div class="placeholder-box">
                 <div id="placeholder">
                     #for(var i=0; i < HINHANH.length; i++){#
-                        #if(i==0){#
-                            <img id="home#:i#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" />
-                        #}else if(i < 3){#
-                            <img id="home#:i#" style="display:none" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" />
-                        #}#
+                    #if(i==0){#
+                    <img id="home#:i#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" />
+                    #}else if(i < 3){#
+                    <img id="home#:i#" style="display:none" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" />
+                    #}#
                     #}#
                 </div>
             </div>
@@ -46,8 +46,17 @@
                         <span class="text-title">Tác giả: </span><span class="text-value">LiNi Thông Minh</span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">#:GIABAN#</div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h5>Mô tả sản phẩm</h5>
+            <div class="text-justify">
                 #=htmlDecode(GHICHU||"")#
             </div>
+           
         </div>
     </script>
 </div>

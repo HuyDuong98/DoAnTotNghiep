@@ -77,10 +77,12 @@ namespace QLNhaSachFahasa.Controllers
             {
                 link = images[0].LINKHINHANH;
             }
+            var giaban = new SanPhamDao().getGiaBan(model.MASANPHAM);
             SanPhamModel Product = new SanPhamModel()
             {
                 TENSANPHAM = model.TENSANPHAM,
                 MASANPHAM = model.MASANPHAM,
+                GIABAN = giaban.DONGIABAN,
                 DONGIA = model.DONGIA,
                 LINKHINHANH = link,
                 GHICHU = System.Web.HttpUtility.HtmlDecode(model.GHICHU),
