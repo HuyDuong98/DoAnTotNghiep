@@ -59,6 +59,8 @@
     <Compile Include="Dao\AdminDao.cs" />
     <Compile Include="Dao\BookDao.cs" />
     <Compile Include="Dao\CustomerDao.cs" />
+    <Compile Include="Dao\DonHangDao.cs" />
+    <Compile Include="Dao\FahasaDao.cs" />
     <Compile Include="Dao\GroupHinhThucDao.cs" />
     <Compile Include="Dao\GroupNgonNguDao.cs" />
     <Compile Include="Dao\GroupPhanLoaiDao.cs" />

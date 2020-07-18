@@ -15,7 +15,7 @@ namespace Model.Dao
             db = new QLNhaSachFahasaDBContext();
         }
         //Khách hàng Web Account
-        public string Insert(KHACHHANG entity )
+        public string Insert(KHACHHANG entity)
         {
             db.KHACHHANGs.Add(entity);
             db.SaveChanges();
@@ -81,6 +81,17 @@ namespace Model.Dao
             } while (flag == false);
             return idCustomer;
         }
-
+        public bool IsEmail(string email)
+        {
+            var e = db.KHACHHANGs.SingleOrDefault(x => x.EMAIL == email && x.TENDANGNHAPKHACHHANG != null);
+            if (e != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

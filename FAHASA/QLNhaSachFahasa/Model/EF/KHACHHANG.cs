@@ -61,6 +61,7 @@ namespace Model.EF
 
         [Column(TypeName = "date")]
         public DateTime? NGAYTAO { get; set; }
+        public int  TRANGTHAI { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DONHANG> DONHANGs { get; set; }

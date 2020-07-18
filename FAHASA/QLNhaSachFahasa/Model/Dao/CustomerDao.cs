@@ -18,7 +18,7 @@ namespace Model.Dao
         {
             if (string.IsNullOrEmpty(keyWord))
             {
-                return db.KHACHHANGs.OrderByDescending(x => x.NGAYTAO).ToList<KHACHHANG>();
+                return db.KHACHHANGs.Where(x=>x.TRANGTHAI == 1).OrderByDescending(x => x.NGAYTAO ).ToList<KHACHHANG>();
             }
             else
             {

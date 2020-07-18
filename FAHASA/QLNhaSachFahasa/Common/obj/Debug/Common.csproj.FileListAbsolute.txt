@@ -10,3 +10,9 @@ D:\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.csprojAssemblyReference.cache
 D:\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 D:\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.dll
 D:\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.pdb
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\bin\Debug\Common.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\bin\Debug\Common.pdb
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Debug\Common.pdb

@@ -54,6 +54,7 @@ namespace Model.EF
         public string NHAXUATBAN { get; set; }
 
         public string GHICHU { get; set; }
+        public string NHACUNGCAP { get; set; }
 
         [StringLength(20)]
         public string QUOCGIA { get; set; }

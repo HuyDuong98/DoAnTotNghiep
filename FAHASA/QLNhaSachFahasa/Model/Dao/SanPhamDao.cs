@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Model.Dao
@@ -25,8 +26,29 @@ namespace Model.Dao
         }
         public List<SANPHAM> getListProductBoxSearch(string keyword)
         {
-            return db.SANPHAMs.Where(x =>( x.TENSANPHAM.Contains(keyword)|| x.TACGIA.Contains(keyword) || x.NHAXUATBAN.Contains(keyword) || x.MASANPHAM.Contains(keyword)) && x.TRANGTHAI ==1).Take(5).ToList<SANPHAM>();
+            var querya = db.SANPHAMs.Where(x => (x.TENSANPHAM.Contains(keyword) || x.TACGIA.Contains(keyword) || x.NHAXUATBAN.Contains(keyword) || x.MASANPHAM.Contains(keyword)) && x.TRANGTHAI == 1).Take(5).ToList<SANPHAM>();
+
+            var queryb = db.SANPHAMs.Where(delegate (SANPHAM c)
+            {
+                if (FahasaDao.ConvertToUnSign(c.TENSANPHAM).IndexOf(keyword, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                FahasaDao.ConvertToUnSign(c.TACGIA).IndexOf(keyword, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                FahasaDao.ConvertToUnSign(c.NHAXUATBAN).IndexOf(keyword, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                FahasaDao.ConvertToUnSign(c.MASANPHAM).IndexOf(keyword, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    return true;
+                else
+                    return false;
+            }).AsQueryable();
+            if(querya.Count == 0)
+            {
+                return queryb.Take(5).ToList();
+            }
+            else
+            {
+                return querya;
+            }
+
         }
+
         public List<SANPHAM> getListSach()
         {
             return db.SANPHAMs.Where(x => x.PHANLOAI == "SACH" && x.TRANGTHAI == 1).ToList<SANPHAM>();
@@ -75,6 +97,113 @@ namespace Model.Dao
             }
 
             return list;
+        }
+        public int setViewsProduct(string productID)
+        {
+            var product = db.SANPHAMs.Where(x => x.MASANPHAM == productID).FirstOrDefault();
+            product.LUOTXEM = product.LUOTXEM + 1;
+            db.SaveChanges();
+            return (int)product.LUOTXEM;
+        }
+        public List<PHANLOAI> getDataPhanLoai()
+        {
+            List<PHANLOAI> model = db.PHANLOAIs.ToList<PHANLOAI>();
+            return model;
+        }
+        public bool CheckID(string id)
+        {
+            var ma = db.DONHANGs.SingleOrDefault(x => x.MAHOADON == id);
+            if (ma != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string IdDonHangAuto(string ma)
+        {
+            int i = 1;
+            bool flag = false;
+            string id = "";
+            do
+            {
+                id = ma + i;
+                if (CheckID(id))
+                {
+                    flag = true;
+                }
+                i++;
+            } while (flag == false);
+            return id;
+        }
+        public string InsertDonHang(DONHANG entity)
+        {
+            db.DONHANGs.Add(entity);
+            db.SaveChanges();
+            return entity.MAHOADON;
+        }
+        public int InsertCTDonHang(CHITIETDONHANG entity)
+        {
+            db.CHITIETDONHANGs.Add(entity);
+            db.SaveChanges();
+            return entity.SOLUONG;
+        }
+        public int InsertProduct(SANPHAM entity)
+        {
+            try
+            {
+                db.SANPHAMs.Add(entity);
+                db.SaveChanges();
+                return 1;
+            }
+           catch
+            {
+                return 0;
+            }
+        }
+
+        public bool CheckIDBook(string id)
+        {
+            var ma = db.SANPHAMs.SingleOrDefault(x => x.MASANPHAM == id);
+            if (ma != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string CreateIDVPPAuto(string ma)
+        {
+            int i = 1;
+            bool flag = false;
+            string id = "";
+            do
+            {
+                id = ma + i;
+                if (CheckIDBook(id))
+                {
+                    flag = true;
+                }
+                i++;
+            } while (flag == false);
+            return id;
+
+        }
+        public List<NHASANXUAT>  DataNSX()
+        {
+            return db.NHASANXUATs.ToList();
+        }
+        public List<NHACUNGCAP> DataNCC()
+        {
+            return db.NHACUNGCAPs.ToList();
+        }
+        public List<XUATXU> DataQG()
+        {
+            return db.XUATXUs.ToList();
         }
     }
 }
