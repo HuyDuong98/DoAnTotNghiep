@@ -1,0 +1,6 @@
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\bin\Release\Common.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\bin\Release\Common.pdb
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Release\Common.csprojAssemblyReference.cache
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Release\Common.csproj.CoreCompileInputs.cache
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Release\Common.dll
+C:\Users\Huy Duong\Documents\DoAnTotNghiep\FAHASA\QLNhaSachFahasa\Common\obj\Release\Common.pdb

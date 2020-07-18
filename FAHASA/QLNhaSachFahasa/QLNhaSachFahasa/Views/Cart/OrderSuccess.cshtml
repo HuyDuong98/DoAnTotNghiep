@@ -1,0 +1,104 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "OrderSuccess";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="container mt-4">
+    <div class="w-100">
+        <nav id="stepper"></nav>
+    </div>
+    <div class="header-box-order pt-0 mt-4">
+        3. @Html.Raw(ViewText.Title_Confirm_Order)
+    </div>
+    <div class="box-order-success">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="/Content/images/icon/cart-success.png" />
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-12"><h5>Cảm ơn bạn đã mua hàng tại Fahasa!</h5></div>
+                    <div class="col-12">
+                        <p>Mã đơn hàng của bạn là:</p>
+                        <div class="id-DDH">@ViewBag.ID</div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <h6>Chi tiết đơn hàng</h6>
+                        <div id="listDDH"></div>
+                        <script type="text/x-kendo-template" id="templateDDH">
+                            <div class="item-cart">
+                                <div class="image">
+                                    <img src="/UploadFile/#:linkImage#" alt="#:nameProduct#" height="100px" />
+                                </div>
+                                <div class="info-cart">
+                                    <div class="title-cart-item d-flex align-items-center">
+                                        #:nameProduct#
+                                    </div>
+                                    <div class="text-price">#:kendo.toString(thanhtien,"n0")# @Html.Raw(ViewText.VND)</div>
+
+                                </div>
+                                <div class="quantity-box d-flex">
+                                    <span>Số lượng: #:soluong#</span>
+                                </div>
+                            </div>
+                        </script>
+                        <div class="total"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $("#stepper").kendoStepper({
+            linear: false,
+            steps: [{
+                label: "Cart",
+                icon: "k-icon k-i-cart"
+            }, {
+                label: "Personal infor",
+                icon: "dictionary-add",
+            }, {
+                label: "Confirm",
+                icon: "k-icon k-i-check",
+                selected: true
+            }]
+        });
+        var listDDH = $("#listDDH").kendoListView({
+            template: kendo.template($("#templateDDH").html()),
+            dataSource: { type: "json" },
+            @*dataBound: function (e) {
+                if (this.dataSource.data().length == 0) {
+                    $("#listCartItem").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TITLE_MESSAGE_NO_PRODUCT). <a href='/' style='color:rgba(255, 70, 5, 1)'>@Html.Raw(ViewText.TITLE_SHOPPING)</div>");
+                }
+            },*@
+        }).data("kendoListView");
+        function fnGetDataListDDH() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListDH", "Cart")',
+                            dataType: "json",
+                            data: {
+                                id:"@ViewBag.ID"
+                            },
+                            type: "POST",
+                            success: function (result) {
+                                $(".total").html("<div class='d-flex'><p>Tổng cộng: </p> <span>" + kendo.toString(result.total, "n0") + " @Html.Raw(ViewText.VND)</span></div>")
+                                options.success(result.model);
+                            },
+                            error: function (result) {
+                                options.error(result.model);
+                            }
+                        });
+                    }
+                },
+            });
+            listDDH.setDataSource(dataSource);
+        }
+        fnGetDataListDDH();
+    </script>
+}

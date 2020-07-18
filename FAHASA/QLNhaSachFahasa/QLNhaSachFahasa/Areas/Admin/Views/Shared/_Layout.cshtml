@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+@using QLNhaSachFahasa.Resources
+@using QLNhaSachFahasa.Common;
+@{
+    var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Login/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title</title>
+</head>
+<body class="bgHomeAdmin">
+    <div class="main-menu ">
+        <div class="container-header mb-5">
+            <div class="row align-items-center site-header d-lg-block">
+                <div class="col-lg-12 text-center mb-3">
+                    <a href="@Url.Action("Index","AdHome")" class="site-brand">
+                        <img src="~/Content/images/icon/logoFahasa.png">
+                    </a>
+                </div>
+                <div class="col-lg-12 text-center name-user mt-4">
+                    <div>
+                        Xin chào, <span class="font-weight-bold" style="color:#62ab00">@session.Name</span>
+                        <a href="@Url.Action("Logout","Login")" alt="@ViewText.TITLE_LOGOUT">
+                            <img src="/Content/images/icon/RedLogout.png" />
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="/Scripts/Gsap.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

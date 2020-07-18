@@ -1,0 +1,170 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm("EditBook", "Book", FormMethod.Post, new { id = "frmCreateBook" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_NAME_BOOK
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TENSACH, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITTLE_TAC_GIA
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TACGIA, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_NHA_XUAT_BAN
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.NHAXUATBAN, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_TRONG_LUONG
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TRONGLUONG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_GAM })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_SO_TRANG
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.SOTRANG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_SO_TRANG })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_KICH_THUOC
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.KICHTHUOC, new { @class = "form-control", placeholder = ViewText.EXAM_KICH_THUOC })
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_GIA_SACH
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.GIASACH, new { @class = "form-control", @id = "input-money", placeholder = ViewText.VND })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_NGON_NGU
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.MANGONNGU, null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_PHAN_LOAI
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.MAPHANLOAISACH, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_HINH_THUC
+                <span class="requit">*</span>
+            </div>
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.MAHINHTHUC, null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input ">
+                @ViewText.TITLE_TOM_TAC
+            </div>
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control" ,@style ="height:300px"})
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.MASACH)
+        @*@Html.Partial("_AddImageBook")*@
+
+        <div class="form-group row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="@ViewText.BUTTON_UPDATE" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    var editor = $("#TOMTAC").kendoEditor({
+        encoded: false,
+    });
+    $("#MANGONNGU").kendoDropDownList();
+    var phanloai = $("#MAPHANLOAISACH").kendoDropDownTree({
+        placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+        height: "auto",
+        dataTextField: "text",
+        dataValueField: "id"
+    }).data("kendoDropDownTree");
+
+
+    $("#MAHINHTHUC").kendoDropDownList();
+
+    var dataSourcePL = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: function (options) {
+                $.ajax({
+                    url: '@Url.Action("GetDataPhanLoai", "Book")',
+                    dataType: "json",
+                    success: function (result) {
+                        options.success(result);
+                    },
+                    error: function (result) {
+                        options.error(result);
+                    }
+                });
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                children: "items"
+            }
+        }
+    });
+
+    phanloai.setDataSource(dataSourcePL);
+    debugger;
+    $("#MAPHANLOAISACH").data("kendoDropDownTree").value("@Model.MAPHANLOAISACH");
+    $("#MAPHANLOAISACH").data("kendoDropDownTree").trigger("change");
+</script>

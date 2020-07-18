@@ -1,0 +1,47 @@
+﻿@using QLNhaSachFahasa.Resources;
+<input id="selectStatusDetail" class="w-100" />
+<div class="w-100 text-right mt-3">
+    <button class="button buttonSave" type="button" onclick="fnSaveChange()">@ViewText.Button_Change</button>
+</div>
+<script>
+    var selectStatus = $("#selectStatusDetail").kendoDropDownList({
+        optionLabel: false,
+        dataTextField: "Text",
+        dataValueField: "Value",
+        height: 310,
+        dataSource: {
+            data: [{ Text: "Mới cập nhật", Value: 0 },
+                { Text: "Đang vân chuyển", Value: 2 },
+                { Text: "Thành công", Value: 1 },
+                { Text: "Đã hủy", Value: -1 }
+            ]}
+    }).data("kendoDropDownList");
+    function fnSaveChange() {
+        var status = $("#selectStatusDetail").data("kendoDropDownList").value();
+        $.ajax({
+            url: "@Url.Action("SaveChangeStatus", "Orders")",
+            data: {
+                id: "@ViewBag.ID",
+                status: status
+            },
+            beforeSend: function () {
+                $(".loading").show();
+            },
+            dataType: "json",
+            type: "POST",
+            success: function (result) {
+                if (result == 1) {
+                    var data = $("#selectStatus").data("kendoDropDownList").value();
+                    GetDataGridOrder(data);
+                }
+            },
+            error: function (result) {
+                showError("Thay đổi không thành công")
+            },
+            complete: function () {
+                $(".loading").hide();
+                $("#popupChangeStatus").data("kendoWindow").close();
+            },
+        });
+    }
+</script>

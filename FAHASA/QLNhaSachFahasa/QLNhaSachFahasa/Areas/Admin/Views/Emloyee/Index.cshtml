@@ -1,0 +1,243 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.NhaVienModel
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Emloyee")">@ViewText.TITLE_LIST_EMPLOYEE</a>
+    </li>
+    <li class="menu-item">
+        <a href="@Url.Action("Create","Emloyee")">@ViewText.TITLE_ADD_EMPLOYEE</a>
+    </li>
+}
+@section title{
+    @ViewText.TITLE_LIST_EMPLOYEE
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-employee">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                    <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-employee','#ico-search','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+        <div class="col-2">
+            <input id="status-employee" class="w-100" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-custom-100 mt-2">
+            <div id="gridEmloyee"></div>
+        </div>
+    </div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+<div id="popupViewsWindows">
+    <div id="wndViewsContent"></div>
+</div>
+<div id="dialog"></div>
+@section scripts{
+    <script src="/Scripts/Custom/Employee.js"></script>
+    <script id="status-template" type="text/x-kendo-template">
+        <div class="d-flex w-100 text-center">
+            <a onclick='popupEditEmployee("#:MANV#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick='funcDeleteEmployee("#:MANV#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+    </script>
+    <script type="text/javascript">
+        addclassFocus("#txtSearchDataTable", "#search-employee");
+        initKeydownNumber();
+        @*var data = @Html.Raw(Json.Encode(Model));*@
+        var dataSource = new kendo.data.DataSource();
+
+        $("#popupEditWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        $("#popupViewsWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_INFO_EMPLOYEE)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+        var dataStatus =  [ { text: "Làm việc", value: "true" }, { text: "Thôi việc", value: "false" },];
+        $("#status-employee").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: dataStatus,
+            optionLabel: "@Html.Raw(ViewText.TITLE_ALL)",
+            change: GetData
+        });
+
+        var GridData = $("#gridEmloyee").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            //height: 480,
+            groupable: false,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MANV",
+                    title: "ID",
+                    template: "<span>#=MANV#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 80,
+                }, {
+                    field: "TENNV",
+                    title: "Tên nhân viên",
+                    template: "<div class='title-grid' onclick ='itemClick(\"#:MANV#\")'>#=TENNV#</span>",
+                    attributes: {
+                        style: "cursor:pointer",
+                        "id": "item-#:MANV#",
+                    },
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },{
+                    field: "DIACHINV",
+                    title: "Địa chỉ",
+                    template: "<span>#=DIACHINV#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "SDTNV",
+                    title: "Số điện thoại",
+                    template: "<span>#=SDTNV#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "EMAIL",
+                    title: "Email",
+                    //template: "<span>#=EMAIL#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    //width: "auto",
+                },
+                //{
+                //    field: "NGAYTAO",
+                //    title: "Ngày đăng ký",
+                //},
+                {
+                    field: "TRANGTHAI",
+                    title: "Trạng thái",
+                    sortable: false,
+                    filterable: false,
+                    template: "<div class='text-center'>" +
+                        "<a href='javascript:void(0)' data-id='#:MANV#'  onclick='return fnUpdateStatusEmp(\"#= MANV #\");'><span style='width:89px;padding:5px' id='status-#:MANV#' title='Cập nhật trạng thái' class=\"badge badge-pill badge-status-size #= TRANGTHAI ? 'status-active' : 'status-inactive' #\">#:TRANGTHAI?'Làm việc':'Thôi việc'#</span></a>" +
+                            "</div>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                 {
+                    template: kendo.template($("#status-template").html()),
+                    width: 110,
+                }],
+            groupable: false,
+            filterable: true,
+            sortable: true,
+
+            //change: function (e) {
+            //    var selectedRows = this.select();
+            //    //var selectedDataItems = [];
+            //    //for (var i = 0; i < selectedRows.length; i++) {
+            //    //    var dataItem = this.dataItem(selectedRows[i]);
+            //    //    selectedDataItems.push(dataItem);
+            //    //}
+            //    console.log(selectedRows);
+            //    e.on("click", function () {
+            //        $('#wndViewsContent').load("/Admin/Emloyee/InfoEmployee?id=" + id, function () {
+            //            $("#popupViewsWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            //        });
+            //    });
+            //},
+
+            pageable: {
+                pageSizes: [5, 10, 25, 100],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keydown(function () {
+                GetData();
+            });
+        });
+
+        GetData();
+
+        function funcDeleteEmployee(id) {
+            $('#dialog').kendoDialog({
+                width: "450px",
+                title: "@Html.Raw(ViewText.Title_Confirm)",
+                closable: false,
+                visible: false,
+                content: " <span class='k-icon k-i-info'></span>" + "@Html.Raw(ViewText.Question_Delete_Employee) <span class='color-red'>" + id+"</span>",
+                buttonLayout: "normal",
+                actions: [
+                    {
+                        text: "@Html.Raw(ViewText.Button_Yes)",
+                        primary: true,
+                        action: function () {
+                            $.ajax({
+                                url: "/Emloyee/DeleteEmployee",
+                                data: { id: id },
+                                dataType: "json",
+                                type: "POST",
+                                success: function (response) {
+                                    if (response.result == true) {
+                                        GetData();
+                                    } else {
+                                        GetData();
+                                    }
+                                },
+                            })
+                        },
+                    },
+                    { text: "@Html.Raw(ViewText.Button_No)" },
+                ]
+            });
+            $('#dialog').data("kendoDialog").open().element.closest(".k-window").css({ top: 40 });
+        }
+    </script>
+
+}
+

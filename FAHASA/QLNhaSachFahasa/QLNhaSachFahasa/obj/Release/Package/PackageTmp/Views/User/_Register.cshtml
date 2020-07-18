@@ -1,0 +1,131 @@
+﻿@model QLNhaSachFahasa.Models.RegisterModel
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm("Register", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Success</div>
+        }
+        @*<div class="form-group row">
+            @Html.LabelFor(model => model.HoKH, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.HoKH, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HoKH, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_NAME)
+            </div>
+
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.TenKH, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TenKH, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_EMAIL)
+            </div>
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_PHONE)
+            </div>
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_ADDRESS)
+            </div>
+            <div class="col-8">
+                @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_USERNAME)
+            </div>
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_PASSWORD)
+            </div>
+            <div class="col-8">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @autocomplete = "off" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                @Html.Raw(ViewText.TITLE_CONFIM_PASSWORD)
+            </div>
+            <div class="col-8">
+                @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfimPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*<div class="form-group row">
+            @Html.LabelFor(model => model.QuocGia, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.QuocGia, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.QuocGia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.ThanhPho, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.ThanhPho, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ThanhPho, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Quan, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.Quan, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Quan, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Phuong, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-8">
+                @Html.TextBoxFor(model => model.Phuong, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Phuong, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group row">
+            <div class="col-md-12 text-right">
+                <input type="submit" value="@ViewText.BUTTON_REGISTER" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

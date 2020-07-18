@@ -1,0 +1,95 @@
+﻿@using QLNhaSachFahasa.Resources
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-md-3 title-input">
+                    @ViewText.TITLE_IMAGE
+                </div>
+                <div class="col-md-9">
+                    <input name="fileImage" multiple="multiple" id="files" type="file" aria-label="files" />
+                    @*@Html.TextBoxFor(x => x.File, new { @class = "form-control", type = "file" })*@
+                    <span class="text-secondary font-italic">@ViewText.NOTE_UPLOAD_FILE_IMAGE</span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-12 text-right">
+                    <button id="BtnSave" class="btn btn-success">@ViewText.BUTTON_ADD </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    $("#BtnSave").on("click", function (e) {
+        e.preventDefault();
+        var formData = new FormData();
+        var files = [];
+        formData.append('id', "@ViewBag.ID");
+
+        var lengthItem = $('input[name=fileImage]').length;
+        for (var j = 0; j < lengthItem; j++) {
+            var length = $('input[name=fileImage]').get(j).files.length;
+            for (var i = 0; i < length; i++) {
+                files.push($('input[name=fileImage]').get(j).files[i]);
+            }
+        }
+        var lengthfiles = files.length;
+        for (var i = 0; i < lengthfiles; i++) {
+            formData.append('fileImages', files[i]);
+        }
+        if (CheckFileUpload()) {
+            $.ajax({
+                url: '@Url.Action("UploadFileImage", "Book")',
+                data: formData,
+                enctype: 'multipart/form-data',
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (res) {
+                    if (res == 1) {
+                        showSuccess("Upload file success");
+                    } else {
+                        showError("Upload file faild");
+                    }
+                },
+                error: function () {
+                    showError("Thất bại");
+                }
+            });
+        } else {
+            showError("Không đúng định dạng file!!")
+        }
+    });
+    $('input[name=fileImage]').kendoUpload({
+        async: {
+            saveUrl: "save",
+            removeUrl: "remove",
+            autoUpload: true
+        },
+        multiple: true,
+        validation: {
+            maxFileSize: 5000000,//Dung lượng file upload 5mb
+            allowedExtensions: [".jpeg", ".jpg", ".png"],//Định dạng file
+        }
+    }).data("kendoUpload");
+
+    function CheckFileUpload() {
+        if ($('input[name=fileImage]').length > 0) {
+            var upload = $('input[name=fileImage]').getKendoUpload();
+            var fileExtension = [".jpeg", ".jpg", ".png"];
+            files = upload.getFiles();
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size > 5000000 || fileExtension.find(x => x == files[i].extension) == undefined) {
+                    return false;
+                    break;
+                }
+            }
+        }
+        return true;
+    }
+</script>

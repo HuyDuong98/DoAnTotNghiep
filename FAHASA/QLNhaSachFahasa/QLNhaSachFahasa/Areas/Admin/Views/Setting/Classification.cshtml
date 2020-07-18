@@ -1,0 +1,70 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Classification";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    <li class="menu-item ">
+        <a href="@Url.Action("Classification","Setting")">@ViewText.TITLE_CLASSIFICATION</a>
+    </li>
+}
+@section title{
+    @ViewText.TITLE_CLASSIFICATION
+}
+<div class="col-8">
+    <div id="treeview"></div>
+</div>
+
+@section scripts{
+    <script>
+
+
+        var item = new kendo.data.HierarchicalDataSource({
+            data: [
+                {
+                    text: "Furniture", items: [
+                        { text: "Tables & Chairs" },
+                        { text: "Sofas" },
+                        { text: "Occasional Furniture", items: [{ text: "abcdef" }, { text:"jasdhjasd" }] }
+                    ]
+                },
+                {
+                    text: "Decor", items: [
+                        { text: "Bed Linen" },
+                        { text: "Curtains & Blinds" },
+                        { text: "Carpets" }
+                    ]
+                }
+            ]
+        });
+        var treeview = $("#treeview").kendoTreeView({
+            dataTextField:"text"
+        }).data("kendoTreeView");
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options)  {
+                    $.ajax({
+                        url: '@Url.Action("GetDataTreeView", "Setting")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    children: "items"
+                }
+            }
+        });
+
+        treeview.setDataSource(dataSource);
+
+    </script>
+
+}

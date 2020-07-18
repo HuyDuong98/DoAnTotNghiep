@@ -1,0 +1,92 @@
+﻿@model QLNhaSachFahasa.Models.CustomerModel
+@using QLNhaSachFahasa.Resources
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmInfoCustomer" }))
+{
+    <div class="form-group row">
+        <div class="col-md-4 title-input">
+            @ViewText.TITLE_NAME
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.TENKH, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input">
+            @ViewText.TITLE_PHONE
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.DIENTHOAI, new { @class = "form-control", @id = "txtPhoneNumber" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input">
+            @ViewText.TITLE_EMAIL
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", @id = "txtTen" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input">
+            @ViewText.TITLE_ADDRESS
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.DIACHI, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <a href="javascript:void(0)" onclick="fnSubmitUpdate()" class="btn btn-submit-order m-0" style="width:100px">@ViewText.BUTTON_UPDATE</a>
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.MAKH)
+}
+<script>
+    initKeydownNumber();
+    initValidForm();
+    function initValidForm() {
+        $("#frmInfoCustomer").validate({
+            ignore: '',
+            rules: {
+                "TENKH": {
+                    required: true
+                },
+                "EMAIL": {
+                    email: true,
+                    required: true
+                },
+                "DIENTHOAI": {
+                    required: true,
+                    maxlength: 10
+                },
+                "DIACHI": {
+                    required: true
+                }
+            },
+            messages:
+            {
+                "TENKH": {
+                    required: "Bạn chưa nhập họ tên."
+                },
+                "EMAIL": {
+                    email: "Email không đúng định dạng.",
+                    required: "Bạn chưa nhập Email."
+                },
+                "DIENTHOAI": {
+                    required: "Bạn chưa nhập số điện thoại.",
+                    maxlength: "Số điện thoại không hợp lệ."
+                },
+                "DIACHI": {
+                    required: "Bạn chưa nhập địa chỉ nhận hàng."
+                }
+            },
+            success: function (error) {
+                error.remove();
+            }
+        });
+    }
+</script>

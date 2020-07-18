@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="container mt-4">
+    <div id="imageDetail"></div>
+    <script type="text/x-kendo-template" id="templateDetail">
+       
+
+        <div class="sumary-detail-view wide">
+            <ul id="homes">
+                <li><a id="thumb1" class="img-thumb" data-index="0" href="javascrpt:void(0)" style="background: url('/UploadFile/637274163493780773.jpg')"></a></li>
+                <li><a id="thumb2" class="img-thumb" data-index="1" href="javascrpt:void(0)" style="background: url('/UploadFile/637277782153718004.jpg')"></a></li>
+                <li><a id="thumb3" class="img-thumb" data-index="2" href="javascrpt:void(0)" style="background: url('/UploadFile/637275672154929391.jpg')"></a></li>
+            </ul>
+            <div class="placeholder-box">
+                <div id="placeholder">
+                    <img id="home0" src="/UploadFile/637274163493780773.jpg" />
+                    <img id="home1" style="display: none" src="/UploadFile/637277782153718004.jpg" />
+                    <img id="home2" style="display: none" src="/UploadFile/637275672154929391.jpg" />
+                </div>
+            </div>
+            <div class="summary-detail">
+                <h3> #:TENSANPHAM#</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="text-title">Nhà cung câp: </span><span class="text-value">AZ Việt Nam</span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-title">Tác giả: </span><span class="text-value">#:TACGIA#</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="text-title">Nhà xuất bản: </span><span class="text-value">#:NHAXUATBAN#</span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="text-title">Tác giả: </span><span class="text-value">LiNi Thông Minh</span>
+                    </div>
+                </div>
+                #:GHICHU#
+            </div>
+        </div>
+    </script>
+</div>
+@section scripts{
+    <script type="text/javascript" charset="utf-8">
+        templateInfoOrder();
+     
+        function templateInfoOrder() {
+            $.ajax({
+                url: '@Url.Action("GetBook", "Home")',
+                data: {
+                    productID:'@ViewBag.ProductID'
+                },
+                dataType: "json",
+                success: function (result) {
+                    var template = kendo.template($("#templateDetail").html());
+                    $("#imageDetail").html(template(result));
+                    $(function () {
+                        var index = 0,
+                            currentEffect;
+
+                        $("#homes a").click(function (e) {
+                            e.preventDefault();
+                            var target = parseInt($(this).data("index"));
+                            if (target === index) {
+                                return;
+                            }
+
+                            if (currentEffect) {
+                                currentEffect.stop();
+                            }
+                            $("#home" + target).show();
+                            currentEffect = kendo.fx("#home" + target).replace("#home" + index, "swap");
+                            currentEffect.run();
+                            index = target;
+                        });
+                    });
+                },
+            });
+        }
+
+    </script>
+}

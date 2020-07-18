@@ -1,0 +1,163 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Customer")">@ViewText.TITLE_LIST_CUSTOMER</a>
+    </li>
+
+}
+@section title{
+    @ViewText.TITLE_LIST_CUSTOMER
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-customer">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-customer')" })
+                    <i class="fa fa-search py-2" id="ico-customer" onclick=" deleteValInput('#search-customer','#ico-customer','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+        <div class="col-6"></div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-custom-100 mt-2">
+            <div id="gridCustomer"></div>
+        </div>
+    </div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/Custom/Customer.js"></script>
+    <script id="status-template" type="text/x-kendo-template">
+        <div class="d-flex w-100 text-center">
+            <a onclick='popupEditCustomer("#:MAKH#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick='funcDeleteCustomer("#:MAKH#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+    </script>
+    <script type="text/javascript">
+        addclassFocus("#txtSearchDataTable", "#search-customer");
+        initKeydownNumber();
+        var dataSource = new kendo.data.DataSource();
+
+        $("#popupEditWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+
+
+        var GridData = $("#gridCustomer").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            //height: 480,
+            groupable: false,
+            sortable: true,
+            filterable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            @*dataBound: function (e) {
+                if (this.dataSource.data().length == 0) {
+                    $("#gridCustomer").find(".k-grid-content").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
+                } else {
+                    $("#gridCustomer").find(".k-grid-content").append("");
+                }
+            },*@
+            columns: [
+                {
+                    field: "MAKH",
+                    title: "ID",
+                    template: "<span>#=MAKH#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 80,
+                }, {
+                    field: "HOKH",
+                    title: "Họ",
+                    template: "<span>#:HOKH#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                {
+                    field: "TENKH",
+                    title: "Tên",
+                    template: "<span>#:TENKH#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "EMAIL",
+                    title: "Email",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "DIENTHOAI",
+                    title: "Số điện thoại",
+                    template: "<span>#=DIENTHOAI#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "DIACHI",
+                    title: "Địa chỉ",
+                    template: "<span>#=DIACHI#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    template: kendo.template($("#status-template").html()),
+                    width: 110,
+                }],
+            sortable: true,
+            pageable: {
+                pageSizes: true,
+                pageSizes: [5, 10, 25, 100],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keydown(function () {
+                GetData();
+            });
+        });
+
+        GetData();
+
+
+    </script>
+}

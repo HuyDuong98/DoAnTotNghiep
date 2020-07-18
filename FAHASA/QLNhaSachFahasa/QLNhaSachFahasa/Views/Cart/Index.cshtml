@@ -1,0 +1,232 @@
+﻿
+@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "FAHASA - " + ViewText.TITLE_CART;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    var cart = (List<QLNhaSachFahasa.Models.CartModel>)Session[QLNhaSachFahasa.Common.CartSession.CartSesstion];
+}
+<div class="container mt-4">
+
+    <div class="row">
+        @if (cart == null)
+        {
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-6 text-right">
+                        <img src="~/Content/images/icon/Untitled.png" width="150px" />
+                    </div>
+                    <div class="col-6">
+                        <p style="font-size:16px">@Html.Raw(ViewText.TITLE_MESSAGE_NO_PRODUCT)</p>
+                        <a href="/" class="btn btn-shopping">@Html.Raw(ViewText.TITLE_SHOPPING)</a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            if (cart.Count == 0)
+            {
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-6 text-right">
+                            <img src="~/Content/images/icon/Untitled.png" width="150px" />
+                        </div>
+                        <div class="col-6">
+                            <p style="font-size:16px">@Html.Raw(ViewText.TITLE_MESSAGE_NO_PRODUCT)</p>
+                            <a href="/" class="btn btn-shopping">@Html.Raw(ViewText.TITLE_SHOPPING)</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            { <div class="header-cart">
+                    <img src="/Content/images/icon/Shopping-Cart-03.png" /> Giỏ Hàng
+                </div>
+                <div class="col-md-7">
+                    <div id="listCartItem"></div>
+                    <script type="text/x-kendo-template" id="templateCart">
+                        <div class="item-cart">
+                            <div class="image">
+                                <img src="/UploadFile/#:LINKHINHANH#" alt="#:TENSANPHAM#" height="100px" />
+                            </div>
+                            <div class="info-cart">
+                                <div class="title-cart-item d-flex align-items-center">
+                                    <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot mr-2':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale mr-2':''#">#:CHUONGTRINHKHUYENMAI#</span>
+                                    #:TENSANPHAM#
+                                </div>
+
+                                #if(TACGIA==null){#
+                                <small class="content-cart-item d-flex align-items-center">
+                                    @Html.Raw(ViewText.TITLE_COLOR) <span class="color" style="background-color:#:MAUSAC#"></span>
+                                </small>                                #}else{#
+                                <small class="content-cart-item">
+                                    #:TACGIA#
+                                </small>
+                                #}#
+                                <div class="text-price">#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</div>
+
+                            </div>
+                            <div class="quantity-box d-flex">
+                                <span>Số lượng:</span>
+                                <div class="quantity-wapper ml-3">
+                                    <span class="btn-quatity quantity-down"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                    <input type="number" step="1" value="#:SOLUONGMUA#" min="1" max="#:SOLUONGTON#" id="quantity-#:MASANPHAM#" data-id="#:MASANPHAM#" class="quantity" />
+                                    <span class="btn-quatity quantity-up"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+
+                            <a href="javascript:void(0)" class="btn btn-danger btn-delete-product" onclick='fnDeleteProduct("#:MASANPHAM#")'><i class="far fa-trash-alt"></i>@Html.Raw(ViewText.BUTTON_DELETE)</a>
+                        </div>
+                    </script>
+                </div>
+                <div class="col-md-5">
+                    <div class="box-info-customer card p-3">
+                        @Html.Partial("_OrderBox")
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>
+
+
+<div id="dialog"></div>
+<script>
+
+    var listCart = $("#listCartItem").kendoListView({
+        template: kendo.template($("#templateCart").html()),
+        dataSource: { type: "json" },
+        dataBound: function (e) {
+            if (this.dataSource.data().length == 0) {
+                $("#listCartItem").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TITLE_MESSAGE_NO_PRODUCT). <a href='/' style='color:rgba(255, 70, 5, 1)'>@Html.Raw(ViewText.TITLE_SHOPPING)</div>");
+            }
+        },
+    }).data("kendoListView");
+    function fnGetDataListCart() {
+         dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetListCart","Cart")',
+                        dataType: "json",
+                        type: "POST",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+        listCart.setDataSource(dataSource);
+    }
+    fnGetDataListCart();
+    function fnDeleteProduct(idProduct) {
+        dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteProductInSession", "Cart")',
+                        data: {
+                            idProduct: idProduct,
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            var numbercart = document.getElementById("sumcart");
+                            numbercart.innerHTML = "" + result.length;
+                            templateProductOrder();
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+        listCart.setDataSource(dataSource);
+    }
+      
+    function fnUpdateQuantityCart() {
+        $(document).on("click", ".quantity-up", function () {
+            debugger;
+            var spinner = $(this),
+                input = spinner.parent().find('input[type="number"]'),
+                max = input.attr('max');
+            var oldValue = parseInt(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue + 1;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: newVal,
+                    id: input.attr("data-id"),
+                },
+                dataType: "json",
+                success: function (res) {
+                    templateProductOrder();
+                }
+            });
+            input.val(newVal);
+            input.trigger("change");
+        });
+        $(document).on("click", ".quantity-down", function () {
+            debugger;
+            var spinner = $(this),
+                input = spinner.parent().find('input[type="number"]'),
+                min = input.attr('min');
+            var oldValue = parseInt(input.val());
+            if (oldValue <= min) {
+                var newVal = min;
+            } else {
+                var newVal = oldValue-1;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: newVal,
+                    id: input.attr("data-id"),
+                },
+                dataType: "json",
+                success: function (res) {
+                    templateProductOrder();
+                }
+            });
+            input.val(newVal);
+            input.trigger("change");
+        });
+        $(".quantity").keyup(function () {
+            var value = parseInt($(this).val()),
+                min = $(this).attr("min"),
+                max = $(this).attr("max");
+            if (value <= min) {
+                value = min;
+            } else if (value >= max) {
+                value = max;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: value,
+                    id: $(this).attr("data-id"),
+                },
+                dataType: "json",
+                success: function (res) {
+                    templateProductOrder();
+                }
+            });
+            $(this).val(value);
+            $(this).trigger("change");
+        });
+    }
+  
+    setTimeout(function () {
+        fnUpdateQuantityCart()
+    }, 2000);
+</script>

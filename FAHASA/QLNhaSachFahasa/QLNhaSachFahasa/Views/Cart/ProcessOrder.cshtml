@@ -1,0 +1,248 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "FAHASA - " + ViewText.Title_Process_Order;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    var info = (QLNhaSachFahasa.Models.InfoOrderModel)Session[QLNhaSachFahasa.Common.CartSession.OrderSesstion];
+    var session = (QLNhaSachFahasa.Common.UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+}
+    <div class="container mt-4">
+
+        <div class="w-100">
+            <nav id="stepper"></nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="header-box-order pt-0 mt-4">
+                    1. @Html.Raw(ViewText.TITLE_ADDRESS_ORDER)
+                </div>
+
+                <div class="location-order">
+                    <a href="javascript:void(0)" onclick="fnPopupUpdateInfo()">@ViewText.LINK_UPDATE_INFO</a>
+                    <div id="infoCustomerBox" class="@((info == null && session== null)?"d-none":"" )"></div>
+                    <ul>
+                        <li>@ViewText.Text_Member <a href="javascript:void(0)" onclick="fnOpenLogin()">@Html.Raw(ViewText.Text_Login_Now)</a></li>
+                        <li>  @ViewText.Register_member <a href="javascript:void(0)" onclick="fnOpenRegister()">  @Html.Raw(ViewText.LABLE_REGISTER)</a></li>
+                    </ul>
+                </div>
+
+                <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
+                    <div class="info-orderer">
+                        <a href="javascript:void(0)" class="link-edit-info" onclick="fnPopupUpdateInfo()">@Html.Raw(ViewText.LINK_UPDATE_INFO)</a>
+                        <div class="row">
+                            <div class="col-12 checkout-summary-label">
+                                @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:Name||"..."#</span>
+                            </div>
+                            <div class="col-12 checkout-summary-label">
+                                @Html.Raw(ViewText.TITLE_PHONE): <span class="info-orderer-value">#:PhoneNumber||"..."#</span>
+                            </div>
+                            <div class="col-12 checkout-summary-label">
+                                @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:Email||"..."#</span>
+                            </div>
+                            <div class="col-12 checkout-summary-label d-flex">
+                                @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:Address||"..."#</span>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+            </div>
+            <div class="col-md-6">
+                <div class="header-box-order pt-0 mt-4">
+                    2. @Html.Raw(ViewText.Title_Payments)
+                </div>
+                <div class="Payment-order">
+                    <ul>
+                        <li>
+                            <input type="radio" name="Payment" id="payment1" class="k-radio radio-payment" checked="checked">
+                            <label class="k-radio-label" for="payment1">Thanh toán tiền mặt khi nhận hàng</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="Payment" id="payment2" class="k-radio radio-payment">
+                            <label class="k-radio-label" for="payment2">Thanh toán bằng thẻ quốc tế Visa, Master, JCB</label>
+                            <ul class="virtual-credit-card d-none">
+                                @*<li>
+                            <span class="virtual-credit-card-img">
+                                <img src="https://salt.tikicdn.com/ts/upload/3b/63/a8/b48c8ea6f5eef4aecdd6e96028600067.png" alt="" width="50px">
+                                <img src="https://salt.tikicdn.com/ts/upload/a4/29/bd/789096005df664678e28e541b1332ce2.png" alt="" width="50px">
+                                <img src="https://salt.tikicdn.com/ts/upload/64/dd/13/7e66c599912fdfd723f3db61b0f9ec8b.png" alt="" width="50px">
+                            </span>
+                        </li>*@
+                                <li>
+                                    <div>
+                                        <a id="gF7Q31" class="w-100" href="javascript:void(0)" onclick="window.open( &quot;http://202.9.84.88/documents/payment/guideVN.jsp?logos=v,m,a,j,u,at&quot;,&quot;myWindow&quot;,&quot;status=0,toolbar=0,location=0,menubar=0,directories=0,scrollbars=1,height=600,width=730,resizable=0&quot;)">
+                                            <div class="d-flex justify-content-between">
+                                                <p id="gF7Q41" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -753px 0px"></p>
+                                                <p id="gF7Q51" style="height: 30px;width: 181px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -812px 0px"></p>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <p id="gF7Q61" style="height: 30px;width: 54px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') 0px 0px"></p>
+                                                <p id="gF7Q71" style="height: 30px;width: 55px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -59px 0px"></p>
+                                                <p id="gF7Q81" style="height: 30px;width: 39px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -126px 0px"></p>
+                                                <p id="gF7Q91" style="height: 30px;width: 42px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -181px 0px"></p>
+                                                <p id="gF7Qa1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -232px 0px"></p>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <p id="gF7Qb1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -288px 0px"></p>
+                                                <p id="gF7Qc1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -346px 0px"></p>
+                                                <p id="gF7Qd1" style="height: 30px;width: 56px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -404px 0px"></p>
+                                                <p id="gF7Qe1" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -461px 0px"></p>
+                                                <p id="gF7Qf1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -636px 0px"></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    @*Số thẻ: <input type="text" class="form-control" placeholder="VD: 4123 4567 8901 2345" />
+                            Tên in trên thẻ: <input type="text" class="form-control text-uppercase" placeholder="VD: NGUYEN VAN A" />
+                            Ngày hết hạn: <input type="text" class="form-control" id="card-expiry-date" />
+                            Mã bảo mật: <input type="password" class="form-control" placeholder="VD:123" />*@
+
+                                    @*@Html.ActionLink("Pay Direct With Credit Card", "PaymentWithCreditCard", "Paypal")*@
+
+                                    @*@Html.ActionLink("Pay with Paypal Account", "PaymentWithPaypal", "Paypal")*@
+                                </li>
+
+                            </ul>
+                        </li>
+                        @*<li>
+                    <input type="radio" name="Payment" id="payment3" class="k-radio radio-payment">
+                    <label class="k-radio-label" for="payment3">Thẻ ATM nội địa/Internet Banking (Miễn phí thanh toán)</label>
+                </li>
+                <li>
+                    <input type="radio" name="Payment" id="payment4" class="k-radio radio-payment">
+                    <label class="k-radio-label" for="payment3">Thanh toán bằng ví MoMo</label>
+                </li>*@
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+       
+
+        <div class="w-100 text-center mt-4">
+            <a class="payment-paypal d-none ml-4" href="@Url.Action("PaymentWithPaypal","Paypal")" title="Pay with Paypal Account"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" width="150px" /></a>
+            <button type="button" class="btn btn-save-order" onclick="fnSaveOrder()">@ViewText.BUTTON_CART_CONFIRM</button>
+        </div>
+        <div id="popupUpdateInfo">
+            <div id="contentUpdateInfo"></div>
+        </div>
+    </div>
+<div id="dialog"></div>
+@section scripts{
+    <script>
+         templateInfoOrder();
+        function templateInfoOrder() {
+            $.ajax({
+                url: '@Url.Action("GetDataInfoCustomerOrder", "Cart")',
+                dataType: "json",
+                type: "POST",
+                success: function (result) {
+                    var templateOrder = kendo.template($("#templateInfoCustomerOrder").html());
+                    $("#infoCustomerBox").html(templateOrder(result));
+                },
+            });
+        }
+        $("#card-expiry-date").kendoDateInput({
+            format: "MM/yyyy",
+            min: Date()
+
+        });
+        $("#payment1").click(function () {
+            $(".virtual-credit-card").addClass("d-none");
+            $(".btn-save-order").removeClass("d-none");
+            $(".payment-paypal").addClass("d-none");
+        })
+        $("#payment2").click(function () {
+            $(".virtual-credit-card").removeClass("d-none");
+            $(".payment-paypal").removeClass("d-none");
+            $(".btn-save-order").addClass("d-none");
+        })
+        $("#payment3").click(function () {
+            $(".virtual-credit-card").addClass("d-none");
+            $(".btn-save-order").removeClass("d-none");
+            $(".payment-paypal").addClass("d-none");
+        })
+        $("#payment4").click(function () {
+            $(".virtual-credit-card").addClass("d-none");
+            $(".btn-save-order").removeClass("d-none");
+            $(".payment-paypal").addClass("d-none");
+        })
+        $("#popupUpdateInfo").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_UPDATE_INFO_CUSTOMER)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            minWidth: 480,
+            draggable: false,
+            scrollable: false,
+        });
+        $("#stepper").kendoStepper({
+            linear: false,
+            steps: [{
+                label: "Cart",
+                icon: "k-icon k-i-cart"
+            }, {
+                label: "Personal infor",
+                icon: "dictionary-add",
+                selected: true
+            }, {
+                label: "Confirm",
+                icon: "k-icon k-i-check",
+            }]
+        });
+        function fnPopupUpdateInfo() {
+            $('#contentUpdateInfo').load("/Cart/UpdateInfoOrderView", function () {
+                $("#popupUpdateInfo").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 70});
+            });
+        }
+        //function submit update info cart
+        function fnSubmitUpdate() {
+            initValidForm();
+            var formUpdate = $("#frmInfoCustomer");
+            if (formUpdate.valid()) {
+                $.ajax({
+                    url: "/Cart/UpdateInfo",
+                    data: formUpdate.serialize(),
+                    dataType: "json",
+                    beforeSend: function () {
+                        $(".loading").show();
+                    },
+                    success: function (res) {
+                        if (res == 1) {
+                            $("#infoCustomerBox").removeClass("d-none");
+                            templateInfoOrder();
+                            $("#popupUpdateInfo").data("kendoWindow").close();
+                        }
+                        if(res==-1){
+                            initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Exist_Email)", "@Html.Raw(ViewText.Button_Close)");
+                        }
+
+                    },
+                    complete: function () {
+                        $(".loading").hide();
+                    }
+                })
+            }
+        }
+        function fnSaveOrder() {
+            $.ajax({
+                url: '@Url.Action("SaveOrder", "Cart")',
+                dataType: "json",
+                success: function (result) {
+                    //fnGetDataListCart();
+                    //initDialog("Thông báo", result, "Close");
+                    if (result.message == 1) {
+                        @*initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_order_success)", "@Html.Raw(ViewText.Button_Close)");*@
+                        @*window.location.href = "@Url.Action("Index","Home")";*@
+                        window.location.href = "/Cart/OrderSuccess?id=" + result.ID;
+                    }
+                    if (result.message == 0) {
+                        initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_update_infor_order)", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                },
+                error: function (res) {
+                    initDialog("Thông báo", "Thất bại", "Close");
+                }
+            });
+        }
+    </script>
+}

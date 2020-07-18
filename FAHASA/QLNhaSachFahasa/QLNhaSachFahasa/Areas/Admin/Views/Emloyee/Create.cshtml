@@ -1,0 +1,153 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.NhaVienModel
+@using QLNhaSachFahasa.Resources
+@section slider{
+    <li class="menu-item">
+        <a href="@Url.Action("Index","Emloyee")">@ViewText.TITLE_LIST_EMPLOYEE</a>
+    </li>
+    <li class="menu-item">
+        <a href="@Url.Action("Create","Emloyee")">@ViewText.TITLE_ADD_EMPLOYEE</a>
+    </li>
+}
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section title{
+    @ViewText.TITLE_ADD_EMPLOYEE
+}
+<div class="container">
+    <div class="row ">
+        <div class="col-12">
+            @using (Html.BeginForm("Create", "Emloyee", FormMethod.Post, new { id = "frmTaoMoiNhanVien" }))
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @if (ViewBag.Success != null)
+                {
+                    <div class="alert alert-success">@ViewBag.Success</div>
+                }
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_NAME_EMPLOYEE
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TENNHANVIEN, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_NAME })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_DATEOFBIRTH
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control", placeholder = ViewText.TITLE_DATEOFBIRTH })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_CMND
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.CMND, new { @class = "form-control", @maxlength = 12, placeholder = ViewText.TITLE_CMND })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_EMAIL
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_EMAIL })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PHONE
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber", placeholder = ViewText.PLACEHOLDER_INPUT_MOBILE })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_ADDRESS
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextAreaFor(model => model.DIACHINHANVIEN, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_ADDRESS })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_IMAGE
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.HINHANH, new { @class = "form-control", placeholder = ViewText.TITLE_IMAGE })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_CHUC_DANH
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.MANHOMNGUOIDUNG, null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_USERNAME
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.TENDANGNHAPNHANVIEN, new { @class = "form-control", @autocomplete = "off", placeholder = ViewText.PLACEHOLDER_INPUT_USERNAME })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_PASSWORD
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.PasswordFor(model => model.MATKHAUNHANVIEN, new { @class = "form-control", @autocomplete = "new-password", placeholder = ViewText.PLACEHOLDER_INPUT_PASSWORD })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_CONFIM_PASSWORD
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_COMFIRM_PASSWORD })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-9 text-right">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/Custom/Employee.js"></script>
+    <script>
+
+        initKeydownNumber();
+        initValidation();
+
+        $("#MANHOMNGUOIDUNG").kendoDropDownList();
+        $("#NGAYSINH").kendoDatePicker({
+            popup: {
+                position: "top right",
+                origin: "bottom right"
+            }
+        });
+    </script>
+}
+

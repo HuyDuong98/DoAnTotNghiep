@@ -1,0 +1,92 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.NhaVienModel
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_ID_EMPLOYEE
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.MANHANVIEN, new { @class = "form-control" , @readonly= true})
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY ">
+                @ViewText.TITLE_NAME_EMPLOYEE
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TENNHANVIEN, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_USERNAME
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.TENDANGNHAPNHANVIEN, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_DATEOFBIRTH
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_CMND
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.CMND, new { @class = "form-control" , @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_EMAIL
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control" , @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_PHONE
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.SDT, new { @class = "form-control" , @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_ADDRESS
+            </div>
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.DIACHINHANVIEN, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_CREATE_DATE
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.NGAYTAO, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3 title-input centerY">
+                @ViewText.TITLE_QUYEN_TRUY_CAP
+            </div>
+            <div class="col-md-9">
+                @Html.TextBoxFor(model => model.MANHOMNGUOIDUNG, new { @class = "form-control", @readonly = true })
+            </div>
+        </div>
+    </div>
+}
+

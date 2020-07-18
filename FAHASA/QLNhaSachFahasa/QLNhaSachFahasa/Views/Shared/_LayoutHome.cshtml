@@ -1,0 +1,434 @@
+﻿@using QLNhaSachFahasa.Resources
+@using QLNhaSachFahasa.Common;
+@using System.Threading;
+@using QLNhaSachFahasa.Models
+
+@{
+    var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+    var sessioncart = (List<CartModel>)Session[QLNhaSachFahasa.Common.CartSession.CartSesstion];
+    var sumCart = 0;
+    if (sessioncart != null)
+    {
+        sumCart = sessioncart.Count;
+    }
+
+}
+@{
+    var currLang = Thread.CurrentThread.CurrentCulture.ToString();
+    var classEn = currLang == "en-US" ? "" : "lang-nonactive";
+    var classVi = currLang == "vi-VN" ? "" : "lang-nonactive";
+
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default-v2.min.css" />
+    <link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css” />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:500&display=swap" rel="stylesheet">
+    <!-- Material Kit CSS -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/Content/kendo/css/kendo.bootstrap-v4.min.css" />
+    <link rel="stylesheet" href="/Content/kendo/css/kendo.mobile.all.min.css" />
+
+    <link href="~/Content/bootstrap-4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/owlCarousel/css/owl.carousel.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/owlCarousel/css/owl.theme.default.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/owlCarousel/css/owl.theme.green.min.css")" rel="stylesheet" />
+    <link href="~/Content/Custom-kendo.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/custom/HomePage.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>*@
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.1.406/js/angular.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.1.406/js/jszip.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.1.406/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.1.406/js/cultures/kendo.culture.@(currLang).min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.1.406/js/messages/kendo.messages.@(currLang).min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
+    <script src="/Content/kendo/script/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+    <script src="/Content/kendo/script/jszip.min.js"></script>
+    <script src="/Content/kendo/script/kendo.all.min.js"></script>
+
+
+
+
+    <script src="/Content/kendo/script/kendo.culture.@(currLang).min.js"></script>
+    <script src="/Content/kendo/script/kendo.messages.@(currLang).min.js"></script>
+    <script src="@Url.Content("~/Content/owlCarousel/js/owl.carousel.min.js")"></script>
+    <script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/src/easytimer.js"></script>
+    <script src="/Scripts/QLFahasa.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/Gsap.js"></script>
+
+
+</head>
+<body>
+
+    <header class="header-of-page">
+        <div class="header-content black-bg">
+            <a href="@Url.Action("Index","Home")" class="logo">
+                <img src="~/Content/images/icon/logoFahasa.png" />
+            </a>
+            <div class="header-user d-flex">
+                <div class="inner-form nav-item">
+                    <div class="input-field">
+                        <input class="form-control" id="searchProduct" type="text" autocomplete="off" placeholder="@ViewText.LABLE_SEARCH" />
+                        <div id="dataSearch" class="content-search-product"></div>
+                        <script type="text/x-kendo-template" id="templateBoxSearch">
+                            <div class="item">
+                                <img src="/UploadFile/#:LINKHINHANH#" alt="#:TENSANPHAM#" height="40px" width="40px" />
+                                <span>#:TENSANPHAM#</span>
+                            </div>
+                        </script>
+                        <button class="btn-search" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="nav-menu ">
+                    <div class="btn-language d-flex nav-item">
+                        <a href="@Url.Action("Change", "Home", new { LanguageAbbrevation = "vi" })"><img src="@Url.Content("~/Content/images/icon/flag-vi.png")" class="@classVi" width="25px" /></a>
+                        <a href="@Url.Action("Change", "Home", new { LanguageAbbrevation = "en" })"><img src="@Url.Content("~/Content/images/icon/flag-us.png")" class="@classEn ml-2" width="25px" /></a>
+                    </div>
+                    <a class="nav-item" href="@Url.Action("Index","Cart")">
+                        <span id="cart-box" style="position:absolute"></span>
+                        <div id="cart-shop" class="icon-cart" style="clear: left; float: left">
+                            <div class="cart-line-1" style="background-color: #2CC3B5"></div>
+                            <div class="cart-line-2" style="background-color: #2CC3B5"></div>
+                            <div class="cart-line-3" style="background-color: #2CC3B5"></div>
+                            <div class="cart-wheel" style="background-color: #2CC3B5"></div>
+                            <span class="count-number" id="sumcart">@sumCart</span>
+                        </div>
+                    </a>
+                    @if (session == null)
+                    {
+                        <div class="login-block nav-item">
+                            <a href="javascript:void(0)" onclick="fnOpenRegister()">@ViewText.LABLE_REGISTER</a>
+                        </div>
+                        <div class="login-block nav-item">
+                            <a href="javascript:void(0)" class="user-btn" onclick="fnOpenLogin()">@ViewText.LABLE_LOGIN</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="info-user nav-item">
+                            <span><small>@ViewText.LABLE_HELLO,</small>  @session.Name&nbsp</span>
+                            <div class="option-box">
+                                <div class="item-option">
+                                    <a href="@Url.Action("CustomerInformation","User")">
+                                        <img src="@Url.Content("~/Content/images/icon/user.png")" />
+                                        <span class="">@ViewText.TITLE_ACCOUNT_INFORMATION</span>
+                                    </a>
+                                </div>
+                                <div class="item-option">
+                                    <a href="@Url.Action("Logout","User")" alt="@ViewText.TITLE_LOGOUT">
+                                        <img src="@Url.Content("~/Content/images/icon/Logout-WF.png")" />
+                                        <span class="">@ViewText.TITLE_LOGOUT</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="header-of-page-mobie">
+        <div class="header-content black-bg">
+            <div class="row">
+                <div class="col-6">
+                    <a href="@Url.Action("Index","Home")" class="logo">
+                        <img src="~/Content/images/icon/logoFahasa.png" />
+                    </a>
+                </div>
+
+                <div class="col-6 text-right">
+                    <i class="fa fa-bars icon-bar" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="bar-mobile d-none">
+        <ul>
+            <li>Tìm kiếm</li>
+            <li>Giỏ hàng</li>
+            <li>Đăng nhập</li>
+            <li>Đăng ký</li>
+            <li>Ngôn ngữ/li>
+        </ul>
+    </div>
+    <div style="width:100%;height:93px;background-color:#fff"></div>
+    <div class="body-view">
+        @RenderBody()
+        <div class="icon-chat">
+            <img src="~/Content/images/icon/Chat.png" />
+        </div>
+        <div class="wrapper-chat">
+            <div id="wrapper">
+                <div id="chat-area">
+                    <div class="w-100 header-chat text-center">Tư vấn - hỗ trợ</div>
+                    <div class="text-center p-5">
+                        <img src="/Content/images/icon/telesale.png" width="120px"/>
+                    </div>
+                    <div id="start-screen">
+                        <div id="startButton">
+                            Bắt đầu cuộc trò chuyện
+                        </div>
+                    </div>
+                </div>
+                <div id="compose-area">
+                    <div class="input-text">
+                        <textarea id="composer" class="text-input" type="text" autofocus="autofocus"></textarea>
+                        <div id="sendButton">
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="loading">
+            <div class="book">
+                <div class="inner">
+                    <div class="left"></div>
+                    <div class="middle"></div>
+                    <div class="right"></div>
+                </div>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+        @*<a class="dribbble" href="https://dribbble.com/shots/7199149-Book-Loader" target="_blank">
+                <img src="https://dribbble.com/assets/logo-small-2x-9fe74d2ad7b25fba0f50168523c15fda4c35534f9ea0b1011179275383035439.png" />
+            </a>*@
+
+        <div id="popupLogin"><div id="contentLogin"></div></div>
+        <div id="popupForgotPassword"><div id="contentForgotPassword"></div></div>
+    </div>
+    <footer>
+        <div class="header-content">
+            <div class="row mt-5">
+                <div class="col-4 ">
+                    <img src="~/Content/images/icon/logoFahasa.png" style="height:34px" />
+                    <div class="d-flex mt-4">
+                        <span class="font-weight-bold mr-2">@ViewText.TITLE_ADDRESS: </span>
+                        <span class="text"> 140 Lê Trọng Tấn, Tân Phú, Hồ Chí Minh</span>
+                    </div>
+                    <div class="d-flex mt-2">
+                        <span class="font-weight-bold  mr-2">@ViewText.TITLE_PHONE: </span>
+                        <span class="text"><a href="tel:+84353033933"> @ViewText.PHONE_CONTACT</a> </span>
+                    </div>
+                    <div class="d-flex mt-2">
+                        <span class="font-weight-bold  mr-2">@ViewText.TITLE_EMAIL: </span>
+                        <span class="text"><a href="mailto:huyduong020998@gmail.com">huyduong020998@gmail.com</a></span>
+                    </div>
+                    <div class="mt-3">
+                        <img src="/Content/images/icon/logo-bo-cong-thuong-da-thong-bao.png" width="100px" />
+                    </div>
+
+                </div>
+                <div class="col-4">
+                    <div class="title-footer text-center">
+                        @ViewText.TITLE_SUPPORT
+                    </div>
+                    <div class="row text-center">
+
+                        <div class="col-12 mt-4"><a href="javacript:void(0)">Chính sách đổi - trả - hoàn tiền</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Chính sách khách sỉ</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Phương thức vận chuyển</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Phương thức thanh toán</a></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="title-footer text-right">
+                        @ViewText.TITLE_MY_ACCOUNT
+                    </div>
+                    <div class="row text-right">
+                        <div class="col-12 mt-4"><a href="javacript:void(0)">@ViewText.TITLE_LOGIN</a>/<a href="javacript:void(0)" onclick="fnOpenRegister()">@ViewText.TITLE_REGISTER</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Thay đổi địa chỉ giao hàng</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Chi tiết tài khoản</a></div>
+                        <div class="col-12 mt-2"><a href="javacript:void(0)">Lịch sử mua hàng</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-right"><em>Copyright © Nhà sách trực tuyến Fahasa design by DNHuy & PNPhuc. All rights reserved</em></div>
+
+        </div>
+
+    </footer>
+
+    @*<script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    @RenderSection("scripts", required: false)
+    <script src="/Scripts/chat.js"></script>
+    <script>
+        $("#popupLogin").kendoWindow({
+            title: false,
+            visible: false,
+            modal: true,
+            height: 500,
+            resizable: false,
+            width: 900,
+            draggable: true,
+            scrollable: true,
+            preventScroll: true,
+            pinned: true,
+        });
+        $("#popupForgotPassword").kendoWindow({
+            title: false,
+            visible: false,
+            modal: true,
+            height: 300,
+            resizable: false,
+            width: 400,
+            draggable: true,
+            scrollable: true,
+            preventScroll: true,
+            pinned: true,
+        });
+    $("#popupInputCode").kendoWindow({
+        title: false,
+        visible: false,
+        modal: true,
+        height: 300,
+        resizable: false,
+        width: 400,
+        draggable: true,
+        scrollable: true,
+        preventScroll: true,
+        pinned: true,
+    });
+        $(".icon-chat").click(function () {
+            $(".wrapper-chat").toggleClass("show-chat");
+        });
+    function fnOpenRegister() {
+       var url = '@Url.Action("Index","User", new{islogin=false})';
+        $('#contentLogin').load(url, function () {
+            $("#popupLogin").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 70 });
+        });
+    }
+    function fnOpenLogin() {
+        var url = '@Url.Action("Index","User", new{islogin=true})';
+        $('#contentLogin').load(url, function () {
+            $("#popupLogin").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 70 });
+        });
+    }
+    function fnOpenForgotPassword() {
+        var url = '@Url.Action("ForgotPassword", "User")';
+        $('#contentForgotPassword').load(url, function () {
+            $("#popupForgotPassword").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 70 });
+        });
+    }
+
+    $(window).scroll(function () {
+        fixedHeaderBg();
+    });
+    var boxSearch = $("#dataSearch").kendoListView({
+        template: kendo.template($("#templateBoxSearch").html()),
+        dataSource: { type: "json" },
+        //@*dataBound: function (e) {
+                //    if (this.dataSource.data().length == 0) {
+                //        $("#listView").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
+                //    }
+                //},*@
+    }).data("kendoListView");
+
+    function getDataBoxSearch(keyword) {
+        var dataSourceBoxSearch = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataSearchProduct", "Home")',
+                        data: {
+                            keyword: keyword,
+                        },
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        },
+                    });
+                }
+            },
+        });
+        boxSearch.setDataSource(dataSourceBoxSearch);
+    }
+
+        $("#searchProduct").keyup(function () {
+            setTimeout(function () {
+                var keyword = $("#searchProduct").val();
+                if ($.trim(keyword) != '') {
+                    $("#dataSearch").removeClass("d-none");
+                    getDataBoxSearch(keyword);
+                } else {
+                    $("#dataSearch").addClass("d-none");
+                }
+
+            }, 500);
+        });
+        $(".icon-bar").click(function () {
+            $(".bar-mobile").toggleClass("d-none");
+        });
+        $(".body-view").click(function () {
+            $(".bar-mobile").addClass("d-none");
+        });
+        function fnReponsivesBar() {
+            var width = $(window).width();
+            if (width < 900) {
+                $(".header-of-page").addClass("d-none");
+                $(".header-of-page-mobie").removeClass("d-none");
+            } else {
+                $(".header-of-page").removeClass("d-none");
+                $(".header-of-page-mobie").addClass("d-none");
+            }
+        }
+        fnReponsivesBar();
+    $(window).resize(function () {
+        fnReponsivesBar()
+    });
+    </script>
+
+</body>
+</html>
