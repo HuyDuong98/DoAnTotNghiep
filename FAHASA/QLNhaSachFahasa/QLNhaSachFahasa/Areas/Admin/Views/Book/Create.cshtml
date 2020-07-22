@@ -124,6 +124,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_QUANTITY
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.SoLuong, new { @class = "form-control form-input quantity", type = "number", min = "0", name = "SoLuong" })
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-2 title-input">
                         @ViewText.TITLE_TOM_TAC
                     </div>
@@ -175,7 +184,10 @@
             optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
             dataTextField: "TenNCC",
             dataValueField: "MaNCC",
-            height: 310,
+             height: 310,
+             change: function () {
+                 console.log($("#NHACUNGCAP").data("kendoDropDownList").value());
+             }
          }).data("kendoDropDownList");
          var dataSourceNCC = new kendo.data.HierarchicalDataSource({
             transport: {
@@ -234,7 +246,8 @@
             for (var i = 0; i < lengthForm; i++) {
                 formData.append(formCreate[i].name, formCreate[i].value);
             }
-            formData.append("NHACUNGCAP", $("#NHACUNGCAP").value);
+            var ncc = $("#NHACUNGCAP").data("kendoDropDownList").value();
+            formData.append("NHACUNGCAP", ncc);
             //var dataEditor = JSON.parse($("#TOMTAC").data("kendoEditor").value());
             //console.log($("#TOMTAC").val());
             //formData.append("TOMTAC", $("#TOMTAC").val());
@@ -281,7 +294,7 @@
                     }
                 });
             } else {
-                showError("Không đúng định dạng file!!")
+                //showError("Không đúng định dạng file!!")
             }
 
         });

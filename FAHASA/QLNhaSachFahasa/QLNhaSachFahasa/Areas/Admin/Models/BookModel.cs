@@ -19,11 +19,13 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public decimal GIASACH { get; set; }
         public double? TRONGLUONG { get; set; }
         public int? SOTRANG { get; set; }
+        public int SoLuong { get; set; }
         public string KICHTHUOC { get; set; }
         public string TOMTAC { get; set; }
         public string NHAXUATBAN { get; set; }
         public string NHACUNGCAP { get; set; }
         public HttpPostedFileBase File { get; set; }
         public string  NGAYTAO { get; set; }
+        
     }
 }

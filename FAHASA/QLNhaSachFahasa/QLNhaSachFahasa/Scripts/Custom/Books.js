@@ -39,6 +39,9 @@ function initValidation() {
             "GIASACH": {
                 required: true
             },
+            "SoLuong": {
+                required: true,
+            },
         },
         messages:
         {
@@ -53,6 +56,9 @@ function initValidation() {
             },
             "GIASACH": {
                 required: "Giá sách không được để trống."
+            },
+            "SoLuong": {
+                required: "Số lượng không được để trống",
             },
         },
         success: function (error) {

@@ -9,7 +9,7 @@
             @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.Id_Orders, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-customer')" })
             <i class="fa fa-search py-2" id="ico-customer" onclick=" deleteValInput('#search-customer','#ico-customer','#txtSearchDataTable') "></i>
         </div>
-        <div class="orders-content row  mt-4">
+        <div class="orders-content row  mt-4 d-none">
             <div class="col-md-6">
                 <h5>Thông tin nhận hàng</h5>
                 <div id="infoCustomerBox"></div>
@@ -54,14 +54,14 @@
                 </script>
                 <div class="total"></div>
             </div>
-
+            <div class="row">
+                <div class="col-12">
+                    <div class="message-order text-center p-3"></div>
+                </div>
+            </div>
         </div>
     </form>
-    <div class="row">
-        <div class="col-12">
-            <div class="message-order text-center p-3"></div>
-        </div>
-    </div>
+    
 </div>
 <script>
      var listDDH = $("#listDDH").kendoListView({
@@ -123,10 +123,15 @@
     fnGetDataListDDH($("#txtSearchDataTable").val()); templateInfoOrder($("#txtSearchDataTable").val());
     $(document).ready(function () {
         $("#txtSearchDataTable").keyup(function () {
-            setTimeout(function () {
-                fnGetDataListDDH($("#txtSearchDataTable").val());
-                templateInfoOrder($("#txtSearchDataTable").val());
-            },1000)
+            if ($("#txtSearchDataTable").val().trim() == "") {
+                $(".orders-content").addClass("d-none");
+            } else {
+                $(".orders-content").removeClass("d-none");
+                setTimeout(function () {
+                    fnGetDataListDDH($("#txtSearchDataTable").val());
+                    templateInfoOrder($("#txtSearchDataTable").val());
+                }, 1000)
+            }
         });
     });
 

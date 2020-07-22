@@ -19,18 +19,18 @@ namespace Model.Dao
         {
             if (status == null && string.IsNullOrEmpty(keyword))
             {
-                return db.DONHANGs.ToList();
+                return db.DONHANGs.OrderByDescending(x => x.NGAYCAPNHAT).ToList();
                 
             }else if (status == null && string.IsNullOrEmpty(keyword))
             {
-                return db.DONHANGs.Where(x => x.MAHOADON == keyword).ToList();
+                return db.DONHANGs.Where(x => x.MAHOADON == keyword).OrderByDescending(x => x.NGAYCAPNHAT).ToList();
             }else if (status != null && string.IsNullOrEmpty(keyword))
             {
-                return db.DONHANGs.Where(x => x.TRANGTHAI == status).ToList();
+                return db.DONHANGs.Where(x => x.TRANGTHAI == status).OrderByDescending(x => x.NGAYCAPNHAT).ToList();
             }
             else
             {
-                return db.DONHANGs.Where(x => x.TRANGTHAI == status && x.MAHOADON == keyword).ToList();
+                return db.DONHANGs.Where(x => x.TRANGTHAI == status && x.MAHOADON == keyword).OrderByDescending(x => x.NGAYCAPNHAT).ToList();
             }
         }
         public List<CHITIETDONHANG> GetOrderDetail(string idDDH)

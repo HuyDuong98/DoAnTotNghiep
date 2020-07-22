@@ -43,7 +43,7 @@
                 <div class="summary-detail">
                     <h3> #:TENSANPHAM#</h3>
                     <div class="row">
-                        <div class="col-md-6" >
+                        <div class="col-md-6">
                             <span class="text-title">@Html.Raw(ViewText.Title_Nha_Cung_Cap): </span><span class="text-value">#:NHASANXUAT#</span>
                         </div>
                         #if(TACGIA!=null){#
@@ -61,6 +61,8 @@
                             <span class="text-title">@Html.Raw(ViewText.TITLE_NHA_XUAT_BAN): </span><span class="text-value">#:NHAXUATBAN#</span>
                         </div>
                         #}#
+                        <div class="col-md-6">@Html.Raw(ViewText.TITLE_KICH_THUOC): <span  class="text-value">#:KICHTHUOC#</span></div>
+                        <div class="col-md-6">@Html.Raw(ViewText.TITLE_TRONG_LUONG):<span  class="text-value" > #:TRONGLUONG# gram</span></div>
                     </div>
                    
                     <div class="row">
@@ -79,8 +81,7 @@
             </div>
             <div class="mt-5">
                 <h5><strong>@Html.Raw(ViewText.Title_Description_Product)</strong></h5>
-                <div>@Html.Raw(ViewText.TITLE_KICH_THUOC): <strong>#:KICHTHUOC#</strong></div>
-                <div>@Html.Raw(ViewText.TITLE_TRONG_LUONG):<strong> #:TRONGLUONG#</strong></div>
+                
                 <div class="text-justify mt-2">
                     #=htmlDecode(GHICHU||"")#
                 </div>

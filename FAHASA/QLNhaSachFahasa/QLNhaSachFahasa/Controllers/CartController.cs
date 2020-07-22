@@ -339,7 +339,7 @@ namespace QLNhaSachFahasa.Controllers
                 }
                 //Gửi mail
                 string smtpUserName = "duongngochuy.hufi@gmail.com";
-                string smtpPassword = "ngochuy123";
+                string smtpPassword = "NgocHuy@123";
                 string smtpHost = "smtp.gmail.com";
                 int smtpPort = 587;
 
@@ -390,13 +390,18 @@ namespace QLNhaSachFahasa.Controllers
                 });
                 total += (item.THANHTIEN * item.SOLUONG);
             }
-            var status = donhang.TRANGTHAI;
+            int status = 4;
             var ship = 0;
-            if (total < 300000)
+            if (donhang != null)
             {
-                total += 30000;
-                ship = 30000;
+                status = (int)donhang.TRANGTHAI;
+                if (total < 300000)
+                {
+                    total += 30000;
+                    ship = 30000;
+                }
             }
+           
             var oModel = new
             {
                 model = model,

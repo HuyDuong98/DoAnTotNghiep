@@ -268,6 +268,8 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 book.NGUOITAO = session.UserID;
                 book.SOLUONG = 0;
                 book.LUOTXEM = 0;
+                book.SOLUONG = inputData.SoLuong;
+                book.NHACUNGCAP = inputData.NHACUNGCAP;
                 result = dao.InserBook(book);
 
                 // Upload file lên server
