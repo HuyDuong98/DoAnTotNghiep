@@ -15,19 +15,19 @@
                 <div id="infoCustomerBox"></div>
             </div>
             <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
-                <div class="info-orderer">
+                <div class="info-orderer border-0">
                     <div class="row">
                         <div class="col-12 checkout-summary-label">
-                            @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:Name||"..."#</span>
+                            @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:TENKH||"..."#</span>
                         </div>
                         <div class="col-12 checkout-summary-label">
-                            @Html.Raw(ViewText.TITLE_PHONE): <span class="info-orderer-value">#:PhoneNumber||"..."#</span>
+                            @Html.Raw(ViewText.TITLE_PHONE): <span class="info-orderer-value">#:DIENTHOAI||"..."#</span>
                         </div>
                         <div class="col-12 checkout-summary-label">
-                            @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:Email||"..."#</span>
+                            @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:EMAIL||"..."#</span>
                         </div>
                         <div class="col-12 checkout-summary-label d-flex">
-                            @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:Address||"..."#</span>
+                            @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:DIACHI||"..."#</span>
                         </div>
                     </div>
                 </div>
@@ -57,16 +57,21 @@
 
         </div>
     </form>
+    <div class="row">
+        <div class="col-12">
+            <div class="message-order text-center p-3"></div>
+        </div>
+    </div>
 </div>
 <script>
      var listDDH = $("#listDDH").kendoListView({
             template: kendo.template($("#templateDDH").html()),
             dataSource: { type: "json" },
-            @*dataBound: function (e) {
+            dataBound: function (e) {
                 if (this.dataSource.data().length == 0) {
-                    $("#listCartItem").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TITLE_MESSAGE_NO_PRODUCT). <a href='/' style='color:rgba(255, 70, 5, 1)'>@Html.Raw(ViewText.TITLE_SHOPPING)</div>");
+                    $("#listDDH").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
                 }
-            },*@
+            },
         }).data("kendoListView");
         function fnGetDataListDDH(keyword) {
             var dataSource = new kendo.data.DataSource({
@@ -80,7 +85,16 @@
                             },
                             type: "POST",
                             success: function (result) {
-                                $(".total").html("<div class='d-flex justify-content-end'><p>Thành tiền: </p> <span>" + kendo.toString(result.total, "n0") + " @Html.Raw(ViewText.VND)</span></div>")
+                                $(".total").html("<div class='d-flex justify-content-between'><p>Phí ship:<span>" + kendo.toString(result.ship, "n0") + "@Html.Raw(ViewText.VND)</span> </p><p>Thành tiền: <span>" + kendo.toString(result.total, "n0") + " @Html.Raw(ViewText.VND)</span> </p></div>");
+                                if (result.status == 1) {
+                                    $(".message-order").html("<span class='color-green'>Đơn hàng của bạn đã được giao thành công</span>");
+                                } else if (result.status == 0) {
+                                    $(".message-order").html("<span class='color-blue'>Đơn hàng của bạn đang được xử lý</span>");
+                                } else if (result.status == -1) {
+                                    $(".message-order").html("<span class='color-red'>Đơn hàng của bạn đã hủy</span>");
+                                } else if (result.status == 2) {
+                                    $(".message-order").html("<span class='color-violet'>Đơn hàng của bạn đang vận chuyển</span>");
+                                }
                                 options.success(result.model);
                             },
                             error: function (result) {
@@ -92,18 +106,12 @@
             });
             listDDH.setDataSource(dataSource);
     }
-    fnGetDataListDDH($("#txtSearchDataTable").val());
-    $(document).ready(function () {
-        $("#txtSearchDataTable").keyup(function () {
-            setTimeout(function () {
-                fnGetDataListDDH($("#txtSearchDataTable").val());
-            }, 500)
-        });
-    });
-    templateInfoOrder();
-    function templateInfoOrder() {
+     function templateInfoOrder(keyword) {
         $.ajax({
-            url: '@Url.Action("GetDataInfoCustomerOrder", "Cart")',
+            url: '@Url.Action("GetInforDetailOrder", "Cart")',
+            data: {
+                idDH: keyword
+            },
             dataType: "json",
             type: "POST",
             success: function (result) {
@@ -112,4 +120,15 @@
             },
         });
     }
+    fnGetDataListDDH($("#txtSearchDataTable").val()); templateInfoOrder($("#txtSearchDataTable").val());
+    $(document).ready(function () {
+        $("#txtSearchDataTable").keyup(function () {
+            setTimeout(function () {
+                fnGetDataListDDH($("#txtSearchDataTable").val());
+                templateInfoOrder($("#txtSearchDataTable").val());
+            },1000)
+        });
+    });
+
+
 </script>

@@ -7,7 +7,9 @@
 <div class="menu">
     <ul class="m-0 p-0">
         <li class="menu-child-book-hiden menu-item">
-            @ViewText.TITLE_BOOK<span class="k-icon k-i-arrow-chevron-down"></span>
+            <a href="/Home/ProductsByPL?pl=SACH">
+                @ViewText.TITLE_BOOK<span class="k-icon k-i-arrow-chevron-down"></span>
+            </a>
             <ul class="menu-child menu-child-book">
                 <li>
                     <div class="w-75 m-auto">
@@ -19,15 +21,17 @@
             </ul>
         </li>
         <li class="menu-child-vpp-hiden menu-item">
-            @ViewText.TITLE_STATIONERY<span class="k-icon k-i-arrow-chevron-down"></span>
-            <ul class="menu-child menu-child-vpp">
-                <li>
-                    <div class="w-75 m-auto">
-                        <div class="row" id="menu-child-content-vpp">
+            <a href="/Home/ProductsByPL?pl=VPP">
+                @ViewText.TITLE_STATIONERY<span class="k-icon k-i-arrow-chevron-down"></span>
+            </a>
+                <ul class="menu-child menu-child-vpp">
+                    <li>
+                        <div class="w-75 m-auto">
+                            <div class="row" id="menu-child-content-vpp">
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
         </li>
         <li><a href="@Url.Action("SearchOrder","Cart")"><span class="k-icon k-i-search"></span>@ViewText.Title_Lookup_Order</a></li>
     </ul>
@@ -118,9 +122,9 @@
 <script type="text/x-kendo-template" id="templateMenu">
     <div class="col-12 col-md-4 mt-4">
         <ul>
-            <li><h5>#:text#</h5></li>
+            <li><a href="/Home/ProductsByPL?pl=#:id#"><h5>#:text#</h5></a></li>
             # for (var i = 0; i < items.length; i++) { #
-            <li class="menu-item"><a href="javascrit:void(0)">#:items[i].text#</a></li>
+            <li class="menu-item"><a href="/Home/ProductsByPL?pl=#:items[i].id#">#:items[i].text#</a></li>
             #} #
         </ul>
     </div>
@@ -131,15 +135,15 @@
     <!-- Load DialogFlow Client API -->
     <script src="https://cdn.rawgit.com/dialogflow/dialogflow-javascript-client/50e82e62/target/ApiAi.min.js"></script>
     <script>
-            var dataSource = new kendo.data.DataSource();
-            var listView = $("#listView").kendoListView({
-                template: kendo.template($("#template").html()),
-                dataSource: dataSource
-            }).data("kendoListView");
-            var listViewSale = $("#listViewSale").kendoListView({
-                template: kendo.template($("#template").html()),
-                dataSource: dataSource
-            }).data("kendoListView");
+        var dataSource = new kendo.data.DataSource();
+        var listView = $("#listView").kendoListView({
+            template: kendo.template($("#template").html()),
+            dataSource: dataSource
+        }).data("kendoListView");
+        var listViewSale = $("#listViewSale").kendoListView({
+            template: kendo.template($("#template").html()),
+            dataSource: dataSource
+        }).data("kendoListView");
         function htmlDecode(value) {
             return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
         }

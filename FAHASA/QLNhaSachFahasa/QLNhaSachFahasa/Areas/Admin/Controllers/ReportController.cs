@@ -1,5 +1,6 @@
 ﻿using Model.Dao;
 using QLNhaSachFahasa.Areas.Admin.Models;
+using QLNhaSachFahasa.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,48 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         public ActionResult ReportByDay()
         {
             return View();
+        }
+        public ActionResult ReportProduct()
+        {
+            return View();
+        }
+        public ActionResult GetDataReportProduct(string keyword)
+        {
+            var list = new BookDao().GetDataBook(keyword);
+            var model = new List<SanPhamModel>();
+            //int nhap=0, xuat=0, ton = 0;
+
+            foreach(var item in list)
+            {
+                var order = new OrdersDao().GetOrderDetailByIDProduct(item.MASANPHAM);
+                int xuat = 0;
+                if(order != null)
+                {
+                    foreach (var items in order)
+                    {
+                        xuat += items.SOLUONG;
+                    }
+                }
+                var ncc = new SanPhamDao().GetItemNCC(item.NHACUNGCAP);
+                string tenNCC = "";
+                if(ncc != null)
+                {
+                    tenNCC = ncc.TENNHACUNGCAP;
+                }
+                model.Add(new SanPhamModel
+                {
+                    MASANPHAM = item.MASANPHAM,
+                    TENSANPHAM = item.TENSANPHAM,
+                    MAUSAC = item.MAUSAC,
+                    TACGIA = item.TACGIA,
+                    NGAYCAPNHAT = item.NGAYCAPNHAT,
+                    NHASANXUAT = tenNCC,
+                    XUAT = xuat,
+                    TON = (int)item.SOLUONG,
+                    NHAP = xuat + (int)item.SOLUONG
+                }) ;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetDataOrederSuccesss(DateTime month)
         {

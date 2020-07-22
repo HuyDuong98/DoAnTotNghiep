@@ -24,8 +24,18 @@ namespace QLNhaSachFahasa.Controllers
         public ActionResult Detail(string productID)
         {
             var i = new SanPhamDao().setViewsProduct(productID);
+            var listImg = new SanPhamDao().getListImages(productID);
+            var img = new List<ImagesModel>();
+            foreach(var item in listImg)
+            {
+                img.Add(new ImagesModel
+                {
+                    LINKHINHANH= item.LINKHINHANH,
+                    TENHINHANH=item.TENHINHANH,
+                });
+            }
             ViewBag.ProductID = productID;
-            return View();
+            return View(img);
         }
 
         public ActionResult GetListBook()
@@ -78,20 +88,35 @@ namespace QLNhaSachFahasa.Controllers
                 link = images[0].LINKHINHANH;
             }
             var giaban = new SanPhamDao().getGiaBan(model.MASANPHAM);
+            decimal dongiaban = model.DONGIA;
+            if(giaban != null)
+            {
+                dongiaban = giaban.DONGIABAN;
+            }
+            var ncc = new SanPhamDao().GetItemNCC(model.NHACUNGCAP);
+            var tenNCC = model.NHASANXUAT;
+            if(ncc != null)
+            {
+                tenNCC = ncc.TENNHACUNGCAP;
+            }
             SanPhamModel Product = new SanPhamModel()
             {
                 TENSANPHAM = model.TENSANPHAM,
                 MASANPHAM = model.MASANPHAM,
-                GIABAN = giaban.DONGIABAN,
+                GIABAN = dongiaban,
                 DONGIA = model.DONGIA,
                 LINKHINHANH = link,
                 GHICHU = System.Web.HttpUtility.HtmlDecode(model.GHICHU),
                 CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
                 LUOTXEM = model.LUOTXEM,
+                SOLUONG = model.SOLUONG,
                 NHAXUATBAN = model.NHAXUATBAN,
-                NHASANXUAT = model.NHASANXUAT,
+                NHASANXUAT = tenNCC,
                 TACGIA = model.TACGIA,
-                HINHANH = listImg
+                HINHANH = listImg,
+                MAUSAC = model.MAUSAC,
+                KICHTHUOC = model.KICHTHUOC,
+                TRONGLUONG = (float)model.TRONGLUONG
             };
             var oModel = new
             {
@@ -200,6 +225,91 @@ namespace QLNhaSachFahasa.Controllers
             //    });
             //}
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        private static List<PhanLoaiModel> FillAll(List<PHANLOAI> flatObjects, string parentCode)
+        {
+            List<PhanLoaiModel> model = new List<PhanLoaiModel>();
+            foreach (var item in flatObjects)
+            {
+                if (item.MAPHANLOAI.Trim() == parentCode.Trim())
+                {
+                    model.Add(new PhanLoaiModel()
+                    {
+                        id = item.MAPHANLOAI,
+                        text = item.TENPHANLOAI
+                    });
+                    model = FillAllChill(flatObjects, model, item.MAPHANLOAI);
+                }
+            }
+            return model.ToList();
+        }
+
+        private static List<PhanLoaiModel> FillAllChill(List<PHANLOAI> flatObjects, List<PhanLoaiModel> model, string parentCode)
+        {
+            foreach (var item in flatObjects)
+            {
+                if (item.MAPHANLOAICHA != null && item.MAPHANLOAICHA.Trim() == parentCode.Trim())
+                {
+                    model.Add(new PhanLoaiModel()
+                    {
+                        id = item.MAPHANLOAI,
+                        text = item.TENPHANLOAI
+                    });
+                    model = FillAllChill(flatObjects, model, item.MAPHANLOAI);
+                }
+            }
+            return model.ToList();
+        }
+        public ActionResult ProductsByPL(string pl)
+        {
+            ViewBag.IdPL = pl.Trim();
+            return View();
+        }
+        public ActionResult GetSPbyPL(string id)
+        {
+            var listTemp = new SanPhamDao().getDataPhanLoai();
+            var root = listTemp.Find(x => x.MAPHANLOAI.Trim() == id);
+            var model = FillAll(listTemp, id.Trim());
+            List<SanPhamModel> products = new List<SanPhamModel>();
+            foreach(var item in model)
+            {
+                var temp = new SanPhamDao().GetListSpByPL(item.id);
+                if(temp != null)
+                {
+                    foreach(var sp in temp)
+                    {
+                        List<HINHANH> images = new SanPhamDao().getListImages(sp.MASANPHAM);
+                        string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(sp.MASANPHAM);
+                        var giaban = new SanPhamDao().getGiaBan(sp.MASANPHAM);
+                        var gia = sp.DONGIA;
+                        if (giaban != null)
+                        {
+                            gia = giaban.DONGIABAN;
+                        }
+                        var product = new SanPhamModel()
+                        {
+                            TENSANPHAM = sp.TENSANPHAM,
+                            MASANPHAM = sp.MASANPHAM,
+                            DONGIA = sp.DONGIA,
+                            GIABAN = gia,
+                            GHICHU = System.Web.HttpUtility.HtmlDecode(sp.GHICHU),
+                            CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
+                            LUOTXEM = sp.LUOTXEM
+                        };
+                        if (images.Count > 0)
+                        {
+                            product.LINKHINHANH = images[0].LINKHINHANH;
+                        }
+                        products.Add(product);
+                    }
+                }
+            }
+            var oModel = new
+            {
+                products= products,
+                rootname = root.TENPHANLOAI,
+            };
+            return Json(oModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

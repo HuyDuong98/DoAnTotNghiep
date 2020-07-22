@@ -264,6 +264,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 book.GHICHU = inputData.TOMTAC;
                 book.NHAXUATBAN = inputData.NHAXUATBAN;
                 book.NGAYTAO = DateTime.Now;
+                book.NGAYCAPNHAT = DateTime.Now;
                 book.NGUOITAO = session.UserID;
                 book.SOLUONG = 0;
                 book.LUOTXEM = 0;
@@ -317,6 +318,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 GHICHU = inputData.GhiChu,
                 LUOTXEM = 0,
                 NGAYTAO = DateTime.Now,
+                NGAYCAPNHAT = DateTime.Now,
                 NGUOITAO = session.UserID,
                 TRANGTHAI =1
             };
@@ -469,7 +471,17 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 foreach (var x in product)
                 {
                     var ncc = new SanPhamDao().GetItemNCC(x.NHACUNGCAP);
+                    string tenNCC = "";
+                    string tenNSX = "";
+                    if(ncc != null)
+                    {
+                        tenNCC = ncc.TENNHACUNGCAP;
+                    } 
                     var nsx = new SanPhamDao().GetItemNSX(x.NHASANXUAT);
+                    if (nsx != null)
+                    {
+                        tenNSX = nsx.TENNHASANXUAT;
+                    }
                     model.Add(new VPPModel
                     {
                         MASP = x.MASANPHAM,
@@ -480,13 +492,18 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                         CHATLIEU = x.CHATLIEU,
                         KICHTHUOC = x.KICHTHUOC,
                         GHICHU = x.GHICHU,
-                        NCC = ncc.TENNHACUNGCAP,
+                        NCC = tenNCC,
                         IDLOAI = x.PHANLOAI,
-                        THUONGHIEU  = nsx.TENNHASANXUAT,
+                        THUONGHIEU  = tenNSX,
                     });
                 }
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult EditVPP(string id)
+        {
+            return PartialView("_EditVPP");
         }
     }
 }

@@ -22,6 +22,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string KICHTHUOC { get; set; }
         public string TOMTAC { get; set; }
         public string NHAXUATBAN { get; set; }
+        public string NHACUNGCAP { get; set; }
         public HttpPostedFileBase File { get; set; }
         public string  NGAYTAO { get; set; }
     }

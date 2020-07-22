@@ -1,0 +1,199 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Fahasa - " + Html.Raw(ViewText.Tittle_Product_Statistics);
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.Tittle_Product_Statistics
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-product">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                    <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-product','#ico-search','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+        <div class="col-6 text-right">
+            <button id="export" class="btn">
+                <img src="/Content/images/icon/excel_export.png" />
+                @ViewText.Export_to_Excel
+            </button>
+            @*<input id="calendar" />*@
+        </div>
+    </div>
+
+    <div id="gridProductStatistic" class="mt-4"></div>
+</div>
+
+@section scripts{
+    <script>
+        $("#calendar").kendoDatePicker({
+            format: "dd/MM/yyyy",
+            dateInput:true,
+            value: new Date(),
+            popup: {
+                origin: "bottom right",
+                position: "top right"
+            }
+        });
+
+        var gridProductStatistic = $("#gridProductStatistic").kendoGrid({
+            attributes: { style: "cursor:pointer", },
+            groupable: false,
+            scrollable: true,
+            sortable: true,
+            filterable: false,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MASANPHAM",
+                    title: "Mã sản phẩm",
+                    template: "<span>#=MASANPHAM#</span>",
+                    width: 100,
+                    locked:true,
+                },
+                {
+                    field: "TENSANPHAM",
+                    title: "Tên sản phẩm",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 200,
+                    locked: true,
+                }, {
+                    field: "MAUSAC",
+                    title: "Màu sắc",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 140,
+                }, {
+                    field: "TACGIA",
+                    title: "Tác giả",
+                    template: "<span>#=TACGIA#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 200,
+                },
+                @*{
+                    field: "PhiShip",
+                    title: "Nhà cung cấp",
+                    template: "<span>#=kendo.toString(PhiShip,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 123,
+                    hidden: true
+                },*@
+                {
+                    field: "NGAYCAPNHAT",
+                    format: "#=kendo.toString(kendo.parseDate(NGAYCAPNHAT),\"dd/MM/yyyy\")#",
+                    title: "Ngày nhập",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NGAYCAPNHAT),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "NHAP",
+                    title: "Nhập",
+                    template: "<div class='text-center'>#=NHAP||'-'#</div>",
+                    headerTemplate: "<div class='text-center'>Nhập</div>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 100,
+                },
+                {
+                    field: "XUAT",
+                    title: "Xuất",
+                    template: "<div class='text-center'>#=XUAT||'-'#</div>",
+                    headerTemplate: "<div class='text-center'>Xuất</div>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 100,
+                },
+                {
+                    field: "TON",
+                    template: "<div class='text-center'>#=TON||'-'#</div>",
+                    title: "Tồn",
+                    headerTemplate:"<div class='text-center'>Tồn</div>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 100,
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [5,10,20,50,100, "All"],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        GetDataGridOrder($("#txtSearchDataTable").val());
+        function GetDataGridOrder(keyword) {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url:"@Url.Action("GetDataReportProduct", "Report")",
+                            data: {
+                                keyword: keyword
+                            },
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        });
+                    }
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            NGAYCAPNHAT: {
+                                type: "date",
+
+                            },
+                        }
+                    }
+                },
+                pageSize: 5
+            });
+            gridProductStatistic.setDataSource(dataSource);
+        }
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keyup(function () {
+                setTimeout(function () { GetDataGridOrder($("#txtSearchDataTable").val());  }, 500);
+
+            });
+            $("#export").click(function (e) {
+                gridProductStatistic.saveAsExcel();
+            });
+        });
+    </script>
+}

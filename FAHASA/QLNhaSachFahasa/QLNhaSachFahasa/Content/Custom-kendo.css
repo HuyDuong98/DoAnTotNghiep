@@ -235,3 +235,6 @@
     display: block;
     float: right;
 }
+.k-grid-header .k-header {
+    font-weight:900
+}

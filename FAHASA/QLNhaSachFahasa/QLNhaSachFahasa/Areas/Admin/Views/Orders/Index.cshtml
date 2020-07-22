@@ -91,7 +91,7 @@
                     width: 140,
                 }, {
                     field: "DiaChi",
-                    title: "Địa chỉ",
+                    title: "Địa chỉ", 
                     template: "<span>#=DiaChi#</span>",
                     headerAttributes: {
                         class: "header-table",
@@ -118,7 +118,7 @@
                 {
                     field: "TrangThai",
                     title: "Trạng thái",
-                    template: "<a href='javascript:void(0)' onclick='fnchangeStatus(\"#=MaDDH#\",\"#=TrangThai#\")' class=\" #=TrangThai==0?'color-blue':TrangThai==1?'color-green':TrangThai==-1?'color-red':'color-violet'#\">#=TrangThai==0?'@Html.Raw(ViewText.Status_New)':TrangThai==1?'@Html.Raw(ViewText.Status_Success)':TrangThai==-1?'@Html.Raw(ViewText.Status_Cancel)':'@Html.Raw(ViewText.Status_Shipping)'#</a>",
+                    template: "<a href='javascript:void(0)' #=TrangThai==1?'disabled':'onclick=fnchangeStatus(\"'+MaDDH+'\",\"'+TrangThai+'\")'# class=\" #=TrangThai==0?'color-blue':TrangThai==1?'color-green':TrangThai==-1?'color-red':'color-violet'#\">#=TrangThai==0?'@Html.Raw(ViewText.Status_New)':TrangThai==1?'@Html.Raw(ViewText.Status_Success)':TrangThai==-1?'@Html.Raw(ViewText.Status_Cancel)':'@Html.Raw(ViewText.Status_Shipping)'#</a>",
                     headerAttributes: {
                         class: "header-table",
                     },

@@ -259,6 +259,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export to Excel.
+        /// </summary>
+        public static string Export_to_Excel {
+            get {
+                return ResourceManager.GetString("Export_to_Excel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password? Click .
         /// </summary>
         public static string Forgot_Password {
@@ -799,6 +808,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Classification.
+        /// </summary>
+        public static string Title_Add_Classification {
+            get {
+                return ResourceManager.GetString("Title_Add_Classification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new employee.
         /// </summary>
         public static string TITLE_ADD_EMPLOYEE {
@@ -1029,6 +1047,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TITLE_DELIVERY_CHARGES {
             get {
                 return ResourceManager.GetString("TITLE_DELIVERY_CHARGES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Description.
+        /// </summary>
+        public static string Title_Description_Product {
+            get {
+                return ResourceManager.GetString("Title_Description_Product", resourceCulture);
             }
         }
         
@@ -1363,6 +1390,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TITLE_NGON_NGU {
             get {
                 return ResourceManager.GetString("TITLE_NGON_NGU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider.
+        /// </summary>
+        public static string Title_Nha_Cung_Cap {
+            get {
+                return ResourceManager.GetString("Title_Nha_Cung_Cap", resourceCulture);
             }
         }
         
@@ -1726,6 +1762,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TITLE_VIEW {
             get {
                 return ResourceManager.GetString("TITLE_VIEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Statistics.
+        /// </summary>
+        public static string Tittle_Product_Statistics {
+            get {
+                return ResourceManager.GetString("Tittle_Product_Statistics", resourceCulture);
             }
         }
         

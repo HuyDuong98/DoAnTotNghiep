@@ -183,6 +183,9 @@
   <data name="Exist_Email" xml:space="preserve">
     <value>Email đã tồn tại</value>
   </data>
+  <data name="Export_to_Excel" xml:space="preserve">
+    <value>Xuất file Excel</value>
+  </data>
   <data name="Forgot_Password" xml:space="preserve">
     <value>Quên mật khẩu? Nhấn vào</value>
   </data>
@@ -369,6 +372,9 @@
   <data name="TITLE_ADDRESS_ORDER" xml:space="preserve">
     <value>Địa chỉ giao hàng</value>
   </data>
+  <data name="Title_Add_Classification" xml:space="preserve">
+    <value>Thêm phân loại</value>
+  </data>
   <data name="TITLE_ADD_EMPLOYEE" xml:space="preserve">
     <value>Thêm mới nhân viên</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="TITLE_DELIVERY_CHARGES" xml:space="preserve">
     <value>Phí giao hàng</value>
+  </data>
+  <data name="Title_Description_Product" xml:space="preserve">
+    <value>Mô tả sản phẩm</value>
   </data>
   <data name="Title_Detail_Order" xml:space="preserve">
     <value>Chi tiết đơn hàng</value>
@@ -551,6 +560,9 @@
   </data>
   <data name="TITLE_NGON_NGU" xml:space="preserve">
     <value>Ngôn ngữ</value>
+  </data>
+  <data name="Title_Nha_Cung_Cap" xml:space="preserve">
+    <value>Nhà cung câp</value>
   </data>
   <data name="TITLE_NHA_XUAT_BAN" xml:space="preserve">
     <value>Nhà xuất bản</value>
@@ -671,6 +683,9 @@
   </data>
   <data name="TITLE_VIEW" xml:space="preserve">
     <value>Lượt xem</value>
+  </data>
+  <data name="Tittle_Product_Statistics" xml:space="preserve">
+    <value>Thống kê sản phẩm</value>
   </data>
   <data name="TITTLE_TAC_GIA" xml:space="preserve">
     <value>Tác giả</value>

@@ -1,0 +1,41 @@
+﻿@using QLNhaSachFahasa.Resources
+<div class="my-2">@ViewText.TITLE_PHAN_LOAI:</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmadd" }))
+{
+    <input type="text" class="form-control w-100" id="add"/>
+}
+    <div class="w-100 text-right mt-4">
+        <button type="button" class="btn buttonSave" id="addPl">@ViewText.BUTTON_ADD</button>
+    </div>
+  
+    <script>
+        $("#addPl").click(function () {
+            var value = $("#add").val();
+            if (value.trim() != "") {
+                $.ajax({
+                    url: '@Url.Action("AddPL", "Setting")',
+                    data: {
+                        idParent: '@ViewBag.idParent',
+                        text:$("#add").val()
+                    },
+                    dataType: "json",
+                    type: 'POST',
+                    success: function (res) {
+                        if (res == 1) {
+                            showSuccess("@Html.Raw(ViewText.Title_Succeed)");
+                            $("#popupAddWindows").data("kendoWindow").close();
+                            LoadData();
+                        }
+                        else {
+                            showError("@Html.Raw(ViewText.Message_Add_Product_Failed)");
+                        }
+                    },
+                    error: function () {
+                        showError("@Html.Raw(ViewText.Message_Add_Product_Failed)");
+                    }
+                });
+
+            }
+        });
+
+    </script>

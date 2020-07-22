@@ -60,6 +60,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="col-md-2 title-input centerY ">
+                        @ViewText.Title_Provider
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NHACUNGCAP, new { @class = " form-input", name = "NHACUNGCAP" })
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-2 title-input ">
                         @ViewText.TITLE_NGON_NGU
                         <span class="requit">*</span>
@@ -122,7 +130,7 @@
                     <div class="col-md-7">
                         @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control" })
                         @*<textarea kendo-editor encoded="false" name="description" validationMessage="Điền nội dung bài viết"
-                                  id="TOMTAC" style="height:150px;width:95%" class="form-control"></textarea>*@
+                id="TOMTAC" style="height:150px;width:95%" class="form-control"></textarea>*@
                     </div>
                 </div>
 
@@ -163,7 +171,30 @@
             dataValueField: "id"
         }).data("kendoDropDownTree");
 
+         var NhaCungCap = $("#NHACUNGCAP").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNCC",
+            dataValueField: "MaNCC",
+            height: 310,
+         }).data("kendoDropDownList");
+         var dataSourceNCC = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNCC", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
 
+        NhaCungCap.setDataSource(dataSourceNCC);
         $("#MAHINHTHUC").kendoDropDownList();
 
         var dataSourcePL = new kendo.data.HierarchicalDataSource({
@@ -203,6 +234,7 @@
             for (var i = 0; i < lengthForm; i++) {
                 formData.append(formCreate[i].name, formCreate[i].value);
             }
+            formData.append("NHACUNGCAP", $("#NHACUNGCAP").value);
             //var dataEditor = JSON.parse($("#TOMTAC").data("kendoEditor").value());
             //console.log($("#TOMTAC").val());
             //formData.append("TOMTAC", $("#TOMTAC").val());

@@ -79,7 +79,21 @@ namespace QLNhaSachFahasa.Controllers
             }
             return Json(order, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult GetInforDetailOrder(string idDH)
+        {
+            var order = new DonHangDao().GetDonHang(idDH);
+            var customer = new CustomerModel();
+            if (order != null)
+            {
+                var cusdetail = new CustomerDao().ViewDetail(order.MAKHACHHANG);
+                customer.MAKH = cusdetail.MAKHACHHANG;
+                customer.TENKH = cusdetail.TENKHACHHANG;
+                customer.DIACHI = cusdetail.DIACHI;
+                customer.DIENTHOAI = cusdetail.DIENTHOAI;
+                customer.EMAIL = cusdetail.EMAIL;
+            }
+            return Json(customer, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult OrderBox()
         {
             return PartialView("_OrderBox");
@@ -181,14 +195,18 @@ namespace QLNhaSachFahasa.Controllers
         {
             var cart = (List<CartModel>)Session[CartSession.CartSesstion];
             int res = 0;
-            foreach (var item in cart)
+            if(cart != null)
             {
-                if (item.SANPHAM.MASANPHAM == id)
+                foreach (var item in cart)
                 {
-                    item.SOLUONG = quantity;
-                    res = 1;
+                    if (item.SANPHAM.MASANPHAM == id)
+                    {
+                        item.SOLUONG = quantity;
+                        res = 1;
+                    }
                 }
             }
+            
             Session.Add(CartSession.CartSesstion, cart);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
@@ -372,10 +390,19 @@ namespace QLNhaSachFahasa.Controllers
                 });
                 total += (item.THANHTIEN * item.SOLUONG);
             }
+            var status = donhang.TRANGTHAI;
+            var ship = 0;
+            if (total < 300000)
+            {
+                total += 30000;
+                ship = 30000;
+            }
             var oModel = new
             {
                 model = model,
-                total =total
+                total =total,
+                status = status,
+                ship = ship
             };
             return Json(oModel, JsonRequestBehavior.AllowGet);
         }

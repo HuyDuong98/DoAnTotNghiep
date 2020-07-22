@@ -98,11 +98,54 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         }
         public ActionResult SaveChangeStatus(string id,int status)
         {
+            string text="";
             var session = (UserLogin)Session[CommonConstants.USER_SEESION];
             var nv = session.UserID;
-            var model = new OrdersDao().SaveChangeStatus(id, status,nv);
-            
-            return Json(model, JsonRequestBehavior.AllowGet);
+            if (status == 1)
+            {
+                var ctdh = new OrdersDao().GetOrderDetail(id);
+                foreach(var item in ctdh)
+                {
+                    var product = new SanPhamDao().getProduct(item.MASANPHAM);
+                    if (product.SOLUONG < item.SOLUONG)
+                    {
+                        text += product.TENSANPHAM + " (" + product.MASANPHAM + "), ";
+                    }
+                }
+                if(text.Trim() == "")
+                {
+                    foreach (var item in ctdh)
+                    {
+                        var product = new SanPhamDao().getProduct(item.MASANPHAM);
+                        var updateSLProduct = new SanPhamDao().updateSLProduct(product.MASANPHAM,(int)product.SOLUONG-item.SOLUONG);
+                    }
+                    var oModel = new
+                    {
+                        model = new OrdersDao().SaveChangeStatus(id, status, nv),
+                        text = text
+                    };
+                    return Json(oModel, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var oModel = new
+                    {
+                        model = 0,
+                        text = text
+                    };
+                    return Json(oModel, JsonRequestBehavior.AllowGet);
+                }
+               
+            }
+            else
+            {
+                var oModel = new
+                {
+                    model = new OrdersDao().SaveChangeStatus(id, status, nv),
+                    text = text
+                };
+                return Json(oModel, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

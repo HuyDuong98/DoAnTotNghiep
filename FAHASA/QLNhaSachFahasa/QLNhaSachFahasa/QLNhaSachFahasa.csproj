@@ -395,6 +395,8 @@
     <Content Include="Content\images\wallpaper2you_322438.png" />
     <Content Include="Content\images\wallpaper2you_322456.jpg" />
     <Content Include="Content\images\wallpaper2you_322470.jpg" />
+    <Content Include="Content\ImageViewer\viewer.css" />
+    <Content Include="Content\ImageViewer\viewer.js" />
     <Content Include="Content\kendo\css\kendo.bootstrap-v4.min.css" />
     <Content Include="Content\kendo\css\kendo.mobile.all.min.css" />
     <Content Include="Content\kendo\script\angular.min.js" />
@@ -508,6 +510,9 @@
     <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Report\_MenuLeft.cshtml" />
     <Content Include="Areas\Admin\Views\Report\ReportByDay.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\_EditVPP.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\ReportProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\_AddNewPL.cshtml" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -618,6 +623,7 @@
     <Content Include="Views\User\_ChangePassword.cshtml" />
     <Content Include="Views\User\CustomerInformation.cshtml" />
     <Content Include="Views\Cart\SearchOrder.cshtml" />
+    <Content Include="Views\Home\ProductsByPL.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

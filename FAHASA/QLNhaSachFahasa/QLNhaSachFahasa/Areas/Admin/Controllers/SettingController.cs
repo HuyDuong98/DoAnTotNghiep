@@ -105,6 +105,16 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             return Json(hierarchicalItems, JsonRequestBehavior.AllowGet);
            
         }
+        public ActionResult AddPLView(string idParent)
+        {
 
+            ViewBag.idParent = idParent;
+            return PartialView("_AddNewPL");
+        }
+        public ActionResult AddPL(string idParent,string text)
+        {
+            var add = new SanPhamDao().ThemPhanLoai(idParent, text);
+            return Json(add, JsonRequestBehavior.AllowGet);
+        }
     }
 }

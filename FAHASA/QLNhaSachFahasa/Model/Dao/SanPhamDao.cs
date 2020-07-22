@@ -18,7 +18,7 @@ namespace Model.Dao
         }
         public List<SANPHAM> getListSanPham()
         {
-            return db.SANPHAMs.Where(x=>x.TRANGTHAI==1).ToList<SANPHAM>();
+            return db.SANPHAMs.Where(x => x.TRANGTHAI == 1).ToList<SANPHAM>();
         }
         public SANPHAM getProduct(string id)
         {
@@ -38,7 +38,7 @@ namespace Model.Dao
                 else
                     return false;
             }).AsQueryable();
-            if(querya.Count == 0)
+            if (querya.Count == 0)
             {
                 return queryb.Take(5).ToList();
             }
@@ -55,7 +55,7 @@ namespace Model.Dao
         }
         public List<SANPHAM> getListVPP()
         {
-            return db.SANPHAMs.Where(x =>  x.PHANLOAI =="VPP" && x.TRANGTHAI ==1).ToList<SANPHAM>();
+            return db.SANPHAMs.Where(x => x.PHANLOAI == "VPP" && x.TRANGTHAI == 1).ToList<SANPHAM>();
         }
         public List<HINHANH> getListImages(string ma)
         {
@@ -70,14 +70,14 @@ namespace Model.Dao
         {
             string name = "";
             CT_CHUONGTRINH_KHUYENMAI maCTKM = db.CT_CHUONGTRINH_KHUYENMAI.Where(x => x.MASANPHAM == masp).FirstOrDefault();
-            if(maCTKM != null)
+            if (maCTKM != null)
             {
                 CHUONGTRINH_KHUYENMAI ctkm = db.CHUONGTRINH_KHUYENMAI.Where(x => x.MACHUONGTRINHKHUYENMAI == maCTKM.MACHUONGTRINHKHUYENMAI).FirstOrDefault();
                 name = ctkm.TENCHUONGTRINHKHUYENMAI;
             }
             return name;
         }
-        public List<SANPHAM> getListProductCTKM(string maCTKM,bool seeAll)
+        public List<SANPHAM> getListProductCTKM(string maCTKM, bool seeAll)
         {
             List<CT_CHUONGTRINH_KHUYENMAI> ctkm = new List<CT_CHUONGTRINH_KHUYENMAI>();
             if (seeAll)
@@ -88,7 +88,7 @@ namespace Model.Dao
             {
                 ctkm = db.CT_CHUONGTRINH_KHUYENMAI.Where(x => x.MACHUONGTRINHKHUYENMAI == maCTKM).Take(4).ToList<CT_CHUONGTRINH_KHUYENMAI>();
             }
-            
+
             List<SANPHAM> list = new List<SANPHAM>();
             foreach (var item in ctkm)
             {
@@ -158,7 +158,7 @@ namespace Model.Dao
                 db.SaveChanges();
                 return 1;
             }
-           catch
+            catch
             {
                 return 0;
             }
@@ -193,7 +193,7 @@ namespace Model.Dao
             return id;
 
         }
-        public List<NHASANXUAT>  DataNSX()
+        public List<NHASANXUAT> DataNSX()
         {
             return db.NHASANXUATs.ToList();
         }
@@ -212,6 +212,74 @@ namespace Model.Dao
         public NHASANXUAT GetItemNSX(string ma)
         {
             return db.NHASANXUATs.Find(ma);
+        }
+        public List<SANPHAM> GetListSpByPL(string maPL)
+        {
+            return db.SANPHAMs.Where(x => x.PHANLOAI.Trim() == maPL).ToList();
+        }
+        public int updateSLProduct(string id, int sl)
+        {
+            try
+            {
+                var product = db.SANPHAMs.Where(x => x.MASANPHAM == id).FirstOrDefault();
+                product.SOLUONG = sl;
+                db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public bool CheckIDPL(string id)
+        {
+            var ma = db.PHANLOAIs.SingleOrDefault(x => x.MAPHANLOAI == id);
+            if (ma != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string CreateIDPLAuto(string ma)
+        {
+            int i = 1;
+            bool flag = false;
+            string id = "";
+            do
+            {
+                id = ma + i;
+                if (CheckIDPL(id))
+                {
+                    flag = true;
+                }
+                i++;
+            } while (flag == false);
+            return id;
+
+        }
+        public int ThemPhanLoai(string idParent, string text)
+        {
+
+            try
+            {
+                string id = CreateIDPLAuto("PL");
+                var pl = new PHANLOAI()
+                {
+                    MAPHANLOAI = id,
+                    MAPHANLOAICHA = idParent,
+                    TENPHANLOAI = text
+                };
+                db.PHANLOAIs.Add(pl);
+                db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

@@ -27,7 +27,7 @@
 
                 <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
                     <div class="info-orderer">
-                        <a href="javascript:void(0)" class="link-edit-info" onclick="fnPopupUpdateInfo()">@Html.Raw(ViewText.LINK_UPDATE_INFO)</a>
+                        @*<a href="javascript:void(0)" class="link-edit-info" onclick="fnPopupUpdateInfo()">@Html.Raw(ViewText.LINK_UPDATE_INFO)</a>*@
                         <div class="row">
                             <div class="col-12 checkout-summary-label">
                                 @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:Name||"..."#</span>
@@ -52,11 +52,11 @@
                 <div class="Payment-order">
                     <ul>
                         <li>
-                            <input type="radio" name="Payment" id="payment1" class="k-radio radio-payment" checked="checked">
+                            <input type="radio" name="Payment" id="payment1" value="0" class="k-radio radio-payment" checked="checked">
                             <label class="k-radio-label" for="payment1">Thanh toán tiền mặt khi nhận hàng</label>
                         </li>
                         <li>
-                            <input type="radio" name="Payment" id="payment2" class="k-radio radio-payment">
+                            <input type="radio" name="Payment" id="payment2"  value="1" class="k-radio radio-payment">
                             <label class="k-radio-label" for="payment2">Thanh toán bằng thẻ quốc tế Visa, Master, JCB</label>
                             <ul class="virtual-credit-card d-none">
                                 @*<li>
@@ -129,6 +129,15 @@
 <div id="dialog"></div>
 @section scripts{
     <script>
+        var selected = $("input[type='radio'][name='Payment']:checked").val();
+        $("#payment1").on("click", function () {
+            selected = $("input[type='radio'][name='Payment']:checked").val();
+            console.log(selected);
+        });
+        $("#payment2").on("click", function () {
+            selected = $("input[type='radio'][name='Payment']:checked").val();
+            console.log(selected);
+        });
          templateInfoOrder();
         function templateInfoOrder() {
             $.ajax({

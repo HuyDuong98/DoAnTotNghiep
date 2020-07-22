@@ -30,9 +30,12 @@
             dataType: "json",
             type: "POST",
             success: function (result) {
-                if (result == 1) {
+                if (result.model == 1) {
                     var data = $("#selectStatus").data("kendoDropDownList").value();
                     GetDataGridOrder(data);
+                    $("#popupChangeStatus").data("kendoWindow").close();
+                } else if (result.model == 0){
+                    showError(result.text+ "không đủ số lượng.");
                 }
             },
             error: function (result) {
@@ -40,7 +43,7 @@
             },
             complete: function () {
                 $(".loading").hide();
-                $("#popupChangeStatus").data("kendoWindow").close();
+               
             },
         });
     }

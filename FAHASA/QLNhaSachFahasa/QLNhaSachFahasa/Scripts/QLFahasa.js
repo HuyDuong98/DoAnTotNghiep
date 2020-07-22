@@ -60,10 +60,10 @@ function showError(message) {
     $('body').append(div);
     $('#error').show('shake');
     //setTimeout(function () { $('.popup').remove(); }, 10000);
-    setTimeout(function () {
-        $('.popup').hide('fast');
-        $('.popup').remove();
-    }, 10000);
+    //setTimeout(function () {
+    //    $('.popup').hide('fast');
+    //    $('.popup').remove();
+    //}, 10000);
 }
 
 function showSuccess(message) {

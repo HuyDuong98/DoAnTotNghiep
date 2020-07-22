@@ -11,14 +11,29 @@
 @section title{
     @ViewText.TITLE_CLASSIFICATION
 }
-<div class="col-8">
+<div class="col-8 ">
     <div id="treeview"></div>
 </div>
-
+<div id="popupAddWindows">
+    <div id="wndAddContent"></div>
+</div>
 @section scripts{
     <script>
 
-
+        $("#popupAddWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.Title_Add_Classification)",
+            visible: false,
+            modal: true,
+            maxHeight: 400,
+            minWidth: 400,
+            draggable: true,
+            scrollable: true
+        });
+        function fnadd(id) {
+            $('#wndAddContent').load("/Admin/Setting/AddPLView?idParent=" + id, function () {
+                $("#popupAddWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
         var item = new kendo.data.HierarchicalDataSource({
             data: [
                 {
@@ -38,33 +53,37 @@
             ]
         });
         var treeview = $("#treeview").kendoTreeView({
-            dataTextField:"text"
+            dataTextField: "text",
+            select:false,
+            template: "<div class='w-100'>#= item.text # <button class='btn buttonSave' style='float:right' onclick='fnadd(\"#:item.id#\")'><i class='fa fa-plus' aria-hidden='true'></i></button></div>",
         }).data("kendoTreeView");
-        var dataSource = new kendo.data.HierarchicalDataSource({
-            transport: {
-                read: function (options)  {
-                    $.ajax({
-                        url: '@Url.Action("GetDataTreeView", "Setting")',
-                        dataType: "json",
-                        success: function (result) {
-                            options.success(result);
-                        },
-                        error: function (result) {
-                            options.error(result);
-                        }
-                    });
+        function LoadData() {
+            var dataSource = new kendo.data.HierarchicalDataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetDataTreeView", "Setting")',
+                            dataType: "json",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        children: "items"
+                    }
                 }
-            },
-            schema: {
-                model: {
-                    id: "id",
-                    children: "items"
-                }
-            }
-        });
+            });
 
-        treeview.setDataSource(dataSource);
-
+            treeview.setDataSource(dataSource);
+        }
+        LoadData();
     </script>
 
 }

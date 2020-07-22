@@ -37,6 +37,10 @@ namespace Model.Dao
         {
             return db.CHITIETDONHANGs.Where(x=>x.MAHOADON== idDDH).ToList();
         }
+        public List<CHITIETDONHANG> GetOrderDetailByIDProduct(string idProduct)
+        {
+            return db.CHITIETDONHANGs.Where(x => x.MASANPHAM == idProduct).ToList();
+        }
         public int SaveChangeStatus(string id, int status, string idNV)
         {
             try

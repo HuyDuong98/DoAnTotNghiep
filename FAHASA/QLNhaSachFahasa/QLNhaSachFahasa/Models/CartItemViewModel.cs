@@ -17,6 +17,6 @@ namespace QLNhaSachFahasa.Models
         public string TACGIA { get; set; }
         public decimal DONGIA { get; set; }
         public string CHUONGTRINHKHUYENMAI { get; set; }
-        public int SOLUONGTON { get; set; }
+        public int? SOLUONGTON { get; set; }
     }
 }

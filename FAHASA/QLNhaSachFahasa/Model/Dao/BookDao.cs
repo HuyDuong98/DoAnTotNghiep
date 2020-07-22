@@ -18,11 +18,11 @@ namespace Model.Dao
         {
             if (string.IsNullOrEmpty(keyWord))
             {
-                return db.SANPHAMs.Where(x=>x.TRANGTHAI==1).ToList<SANPHAM>();
+                return db.SANPHAMs.Where(x=>x.TRANGTHAI==1).OrderByDescending(x => x.NGAYCAPNHAT).ToList<SANPHAM>();
             }
             else
             {
-                return db.SANPHAMs.Where(x =>( x.TENSANPHAM.Contains(keyWord) || x.TACGIA.Contains(keyWord))&& x.TRANGTHAI==1).ToList<SANPHAM>();
+                return db.SANPHAMs.Where(x =>( x.TENSANPHAM.Contains(keyWord) || x.TACGIA.Contains(keyWord) || x.MASANPHAM.Contains(keyWord))&& x.TRANGTHAI==1).OrderByDescending(x=>x.NGAYCAPNHAT).ToList<SANPHAM>();
             }
         }
         public int InserBook(SANPHAM entity)
@@ -53,6 +53,7 @@ namespace Model.Dao
                 book.NHAXUATBAN = entity.NHAXUATBAN;
                 book.NGONNGU = entity.NGONNGU;
                 //book.MAPHANLOAISACH = entity.MAPHANLOAISACH;
+                book.NGAYCAPNHAT = DateTime.Now;
                 book.HINHTHUC = entity.HINHTHUC;
                 db.SaveChanges();
                 return true;

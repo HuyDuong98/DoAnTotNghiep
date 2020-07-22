@@ -1,7 +1,7 @@
 ﻿
 @using QLNhaSachFahasa.Resources
 @{
-    ViewBag.Title = "Thêm mới Sách";
+    ViewBag.Title = "Danh Sách Văn Phòng Phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
 }
 @section slider{
@@ -86,8 +86,8 @@
             title: "@Html.Raw(ViewText.TITLE_EDIT)",
             visible: false,
             modal: true,
-            //maxHeight: 600,
-            minWidth: 600,
+             //maxHeight: 600,
+             width: 600,
             draggable: true,
             scrollable: true
         });
@@ -135,18 +135,18 @@
                     headerAttributes: {
                         class: "header-table",
                     },
-                    width: "auto",
+                    width: 200,
                 }, {
                     field: "MAUSAC",
                     title: "Màu sắc",
-                    template: "<span>#=MAUSAC#</span>",
+                    template: '<div class="color" style="background-color:#:MAUSAC#"></div>',
                     //attributes: {
                     //    style: "cursor:pointer",
                     //},
                     headerAttributes: {
                         class: "header-table",
                     },
-                    width: "auto",
+                    width:80,
                 }, {
                     field: "THUONGHIEU",
                     title: "Nhà sản xuất",

@@ -45,7 +45,8 @@
     <link href="~/Content/Custom-kendo.css" rel="stylesheet" />
     <link href="~/Content/main.css" rel="stylesheet" />
     <link href="~/Content/custom/HomePage.css" rel="stylesheet" />
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="/Content/ImageViewer/viewer.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @*<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>*@
@@ -73,8 +74,7 @@
     <script src="/Scripts/QLFahasa.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/Gsap.js"></script>
-
-
+    <script src="/Content/ImageViewer/viewer.js"></script>
 </head>
 <body>
 
@@ -89,10 +89,10 @@
                         <input class="form-control" id="searchProduct" type="text" autocomplete="off" placeholder="@ViewText.LABLE_SEARCH" />
                         <div id="dataSearch" class="content-search-product"></div>
                         <script type="text/x-kendo-template" id="templateBoxSearch">
-                            <div class="item">
+                            <a class="item" href="/Home/Detail?productID=#:MASANPHAM#">
                                 <img src="/UploadFile/#:LINKHINHANH#" alt="#:TENSANPHAM#" height="40px" width="40px" />
                                 <span>#:TENSANPHAM#</span>
-                            </div>
+                            </a>
                         </script>
                         <button class="btn-search" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -185,7 +185,7 @@
                 <div id="chat-area">
                     <div class="w-100 header-chat text-center">Tư vấn - hỗ trợ</div>
                     <div class="text-center p-5">
-                        <img src="/Content/images/icon/telesale.png" width="120px"/>
+                        <img src="/Content/images/icon/telesale.png" width="120px" />
                     </div>
                     <div id="start-screen">
                         <div id="startButton">
@@ -197,7 +197,7 @@
                     <div class="input-text">
                         <textarea id="composer" class="text-input" type="text" autofocus="autofocus"></textarea>
                         <div id="sendButton">
-                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -291,9 +291,6 @@
         </div>
 
     </footer>
-
-    @*<script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
-    @RenderSection("scripts", required: false)
     <script src="/Scripts/chat.js"></script>
     <script>
         $("#popupLogin").kendoWindow({
@@ -429,6 +426,9 @@
         fnReponsivesBar()
     });
     </script>
+    @*<script src="/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    @RenderSection("scripts", required: false)
+
 
 </body>
 </html>

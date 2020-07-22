@@ -24,17 +24,20 @@ namespace QLNhaSachFahasa.Models
         public string CHATLIEU { get; set; }
         public string MAUSAC { get; set; }
         public string NHASANXUAT { get; set; }
-        public int SOLUONG { get; set; }
+        public int? SOLUONG { get; set; }
         public string NGUOITAO { get; set; }
-        public DateTime NGAYTAO { get; set; }
+        public DateTime? NGAYTAO { get; set; }
         public string NGUOICAPNHAT { get; set; }
-        public DateTime NGAYCAPNHAT { get; set; }
+        public DateTime? NGAYCAPNHAT { get; set; }
         public int TRANGTHAI { get; set; }
         public decimal GIABAN { get; set; }
         public string LINKHINHANH { get; set; }
         public string CHUONGTRINHKHUYENMAI { get; set; }
         public int? LUOTXEM { get; set; }
         public List<ImagesModel> HINHANH { get; set; }
+        public int NHAP { get; set; }
+        public int XUAT { get; set; }
+        public int TON { get;set; }
 
     }
 }

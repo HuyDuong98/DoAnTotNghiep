@@ -183,6 +183,9 @@
   <data name="Exist_Email" xml:space="preserve">
     <value>Email already exists</value>
   </data>
+  <data name="Export_to_Excel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
   <data name="Forgot_Password" xml:space="preserve">
     <value>Forgot Password? Click </value>
   </data>
@@ -369,6 +372,9 @@
   <data name="TITLE_ADDRESS_ORDER" xml:space="preserve">
     <value>Delivery address</value>
   </data>
+  <data name="Title_Add_Classification" xml:space="preserve">
+    <value>Add Classification</value>
+  </data>
   <data name="TITLE_ADD_EMPLOYEE" xml:space="preserve">
     <value>Add new employee</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="TITLE_DELIVERY_CHARGES" xml:space="preserve">
     <value>Delivery charges</value>
+  </data>
+  <data name="Title_Description_Product" xml:space="preserve">
+    <value>Product Description</value>
   </data>
   <data name="Title_Detail_Order" xml:space="preserve">
     <value>Order details</value>
@@ -552,6 +561,9 @@ Edit</value>
   </data>
   <data name="TITLE_NGON_NGU" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="Title_Nha_Cung_Cap" xml:space="preserve">
+    <value>Provider</value>
   </data>
   <data name="TITLE_NHA_XUAT_BAN" xml:space="preserve">
     <value>Publishing company</value>
@@ -675,6 +687,9 @@ Weight</value>
   </data>
   <data name="TITLE_VIEW" xml:space="preserve">
     <value>Views</value>
+  </data>
+  <data name="Tittle_Product_Statistics" xml:space="preserve">
+    <value>Product Statistics</value>
   </data>
   <data name="TITTLE_TAC_GIA" xml:space="preserve">
     <value>Author</value>
