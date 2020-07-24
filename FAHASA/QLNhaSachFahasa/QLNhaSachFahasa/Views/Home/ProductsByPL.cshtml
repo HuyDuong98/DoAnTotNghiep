@@ -103,7 +103,7 @@
                             dataType: "json",
                             success: function (result) {
                                 $("#title-pl").html("<h5>Bạn đang tìm: <strong>" + result.rootname + "</strong></h5>");
-                                
+
                                 options.success(result.products);
                             },
                             error: function (result) {
@@ -167,6 +167,34 @@
             });
             menuVPP.setDataSource(dataSourceVPP);
         }
+        function fnAddToCart(masanpham, soluong) {
+            $.ajax({
+                url: '@Url.Action("AddIItem", "Cart")',
+                dataType: "json",
+                data: {
+                    maSanPham: masanpham,
+                    soluong: soluong
+                },
+                success: function (res) {
+                    var numbercart = document.getElementById("sumcart");
+                    numbercart.innerHTML = "" + res.length;
+                },
+            });
+        }
+        $(document).on("click", ".addtocart", function () {
+            var idCart = $(this).attr("data-idCart");
+            fnAddToCart(idCart, 1);
+            var src = $(this).parent().find("img").attr("src");
+            $(this).parent().find("img").after("<img class='img-fake' style='position:absolute;top:0;left:0;z-index:100' src='" + src + "' width='60px'/>");
+
+            var product = $(".img-fake");
+
+            kendo.fx(product).transfer($("#cart-box")).play().then(function () {
+                $(".img-fake").fadeOut("slow", function () {
+                    $(".img-fake").remove();
+                });
+            });
+        });
         getDataBookMenu();
         getDataVPPMenu();
     </script>

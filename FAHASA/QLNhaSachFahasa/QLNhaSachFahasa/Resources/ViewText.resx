@@ -330,6 +330,15 @@
   <data name="Resend_Code" xml:space="preserve">
     <value>Resend code</value>
   </data>
+  <data name="Sales_Statistics" xml:space="preserve">
+    <value>Sales statistics</value>
+  </data>
+  <data name="Sales_Statistics_by_Day" xml:space="preserve">
+    <value>Sales statistics by day</value>
+  </data>
+  <data name="Sales_Statistics_by_Month" xml:space="preserve">
+    <value>Sales statistics by month</value>
+  </data>
   <data name="Status_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -362,6 +371,9 @@
   </data>
   <data name="TEXT_PAGE_ERROR" xml:space="preserve">
     <value>Deny access. Contact the administrator for assistance.</value>
+  </data>
+  <data name="Tilte_Price" xml:space="preserve">
+    <value>Price</value>
   </data>
   <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
     <value>Account information</value>
@@ -475,6 +487,9 @@ Edit</value>
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Free Support 24/7</value>
   </data>
+  <data name="Title_From" xml:space="preserve">
+    <value>From</value>
+  </data>
   <data name="TITLE_GIA_SACH" xml:space="preserve">
     <value>Bookshelf</value>
   </data>
@@ -571,6 +586,9 @@ Edit</value>
   <data name="Title_Notification" xml:space="preserve">
     <value>Notification</value>
   </data>
+  <data name="Title_Original_Price" xml:space="preserve">
+    <value>Original price</value>
+  </data>
   <data name="TITLE_PASSWORD" xml:space="preserve">
     <value>password</value>
   </data>
@@ -621,6 +639,9 @@ Access rights</value>
   <data name="TITLE_REGISTER" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Title_Revenue" xml:space="preserve">
+    <value>Revenue</value>
+  </data>
   <data name="Title_Search_Orders" xml:space="preserve">
     <value>Search orders</value>
   </data>
@@ -668,6 +689,9 @@ Access rights</value>
   </data>
   <data name="TITLE_THANH_PHO" xml:space="preserve">
     <value>Province / City</value>
+  </data>
+  <data name="Title_To" xml:space="preserve">
+    <value>to</value>
   </data>
   <data name="TITLE_TOM_TAC" xml:space="preserve">
     <value>Summary</value>

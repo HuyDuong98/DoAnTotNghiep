@@ -17,6 +17,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string TENSACH { get; set; }
         public string TACGIA { get; set; }
         public decimal GIASACH { get; set; }
+        public decimal GIABAN { get; set; }
         public double? TRONGLUONG { get; set; }
         public int? SOTRANG { get; set; }
         public int SoLuong { get; set; }

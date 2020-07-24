@@ -63,7 +63,7 @@ namespace Model.Dao
         }
         public GIABAN getGiaBan(string masp)
         {
-            return db.GIABANs.Find(masp);
+            return db.GIABANs.Where(x=>x.MASANPHAM == masp).OrderByDescending(x => x.NGAYCAPNHATGIA).FirstOrDefault();
         }
 
         public string getChuongTrinhKhuyenMai(string masp)
@@ -273,6 +273,58 @@ namespace Model.Dao
                     TENPHANLOAI = text
                 };
                 db.PHANLOAIs.Add(pl);
+                db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public bool CheckIDGia(string id)
+        {
+            var ma = db.GIABANs.SingleOrDefault(x => x.MAGIA == id);
+            if (ma != null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public string CreateIDGiaBanAuto(string ma)
+        {
+            int i = 1;
+            bool flag = false;
+            string id = "";
+            do
+            {
+                id = ma + i;
+                if (CheckIDGia(id))
+                {
+                    flag = true;
+                }
+                i++;
+            } while (flag == false);
+            return id;
+
+        }
+        public int UpdateGiaBan(string idProduct, decimal giaban, string idNV)
+        {
+            try
+            {
+                var idGia = CreateIDGiaBanAuto("GIA");
+                var gia = new GIABAN()
+                {
+                    MAGIA = idGia,
+                    MASANPHAM = idProduct,
+                    DONGIABAN = giaban,
+                    NGAYCAPNHATGIA = DateTime.Now,
+                    VAT = 0,
+                    NGUOICAPNHAT = idNV,
+                };
+                db.GIABANs.Add(gia);
                 db.SaveChanges();
                 return 1;
             }

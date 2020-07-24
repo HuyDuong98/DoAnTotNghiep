@@ -12,6 +12,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string HinhThuc { get; set; }
         public string TenSanPham { get; set; }
         public decimal DonGia { get; set; }
+        public decimal GiaBan { get; set; }
         public double TrongLuong { get; set; }
         public string KichThuoc { get; set; }
         public string QuocGia { get; set; }

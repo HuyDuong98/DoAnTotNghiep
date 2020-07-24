@@ -271,7 +271,12 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 book.SOLUONG = inputData.SoLuong;
                 book.NHACUNGCAP = inputData.NHACUNGCAP;
                 result = dao.InserBook(book);
-
+                decimal gia = inputData.GIASACH;
+                if (!string.IsNullOrEmpty(inputData.GIABAN.ToString()) && inputData.GIABAN != 0)
+                {
+                    gia = inputData.GIABAN;
+                }
+                var updateGiaBan = new SanPhamDao().UpdateGiaBan(book.MASANPHAM, gia, book.NGUOITAO);
                 // Upload file lên server
                 if (fileImages != null)
                 {
@@ -325,6 +330,12 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 TRANGTHAI =1
             };
             res = new SanPhamDao().InsertProduct(product);
+            decimal gia = inputData.DonGia;
+            if (!string.IsNullOrEmpty(inputData.GiaBan.ToString()) && inputData.GiaBan != 0)
+            {
+                gia = inputData.GiaBan;
+            }
+            var updateGiaBan = new SanPhamDao().UpdateGiaBan(product.MASANPHAM, gia, product.NGUOITAO);
             if (fileImages != null)
             {
                 foreach (var file in fileImages)

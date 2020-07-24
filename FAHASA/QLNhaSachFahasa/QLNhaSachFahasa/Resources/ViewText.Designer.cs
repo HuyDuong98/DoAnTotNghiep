@@ -700,6 +700,33 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sales statistics.
+        /// </summary>
+        public static string Sales_Statistics {
+            get {
+                return ResourceManager.GetString("Sales_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales statistics by day.
+        /// </summary>
+        public static string Sales_Statistics_by_Day {
+            get {
+                return ResourceManager.GetString("Sales_Statistics_by_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sales statistics by month.
+        /// </summary>
+        public static string Sales_Statistics_by_Month {
+            get {
+                return ResourceManager.GetString("Sales_Statistics_by_Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Status_Cancel {
@@ -795,6 +822,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TEXT_PAGE_ERROR {
             get {
                 return ResourceManager.GetString("TEXT_PAGE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Tilte_Price {
+            get {
+                return ResourceManager.GetString("Tilte_Price", resourceCulture);
             }
         }
         
@@ -1133,6 +1169,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string Title_From {
+            get {
+                return ResourceManager.GetString("Title_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookshelf.
         /// </summary>
         public static string TITLE_GIA_SACH {
@@ -1421,6 +1466,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Original price.
+        /// </summary>
+        public static string Title_Original_Price {
+            get {
+                return ResourceManager.GetString("Title_Original_Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to password.
         /// </summary>
         public static string TITLE_PASSWORD {
@@ -1567,6 +1621,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Revenue.
+        /// </summary>
+        public static string Title_Revenue {
+            get {
+                return ResourceManager.GetString("Title_Revenue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search orders.
         /// </summary>
         public static string Title_Search_Orders {
@@ -1707,6 +1770,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string TITLE_THANH_PHO {
             get {
                 return ResourceManager.GetString("TITLE_THANH_PHO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to.
+        /// </summary>
+        public static string Title_To {
+            get {
+                return ResourceManager.GetString("Title_To", resourceCulture);
             }
         }
         

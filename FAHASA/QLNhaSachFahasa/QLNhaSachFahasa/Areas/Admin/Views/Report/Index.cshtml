@@ -7,44 +7,42 @@
     @Html.Partial("_MenuLeft")
 }
 @section title{
-    @ViewText.Title_Statistic_Order_By_Month
+    @ViewText.Title_Statistics_Orders
 }
-    <div class="container">
-        <div class="w-100 text-right">
-            <input id="calendar" />
-        </div>
-        <div class="sumary-month row my-4">
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="sum-success col-md-12 text-center"></div>
-                    <div class="col-md-12 text-center title-sum-month">Tổng đơn thành công</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="sum-cancel col-md-12 text-center"></div>
-                    <div class="col-md-12 text-center title-sum-month">Tổng đơn thất bại</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="row">
-                    <div class="sum col-md-12 text-center"></div>
-                    <div class="col-md-12 text-center title-sum-month">Tổng đơn</div>
-                </div>
-            </div>
-
-
-        </div>
-        <div class="boder-box" id="chart"></div>
-        <div id="chartLine"></div>
-        <div class="w-100 text-right">
-            <button id="export" class="btn">
-                <img src="~/Content/images/icon/excel_export.png" />
-                @ViewText.Export_to_Excel
-            </button>
-        </div>
-        <div id="gridSummary"></div>
+<div class="container">
+    <div class="w-100 text-right">
+        <input id="calendar" />
     </div>
+    <div class="sumary-month row my-4">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum-success col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn thành công</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum-cancel col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn thất bại</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn</div>
+            </div>
+        </div>
+    </div>
+    <div class="boder-box" id="chart"></div>
+    <div id="chartLine"></div>
+    <div class="w-100 text-right">
+        <button id="export" class="btn">
+            <img src="~/Content/images/icon/excel_export.png" />
+            @ViewText.Export_to_Excel
+        </button>
+    </div>
+    <div id="gridSummary"></div>
+</div>
 
 @section scripts{
     <script>
@@ -236,32 +234,12 @@
                 },
                 seriesDefaults: {
                     type: "column",
-                    spacing: 0.2,
-                    gap: 5,
+                    spacing: 0.5,
+                    gap: 1,
                     font: "Quicksand"
                 },
+
                 series: [
-                @*{
-                name: "@Html.Raw(ViewText.Status_New)",
-                data: data,
-                border: {
-                    width: 0,
-                },
-                color: '#008eff',
-                overlay: {
-                    gradient: "none"
-                }
-            }, {
-                    name: "@Html.Raw(ViewText.Status_Shipping)",
-                    data: dataNow,
-                    border: {
-                        width: 0,
-                    },
-                    color: '#f900ff',
-                    overlay: {
-                        gradient: "none"
-                    }
-                },*@
                     {
                         name: "@Html.Raw(ViewText.Status_Success)",
                         data: dataSuccess,
@@ -288,6 +266,9 @@
                         visible: false,
 
                     },
+                    labels: {
+                        step: 2
+                    }
                 },
                 categoryAxis: {
                     categories: month,
@@ -399,7 +380,7 @@
                         $.ajax({
                             url:"@Url.Action("GetDataGridOrder", "Report")",
                             data: {
-                                month: month, 
+                                month: month,
                             },
                             beforeSend: function () {
                                 $(".loading").show();

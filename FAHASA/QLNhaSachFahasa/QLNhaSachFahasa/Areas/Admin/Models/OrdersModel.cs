@@ -13,6 +13,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string DiaChi { get; set; }
         public decimal PhiShip { get; set; }
         public decimal TongTien { get; set; }
+        public decimal TongNhap { get; set; }
         public int? TrangThai { get; set; }
         public string TenNguoiCapNhat { get; set; }
         public DateTime? NgayCapNhat { get; set; }

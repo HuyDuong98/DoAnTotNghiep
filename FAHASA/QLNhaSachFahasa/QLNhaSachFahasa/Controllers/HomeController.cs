@@ -48,11 +48,16 @@ namespace QLNhaSachFahasa.Controllers
                 List<HINHANH> images = new SanPhamDao().getListImages(item.MASANPHAM);
                 string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.MASANPHAM);
                 var giaban = new SanPhamDao().getGiaBan(item.MASANPHAM);
+                var gia = item.DONGIA;
+                if (giaban != null)
+                {
+                    gia = giaban.DONGIABAN;
+                }
                 var sp = new SanPhamModel
                 {
                     TENSANPHAM = item.TENSANPHAM,
                     MASANPHAM = item.MASANPHAM,
-                    DONGIA = item.DONGIA,
+                    DONGIA = gia,
                     //GIABAN = giaban.DONGIABAN,
                     GHICHU = System.Web.HttpUtility.HtmlDecode(item.GHICHU),
                     CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,

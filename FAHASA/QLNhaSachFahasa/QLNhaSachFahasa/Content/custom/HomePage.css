@@ -3243,7 +3243,22 @@ button:hover {
         font-size: 50px;
         font-weight: 900;
     }
+.total-interest {
+    color: #00c6ff;
+    font-size: 38px;
+    font-weight: 900;
+}
+.total-import {
+    color: #1c9903;
+    font-size: 38px;
+    font-weight: 900;
+}
 
+.total-revenue {
+    color: #ff0000;
+    font-size: 38px;
+    font-weight: 900;
+}
 .title-sum-month {
     font-size: 18px;
     color: #000;

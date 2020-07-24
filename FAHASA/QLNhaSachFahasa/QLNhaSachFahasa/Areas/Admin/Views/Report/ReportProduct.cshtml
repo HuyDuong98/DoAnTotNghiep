@@ -46,7 +46,7 @@
         var gridProductStatistic = $("#gridProductStatistic").kendoGrid({
             attributes: { style: "cursor:pointer", },
             groupable: false,
-            scrollable: true,
+            //scrollable: true,
             sortable: true,
             filterable: false,
             pageable: {
@@ -58,8 +58,8 @@
                     field: "MASANPHAM",
                     title: "Mã sản phẩm",
                     template: "<span>#=MASANPHAM#</span>",
-                    width: 100,
-                    locked:true,
+                    width: 120,
+                    //locked:true,
                 },
                 {
                     field: "TENSANPHAM",
@@ -68,22 +68,24 @@
                         class: "header-table",
                     },
                     width: 200,
-                    locked: true,
+                    //locked: true,
                 }, {
                     field: "MAUSAC",
                     title: "Màu sắc",
+                    template: '<div class="color" style="background-color:#:MAUSAC#"></div>',
                     headerAttributes: {
                         class: "header-table",
                     },
-                    width: 140,
+                    width: 90,
                 }, {
                     field: "TACGIA",
                     title: "Tác giả",
-                    template: "<span>#=TACGIA#</span>",
+                    template: "<div class='text-center'>#=TACGIA||'-'#</div>",
+                    headerTemplate: "<div class='text-center'>Tác giả</div>",
                     headerAttributes: {
                         class: "header-table",
                     },
-                    width: 200,
+                    width: 150,
                 },
                 @*{
                     field: "PhiShip",
@@ -137,7 +139,7 @@
                 }],
             pageable: {
                 pageSizes: true,
-                pageSizes: [5,10,20,50,100, "All"],
+                pageSizes: [10,20,50,100, "All"],
                 responsive: false,
                 messages: {
                     display: "{0}-{1} trong số {2} mục",
@@ -182,7 +184,7 @@
                         }
                     }
                 },
-                pageSize: 5
+                pageSize: 10
             });
             gridProductStatistic.setDataSource(dataSource);
         }

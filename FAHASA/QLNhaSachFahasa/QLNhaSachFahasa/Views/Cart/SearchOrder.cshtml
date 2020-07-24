@@ -13,6 +13,11 @@
             <div class="col-md-6">
                 <h5>Thông tin nhận hàng</h5>
                 <div id="infoCustomerBox"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="message-order py-3"></div>
+                    </div>
+                </div>
             </div>
             <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
                 <div class="info-orderer border-0">
@@ -30,6 +35,7 @@
                             @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:DIACHI||"..."#</span>
                         </div>
                     </div>
+                    
                 </div>
             </script>
             <div class="col-md-6">
@@ -54,11 +60,7 @@
                 </script>
                 <div class="total"></div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="message-order text-center p-3"></div>
-                </div>
-            </div>
+          
         </div>
     </form>
     

@@ -330,6 +330,15 @@
   <data name="Resend_Code" xml:space="preserve">
     <value>Gửi lại mã</value>
   </data>
+  <data name="Sales_Statistics" xml:space="preserve">
+    <value>Thống kê doanh thu</value>
+  </data>
+  <data name="Sales_Statistics_by_Day" xml:space="preserve">
+    <value>Thống kê doanh thu theo ngày</value>
+  </data>
+  <data name="Sales_Statistics_by_Month" xml:space="preserve">
+    <value>Thống kê doanh thu theo tháng</value>
+  </data>
   <data name="Status_Cancel" xml:space="preserve">
     <value>Thất bại</value>
   </data>
@@ -362,6 +371,9 @@
   </data>
   <data name="TEXT_PAGE_ERROR" xml:space="preserve">
     <value>Từ chối truy cập. Liên hệ với ban quản trị để được hỗ trợ.</value>
+  </data>
+  <data name="Tilte_Price" xml:space="preserve">
+    <value>Giá bán</value>
   </data>
   <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
     <value>Thông tin tài khoản</value>
@@ -474,6 +486,9 @@
   <data name="TITLE_FREE_SUPPORT" xml:space="preserve">
     <value>Hỗ trợ miễn phí 24/7</value>
   </data>
+  <data name="Title_From" xml:space="preserve">
+    <value>Từ</value>
+  </data>
   <data name="TITLE_GIA_SACH" xml:space="preserve">
     <value>Giá sách</value>
   </data>
@@ -570,6 +585,9 @@
   <data name="Title_Notification" xml:space="preserve">
     <value>Thông báo</value>
   </data>
+  <data name="Title_Original_Price" xml:space="preserve">
+    <value>Giá nhập</value>
+  </data>
   <data name="TITLE_PASSWORD" xml:space="preserve">
     <value>Mật khẩu</value>
   </data>
@@ -618,6 +636,9 @@
   <data name="TITLE_REGISTER" xml:space="preserve">
     <value>Đăng ký</value>
   </data>
+  <data name="Title_Revenue" xml:space="preserve">
+    <value>Doanh thu</value>
+  </data>
   <data name="Title_Search_Orders" xml:space="preserve">
     <value>Tìm kiếm đơn hàng</value>
   </data>
@@ -665,6 +686,9 @@
   </data>
   <data name="TITLE_THANH_PHO" xml:space="preserve">
     <value>Tỉnh/Thành phố</value>
+  </data>
+  <data name="Title_To" xml:space="preserve">
+    <value>đến</value>
   </data>
   <data name="TITLE_TOM_TAC" xml:space="preserve">
     <value>Tóm tắc</value>

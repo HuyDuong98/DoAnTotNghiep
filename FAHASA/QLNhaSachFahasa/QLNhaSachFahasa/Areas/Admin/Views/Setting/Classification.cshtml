@@ -55,7 +55,7 @@
         var treeview = $("#treeview").kendoTreeView({
             dataTextField: "text",
             select:false,
-            template: "<div class='w-100'>#= item.text # <button class='btn buttonSave' style='float:right' onclick='fnadd(\"#:item.id#\")'><i class='fa fa-plus' aria-hidden='true'></i></button></div>",
+            template: "<div class='w-100'>#= item.text # <button class='button buttonEdit rounded-circle' style='float:right' onclick='fnadd(\"#:item.id#\")'><i class='fa fa-plus' aria-hidden='true'></i></button></div>",
         }).data("kendoTreeView");
         function LoadData() {
             var dataSource = new kendo.data.HierarchicalDataSource({
