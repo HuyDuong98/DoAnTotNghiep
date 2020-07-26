@@ -36,7 +36,7 @@
                 @ViewText.TITLE_DATEOFBIRTH
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control", @readonly = true })
+                @Html.TextBoxFor(model => model.NGAYSINH, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = true })
             </div>
         </div>
         <div class="form-group row">
@@ -76,7 +76,7 @@
                 @ViewText.TITLE_CREATE_DATE
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.NGAYTAO, new { @class = "form-control", @readonly = true })
+                @Html.TextBoxFor(model => model.NGAYTAO, "{0:dd/MM/yyyy}", new { @class = "form-control", @readonly = true })
             </div>
         </div>
         <div class="form-group row">

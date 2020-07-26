@@ -1,0 +1,292 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Fahasa - " + Html.Raw(ViewText.Sales_Statistics);
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.Sales_Statistics
+}
+
+    <div class="container">
+        <div class="w-100 text-right">
+            <input id="calendar" />
+        </div>
+        <div class="sumary-month row my-4">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="total-import col-md-12 text-center"></div>
+                    <div class="col-md-12 text-center title-sum-month">Tổng nhập </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="total-revenue col-md-12 text-center"></div>
+                    <div class="col-md-12 text-center title-sum-month">@ViewText.Title_Revenue</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="total-interest col-md-12 text-center"></div>
+                    <div class="col-md-12 text-center title-sum-month">Lợi Nhuận</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="chart"></div>
+
+        <div class="w-100 text-right">
+            <button id="export" class="btn">
+                <img src="/Content/images/icon/excel_export.png" />
+                @ViewText.Export_to_Excel
+            </button>
+        </div>
+        <div id="gridTotal"></div>
+        @*<div class="w-100 text-right d-flex justify-content-end mt-3">
+            <div class="mr-2 d-flex align-items-center font-weight-bold">@ViewText.Title_From:</div>
+            <input id="calendar-from" />
+            <div class="mr-2 ml-3  d-flex align-items-center font-weight-bold">@ViewText.Title_To:</div>
+            <input id="calendar-to" />
+        </div>*@
+    </div>
+@section scripts{
+    <script>
+        var month = [];
+
+        for (i = 0; i < new Date().getDate(); i++) {
+            //var k = Math.floor(Math.random() * 100);
+            //dataSuccess[i] = k;
+            //var k = Math.floor(Math.random() * 100);
+            //dataCancel[i] = k;
+            month[i] = i + 1;
+        }
+        $("#calendar").kendoDatePicker({
+            start: "year",
+            depth: "year",
+            format: "MM/yyyy",
+            parseFormats: ["MM/yyyy"],
+            value: new Date(),
+            popup: {
+                origin: "bottom right",
+                position: "top right"
+            }
+        });
+        $("#calendar-from").kendoDatePicker({
+            //start: "year",
+            //depth: "year",
+            format: "dd/MM/yyyy",
+            parseFormats: ["dd/MM/yyyy"],
+            value: new Date(new Date().getMonth() + 1 + "/1/" + new Date().getFullYear()),
+            max: new Date(),
+            popup: {
+                origin: "bottom right",
+                position: "top right"
+            }
+        });
+        $("#calendar-to").kendoDatePicker({
+            //start: "year",
+            //depth: "year",
+            format: "dd/MM/yyyy",
+            parseFormats: ["dd/MM/yyyy"],
+            value: new Date(),
+            min: new Date(),
+            popup: {
+                origin: "bottom right",
+                position: "top right"
+            }
+        });
+        $("#calendar").data("kendoDatePicker").bind("change", function () {
+            GetDataChartLineForMonth($("#calendar").data("kendoDatePicker").value().toJSON());
+            GetDataGridOrder($("#calendar").data("kendoDatePicker").value().toJSON());
+        });
+
+      
+        GetDataChartLineForMonth($("#calendar").data("kendoDatePicker").value().toJSON());
+        function GetDataChartLineForMonth(month){
+            $.ajax({
+                url: "@Url.Action("GetDataLineChartSalesReport", "Report")",
+                data: {
+                    month: month,
+                },
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                success: function (result) {
+                    createChart(result.data);
+                    //CreateChartLine(result.datasuccess, result.datacancel);
+                    $(".total-revenue").text(kendo.toString(result.sum, "n0") +"@Html.Raw(ViewText.VND)");
+                    $(".total-import").text(kendo.toString(result.totalIn, "n0") +"@Html.Raw(ViewText.VND)");
+                    $(".total-interest").text(kendo.toString(result.sum - result.totalIn, "n0") +"@Html.Raw(ViewText.VND)");
+                    //$(".sum-cancel").text(result.sumCancel);
+                    //$(".sum").text(result.sumCancel + result.sumSuccess);
+
+                },
+                error: function (result) {
+                    dataSuccess = result
+                },
+                complete: function () {
+                    $(".loading").hide()
+                },
+            });
+        }
+        function createChart(data) {
+
+
+            $("#chart").kendoChart({
+                title: {
+                    text: '@Html.Raw(ViewText.Sales_Statistics_by_Month) (' + kendo.toString($("#calendar").val(), 'MM/yyyy') + ')'
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                series: [{
+                    name: "@Html.Raw(ViewText.Title_Revenue)",
+                    data: data,
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "{0} ",
+                        template: '#=kendo.toString(value,"n0")# @Html.Raw(ViewText.VND)'
+                    },
+                    line: {
+                        visible: false
+                    },
+                    axisCrossingValue: 0
+                },
+                categoryAxis: {
+                    categories: month,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    labels: {
+                        rotation: "auto"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: '#= series.name #: #=kendo.toString(value,"n0")# @Html.Raw(ViewText.VND)'
+                }
+            });
+        }
+        var gridOrder = $("#gridTotal").kendoGrid({
+            attributes: { style: "cursor:pointer", },
+            groupable: false,
+            sortable: true,
+            filterable: false,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MaDDH",
+                    title: "Mã đơn hàng",
+                    template: "<span>#=MaDDH#</span>",
+                    width: 150,
+                },
+                @*{
+                    field: "PhiShip",
+                    title: "Phí ship",
+                    template: "<span>#=kendo.toString(PhiShip,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 123,
+                },*@
+                  {
+                    field: "TongTien",
+                    format: "#=kendo.toString(TongTien,\"n0\")#",
+                    title: "Tổng giá nhập",
+                      template: "<span>#=kendo.toString(TongNhap,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "TongTien",
+                    format: "#=kendo.toString(TongTien,\"n0\")#",
+                    title: "Tổng giá bán",
+                    template: "<span>#=kendo.toString(TongTien,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "NgayCapNhat",
+                    format: "#=kendo.toString(kendo.parseDate(NgayCapNhat),\"dd/MM/yyyy\")#",
+                    title: "Ngày cập nhật",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NgayCapNhat),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [100,"All"],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        function GetDataGridOrder(month) {
+
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url:"@Url.Action("GetDataGridOrderSales", "Report")",
+                            data: {
+                                month: month,
+                            },
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        });
+                    }
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            NgayCapNhat: {
+                                type: "date"
+                            },
+                        }
+                    }
+                },
+                pageSize: 100
+            });
+            gridOrder.setDataSource(dataSource);
+        }
+        GetDataGridOrder($("#calendar").data("kendoDatePicker").value().toJSON());
+        $("#export").click(function (e) {
+            gridOrder.saveAsExcel();
+        });
+    </script>
+}

@@ -187,7 +187,7 @@
 }
 .k-widget {
     font-family: "Quicksand-Regular";
-    /*border:none*/
+    border:none
 }
 .k-dropdown .k-dropdown-wrap, .k-dropdowntree .k-dropdown-wrap {
     border: 1px solid #ced4da;
@@ -210,4 +210,31 @@
 }
 .k-colorpicker .k-selected-color {
     width:99px !important
+}
+.k-listview {
+    flex-flow: wrap;
+}
+.k-radio:checked {
+    border-color: #ff0000;
+    color: #ff0000;
+    background-color: #ffffff;
+}
+    .k-radio:checked:focus {
+        border-color: #ff0000;
+        box-shadow: 0 0 0 2px #f317004a;
+    }
+.k-upload .k-upload-files .k-file-name {
+    width: 200px;
+}
+.k-card > img.k-card-image {
+    height: 134px;
+    display: block;
+}
+
+.quoteCard span {
+    display: block;
+    float: right;
+}
+.k-grid-header .k-header {
+    font-weight:900
 }

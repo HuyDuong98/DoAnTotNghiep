@@ -1,5 +1,5 @@
 ﻿@using QLNhaSachFahasa.Resources
-<div id="infoCustomerBox"></div>
+@*<div id="infoCustomerBox"></div>*@
 <div id="orderBox"></div>
 <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
     <div class="header-box-order pt-0">
@@ -51,11 +51,12 @@
             </div>
 
         </div>
-        <button type="button" class="btn btn-submit-order" onclick="fnSaveOrder()">@Html.Raw(ViewText.BUTTON_CART_CONFIRM)</button>
+        @*<button type="button" class="btn btn-submit-order" onclick="fnSaveOrder()">@Html.Raw(ViewText.BUTTON_CART_CONFIRM)</button>*@
+        <a href="@Url.Action("ProcessOrder","Cart")" class="btn btn-submit-order" >@Html.Raw(ViewText.Button_Proceed_Order)</a>
     </div>
 </script>
 <script>
-    templateInfoOrder();
+    //templateInfoOrder();
     templateProductOrder();
     function templateInfoOrder() {
         $.ajax({

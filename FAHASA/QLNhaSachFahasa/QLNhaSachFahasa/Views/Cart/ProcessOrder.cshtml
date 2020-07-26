@@ -59,55 +59,54 @@
                             <input type="radio" name="Payment" id="payment3" value="2" class="k-radio radio-payment">
                             <label class="k-radio-label" for="payment1">Thanh toán bằng VNPay</label>
                             @*<ul class="virtual-atm-card d-none">
-                                <li>
-                                    Số thẻ: <input type="text" class="form-control" placeholder="VD: 4123 4567 8901 2345" />
-                                    Tên in trên thẻ: <input type="text" class="form-control text-uppercase" placeholder="VD: NGUYEN VAN A" />
-                                    Ngày hết hạn: <input type="text" class="form-control" id="card-expiry-date" />
-                                    Mã bảo mật: <input type="password" class="form-control" placeholder="VD:123" />
-                                </li>
-                            </ul>
-                            <a href="@Url.Action("PaymentByVNPay","VNPay")">Payment VNPay</a>*@
+                <li>
+                    Số thẻ: <input type="text" class="form-control" placeholder="VD: 4123 4567 8901 2345" />
+                    Tên in trên thẻ: <input type="text" class="form-control text-uppercase" placeholder="VD: NGUYEN VAN A" />
+                    Ngày hết hạn: <input type="text" class="form-control" id="card-expiry-date" />
+                    Mã bảo mật: <input type="password" class="form-control" placeholder="VD:123" />
+                </li>
+            </ul>
+            <a href="@Url.Action("PaymentByVNPay","VNPay")">Payment VNPay</a>*@
                         </li>
-                        <li>
-                            <input type="radio" name="Payment" id="payment2" value="1" class="k-radio radio-payment">
-                            <label class="k-radio-label" for="payment2">Thanh toán bằng thẻ quốc tế Visa, Master, JCB</label>
-                            <ul class="virtual-credit-card d-none">
-                                @*<li>
-                    <span class="virtual-credit-card-img">
-                        <img src="https://salt.tikicdn.com/ts/upload/3b/63/a8/b48c8ea6f5eef4aecdd6e96028600067.png" alt="" width="50px">
-                        <img src="https://salt.tikicdn.com/ts/upload/a4/29/bd/789096005df664678e28e541b1332ce2.png" alt="" width="50px">
-                        <img src="https://salt.tikicdn.com/ts/upload/64/dd/13/7e66c599912fdfd723f3db61b0f9ec8b.png" alt="" width="50px">
-                    </span>
-                </li>*@
-                                <li>
-                                    <div>
-                                        <a id="gF7Q31" class="w-100" href="javascript:void(0)" onclick="window.open( &quot;http://202.9.84.88/documents/payment/guideVN.jsp?logos=v,m,a,j,u,at&quot;,&quot;myWindow&quot;,&quot;status=0,toolbar=0,location=0,menubar=0,directories=0,scrollbars=1,height=600,width=730,resizable=0&quot;)">
-                                            <div class="d-flex justify-content-between">
-                                                <p id="gF7Q41" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -753px 0px"></p>
-                                                <p id="gF7Q51" style="height: 30px;width: 181px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -812px 0px"></p>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <p id="gF7Q61" style="height: 30px;width: 54px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') 0px 0px"></p>
-                                                <p id="gF7Q71" style="height: 30px;width: 55px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -59px 0px"></p>
-                                                <p id="gF7Q81" style="height: 30px;width: 39px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -126px 0px"></p>
-                                                <p id="gF7Q91" style="height: 30px;width: 42px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -181px 0px"></p>
-                                                <p id="gF7Qa1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -232px 0px"></p>
-                                            </div>
-                                            <div class="d-flex justify-content-between">
-                                                <p id="gF7Qb1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -288px 0px"></p>
-                                                <p id="gF7Qc1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -346px 0px"></p>
-                                                <p id="gF7Qd1" style="height: 30px;width: 56px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -404px 0px"></p>
-                                                <p id="gF7Qe1" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -461px 0px"></p>
-                                                <p id="gF7Qf1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -636px 0px"></p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
+                        <!--<li>
+                <input type="radio" name="Payment" id="payment2" value="1" class="k-radio radio-payment">
+                <label class="k-radio-label" for="payment2">Thanh toán bằng thẻ quốc tế Visa, Master, JCB</label>
+                <ul class="virtual-credit-card d-none">
+                    @*<li>
+        <span class="virtual-credit-card-img">
+            <img src="https://salt.tikicdn.com/ts/upload/3b/63/a8/b48c8ea6f5eef4aecdd6e96028600067.png" alt="" width="50px">
+            <img src="https://salt.tikicdn.com/ts/upload/a4/29/bd/789096005df664678e28e541b1332ce2.png" alt="" width="50px">
+            <img src="https://salt.tikicdn.com/ts/upload/64/dd/13/7e66c599912fdfd723f3db61b0f9ec8b.png" alt="" width="50px">
+        </span>
+    </li>*@
+                    <li>
+                        <div>
+                            <a id="gF7Q31" class="w-100" href="javascript:void(0)" onclick="window.open( &quot;http://202.9.84.88/documents/payment/guideVN.jsp?logos=v,m,a,j,u,at&quot;,&quot;myWindow&quot;,&quot;status=0,toolbar=0,location=0,menubar=0,directories=0,scrollbars=1,height=600,width=730,resizable=0&quot;)">
+                                <div class="d-flex justify-content-between">
+                                    <p id="gF7Q41" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -753px 0px"></p>
+                                    <p id="gF7Q51" style="height: 30px;width: 181px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -812px 0px"></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p id="gF7Q61" style="height: 30px;width: 54px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') 0px 0px"></p>
+                                    <p id="gF7Q71" style="height: 30px;width: 55px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -59px 0px"></p>
+                                    <p id="gF7Q81" style="height: 30px;width: 39px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -126px 0px"></p>
+                                    <p id="gF7Q91" style="height: 30px;width: 42px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -181px 0px"></p>
+                                    <p id="gF7Qa1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -232px 0px"></p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <p id="gF7Qb1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -288px 0px"></p>
+                                    <p id="gF7Qc1" style="height: 30px;width: 57px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -346px 0px"></p>
+                                    <p id="gF7Qd1" style="height: 30px;width: 56px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -404px 0px"></p>
+                                    <p id="gF7Qe1" style="height: 30px;width: 59px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -461px 0px"></p>
+                                    <p id="gF7Qf1" style="height: 30px;width: 53px;background: url('http://202.9.84.88/documents/payment/logo_ngang_30.png') -636px 0px"></p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
 
 
-                            </ul>
-                        </li>
-
+                </ul>
+            </li>-->
                         @*<li>
             <input type="radio" name="Payment" id="payment3" class="k-radio radio-payment">
             <label class="k-radio-label" for="payment3">Thẻ ATM nội địa/Internet Banking (Miễn phí thanh toán)</label>

@@ -42,6 +42,11 @@
         TweenMax.from($('.container-login'), 1.15, { opacity: 0, y: 100 });
         $("#submitForm").on("click", function () {
             $("#frmLogin").submit();
-        })
+        });
+        $(document).on('keypress', function (e) {
+            if (e.which == 13) {
+                $("#frmLogin").submit();
+            }
+        });
     </script>
 }

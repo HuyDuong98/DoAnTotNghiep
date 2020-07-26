@@ -60,6 +60,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <div class="col-md-2 title-input centerY ">
+                        @ViewText.Title_Provider
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.NHACUNGCAP, new { @class = " form-input", name = "NHACUNGCAP" })
+                    </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-md-2 title-input ">
                         @ViewText.TITLE_NGON_NGU
                         <span class="requit">*</span>
@@ -108,11 +116,28 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_GIA_SACH
+                        @ViewText.Title_Original_Price
                         <span class="requit">*</span>
                     </div>
                     <div class="col-md-7">
                         @Html.TextBoxFor(model => model.GIASACH, new { @class = "form-control", @id = "input-money", placeholder = ViewText.VND })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.Tilte_Price
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.GIABAN, new { @class = "form-control ", @id = "input-money-2", placeholder = ViewText.VND })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2 title-input centerY">
+                        @ViewText.TITLE_QUANTITY
+                        <span class="requit">*</span>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.SoLuong, new { @class = "form-control form-input quantity", type = "number", min = "0", name = "SoLuong" })
                     </div>
                 </div>
                 <div class="form-group row">
@@ -121,6 +146,8 @@
                     </div>
                     <div class="col-md-7">
                         @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control" })
+                        @*<textarea kendo-editor encoded="false" name="description" validationMessage="Điền nội dung bài viết"
+                id="TOMTAC" style="height:150px;width:95%" class="form-control"></textarea>*@
                     </div>
                 </div>
 
@@ -150,7 +177,9 @@
     <script src="/Scripts/Custom/Books.js"></script>
     <script>
         initKeydownNumber();
-        var editor = $("#TOMTAC").kendoEditor();
+        var editor = $("#TOMTAC").kendoEditor({
+            //encoded: false,
+        });
         $("#MANGONNGU").kendoDropDownList();
         var phanloai = $("#MAPHANLOAISACH").kendoDropDownTree({
             placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
@@ -159,7 +188,33 @@
             dataValueField: "id"
         }).data("kendoDropDownTree");
 
+         var NhaCungCap = $("#NHACUNGCAP").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNCC",
+            dataValueField: "MaNCC",
+             height: 310,
+             change: function () {
+                 console.log($("#NHACUNGCAP").data("kendoDropDownList").value());
+             }
+         }).data("kendoDropDownList");
+         var dataSourceNCC = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNCC", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
 
+        NhaCungCap.setDataSource(dataSourceNCC);
         $("#MAHINHTHUC").kendoDropDownList();
 
         var dataSourcePL = new kendo.data.HierarchicalDataSource({
@@ -196,15 +251,16 @@
             var formData = new FormData();
             debugger;
             var lengthForm = formCreate.length;
-            console.log(lengthForm);
             for (var i = 0; i < lengthForm; i++) {
                 formData.append(formCreate[i].name, formCreate[i].value);
-                console.log(formCreate[i].name);
-                console.log(formCreate[i].value);
             }
+            var ncc = $("#NHACUNGCAP").data("kendoDropDownList").value();
+            formData.append("NHACUNGCAP", ncc);
+            //var dataEditor = JSON.parse($("#TOMTAC").data("kendoEditor").value());
+            //console.log($("#TOMTAC").val());
+            //formData.append("TOMTAC", $("#TOMTAC").val());
             var valuePhanLoai = $("#MAPHANLOAISACH").val();
-            formData.append("MAPHANLOAISACH", valuePhanLoai );
-
+            formData.append("MAPHANLOAISACH", valuePhanLoai);
 
             var lengthItem = $('input[name=fileImage]').length;
             for (var j = 0; j < lengthItem; j++) {
@@ -219,6 +275,7 @@
             }
 
             if (form.valid() && CheckFileUpload()) {
+                debugger;
                 $.ajax({
                     url: '@Url.Action("GetCreateBook", "Book")',
                     data:  formData,
@@ -245,7 +302,7 @@
                     }
                 });
             } else {
-                showError("Không đúng định dạng file!!")
+                //showError("Không đúng định dạng file!!")
             }
 
         });

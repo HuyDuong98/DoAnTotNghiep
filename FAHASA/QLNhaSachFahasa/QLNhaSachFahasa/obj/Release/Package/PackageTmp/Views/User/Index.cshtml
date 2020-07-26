@@ -1,41 +1,332 @@
 ﻿@model QLNhaSachFahasa.Models.LoginModel
 @using QLNhaSachFahasa.Resources
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
-}
-
-@using (Html.BeginForm("Login", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        <div class="text-center logo">
-            <a href="@Url.Action("Index","Home")" class="site-brand">
-                <img src="~/Content/images/icon/logoFahasa.png" />
-            </a>
+<div class="btn-close-window"><span class="k-icon k-i-close-outline"></span></div>
+<div class="row ">
+    <div class="col-md-4">
+        <div>
+            <h3 class="text-header-login">@ViewText.TITLE_LOGIN</h3>
         </div>
-        
-        @Html.ValidationSummary(true, "", new { @class = "text-danger text-center" })
-        <div class="col-12 ">
-            @Html.TextBoxFor(model => model.UseeName, new { @class = "form-control", maxlength = 50, autofocus = "true", placeholder = ViewText.PLACEHOLDER_USERNAME })
-            @Html.ValidationMessageFor(model => model.UseeName, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-12">
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control", maxlength = 20, @type = "password", placeholder = ViewText.PLACEHOLDER_PASSWORD })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-        @*<div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.RememberMe)
-                    Remember Me
+        <p>
+            @ViewText.Decription_login
+        </p>
+        <img src="/Content/images/background_login.png" />
+    </div>
+    <div class="col-md-8">
+        <div id="tabstrip">
+            <ul>
+                <li id="tab-login" class="@(ViewBag.isLogin?"k-state-active":"")">
+                    @ViewText.LABLE_LOGIN
+                </li>
+                <li id="tab-register" class="@(ViewBag.isLogin?"":"k-state-active")">
+                    @ViewText.LABLE_REGISTER
+                </li>
+            </ul>
+            <div class="box-login">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmLogin" }))
+                {
+                    <div class="row mt-5">
+                        <div class="col-md-3">
+                            @ViewText.Login_name
+                        </div>
+                        <div class="col-md-9 ">
+                            @Html.TextBoxFor(model => model.UseeName, new { @class = "form-control", maxlength = 50, autofocus = "true", placeholder = ViewText.PLACEHOLDER_USERNAME })
+                            @Html.ValidationMessageFor(model => model.UseeName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            @ViewText.TITLE_PASSWORD
+                        </div>
+                        <div class="col-md-9">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", maxlength = 20, @type = "password", placeholder = ViewText.PLACEHOLDER_PASSWORD })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9 forgot-password">
+                            <span>@ViewText.Forgot_Password </span>
+                            <a href="javascript:void(0)" onclick="fnForgotPassword()">@ViewText.Text_Here</a>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9 mt-4">
+                        <input type="button" onclick="fnLogin()" value="@ViewText.BUTTON_LOGIN" class="btn btn-success w-100" />
+                    </div>
                 </div>
             </div>
-        </div>*@
-        <div class="col-12">
-            <input type="submit" value="@ViewText.BUTTON_LOGIN" class="btn btn-success w-100" />
+            <div class="box-login">
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmRegister" }))
+                {
+
+                    <div class="form-group row mt-3">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.Title_Surname)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextBoxFor(model => model.HoKH, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_NAME)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextBoxFor(model => model.TenKH, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_EMAIL)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_PHONE)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @id = "txtPhoneNumber" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_ADDRESS)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_USERNAME)
+                        </div>
+                        <div class="col-8">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autocomplete = "off" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_PASSWORD)
+                        </div>
+                        <div class="col-8">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            @Html.Raw(ViewText.TITLE_CONFIM_PASSWORD)
+                        </div>
+                        <div class="col-8">
+                            @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                }
+                <div class="form-group row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <input type="button" onclick="fnRegister()" value="@ViewText.BUTTON_REGISTER" class="btn btn-success w-100" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-}
+</div>
+
+
+<script>
+    initKeydownNumber();
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        }
+    });
+    $(".btn-close-window").click(function () {
+        var popup = $("#popupLogin").data("kendoWindow");
+        popup.close();
+    });
+    function fnLogin() {
+        initValidFormLogin();
+        var frmLogin = $("#frmLogin");
+        var dataLogin = $("#frmLogin").serialize();
+        if (frmLogin.valid()) {
+            $.ajax({
+                url: "@Url.Action("Login", "User")",
+                data: dataLogin,
+                type:"POST",
+                dataType: "json",
+                success: function (res) {
+                    if (res == -2) {
+                        initDialog("@Html.Raw(ViewText.Notification)", "Tài khoản không tồn tại", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == 0) {
+                        initDialog("@Html.Raw(ViewText.Notification)", "Đăng nhập không thành công", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == -1) {
+                        initDialog("@Html.Raw(ViewText.Notification)", "Mật khẩu không đúng", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == 1) {
+                        //initDialog("Thông báo", "Đăng nhập thành công.", "Close");
+                        //var tabToActivate = $("#tab-login");
+                        //$("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+                        var popup = $("#popupLogin").data("kendoWindow");
+                        popup.close();
+                        window.location.href = "@Url.Action("Index","Home")";
+
+                    }
+                },
+                error: function () {
+                    initDialog("@Html.Raw(ViewText.Notification)", "Lỗi hệ thống", "@Html.Raw(ViewText.Button_Close)");
+                },
+            });
+        }
+    }
+    function fnRegister() {
+        initValidFormRegister();
+        var frmRegister = $("#frmRegister");
+        var data = $("#frmRegister").serialize();
+        if (frmRegister.valid()) {
+            $.ajax({
+                url: "@Url.Action("Register", "User")",
+                data: data,
+                type:"POST",
+                dataType: "json",
+                success: function (res) {
+                    if (res == -2) {
+                        initDialog("@Html.Raw(ViewText.Notification)", "Tên đăng nhập đã tồn tại", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == -3) {
+                        initDialog("@Html.Raw(ViewText.Notification)", " Email đã tồn tại.", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == -1) {
+                        initDialog("@Html.Raw(ViewText.Notification)", "  Đăng ký không thành công.", "@Html.Raw(ViewText.Button_Close)");
+                    }
+                    if (res == 1) {
+                        @*initDialog("@Html.Raw(ViewText.Notification)", "Đăng ký thành công.", "@Html.Raw(ViewText.Button_Close)");*@
+                        var tabToActivate = $("#tab-login");
+                        $("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+                    }
+                },
+                error: function () {
+                    initDialog("@Html.Raw(ViewText.Notification)", "Lỗi hệ thống", "@Html.Raw(ViewText.Button_Close)");
+                },
+            });
+        }
+    }
+    function fnForgotPassword() {
+        var popup = $("#popupLogin").data("kendoWindow");
+        popup.close();
+        fnOpenForgotPassword();
+    }
+    function initValidFormRegister() {
+        $("#frmRegister").validate({
+            ignore: '',
+            rules: {
+                "HoKH": {
+                    required: true
+                },
+                "TenKH": {
+                    required: true
+                },
+                "Email": {
+                    email: true,
+                    required: true
+                },
+                "Phone": {
+                    required: true,
+                    maxlength: 10
+                },
+                "Address": {
+                    required: true
+                },
+                "UserName": {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
+                },
+                "Password": {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 20
+                },
+                "ConfimPassword": {
+                    required: true,
+                    equalTo: "#frmRegister #Password"
+                }
+            },
+            messages:
+            {
+                "HoKH": {
+                    required:  "@Html.Raw(ViewText.Message_Required)"
+                },
+                "TenKH": {
+                    required: "@Html.Raw(ViewText.Message_Required)"
+                },
+                "Email": {
+                    email:  "@Html.Raw(ViewText.Message_Confirm_Email)",
+                    required: "@Html.Raw(ViewText.Message_Required)"
+                },
+                "Phone": {
+                    required:  "@Html.Raw(ViewText.Message_Required)",
+                    maxlength: 10
+                },
+                "Address": {
+                    required:  "@Html.Raw(ViewText.Message_Required)"
+                },
+                "UserName": {
+                    required:    "@Html.Raw(ViewText.Message_Required)",
+                    minlength:  "@Html.Raw(ViewText.Message_Min_Length)",
+                    maxlength:  "@Html.Raw(ViewText.Message_Max_Length)"
+                },
+                "Password": {
+                    required:  "@Html.Raw(ViewText.Message_Required)",
+                    minlength: "@Html.Raw(ViewText.Message_Min_Length)",
+                    maxlength: "@Html.Raw(ViewText.Message_Max_Length)"
+                },
+                "ConfimPassword": {
+                    required:  "@Html.Raw(ViewText.Message_Required)",
+                    equalTo: "@Html.Raw(ViewText.Message_Confim_Password)"
+                }
+            },
+            success: function (error) {
+                error.remove();
+            }
+        });
+    }
+    function initValidFormLogin() {
+        $("#frmLogin").validate({
+            ignore: '',
+            rules: {
+                "UseeName": {
+                    required: true
+                },
+                "Password": {
+                    required: true
+                }
+            },
+            messages:
+            {
+                "UseeName": {
+                    required:  "@Html.Raw(ViewText.Message_Required)"
+                },
+                "Password": {
+                    required: "@Html.Raw(ViewText.Message_Required)"
+                }
+            },
+            success: function (error) {
+                error.remove();
+            }
+        });
+    }
+</script>

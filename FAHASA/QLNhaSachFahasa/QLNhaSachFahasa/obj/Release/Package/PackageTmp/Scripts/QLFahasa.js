@@ -25,7 +25,7 @@ function addclassFocus(idInput, idSearch) {
     })
 }
 function initKeydownNumber() {
-    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number", "#CMND", ".quantity", function (e) {
+    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number, #input-money-2, #CMND", function (e) {
         if (e.keyCode === 110 || e.keyCode === 190)
             e.preventDefault();
 
@@ -60,12 +60,20 @@ function showError(message) {
     $('body').append(div);
     $('#error').show('shake');
     //setTimeout(function () { $('.popup').remove(); }, 10000);
-    setTimeout(function () {
-        $('.popup').hide('fast');
-        $('.popup').remove();
-    }, 10000);
+    //setTimeout(function () {
+    //    $('.popup').hide('fast');
+    //    $('.popup').remove();
+    //}, 10000);
 }
-
+function showSuccessOrder() {
+    $(".text-mesage-order").remove();
+    $(".message-cart").append('<span class="text-mesage-order">Đã thêm sản phẩm vào giỏ hàng!</span>');
+    $(".message-cart").show();
+    setTimeout(function () {
+        $(".message-cart").hide('fast');
+        $(".text-mesage-order").remove();
+    }, 5000);
+}
 function showSuccess(message) {
     $('.popup').remove();
     var div =
@@ -97,21 +105,25 @@ function fixedHeaderBg() {
             $(".header-of-page-mobie").addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
             $('.en-link').css({ "color": "#5C5758" });
             $head.removeClass('black-bg');
+            $('.header-of-page .header-content').css("padding", "12px 0");
         } else {
             $headerOfPage.removeClass('bg-color').css({ "boxShadow": "none" });
             $(".header-of-page-mobie").removeClass('bg-color').css({ "boxShadow": "none" });
             $head.addClass('black-bg');
             $('.en-link').css({ "color": "#fff" });
+            $('.header-of-page .header-content').css("padding", "22px 0");
         }
     } else {
         if (top >= 1) {
             $headerOfPage.addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
             $(".header-of-page-mobie").addClass('bg-color').css({ "boxShadow": "rgb(220, 220, 220) 0 2px 10px" });
             $head.removeClass('black-bg');
+            $('.header-of-page .header-content').css("padding","12px 0");
         } else {
             $headerOfPage.removeClass('bg-color').css({ "boxShadow": "none" });
             $(".header-of-page-mobie").removeClass('bg-color').css({ "boxShadow": "none" });
             $head.addClass('black-bg');
+            $('.header-of-page .header-content').css("padding", "22px 0");
         }
     }
 }

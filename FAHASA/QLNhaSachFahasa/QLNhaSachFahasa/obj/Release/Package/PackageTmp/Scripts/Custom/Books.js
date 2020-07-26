@@ -39,6 +39,9 @@ function initValidation() {
             "GIASACH": {
                 required: true
             },
+            "SoLuong": {
+                required: true,
+            },
         },
         messages:
         {
@@ -53,6 +56,9 @@ function initValidation() {
             },
             "GIASACH": {
                 required: "Giá sách không được để trống."
+            },
+            "SoLuong": {
+                required: "Số lượng không được để trống",
             },
         },
         success: function (error) {
@@ -70,6 +76,12 @@ function popupEditBook(id) {
         $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
     });
 }
+function popupEditVPP(id) {
+    $('#wndEditContent').load("/Admin/Book/EditVPP?id=" + id, function () {
+        $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+    });
+}
+
 function funcDeleteBook(id) {
     var Ok = confirm('Bạn có muốn xóa sách ' + id + "?");
     if (Ok)

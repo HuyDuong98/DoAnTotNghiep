@@ -58,10 +58,10 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             customer.HOKH = model.HOKHACHHANG;
             customer.EMAIL = model.EMAIL;
             customer.DIENTHOAI = model.DIENTHOAI;
-            customer.QUOCGIA = model.QUOCGIA;
-            customer.THANHPHO = model.THANHPHO;
-            customer.QUAN = model.QUAN;
-            customer.PHUONG = model.PHUONG;
+            //customer.QUOCGIA = model.QUOCGIA;
+            //customer.THANHPHO = model.THANHPHO;
+            //customer.QUAN = model.QUAN;
+            //customer.PHUONG = model.PHUONG;
             customer.DIACHI = model.DIACHI;
             customer.USERNAME = model.TENDANGNHAPKHACHHANG;
             return PartialView("~/Areas/Admin/Views/Customer/_Edit.cshtml", customer);

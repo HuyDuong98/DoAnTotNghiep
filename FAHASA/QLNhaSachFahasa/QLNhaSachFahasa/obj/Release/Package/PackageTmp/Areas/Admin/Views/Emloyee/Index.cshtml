@@ -41,7 +41,7 @@
 <div id="popupViewsWindows">
     <div id="wndViewsContent"></div>
 </div>
-
+<div id="dialog"></div>
 @section scripts{
     <script src="/Scripts/Custom/Employee.js"></script>
     <script id="status-template" type="text/x-kendo-template">
@@ -204,6 +204,39 @@
 
         GetData();
 
+        function funcDeleteEmployee(id) {
+            $('#dialog').kendoDialog({
+                width: "450px",
+                title: "@Html.Raw(ViewText.Title_Confirm)",
+                closable: false,
+                visible: false,
+                content: " <span class='k-icon k-i-info'></span>" + "@Html.Raw(ViewText.Question_Delete_Employee) <span class='color-red'>" + id+"</span>",
+                buttonLayout: "normal",
+                actions: [
+                    {
+                        text: "@Html.Raw(ViewText.Button_Yes)",
+                        primary: true,
+                        action: function () {
+                            $.ajax({
+                                url: "/Emloyee/DeleteEmployee",
+                                data: { id: id },
+                                dataType: "json",
+                                type: "POST",
+                                success: function (response) {
+                                    if (response.result == true) {
+                                        GetData();
+                                    } else {
+                                        GetData();
+                                    }
+                                },
+                            })
+                        },
+                    },
+                    { text: "@Html.Raw(ViewText.Button_No)" },
+                ]
+            });
+            $('#dialog').data("kendoDialog").open().element.closest(".k-window").css({ top: 40 });
+        }
     </script>
 
 }

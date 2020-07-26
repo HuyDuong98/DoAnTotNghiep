@@ -1,0 +1,420 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Fahasa - " + Html.Raw(ViewText.Title_Statistic_Order_By_Month);
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.Title_Statistics_Orders
+}
+<div class="container">
+    <div class="w-100 text-right">
+        <input id="calendar" />
+    </div>
+    <div class="sumary-month row my-4">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum-success col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn thành công</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum-cancel col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn thất bại</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="sum col-md-12 text-center"></div>
+                <div class="col-md-12 text-center title-sum-month">Tổng đơn</div>
+            </div>
+        </div>
+    </div>
+    <div class="boder-box" id="chart"></div>
+    <div id="chartLine"></div>
+    <div class="w-100 text-right">
+        <button id="export" class="btn">
+            <img src="~/Content/images/icon/excel_export.png" />
+            @ViewText.Export_to_Excel
+        </button>
+    </div>
+    <div id="gridSummary"></div>
+</div>
+
+@section scripts{
+    <script>
+                var i = 0;
+                var dataSuccess = [];
+                var dataCancel = [];
+                var month = [];
+
+        for (i = 0; i < 31; i++) {
+            //var k = Math.floor(Math.random() * 100);
+            //dataSuccess[i] = k;
+            var k = Math.floor(Math.random() * 100);
+            dataCancel[i] = k;
+            month[i] = i + 1;
+        }
+        $("#calendar").kendoDatePicker({
+            start: "year",
+            depth: "year",
+            format: "MM/yyyy",
+            parseFormats: ["MM/yyyy"],
+            value: new Date(),
+            popup: {
+                origin: "bottom right",
+                position: "top right"
+            }
+        });
+        $("#calendar").data("kendoDatePicker").bind("change", function () {
+            var value = this.value();
+            GetDataChartForMonth($("#calendar").data("kendoDatePicker").value().toJSON());
+            GetDataGridOrder($("#calendar").data("kendoDatePicker").value().toJSON());
+        });
+        GetDataChartForMonth($("#calendar").data("kendoDatePicker").value().toJSON());
+        function GetDataChartForMonth(month) {
+            $.ajax({
+                url: "@Url.Action("GetDataOrederSuccesss", "Report")",
+                data: {
+                    //month: kendo.parseDate($("#datepickerCall").val(), "dd/MM/yyyy").toJSON(),
+                    month: month ,
+                },
+                beforeSend: function () {
+                    $(".loading").show();
+                },
+                success: function (result) {
+                    console.log(result);
+                    CreateChartColumn(result.datasuccess, result.datacancel);
+                    //CreateChartLine(result.datasuccess, result.datacancel);
+                    $(".sum-success").text(result.sumSuccess);
+                    $(".sum-cancel").text(result.sumCancel);
+                    $(".sum").text(result.sumCancel + result.sumSuccess);
+
+                },
+                error: function (result) {
+                    dataSuccess = result
+                },
+                complete: function () {
+                    $(".loading").hide();
+                },
+            });
+        }
+        function CreateChartLine(dataSuccess,dataCancel) {
+            $("#chartLine").kendoChart({
+                title: {
+                    text: '@Html.Raw( ViewText.Title_Statistics_Orders) \n (' + kendo.toString($("#calendar").val(), 'MM/yyyy') + ')',
+                    font: "500 24px Quicksand",
+                },
+                legend: {
+                    position: "bottom",
+                    item: {
+                        visual: function (e) {
+                            var color = e.options.markers.background;
+                            var labelColor = e.options.labels.color;
+                            var rect = new kendo.geometry.Rect([0, 0], [300, 100]);
+                            var layout = new kendo.drawing.Layout(rect, {
+                                spacing: 5,
+                                alignItems: "center",
+                            });
+                            // create a circle geometry centered at x=10, y=5, with a radius of 5
+                            var CircGeometry = new kendo.geometry.Circle([10, 5], 5);
+                            // draw the circle using the geometry and set the color (could have no stroke)
+                            var marker = new kendo.drawing.Circle(CircGeometry, {
+                                stroke: { color: color, width: 1 },
+                                fill: {
+                                    color: color
+                                }
+                            });
+
+                            var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                                fill: {
+                                    color: labelColor
+                                },
+                                font: "14px Quicksand"
+                            });
+
+                            layout.append(marker, label);
+                            layout.reflow()
+                            return layout;
+                        }
+                    }
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                series: [{
+                    name: "@Html.Raw(ViewText.Status_Success)",
+                    data: dataSuccess,
+                    color: '#1c9903',
+                }, {
+                    name: "@Html.Raw(ViewText.Status_Cancel)",
+                        data: dataCancel,
+                    color: '#ff0000',
+
+                }],
+
+                valueAxis: {
+                    labels: {
+                        format: "{0}"
+                    },
+                    line: {
+                        visible: false
+                    },
+                    axisCrossingValue: -10
+                },
+                categoryAxis: {
+                    categories: month,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    labels: {
+                        rotation: "auto"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });
+
+        }
+        function CreateChartColumn(dataSuccess, dataCancel) {
+            $("#chart").kendoChart({
+                title: {
+                    text: '@Html.Raw( ViewText.Title_Statistics_Orders) \n (' + kendo.toString($("#calendar").val(), 'MM/yyyy') + ')',
+                    font: "500 24px Quicksand",
+                    color: "#3c3f54"
+                },
+                render: function (e) {
+                    $('[fill="#3c3f54"]').attr("x", e.sender.element.width() / 2).attr("text-anchor", "middle")[1].style.fontSize = "24px";
+                    $('[fill="#3c3f54"]').attr("x", e.sender.element.width() / 2).attr("text-anchor", "middle")[1].style.fill = "#2086fb";
+                },
+                legend: {
+                    position: "bottom",
+                    spacing: 15,
+                    item: {
+                        visual: function (e) {
+                            var color = e.options.markers.background;
+                            var labelColor = e.options.labels.color;
+                            var rect = new kendo.geometry.Rect([0, 0], [300, 100]);
+                            var layout = new kendo.drawing.Layout(rect, {
+                                spacing: 5,
+                                alignItems: "center",
+                            });
+                            // create a circle geometry centered at x=10, y=5, with a radius of 5
+                            var CircGeometry = new kendo.geometry.Circle([10, 5], 5);
+                            // draw the circle using the geometry and set the color (could have no stroke)
+                            var marker = new kendo.drawing.Circle(CircGeometry, {
+                                stroke: { color: color, width: 1 },
+                                fill: {
+                                    color: color
+                                }
+                            });
+
+                            var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                                fill: {
+                                    color: labelColor
+                                },
+                                font: "14px Quicksand"
+                            });
+
+                            layout.append(marker, label);
+                            layout.reflow()
+                            return layout;
+                        }
+                    }
+                },
+                seriesDefaults: {
+                    type: "column",
+                    spacing: 0.5,
+                    gap: 1,
+                    font: "Quicksand"
+                },
+
+                series: [
+                    {
+                        name: "@Html.Raw(ViewText.Status_Success)",
+                        data: dataSuccess,
+                        border: {
+                            width: 0,
+                        },
+                        color: '#1c9903',
+                        overlay: {
+                            gradient: "none"
+                        }
+                    }, {
+                        name: "@Html.Raw(ViewText.Status_Cancel)",
+                        data: dataCancel,
+                        border: {
+                            width: 0,
+                        },
+                        color: '#ff0000',
+                        overlay: {
+                            gradient: "none"
+                        }
+                    }],
+                valueAxis: {
+                    line: {
+                        visible: false,
+
+                    },
+                    labels: {
+                        step: 2
+                    }
+                },
+                categoryAxis: {
+                    categories: month,
+                    font: "Quicksand",
+                    majorGridLines: {
+                        visible: true,
+                        color: "#e5e7ee"
+                    },
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}"
+                }
+            });
+        }
+        var gridOrder = $("#gridSummary").kendoGrid({
+            attributes: { style: "cursor:pointer", },
+            groupable: false,
+            sortable: true,
+            filterable: false,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MaDDH",
+                    title: "Mã đơn hàng",
+                    template: "<span>#=MaDDH#</span>",
+                    width: 150,
+                },
+                {
+                    field: "TenKH",
+                    title: "Tên khách hàng",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 150,
+                }, {
+                    field: "SDT",
+                    title: "Số điện thoại",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 140,
+                }, {
+                    field: "DiaChi",
+                    title: "Địa chỉ",
+                    template: "<span>#=DiaChi#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 200,
+                },
+                {
+                    field: "PhiShip",
+                    title: "Phí ship",
+                    template: "<span>#=kendo.toString(PhiShip,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 123,
+                    hidden: true
+                },
+                {
+                    field: "TongTien",
+                    format: "#=kendo.toString(TongTien,\"n0\")#",
+                    title: "Tổng tiền",
+                    template: "<span>#=kendo.toString(TongTien,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "NgayCapNhat",
+                    format: "#=kendo.toString(kendo.parseDate(NgayCapNhat),\"dd/MM/yyyy\")#",
+                    title: "Ngày cập nhật",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NgayCapNhat),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                }, {
+                    field: "TrangThai",
+                    title: "Trạng thái",
+                    format: "#=TrangThai==0?'@Html.Raw(ViewText.Status_New)':TrangThai==1?'@Html.Raw(ViewText.Status_Success)':TrangThai==-1?'@Html.Raw(ViewText.Status_Cancel)':'@Html.Raw(ViewText.Status_Shipping)'#",
+                    template: "<div class=\" #=TrangThai==0?'color-blue':TrangThai==1?'color-green':TrangThai==-1?'color-red':'color-violet'#\">#=TrangThai==0?'@Html.Raw(ViewText.Status_New)':TrangThai==1?'@Html.Raw(ViewText.Status_Success)':TrangThai==-1?'@Html.Raw(ViewText.Status_Cancel)':'@Html.Raw(ViewText.Status_Shipping)'#</div>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "150px",
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [100,"All"],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        function GetDataGridOrder(month) {
+
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url:"@Url.Action("GetDataGridOrder", "Report")",
+                            data: {
+                                month: month,
+                            },
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        });
+                    }
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            NgayCapNhat: {
+                                type: "date"
+                            },
+                        }
+                    }
+                },
+                pageSize: 100
+            });
+            gridOrder.setDataSource(dataSource);
+        }
+        GetDataGridOrder($("#calendar").data("kendoDatePicker").value().toJSON());
+        $("#export").click(function (e) {
+            gridOrder.saveAsExcel();
+        });
+    </script>
+}

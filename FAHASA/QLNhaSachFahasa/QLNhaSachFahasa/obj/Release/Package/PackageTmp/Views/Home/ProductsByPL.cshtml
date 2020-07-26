@@ -1,0 +1,202 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Fahasa - Tìm kiếm sản phẩm";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+    <div class="menu">
+        <ul class="m-0 p-0">
+            <li class="menu-child-book-hiden menu-item">
+                <a href="javascript:void(0)" onclick='LoadData("SACH")'>
+                    @ViewText.TITLE_BOOK<span class="k-icon k-i-arrow-chevron-down"></span>
+                </a>
+                <ul class="menu-child menu-child-book">
+                    <li>
+                        <div class="w-75 m-auto">
+                            <div class="row" id="menu-child-content-book">
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-child-vpp-hiden menu-item">
+                <a href="javascript:void(0)" onclick='LoadData("VPP")'>
+                    @ViewText.TITLE_STATIONERY<span class="k-icon k-i-arrow-chevron-down"></span>
+                </a>
+                <ul class="menu-child menu-child-vpp">
+                    <li>
+                        <div class="w-75 m-auto">
+                            <div class="row" id="menu-child-content-vpp">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="@Url.Action("SearchOrder","Cart")"><span class="k-icon k-i-search"></span>@ViewText.Title_Lookup_Order</a></li>
+        </ul>
+    </div>
+<div class="container mt-4">
+    <div id="title-pl"></div>
+    <div class="box-sale-content">
+        <div id="listView" class="row"></div>
+        <script type="text/x-kendo-template" id="template">
+            <div class="item col-md-3 col-sm-3 col-3">
+                <div class="t-card-book" style="width: 100%;">
+                    <a href="/Home/Detail?productID=#:MASANPHAM#" class="t-card-book-img relative ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Read">
+                        <div class="book-bg-1">
+                            <img alt="#:TENSANPHAM#" title="#:TENSANPHAM#" src="@Url.Content("~/UploadFile/#:LINKHINHANH#")" height="176px" />
+                        </div><span class="view-b-icon"></span>
+                    </a>
+                    <div class="t-card-book-infor">
+                        <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
+                            <span class="title-card">#:TENSANPHAM#</span>
+                        </a>
+                        <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
+                        <div class="text-price"><em>#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</em></div>
+                        <div class="t-card-book-infor-description">
+
+                            #= htmlDecode(GHICHU||"")#
+                        </div>
+                    </div><div class="t-break-line"></div>
+                    <div class="t-card-book-likes">
+                        <small>#:LUOTXEM# @Html.Raw(ViewText.TITLE_VIEW)</small>
+                    </div>
+                    <a href="javascript:void(0)" data-idCart="#:MASANPHAM#" @*onclick="fnAddToCart('#:MASANPHAM#',1)"*@ class="t-card-detail-link bg-waka white-text rounded ga_click addtocart">@Html.Raw(ViewText.BUTTON_ADD_TO_CART)</a>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
+<script type="text/x-kendo-template" id="templateMenu">
+    <div class="col-12 col-md-4 mt-4">
+        <ul>
+            <li><a href="javascript:void(0)" onclick='LoadData("#:id#")'><h5>#:text#</h5></a></li>
+            # for (var i = 0; i < items.length; i++) { #
+            <li class="menu-item"><a href="javascript:void(0)" onclick='LoadData("#:items[i].id#")'>#:items[i].text#</a></li>
+            #} #
+        </ul>
+    </div>
+</script>
+@section scripts{
+    <script>
+        function htmlDecode(value) {
+            return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+        }
+        var listView = $("#listView").kendoListView({
+            template: kendo.template($("#template").html()),
+            dataBound: function (e) {
+                if (this.dataSource.data().length == 0) {
+                    $("#listView").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
+                }
+            },
+            //dataSource: dataSource
+        }).data("kendoListView");
+        function LoadData(id) {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetSPbyPL", "Home")',
+                            data: {
+                                id: id.trim(),
+                            },
+                            dataType: "json",
+                            success: function (result) {
+                                $("#title-pl").html("<h5>Bạn đang tìm: <strong>" + result.rootname + "</strong></h5>");
+
+                                options.success(result.products);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+            });
+            listView.setDataSource(dataSource);
+        }
+        LoadData('@ViewBag.IdPL');
+         //Menu top
+        var menu = $("#menu-child-content-book").kendoListView({
+            template: kendo.template($("#templateMenu").html()),
+        }).data("kendoListView");
+        var menuVPP = $("#menu-child-content-vpp").kendoListView({
+            template: kendo.template($("#templateMenu").html()),
+        }).data("kendoListView");
+        function getDataBookMenu() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListContentMenu", "Home")',
+                            data: {
+                                id: "SACH"
+                            },
+                            dataType: "json",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+            });
+            menu.setDataSource(dataSource);
+        }
+        function getDataVPPMenu() {
+            var dataSourceVPP = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListContentMenu", "Home")',
+                            data: {
+                                id: "VPP"
+                            },
+                            dataType: "json",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+            });
+            menuVPP.setDataSource(dataSourceVPP);
+        }
+        function fnAddToCart(masanpham, soluong) {
+            $.ajax({
+                url: '@Url.Action("AddIItem", "Cart")',
+                dataType: "json",
+                data: {
+                    maSanPham: masanpham,
+                    soluong: soluong
+                },
+                success: function (res) {
+                    var numbercart = document.getElementById("sumcart");
+                    numbercart.innerHTML = "" + res.length;
+                    showSuccessOrder();
+                },
+            });
+        }
+        $(document).on("click", ".addtocart", function () {
+            var idCart = $(this).attr("data-idCart");
+            fnAddToCart(idCart, 1);
+            var src = $(this).parent().find("img").attr("src");
+            $(this).parent().find("img").after("<img class='img-fake' style='position:absolute;top:0;left:0;z-index:100' src='" + src + "' width='60px'/>");
+
+            var product = $(".img-fake");
+
+            kendo.fx(product).transfer($("#cart-box")).play().then(function () {
+                $(".img-fake").fadeOut("slow", function () {
+                    $(".img-fake").remove();
+                });
+            });
+        });
+        getDataBookMenu();
+        getDataVPPMenu();
+    </script>
+}
