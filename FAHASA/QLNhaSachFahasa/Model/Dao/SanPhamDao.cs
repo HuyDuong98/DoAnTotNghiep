@@ -98,6 +98,10 @@ namespace Model.Dao
 
             return list;
         }
+        public List<SANPHAM> getListProduct(string idPL)
+        {
+            return  db.SANPHAMs.Where(x => x.PHANLOAI == idPL && x.TRANGTHAI == 1).Take(10).ToList();
+        }
         public int setViewsProduct(string productID)
         {
             var product = db.SANPHAMs.Where(x => x.MASANPHAM == productID).FirstOrDefault();

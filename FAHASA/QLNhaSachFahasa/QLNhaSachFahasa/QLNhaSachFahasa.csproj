@@ -258,11 +258,13 @@
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\HasCredentialAttribute.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Common\VnPayLibrary.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\FahasaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaypalController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VNPayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -277,6 +279,7 @@
     <Compile Include="Models\InfoOrderModel.cs" />
     <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\OrderInfo.cs" />
     <Compile Include="Models\ProductOrderModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\SanPhamModel.cs" />
@@ -624,6 +627,7 @@
     <Content Include="Views\User\CustomerInformation.cshtml" />
     <Content Include="Views\Cart\SearchOrder.cshtml" />
     <Content Include="Views\Home\ProductsByPL.cshtml" />
+    <Content Include="Views\VNPay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

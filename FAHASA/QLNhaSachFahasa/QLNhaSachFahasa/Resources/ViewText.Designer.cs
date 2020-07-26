@@ -124,6 +124,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Button_Export {
+            get {
+                return ResourceManager.GetString("Button_Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string BUTTON_LOGIN {
@@ -462,6 +471,24 @@ namespace QLNhaSachFahasa.Resources {
         public static string Message_update_infor_order {
             get {
                 return ResourceManager.GetString("Message_update_infor_order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update product failed.
+        /// </summary>
+        public static string Message_Update_Product_Failed {
+            get {
+                return ResourceManager.GetString("Message_Update_Product_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update product success.
+        /// </summary>
+        public static string Message_Update_Product_Success {
+            get {
+                return ResourceManager.GetString("Message_Update_Product_Success", resourceCulture);
             }
         }
         
@@ -831,6 +858,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string Tilte_Price {
             get {
                 return ResourceManager.GetString("Tilte_Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string Titile_Comfirm {
+            get {
+                return ResourceManager.GetString("Titile_Comfirm", resourceCulture);
             }
         }
         
@@ -1489,6 +1525,15 @@ namespace QLNhaSachFahasa.Resources {
         public static string Title_Payments {
             get {
                 return ResourceManager.GetString("Title_Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal infor.
+        /// </summary>
+        public static string Title_Personal_info {
+            get {
+                return ResourceManager.GetString("Title_Personal_info", resourceCulture);
             }
         }
         

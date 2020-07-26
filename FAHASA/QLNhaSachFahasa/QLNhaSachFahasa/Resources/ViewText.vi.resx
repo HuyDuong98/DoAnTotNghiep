@@ -138,6 +138,9 @@
   <data name="BUTTON_DELETE" xml:space="preserve">
     <value>Xóa</value>
   </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Xuất file</value>
+  </data>
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
@@ -250,7 +253,13 @@
     <value>Trường bắt buộc nhập</value>
   </data>
   <data name="Message_update_infor_order" xml:space="preserve">
-    <value>Bạn chưa cập nhật thông tin đơn hàng</value>
+    <value>Bạn chưa cập nhật địa chỉ giao hàng</value>
+  </data>
+  <data name="Message_Update_Product_Failed" xml:space="preserve">
+    <value>Cập nhật sản phẩm không thành công</value>
+  </data>
+  <data name="Message_Update_Product_Success" xml:space="preserve">
+    <value>Cập nhật sản phẩm thành công</value>
   </data>
   <data name="NOTE_UPLOAD_FILE_IMAGE" xml:space="preserve">
     <value>File format .jpeg, .jpg, .png. File size max 5MB. </value>
@@ -374,6 +383,9 @@
   </data>
   <data name="Tilte_Price" xml:space="preserve">
     <value>Giá bán</value>
+  </data>
+  <data name="Titile_Comfirm" xml:space="preserve">
+    <value>Xác nhận</value>
   </data>
   <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
     <value>Thông tin tài khoản</value>
@@ -593,6 +605,9 @@
   </data>
   <data name="Title_Payments" xml:space="preserve">
     <value>Hình thức thanh toán</value>
+  </data>
+  <data name="Title_Personal_info" xml:space="preserve">
+    <value>Cập nhật thông tin</value>
   </data>
   <data name="TITLE_PHAN_LOAI" xml:space="preserve">
     <value>Phân loại</value>

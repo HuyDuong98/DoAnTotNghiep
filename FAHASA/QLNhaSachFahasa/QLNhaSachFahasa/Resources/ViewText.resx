@@ -138,6 +138,9 @@
   <data name="BUTTON_DELETE" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Button_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
   <data name="BUTTON_LOGIN" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -251,6 +254,12 @@
   </data>
   <data name="Message_update_infor_order" xml:space="preserve">
     <value>You have not updated order information</value>
+  </data>
+  <data name="Message_Update_Product_Failed" xml:space="preserve">
+    <value>Update product failed</value>
+  </data>
+  <data name="Message_Update_Product_Success" xml:space="preserve">
+    <value>Update product success</value>
   </data>
   <data name="NOTE_UPLOAD_FILE_IMAGE" xml:space="preserve">
     <value>File format .jpeg, .jpg, .png. File size max 5MB. </value>
@@ -374,6 +383,9 @@
   </data>
   <data name="Tilte_Price" xml:space="preserve">
     <value>Price</value>
+  </data>
+  <data name="Titile_Comfirm" xml:space="preserve">
+    <value>Confirm</value>
   </data>
   <data name="TITLE_ACCOUNT_INFORMATION" xml:space="preserve">
     <value>Account information</value>
@@ -594,6 +606,9 @@ Edit</value>
   </data>
   <data name="Title_Payments" xml:space="preserve">
     <value>Hình thức thanh toán</value>
+  </data>
+  <data name="Title_Personal_info" xml:space="preserve">
+    <value>Personal infor</value>
   </data>
   <data name="TITLE_PHAN_LOAI" xml:space="preserve">
     <value>Classify</value>

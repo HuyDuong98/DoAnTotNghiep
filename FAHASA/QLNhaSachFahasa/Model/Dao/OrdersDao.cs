@@ -61,5 +61,9 @@ namespace Model.Dao
         {
             return db.DONHANGs.Where(x => x.NGAYCAPNHAT.Month == month.Month && x.NGAYCAPNHAT.Year== month.Year && (x.TRANGTHAI == 1 || x.TRANGTHAI == -1)).ToList();
         }
+        public PHUONGTHUCTHANHTOAN GetPhuongThucThanhToan(string idPT)
+        {
+            return db.PHUONGTHUCTHANHTOANs.Where(x => x.MAPHUONGTHUCTHANHTOAN == idPT).FirstOrDefault();
+        }
     }
 }

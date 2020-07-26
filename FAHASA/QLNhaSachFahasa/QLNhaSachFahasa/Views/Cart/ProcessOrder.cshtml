@@ -55,7 +55,19 @@
                             <input type="radio" name="Payment" id="payment1" value="0" class="k-radio radio-payment" checked="checked">
                             <label class="k-radio-label" for="payment1">Thanh toán tiền mặt khi nhận hàng</label>
                         </li>
-
+                        <li>
+                            <input type="radio" name="Payment" id="payment3" value="2" class="k-radio radio-payment">
+                            <label class="k-radio-label" for="payment1">Thanh toán bằng VNPay</label>
+                            @*<ul class="virtual-atm-card d-none">
+                                <li>
+                                    Số thẻ: <input type="text" class="form-control" placeholder="VD: 4123 4567 8901 2345" />
+                                    Tên in trên thẻ: <input type="text" class="form-control text-uppercase" placeholder="VD: NGUYEN VAN A" />
+                                    Ngày hết hạn: <input type="text" class="form-control" id="card-expiry-date" />
+                                    Mã bảo mật: <input type="password" class="form-control" placeholder="VD:123" />
+                                </li>
+                            </ul>
+                            <a href="@Url.Action("PaymentByVNPay","VNPay")">Payment VNPay</a>*@
+                        </li>
                         <li>
                             <input type="radio" name="Payment" id="payment2" value="1" class="k-radio radio-payment">
                             <label class="k-radio-label" for="payment2">Thanh toán bằng thẻ quốc tế Visa, Master, JCB</label>
@@ -95,18 +107,7 @@
 
                             </ul>
                         </li>
-                        <li>
-                            <input type="radio" name="Payment" id="payment3" value="0" class="k-radio radio-payment" checked="checked">
-                            <label class="k-radio-label" for="payment1">Thanh toán bằng thẻ ATM</label>
-                            <ul class="virtual-atm-card d-none">
-                                <li>
-                                    Số thẻ: <input type="text" class="form-control" placeholder="VD: 4123 4567 8901 2345" />
-                                    Tên in trên thẻ: <input type="text" class="form-control text-uppercase" placeholder="VD: NGUYEN VAN A" />
-                                    Ngày hết hạn: <input type="text" class="form-control" id="card-expiry-date" />
-                                    Mã bảo mật: <input type="password" class="form-control" placeholder="VD:123" />
-                                </li>
-                            </ul>
-                        </li>
+
                         @*<li>
             <input type="radio" name="Payment" id="payment3" class="k-radio radio-payment">
             <label class="k-radio-label" for="payment3">Thẻ ATM nội địa/Internet Banking (Miễn phí thanh toán)</label>
@@ -130,15 +131,19 @@
             <div id="contentUpdateInfo"></div>
         </div>
     </div>
-<div id="dialog"></div>
+@*<div id="dialog"></div>*@
 @section scripts{
     <script>
-        var selected = $("input[type='radio'][name='Payment']:checked").val();
+        var selected = "0";
         $("#payment1").on("click", function () {
             selected = $("input[type='radio'][name='Payment']:checked").val();
             console.log(selected);
         });
         $("#payment2").on("click", function () {
+            selected = $("input[type='radio'][name='Payment']:checked").val();
+            console.log(selected);
+        });
+        $("#payment3").on("click", function () {
             selected = $("input[type='radio'][name='Payment']:checked").val();
             console.log(selected);
         });
@@ -163,22 +168,25 @@
             $(".virtual-credit-card").addClass("d-none");
             $(".btn-save-order").removeClass("d-none");
             $(".payment-paypal").addClass("d-none");
+            $(".virtual-atm-card").addClass("d-none");
         })
         $("#payment2").click(function () {
             $(".virtual-credit-card").removeClass("d-none");
             $(".payment-paypal").removeClass("d-none");
             $(".btn-save-order").addClass("d-none");
+            $(".virtual-atm-card").addClass("d-none");
         })
         $("#payment3").click(function () {
             $(".virtual-credit-card").addClass("d-none");
             $(".btn-save-order").removeClass("d-none");
+            $(".virtual-atm-card").removeClass("d-none");
             $(".payment-paypal").addClass("d-none");
         })
-        $("#payment4").click(function () {
-            $(".virtual-credit-card").addClass("d-none");
-            $(".btn-save-order").removeClass("d-none");
-            $(".payment-paypal").addClass("d-none");
-        })
+        //$("#payment4").click(function () {
+        //    $(".virtual-credit-card").addClass("d-none");
+        //    $(".btn-save-order").removeClass("d-none");
+        //    $(".payment-paypal").addClass("d-none");
+        //})
         $("#popupUpdateInfo").kendoWindow({
             title: "@Html.Raw(ViewText.TITLE_UPDATE_INFO_CUSTOMER)",
             visible: false,
@@ -191,14 +199,14 @@
         $("#stepper").kendoStepper({
             linear: false,
             steps: [{
-                label: "Cart",
+                label: "@Html.Raw(ViewText.TITLE_CART)",
                 icon: "k-icon k-i-cart"
             }, {
-                label: "Personal infor",
+                label: "@Html.Raw(ViewText.Title_Personal_info)",
                 icon: "dictionary-add",
                 selected: true
             }, {
-                label: "Confirm",
+                label: "@Html.Raw(ViewText.Titile_Comfirm)",
                 icon: "k-icon k-i-check",
             }]
         });
@@ -237,25 +245,46 @@
             }
         }
         function fnSaveOrder() {
-            $.ajax({
-                url: '@Url.Action("SaveOrder", "Cart")',
-                dataType: "json",
-                success: function (result) {
-                    //fnGetDataListCart();
-                    //initDialog("Thông báo", result, "Close");
-                    if (result.message == 1) {
+            if (selected == 0) {
+                $.ajax({
+                    url: '@Url.Action("SaveOrder", "Cart")',
+                    dataType: "json",
+                    success: function (result) {
+                        //fnGetDataListCart();
+                        //initDialog("Thông báo", result, "Close");
+                        if (result.message == 1) {
                         @*initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_order_success)", "@Html.Raw(ViewText.Button_Close)");*@
-                        @*window.location.href = "@Url.Action("Index","Home")";*@
-                        window.location.href = "/Cart/OrderSuccess?id=" + result.ID;
+                            @*window.location.href = "@Url.Action("Index","Home")";*@
+                            window.location.href = "/Cart/OrderSuccess?id=" + result.ID;
+                        }
+                        if (result.message == 0) {
+                            initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_update_infor_order)", "@Html.Raw(ViewText.Button_Close)");
+                        }
+                    },
+                    error: function (res) {
+                        initDialog("Thông báo", "Thất bại", "Close");
                     }
-                    if (result.message == 0) {
-                        initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_update_infor_order)", "@Html.Raw(ViewText.Button_Close)");
+                });
+            } else if (selected == 2) {
+                //Thanh toán vnpay
+                 $.ajax({
+                    url: '@Url.Action("SaveOrder", "VNPay")',
+                    dataType: "json",
+                    success: function (result) {
+                        //fnGetDataListCart();
+                        //initDialog("Thông báo", result, "Close");
+                        if (result == 1) {
+                            location.href="@Url.Action("PaymentByVNPay","VNPay")";
+                        }
+                        if (result == 0) {
+                            initDialog("@Html.Raw(ViewText.Title_Notification)", "@Html.Raw(ViewText.Message_update_infor_order)", "@Html.Raw(ViewText.Button_Close)");
+                        }
+                    },
+                    error: function (res) {
+                        initDialog("Thông báo", "Thất bại", "Close");
                     }
-                },
-                error: function (res) {
-                    initDialog("Thông báo", "Thất bại", "Close");
-                }
-            });
+                });
+            }
         }
     </script>
 }

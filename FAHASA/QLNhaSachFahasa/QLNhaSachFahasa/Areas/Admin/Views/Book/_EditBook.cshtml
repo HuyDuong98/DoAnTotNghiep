@@ -1,7 +1,7 @@
 ﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
 @using QLNhaSachFahasa.Resources
 
-@using (Html.BeginForm("EditBook", "Book", FormMethod.Post, new { id = "frmCreateBook" }))
+@using (Html.BeginForm("EditBook", "Book", FormMethod.Post, new { id = "frmEditBook" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -14,7 +14,7 @@
                 <span class="requit">*</span>
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.TENSACH, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.TENSACH, new { @class = "form-control form-input" , name = "TENSACH" })
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 <span class="requit">*</span>
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.TACGIA, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.TACGIA, new { @class = "form-control form-input", name = "TACGIA" })
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 <span class="requit">*</span>
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.NHAXUATBAN, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.NHAXUATBAN, new { @class = "form-control form-input", name = "NHAXUATBAN" })
             </div>
         </div>
 
@@ -43,7 +43,7 @@
                 @ViewText.TITLE_TRONG_LUONG
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.TRONGLUONG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_GAM })
+                @Html.TextBoxFor(model => model.TRONGLUONG, new { @class = "form-control form-input", name = "TRONGLUONG", @id = "input-number", placeholder = ViewText.DV_GAM })
             </div>
         </div>
 
@@ -52,7 +52,7 @@
                 @ViewText.TITLE_SO_TRANG
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.SOTRANG, new { @class = "form-control", @id = "input-number", placeholder = ViewText.DV_SO_TRANG })
+                @Html.TextBoxFor(model => model.SOTRANG, new { @class = "form-control form-input", @id = "input-number", name = "SOTRANG", placeholder = ViewText.DV_SO_TRANG })
             </div>
         </div>
 
@@ -61,13 +61,13 @@
                 @ViewText.TITLE_KICH_THUOC
             </div>
             <div class="col-md-9">
-                @Html.TextBoxFor(model => model.KICHTHUOC, new { @class = "form-control", placeholder = ViewText.EXAM_KICH_THUOC })
+                @Html.TextBoxFor(model => model.KICHTHUOC, new { @class = "form-control form-input", name = "KICHTHUOC", placeholder = ViewText.EXAM_KICH_THUOC })
             </div>
         </div>
 
 
 
-        <div class="form-group row">
+        @*<div class="form-group row">
             <div class="col-md-3 title-input ">
                 @ViewText.TITLE_GIA_SACH
                 <span class="requit">*</span>
@@ -75,7 +75,7 @@
             <div class="col-md-9">
                 @Html.TextBoxFor(model => model.GIASACH, new { @class = "form-control", @id = "input-money", placeholder = ViewText.VND })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group row">
             <div class="col-md-3 title-input ">
@@ -83,7 +83,7 @@
                 <span class="requit">*</span>
             </div>
             <div class="col-md-9">
-                @Html.DropDownListFor(model => model.MANGONNGU, null, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.MANGONNGU, null, new { @class = "form-control ", name = "MANGONNGU" })
             </div>
         </div>
 
@@ -112,19 +112,20 @@
                 @ViewText.TITLE_TOM_TAC
             </div>
             <div class="col-md-9">
-                @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control" ,@style ="height:300px"})
+                @Html.TextAreaFor(model => model.TOMTAC, new { @class = "form-control form-input", name = "TOMTAC", @style = "height:300px" })
             </div>
         </div>
-        @Html.HiddenFor(model => model.MASACH)
+        @Html.HiddenFor(model => model.MASACH, new { @class = "form-input", name = "MASACH" })
         @*@Html.Partial("_AddImageBook")*@
 
-        <div class="form-group row">
-            <div class="col-md-12 text-right">
-                <input type="submit" value="@ViewText.BUTTON_UPDATE" class="btn btn-success" />
-            </div>
-        </div>
+
     </div>
 }
+<div class="form-group row">
+    <div class="col-md-12 text-right">
+        <button onclick="fnSaveEdit()" class="btn btn-success">@ViewText.BUTTON_UPDATE</button>
+    </div>
+</div>
 <script>
     var editor = $("#TOMTAC").kendoEditor({
         encoded: false,
@@ -136,7 +137,6 @@
         dataTextField: "text",
         dataValueField: "id"
     }).data("kendoDropDownTree");
-
 
     $("#MAHINHTHUC").kendoDropDownList();
 
@@ -164,7 +164,46 @@
     });
 
     phanloai.setDataSource(dataSourcePL);
-    debugger;
     $("#MAPHANLOAISACH").data("kendoDropDownTree").value("@Model.MAPHANLOAISACH");
     $("#MAPHANLOAISACH").data("kendoDropDownTree").trigger("change");
+
+    function fnSaveEdit() {
+        var form = $("#frmEditBook");
+        var formCreate = $(".form-input");
+        var formData = new FormData();
+        var lengthForm = formCreate.length;
+        console.log(lengthForm);
+        for (var i = 0; i < lengthForm; i++) {
+            formData.append(formCreate[i].name, formCreate[i].value);
+            console.log(formCreate[i].name);
+            console.log(formCreate[i].value);
+        }
+        var ngonngu = $("#MANGONNGU").val();
+        var hinhthuc = $("#MAHINHTHUC").val();
+        var phanloai = $("#MAPHANLOAISACH").data("kendoDropDownTree").value();
+        formData.append("MANGONNGU", ngonngu);
+        formData.append("MAHINHTHUC", hinhthuc);
+        formData.append("MAPHANLOAISACH", phanloai);
+        $.ajax({
+            url: '@Url.Action("EditBook", "Book")',
+            data: formData,
+            enctype: 'multipart/form-data',
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function (res) {
+                if (res == 1) {
+                    $("#popupEditWindows").data("kendoWindow").close();
+                    showSuccess("@Html.Raw(ViewText.Message_Update_Product_Success)");
+
+                } else {
+                    showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                }
+            },
+            error: function () {
+                showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+            }
+        });
+    }
 </script>

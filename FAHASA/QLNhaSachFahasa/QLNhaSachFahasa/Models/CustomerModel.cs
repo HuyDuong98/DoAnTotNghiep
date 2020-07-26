@@ -23,5 +23,8 @@ namespace QLNhaSachFahasa.Models
         public string USERNAME { get; set; }
         public string PASSWORD { get; set; }
         public DateTime? NGAYTAO { get; set; }
+        public decimal Ship { get; set; }
+        public DateTime NgayTaoDon { get; set; }
+        public string PhuongThucThanhToan { get; set; }
     }
 }

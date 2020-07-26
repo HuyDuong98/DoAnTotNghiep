@@ -49,10 +49,10 @@ function pauseListening() {
 }
 
 var botScript = [
-    "Hello! What is your name?",
-    "This is the second thing I say",
-    "This is the third thing I say",
-    "This is the last thing I say before I say goodbye"
+    "Xin chào! Bạn cần hỗ trợ gì?",
+    "Xin chào! Bạn cần hỗ trợ gì?",
+    "Xin chào! Bạn cần hỗ trợ gì?",
+    "Tạm biệt bạn. Chúc bạn có một ngày tốt lành"
   ];
   
   // goodbye is a variable that stores what the robot will say when it runs out of other things to say.
@@ -60,7 +60,8 @@ var botScript = [
 
 
   function lookForChat() {
-    // If there have been no chats yet, start the bot.
+      // If there have been no chats yet, start the bot.
+      debugger;
     if (count == 0) {
       startBot();
     }
@@ -147,8 +148,8 @@ var botScript = [
   
 
 
-  function userChat() {
-
+function userChat() {
+    debugger;
     // Find where the user is inputing text.
     compose_area = document.getElementById('composer');
   
@@ -167,10 +168,24 @@ var botScript = [
     // We can test if the user's message matches any of the prompts using if statements.
     console.log("✍ Code for custom prompts goes here");
     
-    if (uppercase == "HAPPY BIRTHDAY") { 
-      sendSpecialChat = [true, "Thank you! How did you know it's my birthday?!"];
+    if (uppercase == "HI" || uppercase == "HELLO" || uppercase == "XIN CHÀO" || uppercase == "XIN CHAO" || uppercase == "CHAO" || uppercase == "CHÀO") {
+        sendSpecialChat = [true, "Xin chào, rất vui được gặp bạn! Bạn cần hỗ trợ gì?"];
     }
-  
+    if (uppercase == "NGOC PHUC" || uppercase == "NGỌC PHÚC") {
+        sendSpecialChat = [true, "Chào Admin page Ngọc Phúc style"];
+    }
+    if (uppercase == "NGỌC HUY" || uppercase == "NGOC HUY") {
+        sendSpecialChat = [true, "Xin chào! Admin page Dương Ngọc Huy"];
+    }
+    if (uppercase == "CC") {
+        sendSpecialChat = [true, "Bạn hãy lịch sự!"];
+    }
+    if (/SDT/.test(uppercase) || /PHONE/.test(uppercase) || /MOBILE/.test(uppercase)) {
+        sendSpecialChat = [true, "Bạn có thể liên hệ trực tiếp với Admin qua số điện thoại 035033933."];
+    }
+    if (/EMAIL/.test(uppercase)) {
+        sendSpecialChat = [true, "Bạn có thể liên hệ trực tiếp với Admin qua duongngochuy.hufi@gmail.com"];
+    }
     // sendSpecialChat is an array that will override the next thing the bot says with the second value if the first value is true. If the first value is false the bot will say the next thing in the script.
   
   

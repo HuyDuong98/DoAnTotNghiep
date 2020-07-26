@@ -147,45 +147,45 @@
         function htmlDecode(value) {
             return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
         }
-            dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: function (options) {
-                        $.ajax({
-                            url: '@Url.Action("GetListBook", "Home")',
-                            dataType: "json",
-                            success: function (result) {
-                                options.success(result);
-                            },
-                            error: function (result) {
-                                options.error(result);
-                            }
-                        });
-                    }
-                },
-            });
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetListBook", "Home")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
 
-            var dataSourceSale = new kendo.data.DataSource({
-                transport: {
-                    read: function (options) {
-                        $.ajax({
-                            url: '@Url.Action("GetListBookSale", "Home")',
-                            data: {
-                                seeAll: false,
-                            },
-                            dataType: "json",
-                            success: function (result) {
-                                options.success(result);
-                            },
-                            error: function (result) {
-                                options.error(result);
-                            }
-                        });
-                    }
-                },
-            });
+        var dataSourceSale = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetListBookSale", "Home")',
+                        data: {
+                            seeAll: false,
+                        },
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
 
-            listView.setDataSource(dataSource);
-            listViewSale.setDataSource(dataSourceSale);
+        listView.setDataSource(dataSource);
+        listViewSale.setDataSource(dataSourceSale);
 
             function fnAddToCart(masanpham, soluong) {
                 $.ajax({

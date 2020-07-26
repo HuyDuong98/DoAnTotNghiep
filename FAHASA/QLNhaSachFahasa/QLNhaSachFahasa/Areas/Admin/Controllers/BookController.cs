@@ -363,23 +363,27 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public ActionResult EditBook(SANPHAM book)
+        public ActionResult EditBook(BookModel book)
         {
-            if (ModelState.IsValid)
+
+            var dao = new BookDao();
+            var model = new SANPHAM()
             {
-                var dao = new BookDao();
-                var result = dao.UpdateBook(book);
-                if (result)
-                {
-                    return RedirectToAction("Index", "Book");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Cập nhật không thành công.");
-                }
-            }
-            return RedirectToAction("Index", "Book");
-        }
+                MASANPHAM = book.MASACH,
+                TENSANPHAM = book.TENSACH,
+                TACGIA = book.TACGIA,
+                NHAXUATBAN = book.NHAXUATBAN,
+                TRONGLUONG = book.TRONGLUONG,
+                SOTRANG = book.SOTRANG,
+                KICHTHUOC = book.KICHTHUOC,
+                NGONNGU = book.MANGONNGU,
+                PHANLOAI = book.MAPHANLOAISACH,
+                HINHTHUC = book.MAHINHTHUC,
+                GHICHU = book.TOMTAC,
+            };
+            var result = dao.UpdateBook(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }  
         public ActionResult Delete(string id)
         {
             var result = new BookDao().Delete(id);
@@ -516,7 +520,43 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
 
         public ActionResult EditVPP(string id)
         {
-            return PartialView("_EditVPP");
+            var product = new SanPhamDao().getProduct(id);
+            var model = new ProductModel()
+            {
+                MaSanPham = product.MASANPHAM,
+                TenSanPham = product.TENSANPHAM,
+                PhanLoai = product.PHANLOAI,
+                ChatLieu = product.CHATLIEU,
+                MauSac = product.MAUSAC,
+                TrongLuong = (double)product.TRONGLUONG,
+                KichThuoc = product.KICHTHUOC,
+                NhaSanXuat = product.NHASANXUAT,
+                NhaCungCap = product.NHACUNGCAP,
+                QuocGia = product.QUOCGIA,
+                DonGia = product.DONGIA,
+                GhiChu = System.Web.HttpUtility.HtmlDecode(product.GHICHU),
+            };
+            return PartialView("_EditVPP",model);
+        }
+
+        public ActionResult SaveEditVPP(ProductModel product)
+        {
+            var model = new SANPHAM()
+            {
+                MASANPHAM = product.MaSanPham,
+                TENSANPHAM = product.TenSanPham,
+                CHATLIEU = product.ChatLieu,
+                MAUSAC = product.MauSac,
+                TRONGLUONG = product.TrongLuong,
+                NHASANXUAT = product.NhaSanXuat,
+                KICHTHUOC = product.KichThuoc,
+                NHACUNGCAP = product.NhaCungCap,
+                PHANLOAI = product.PhanLoai,
+                QUOCGIA = product.QuocGia,
+                GHICHU = product.GhiChu,
+            };
+            var result = new BookDao().UpdateVPP(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

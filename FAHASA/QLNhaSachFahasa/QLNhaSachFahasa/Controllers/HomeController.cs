@@ -24,6 +24,7 @@ namespace QLNhaSachFahasa.Controllers
         public ActionResult Detail(string productID)
         {
             var i = new SanPhamDao().setViewsProduct(productID);
+            SANPHAM model = new SanPhamDao().getProduct(productID);
             var listImg = new SanPhamDao().getListImages(productID);
             var img = new List<ImagesModel>();
             foreach(var item in listImg)
@@ -35,6 +36,7 @@ namespace QLNhaSachFahasa.Controllers
                 });
             }
             ViewBag.ProductID = productID;
+            ViewBag.PL = model.PHANLOAI;
             return View(img);
         }
 
@@ -155,6 +157,32 @@ namespace QLNhaSachFahasa.Controllers
                     CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
                     LUOTXEM = item.LUOTXEM
                 });
+            }
+            return Json(listProduct, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetListSuggest(string idPL)
+        {
+            List<SANPHAM> model = new SanPhamDao().getListProduct(idPL);
+            List<SanPhamModel> listProduct = new List<SanPhamModel>();
+            if (model != null)
+            {
+                foreach (SANPHAM item in model)
+                {
+                    List<HINHANH> images = new SanPhamDao().getListImages(item.MASANPHAM);
+                    string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.MASANPHAM);
+                    listProduct.Add(new SanPhamModel
+                    {
+
+                        TENSANPHAM = item.TENSANPHAM,
+                        MASANPHAM = item.MASANPHAM,
+                        DONGIA = item.DONGIA,
+                        LINKHINHANH = images[0].LINKHINHANH,
+                        GHICHU = item.GHICHU,
+                        CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
+                        LUOTXEM = item.LUOTXEM
+                    });
+                }
             }
             return Json(listProduct, JsonRequestBehavior.AllowGet);
         }

@@ -4,274 +4,275 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-    <div class="container mt-4">
-        <div id="imageDetail"></div>
-       
-        <script type="text/x-kendo-template" id="templateDetail">
-
-            <div class="sumary-detail-view wide">
-                <ul id="homes">
+<div class="container mt-4">
+    <div id="imageDetail"></div>
+    <div class="mt-4"><h5><strong>Sản phẩm liên quan</strong></h5></div>
+    <div class="box-sale-content ">
+        <div id="listProduct" class="row"></div>
+    </div>
+    <script type="text/x-kendo-template" id="templateDetail">
+        <div class="sumary-detail-view wide">
+            <ul id="homes">
+                #for(var i=0; i < HINHANH.length; i++){#
+                #if(i < 3){#
+                <li><a id="thumb#:i+1#" class="img-thumb" data-index="#:i#" href="javascrpt:void(0)" style="background: url('/UploadFile/#=HINHANH[i].LINKHINHANH#')"></a></li>
+                #}else{#
+                <li><span class="img-plus" id="btnmoreimg">+#:HINHANH.length-2#</span></li>
+                #break;#
+                #}#
+                #}#
+            </ul>
+            <div class="placeholder-box" id="btnmoreimg2">
+                <div id="placeholder">
                     #for(var i=0; i < HINHANH.length; i++){#
-                    #if(i < 3){#
-                    <li><a id="thumb#:i+1#" class="img-thumb" data-index="#:i#" href="javascrpt:void(0)" style="background: url('/UploadFile/#=HINHANH[i].LINKHINHANH#')"></a></li>
-                    #}else{#
-                    <li><span class="img-plus" id="btnmoreimg">+#:HINHANH.length-2#</span></li>
-                    #break;#
+                    #if(i==0){#
+                    <img id="home#:i#" data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" class="img-detail" />
+                    #}else if(i < 3){#
+                    <img id="home#:i#" data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" style="display:none" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" class="img-detail" />
                     #}#
+                    #}#
+                </div>
+            </div>
+
+            <div id="galley" class="d-none">
+                <ul class="pictures">
+                    #for(var i=0; i < HINHANH.length; i++){#
+                    <li><img data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" alt="#=HINHANH[i].TENHINHANH#"></li>
                     #}#
                 </ul>
-                <div class="placeholder-box"  id="btnmoreimg2">
-                    <div id="placeholder">
-                        #for(var i=0; i < HINHANH.length; i++){#
-                        #if(i==0){#
-                        <img id="home#:i#" data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" class="img-detail" />
-                        #}else if(i < 3){#
-                        <img id="home#:i#" data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" style="display:none" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" class="img-detail" />
-                        #}#
-                        #}#
+            </div>
+
+            <div class="summary-detail">
+                <h3> #:TENSANPHAM#</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="text-title">@Html.Raw(ViewText.Title_Nha_Cung_Cap): </span><span class="text-value">#:NHASANXUAT#</span>
                     </div>
+                    #if(TACGIA!=null){#
+                    <div class="col-md-6">
+                        <span class="text-title">@Html.Raw(ViewText.TITTLE_TAC_GIA): </span><span class="text-value">#:TACGIA#</span>
+                    </div>
+                    #}#
+                    #if(MAUSAC!=null){#
+                    <div class="col-md-6 d-flex">
+                        <span class="text-title">@Html.Raw(ViewText.TITLE_COLOR): </span><div class="color" style="background-color:#:MAUSAC#"></div>
+                    </div>
+                    #}#
+                    #if(NHAXUATBAN!=null){#
+                    <div class="col-md-6">
+                        <span class="text-title">@Html.Raw(ViewText.TITLE_NHA_XUAT_BAN): </span><span class="text-value">#:NHAXUATBAN#</span>
+                    </div>
+                    #}#
+                    @*<div class="col-md-6">@Html.Raw(ViewText.TITLE_KICH_THUOC): <span  class="text-value">#:KICHTHUOC#</span></div>*@
+                    <div class="col-md-6">@Html.Raw(ViewText.TITLE_TRONG_LUONG):<span class="text-value"> #:TRONGLUONG# gram</span></div>
                 </div>
 
-                <div id="galley" class="d-none">
-                    <ul class="pictures">
-                        #for(var i=0; i < HINHANH.length; i++){#
-                        <li><img data-original="/UploadFile/#=HINHANH[i].LINKHINHANH#" src="/UploadFile/#=HINHANH[i].LINKHINHANH#" alt="#=HINHANH[i].TENHINHANH#"></li>
-                        #}#
-                    </ul>
+                <div class="row">
+                    <div class="col-12 text-price"><em>#:kendo.toString(GIABAN,"n0")# @Html.Raw(ViewText.VND)</em></div>
                 </div>
+                <div class="quantity-box d-flex ">
+                    <span>Số lượng:</span>
+                    <div class="quantity-wapper ml-3">
+                        <span class="btn-quatity quantity-down"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                        <input type="number" step="1" value="1" min="1" max="#:SOLUONG#" id="quantity-#:MASANPHAM#" data-id="#:MASANPHAM#" class="quantity" />
+                        <span class="btn-quatity quantity-up"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <button class="btn btn-save-order mt-3" onclick='fnAddToCart("#:MASANPHAM#")'>@Html.Raw(ViewText.BUTTON_ADD_TO_CART)</button>
+            </div>
+        </div>
+        <div class="mt-5">
+            <h5><strong>@Html.Raw(ViewText.Title_Description_Product)</strong></h5>
 
-                <div class="summary-detail">
-                    <h3> #:TENSANPHAM#</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <span class="text-title">@Html.Raw(ViewText.Title_Nha_Cung_Cap): </span><span class="text-value">#:NHASANXUAT#</span>
-                        </div>
-                        #if(TACGIA!=null){#
-                        <div class="col-md-6">
-                            <span class="text-title">@Html.Raw(ViewText.TITTLE_TAC_GIA): </span><span class="text-value">#:TACGIA#</span>
-                        </div>
-                        #}#
-                        #if(MAUSAC!=null){#
-                        <div class="col-md-6 d-flex">
-                            <span class="text-title">@Html.Raw(ViewText.TITLE_COLOR): </span><div class="color" style="background-color:#:MAUSAC#"></div>
-                        </div>
-                        #}#
-                        #if(NHAXUATBAN!=null){#
-                        <div class="col-md-6">
-                            <span class="text-title">@Html.Raw(ViewText.TITLE_NHA_XUAT_BAN): </span><span class="text-value">#:NHAXUATBAN#</span>
-                        </div>
-                        #}#
-                        <div class="col-md-6">@Html.Raw(ViewText.TITLE_KICH_THUOC): <span  class="text-value">#:KICHTHUOC#</span></div>
-                        <div class="col-md-6">@Html.Raw(ViewText.TITLE_TRONG_LUONG):<span  class="text-value" > #:TRONGLUONG# gram</span></div>
-                    </div>
-                   
-                    <div class="row">
-                        <div class="col-12 text-price"><em>#:kendo.toString(GIABAN,"n0")# @Html.Raw(ViewText.VND)</em></div>
-                    </div>
-                    <div class="quantity-box d-flex ">
-                        <span>Số lượng:</span>
-                        <div class="quantity-wapper ml-3">
-                            <span class="btn-quatity quantity-down"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                            <input type="number" step="1" value="1" min="1" max="#:SOLUONG#" id="quantity-#:MASANPHAM#" data-id="#:MASANPHAM#" class="quantity" />
-                            <span class="btn-quatity quantity-up"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                        </div>
-                    </div>
-                    <button class="btn btn-save-order mt-3" onclick='fnAddToCart("#:MASANPHAM#")'>@Html.Raw(ViewText.BUTTON_ADD_TO_CART)</button>
-                </div>
+            <div class="text-justify mt-2">
+                #=htmlDecode(GHICHU||"")#
             </div>
-            <div class="mt-5">
-                <h5><strong>@Html.Raw(ViewText.Title_Description_Product)</strong></h5>
-                
-                <div class="text-justify mt-2">
-                    #=htmlDecode(GHICHU||"")#
-                </div>
-            </div>
-        </script>
+        </div>
+    </script>
+
+</div>
+<script type="text/x-kendo-template" id="templateProduct">
+    <div class="item-product col-lg-3 col-sm-3 col-6 mt-5">
+        <a href="/Home/Detail?productID=#:MASANPHAM#" class="">
+            <div class="book-bg-1 m-auto">
+                <img alt="#:TENSANPHAM#" title="#:TENSANPHAM#" src="@Url.Content("~/UploadFile/#:LINKHINHANH#")" height="176px" />
+            </div><span class="view-b-icon"></span>
+        </a>
+        <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
+            <span class="title-card">#:TENSANPHAM#</span>
+        </a>
+        <span class="flash-position #:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
+        <div class="text-price"><span class="text-title-product">Đơn giá:</span> <em>#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</em></div>
+        @*<div class="t-card-book-infor-description">
+
+            #= htmlDecode(GHICHU||"")#
+        </div>*@
     </div>
-
+</script>
 <script>
 
     templateInfoOrder();
     fnUpdateQuantityCart();
+    var listProduct = $("#listProduct").kendoListView({
+        template: kendo.template($("#templateProduct").html()),
+    }).data("kendoListView");
 
-        function htmlDecode(value) {
-            return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
-        }
-        function fnAddToCart(masanpham) {
-            var soluong = $(".quantity").val();
-            $.ajax({
-                url: '@Url.Action("AddIItem", "Cart")',
-                dataType: "json",
-                data: {
-                    maSanPham: masanpham,
-                    soluong: soluong
-                },
-                success: function (res) {
-                    var numbercart = document.getElementById("sumcart");
-                    numbercart.innerHTML = "" + res.length;
-                },
-            });
-        }
-        function templateInfoOrder() {
-            $.ajax({
-                url: '@Url.Action("GetBook", "Home")',
-                data: {
-                    productID:'@ViewBag.ProductID'
-                },
-                dataType: "json",
-                success: function (result) {
-                    var template = kendo.template($("#templateDetail").html());
-                    $("#imageDetail").html(template(result));
-                    $(function () {
-                        var index = 0,
-                            currentEffect;
-                        
-                        $("#homes a").click(function (e) {
-                            e.preventDefault();
-                            var target = parseInt($(this).data("index"));
-                            if (target === index) {
-                                return;
-                            }
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: function (options) {
+                $.ajax({
+                    url: '@Url.Action("GetListSuggest", "Home")',
+                    data: {
+                        idPL: "@ViewBag.PL",
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        options.success(result);
+                    },
+                    error: function (result) {
+                        options.error(result);
+                    }
+                });
+            }
+        },
+    });
+    listProduct.setDataSource(dataSource);
+    function htmlDecode(value) {
+        return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+    }
+    function fnAddToCart(masanpham) {
+        var soluong = $(".quantity").val();
+        $.ajax({
+            url: '@Url.Action("AddIItem", "Cart")',
+            dataType: "json",
+            data: {
+                maSanPham: masanpham,
+                soluong: soluong
+            },
+            success: function (res) {
+                var numbercart = document.getElementById("sumcart");
+                numbercart.innerHTML = "" + res.length;
+            },
+        });
+    }
+    function templateInfoOrder() {
+        $.ajax({
+            url: '@Url.Action("GetBook", "Home")',
+            data: {
+                productID: '@ViewBag.ProductID'
+            },
+            dataType: "json",
+            success: function (result) {
+                var template = kendo.template($("#templateDetail").html());
+                $("#imageDetail").html(template(result));
+                $(function () {
+                    var index = 0,
+                        currentEffect;
 
-                            if (currentEffect) {
-                                currentEffect.stop();
-                            }
-                            $("#home" + target).show();
-                            currentEffect = kendo.fx("#home" + target).replace("#home" + index, "swap");
-                            currentEffect.run();
-                            index = target;
-                        });
+                    $("#homes a").click(function (e) {
+                        e.preventDefault();
+                        var target = parseInt($(this).data("index"));
+                        if (target === index) {
+                            return;
+                        }
+
+                        if (currentEffect) {
+                            currentEffect.stop();
+                        }
+                        $("#home" + target).show();
+                        currentEffect = kendo.fx("#home" + target).replace("#home" + index, "swap");
+                        currentEffect.run();
+                        index = target;
                     });
+                });
+            },
+        });
+    }
+    function fnUpdateQuantityCart() {
+        $(document).on("click", ".quantity-up", function () {
+            var spinner = $(this),
+                input = spinner.parent().find('input[type="number"]'),
+                max = input.attr('max');
+            var oldValue = parseInt(input.val());
+            if (oldValue >= max) {
+                var newVal = oldValue;
+            } else {
+                var newVal = oldValue + 1;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: newVal,
+                    id: input.attr("data-id"),
                 },
-            });
-        }
-        function fnUpdateQuantityCart() {
-            $(document).on("click", ".quantity-up", function () {
-                var spinner = $(this),
-                    input = spinner.parent().find('input[type="number"]'),
-                    max = input.attr('max');
-                var oldValue = parseInt(input.val());
-                if (oldValue >= max) {
-                    var newVal = oldValue;
-                } else {
-                    var newVal = oldValue + 1;
+                dataType: "json",
+                success: function (res) {
+                    //templateProductOrder();
                 }
-                $.ajax({
-                    url: "/Cart/UpdateQuantity",
-                    data: {
-                        quantity: newVal,
-                        id: input.attr("data-id"),
-                    },
-                    dataType: "json",
-                    success: function (res) {
-                        //templateProductOrder();
-                    }
-                });
-                input.val(newVal);
-                input.trigger("change");
             });
-            $(document).on("click", ".quantity-down", function () {
-                var spinner = $(this),
-                    input = spinner.parent().find('input[type="number"]'),
-                    min = input.attr('min');
-                var oldValue = parseInt(input.val());
-                if (oldValue <= min) {
-                    var newVal = min;
-                } else {
-                    var newVal = oldValue - 1;
+            input.val(newVal);
+            input.trigger("change");
+        });
+        $(document).on("click", ".quantity-down", function () {
+            var spinner = $(this),
+                input = spinner.parent().find('input[type="number"]'),
+                min = input.attr('min');
+            var oldValue = parseInt(input.val());
+            if (oldValue <= min) {
+                var newVal = min;
+            } else {
+                var newVal = oldValue - 1;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: newVal,
+                    id: input.attr("data-id"),
+                },
+                dataType: "json",
+                success: function (res) {
+                    //templateProductOrder();
                 }
-                $.ajax({
-                    url: "/Cart/UpdateQuantity",
-                    data: {
-                        quantity: newVal,
-                        id: input.attr("data-id"),
-                    },
-                    dataType: "json",
-                    success: function (res) {
-                        //templateProductOrder();
-                    }
-                });
-                input.val(newVal);
-                input.trigger("change");
             });
-            $(".quantity").keyup(function () {
-                var value = parseInt($(this).val()),
-                    min = $(this).attr("min"),
-                    max = $(this).attr("max");
-                if (value <= min) {
-                    value = min;
-                } else if (value >= max) {
-                    value = max;
+            input.val(newVal);
+            input.trigger("change");
+        });
+        $(".quantity").keyup(function () {
+            var value = parseInt($(this).val()),
+                min = $(this).attr("min"),
+                max = $(this).attr("max");
+            if (value <= min) {
+                value = min;
+            } else if (value >= max) {
+                value = max;
+            }
+            $.ajax({
+                url: "/Cart/UpdateQuantity",
+                data: {
+                    quantity: value,
+                    id: $(this).attr("data-id"),
+                },
+                dataType: "json",
+                success: function (res) {
+                    //templateProductOrder();
                 }
-                $.ajax({
-                    url: "/Cart/UpdateQuantity",
-                    data: {
-                        quantity: value,
-                        id: $(this).attr("data-id"),
-                    },
-                    dataType: "json",
-                    success: function (res) {
-                        //templateProductOrder();
-                    }
-                });
-                $(this).val(value);
-                $(this).trigger("change");
             });
+            $(this).val(value);
+            $(this).trigger("change");
+        });
     }
     setTimeout(function () {
-        //$('#btnmoreimg').click(function () {
-        //    var image = new Image();
-        //    image.src = '/Content/images/background-dep.jpg';
-
-        //    var viewer = new Viewer(image, {
-        //        hidden: function () {
-        //            viewer.destroy();
-        //        },
-        //    });
-        //    viewer.show();
-        //});
-        //window.addEventListener('DOMContentLoaded', function () {
-            var galley = document.getElementById('galley');
-            var viewer = new Viewer(galley, {
-                url: 'data-original',
-                hidden: function () {
-                    viewer.destroy();
-                },
-                //toolbar: {
-                //    oneToOne: true,
-
-                //    prev: function () {
-                //        viewer.prev(true);
-                //    },
-
-                //    play: true,
-
-                //    next: function () {
-                //        viewer.next(true);
-                //    },
-
-                //    download: function () {
-                //        const a = document.createElement('a');
-
-                //        a.href = viewer.image.src;
-                //        a.download = viewer.image.alt;
-                //        document.body.appendChild(a);
-                //        a.click();
-                //        document.body.removeChild(a);
-                //    },
-                //},
-            });
+        var galley = document.getElementById('galley');
+        var viewer = new Viewer(galley, {
+            url: 'data-original',
+            hidden: function () {
+                viewer.destroy();
+            },
+        });
         $("#btnmoreimg,#btnmoreimg2").click(function () {
             viewer.show();
         });
-        //});
-        //window.addEventListener('DOMContentLoaded', function () {
-
-        //});
     }, 2000);
-        $(document).ready(function () {
-            
 
-        });
 </script>
 

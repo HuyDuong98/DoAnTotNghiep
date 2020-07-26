@@ -38,14 +38,14 @@ namespace Model.Dao
                 return 0;
             }
         }
-        public bool UpdateBook(SANPHAM entity)
+        public int UpdateBook(SANPHAM entity)
         {
             try
             {
                 var book = db.SANPHAMs.Find(entity.MASANPHAM);
                 book.TENSANPHAM = entity.TENSANPHAM;
                 book.TACGIA = entity.TACGIA;
-                book.DONGIA = entity.DONGIA;
+                //book.DONGIA = entity.DONGIA;
                 book.TRONGLUONG = entity.TRONGLUONG;
                 book.SOTRANG = entity.SOTRANG;
                 book.KICHTHUOC = entity.KICHTHUOC;
@@ -56,15 +56,39 @@ namespace Model.Dao
                 book.NGAYCAPNHAT = DateTime.Now;
                 book.HINHTHUC = entity.HINHTHUC;
                 db.SaveChanges();
-                return true;
+                return 1;
             }
             catch (Exception)
             {
-                return false;
+                return 0;
             }
 
         }
+        public int UpdateVPP(SANPHAM entity)
+        {
+            try
+            {
+                var book = db.SANPHAMs.Find(entity.MASANPHAM);
 
+                book.TENSANPHAM = entity.TENSANPHAM;
+                book.CHATLIEU = entity.CHATLIEU;
+                book.MAUSAC = entity.MAUSAC;
+                book.TRONGLUONG = entity.TRONGLUONG;
+                book.NHASANXUAT = entity.NHASANXUAT;
+                book.KICHTHUOC = entity.KICHTHUOC;
+                book.NHACUNGCAP = entity.NHACUNGCAP;
+                book.PHANLOAI = entity.PHANLOAI;
+                book.QUOCGIA = entity.QUOCGIA;
+                book.GHICHU = entity.GHICHU;
+                db.SaveChanges();
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+
+        }
         public bool Delete(string id)
         {
             try

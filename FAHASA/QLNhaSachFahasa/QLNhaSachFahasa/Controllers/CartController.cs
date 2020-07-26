@@ -82,15 +82,30 @@ namespace QLNhaSachFahasa.Controllers
         public ActionResult GetInforDetailOrder(string idDH)
         {
             var order = new DonHangDao().GetDonHang(idDH);
+            var listCT_DonHang = new DonHangDao().getListCTDH(idDH);
             var customer = new CustomerModel();
+            decimal phiShip = 0;
+            decimal tong = 0;
+            foreach(var item in listCT_DonHang)
+            {
+                tong += item.SOLUONG * item.THANHTIEN;
+            }
+            if (tong < 300000)
+            {
+                phiShip = 30000;
+            }
             if (order != null)
             {
                 var cusdetail = new CustomerDao().ViewDetail(order.MAKHACHHANG);
+                var pttt = new OrdersDao().GetPhuongThucThanhToan(order.MAPHUONGTHUCTHANHTOAN);
                 customer.MAKH = cusdetail.MAKHACHHANG;
                 customer.TENKH = cusdetail.TENKHACHHANG;
                 customer.DIACHI = cusdetail.DIACHI;
                 customer.DIENTHOAI = cusdetail.DIENTHOAI;
                 customer.EMAIL = cusdetail.EMAIL;
+                customer.NgayTaoDon = order.NGAYLAP;
+                customer.PhuongThucThanhToan = pttt.TENPHUONGTHUCTHANHTOAN;
+                customer.Ship = phiShip;
             }
             return Json(customer, JsonRequestBehavior.AllowGet);
         }
@@ -322,6 +337,7 @@ namespace QLNhaSachFahasa.Controllers
                     NGAYLAP = DateTime.Now,
                     NGAYCAPNHAT = DateTime.Now,
                     TRANGTHAI = 0,
+                    MAPHUONGTHUCTHANHTOAN = "0",
                     GHICHU = "",
                 };
                 var a = new SanPhamDao().InsertDonHang(order);
@@ -345,7 +361,7 @@ namespace QLNhaSachFahasa.Controllers
 
                 string emailTo = info.Email;
                 string subject = "Đơn hàng vừa mua";
-                string body = string.Format("Bạn vừa nhận được liên hê từ: <b>{0}</b><br/>Email: {1}<br/>Cảm ơn bạn đã mua hàng tại website Fahasa.</br> Mã đơn hàng của bạn là: " + idDH + ".</br>Đơn hàng của bạn đang được xử lý.", "Admin ", "");
+                string body = string.Format("Bạn vừa nhận được liên hê từ: <b>{0}</b><br/>Email: {1}<br/>Cảm ơn bạn đã mua hàng tại website Fahasa.<br/> Mã đơn hàng của bạn là: " + idDH + ".<br/>Dùng mã đơn hàng để tra cứu đơn hàng trực tiếp trên website. <br/>Đơn hàng của bạn đang được xử lý.", "Admin ", "");
 
                 EmailService service = new EmailService();
                 bool kq = service.Send(smtpUserName, smtpPassword, smtpHost, smtpPort, emailTo, subject, body);
