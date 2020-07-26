@@ -152,6 +152,7 @@
             success: function (res) {
                 var numbercart = document.getElementById("sumcart");
                 numbercart.innerHTML = "" + res.length;
+                showSuccessOrder();
             },
         });
     }
@@ -194,11 +195,8 @@
                 input = spinner.parent().find('input[type="number"]'),
                 max = input.attr('max');
             var oldValue = parseInt(input.val());
-            if (oldValue >= max) {
-                var newVal = oldValue;
-            } else {
-                var newVal = oldValue + 1;
-            }
+
+            var newVal = oldValue + 1;
             $.ajax({
                 url: "/Cart/UpdateQuantity",
                 data: {

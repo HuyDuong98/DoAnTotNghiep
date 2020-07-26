@@ -178,6 +178,7 @@
                 success: function (res) {
                     var numbercart = document.getElementById("sumcart");
                     numbercart.innerHTML = "" + res.length;
+                    showSuccessOrder();
                 },
             });
         }
