@@ -125,3 +125,9 @@
 ::-ms-input-placeholder { /*Microsoft Edge */
     color: #fff !important;
 }
+.lang-admin {
+    position: absolute;
+    bottom: 5px;
+    left:50%;
+    transform:translateX(-50%);
+}

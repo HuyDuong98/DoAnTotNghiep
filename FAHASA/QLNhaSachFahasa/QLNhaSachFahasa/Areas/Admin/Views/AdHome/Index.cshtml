@@ -1,29 +1,41 @@
 ﻿@model List<Model.EF.MANHINHTRANGCHU>
 @using QLNhaSachFahasa.Resources
+@using System.Threading;
 @{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<div class="content">
-    <div class="cal row" id="render-item-content">
-        @foreach (var item in Model)
-        {
-            <a class="day-home p-2 col-lg-3 col-md-4 col-sm-2" title="" href="@item.LINK" >
-                <div class="d-flex">
-                    <img src="@Url.Content("/Content/images/MenuHome/" + @item.ICON + "")" title="@item.TITLE" width="40" height="40" />
-                    <div class="ml-3">
-                        <h5 class="title-itemHome text-left">@item.TITLE</h5>
-                        <small class="text-small text-left mt-10 d-block grayy-color description-home" title="@item.DESCRIPTION"> @item.DESCRIPTION</small>
+@{
+    var currLang = Thread.CurrentThread.CurrentCulture.ToString();
+    var classEn = currLang == "en-US" ? "" : "lang-nonactive";
+    var classVi = currLang == "vi-VN" ? "" : "lang-nonactive";
 
+
+}
+    <div class="content">
+        <div class="cal row" id="render-item-content">
+            @foreach (var item in Model)
+            {
+                <a class="day-home p-2 col-lg-3 col-md-4 col-sm-2" title="" href="@item.LINK">
+                    <div class="d-flex">
+                        <img src="@Url.Content("/Content/images/MenuHome/" + @item.ICON + "")" title="@item.TITLE" width="40" height="40" />
+                        <div class="ml-3">
+                            <h5 class="title-itemHome text-left">@item.TITLE</h5>
+                            <small class="text-small text-left mt-10 d-block grayy-color description-home" title="@item.DESCRIPTION"> @item.DESCRIPTION</small>
+
+                        </div>
                     </div>
-                </div>
-            </a>
-        }
+                </a>
+            }
+        </div>
+        <div class="btn-language d-flex nav-item lang-admin">
+            <a href="@Url.Action("Change", "AdHome", new { LanguageAbbrevation = "vi" })"><img src="@Url.Content("~/Content/images/icon/flag-vi.png")" class="@classVi" width="25px" /></a>
+            <a href="@Url.Action("Change", "AdHome", new { LanguageAbbrevation = "en" })"><img src="@Url.Content("~/Content/images/icon/flag-us.png")" class="@classEn ml-2" width="25px" /></a>
+        </div>
     </div>
-</div>
 @section scripts{
     <script>
-        TweenMax.staggerFrom($('.day-home'), 0.1, {  opacity: 0}, 0.15);
+        TweenMax.staggerFrom($('.day-home'), 0.1, { opacity: 0 }, 0.15);
         var widthContent = $(".cal").width();
         console.log(widthContent);
         $(".container-header").css("width", widthContent);

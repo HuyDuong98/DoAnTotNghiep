@@ -1,6 +1,7 @@
 ﻿using Model.Dao;
 using QLNhaSachFahasa.Areas.Admin.Models;
 using QLNhaSachFahasa.Common;
+using QLNhaSachFahasa.UtilityHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,24 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 return View(emp);
             }
         }
+        public ActionResult Change(string languageAbbrevation)
+        {
+            if (languageAbbrevation == "vi")
+            {
+                CurrentLanguage = LanguageCulture.VIETNAMESE.Value;
+            }
+            else
+            {
+                CurrentLanguage = LanguageCulture.ENGLISH.Value;
+            }
 
+            string urlReferrer = Request.UrlReferrer.ToString();
+            if (string.IsNullOrWhiteSpace(urlReferrer))
+            {
+                urlReferrer = "/Login";
+            }
+
+            return Redirect(urlReferrer);
+        }
     }
 }
