@@ -1,0 +1,78 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
+@using QLNhaSachFahasa.Resources
+@Model.TENSACH
+<br />
+<div class=" mb-3">Giá Bán: <span class="price-old"></span> vnd</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmUpdatePrice" }))
+{
+    <div class="form-group d-flex">
+        <div class=" title-input centerY text-nowrap">
+            @ViewText.Tilte_Price
+            <span class="requit">*</span>
+        </div>
+        <div class="w-100 ml-3">
+            @Html.TextBoxFor(model => model.GIABAN, new { @class = "form-control form-input quantity input-number", placeholder = ViewText.VND, type = "number", min = "0", name = "SoLuong", style = "text-align: right; " })
+        </div>
+    </div>
+}
+<div class="form-group row">
+    <div class="col-md-12 text-right">
+        <button onclick="fnSubmitPrice()" class="btn btn-success">@ViewText.BUTTON_SUBMIT </button>
+    </div>
+</div>
+<script>
+    var price = kendo.toString(@Model.GIABAN, "n0");
+    $(".price-old").html(price);
+    var frmUpdatePrice = $("#frmUpdatePrice");
+    initValidationPrice();
+    initKeydownNumber();
+    function initValidationPrice() {
+
+            frmUpdatePrice.validate({
+                ignore: '',
+                rules: {
+                    "GIABAN": {
+                        required: true,
+                        min:0
+                    },
+                },
+                messages:
+                {
+                    "GIABAN": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                        min: "Giá sản phẩm không được nhỏ hơn 0",
+                    },
+                },
+                success: function (error) {
+                    error.remove();
+                }
+            });
+        }
+    function fnSubmitPrice() {
+        if (frmUpdatePrice.valid()) {
+            var gia = parseFloat($("#GIABAN").val());
+            $.ajax({
+                url: '@Url.Action("SaveUpdatePrice", "Book")',
+                data: {
+                    id: "@Model.MASACH",
+                    gia: gia
+                },
+                dataType: "json",
+                type: 'POST',
+                success: function (res) {
+                    if (res == 1) {
+                        $("#popupEdit").data("kendoWindow").close();
+                        GetData();
+                        GetDataVPP();
+                        showSuccess("@Html.Raw(ViewText.Message_Update_Product_Success)");
+                    } else {
+                        showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                    }
+                },
+                error: function () {
+                    showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                }
+            });
+        }
+    }
+</script>

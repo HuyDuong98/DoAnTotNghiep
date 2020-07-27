@@ -22,132 +22,153 @@
             {
                 @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @if (ViewBag.Success != null)
-                {
-                    <div class="alert alert-success">@ViewBag.Success</div>
-                }
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_NAME_EMPLOYEE
-                        <span class="requit">*</span>
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success">@ViewBag.Success</div>
+                    }
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_NAME_EMPLOYEE
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.TENNHANVIEN, new { @class = "form-control form-input", name = "TENNHANVIEN", placeholder = ViewText.PLACEHOLDER_INPUT_NAME })
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.TENNHANVIEN, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_NAME })
+                    @*<div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_DATEOFBIRTH
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control form-input", name = "NGAYSINH", placeholder = ViewText.TITLE_DATEOFBIRTH })
+                        </div>
+                    </div>*@
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_CMND
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.CMND, new { @class = "form-control form-input", name = "CMND", @maxlength = 12, placeholder = ViewText.TITLE_CMND })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_DATEOFBIRTH
-                        <span class="requit">*</span>
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_EMAIL
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control form-input", name = "EMAIL", placeholder = ViewText.PLACEHOLDER_INPUT_EMAIL })
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.NGAYSINH, new { @class = "form-control", placeholder = ViewText.TITLE_DATEOFBIRTH })
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_PHONE
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control form-input", name = "SDT", @maxlength = 11, @id = "txtPhoneNumber", placeholder = ViewText.PLACEHOLDER_INPUT_MOBILE })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_CMND
-                        <span class="requit">*</span>
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_ADDRESS
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextAreaFor(model => model.DIACHINHANVIEN, new { @class = "form-control form-input", name = "DIACHINHANVIEN", placeholder = ViewText.PLACEHOLDER_INPUT_ADDRESS })
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.CMND, new { @class = "form-control", @maxlength = 12, placeholder = ViewText.TITLE_CMND })
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_CHUC_DANH
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.MANHOMNGUOIDUNG, null, new { @class = "form-control " })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_EMAIL
-                        <span class="requit">*</span>
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_USERNAME
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.TextBoxFor(model => model.TENDANGNHAPNHANVIEN, new { @class = "form-control form-input", name = "MANGONNGU", @autocomplete = "off", placeholder = ViewText.PLACEHOLDER_INPUT_USERNAME })
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.EMAIL, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_EMAIL })
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_PHONE
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", @maxlength = 11, @id = "txtPhoneNumber", placeholder = ViewText.PLACEHOLDER_INPUT_MOBILE })
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_ADDRESS
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextAreaFor(model => model.DIACHINHANVIEN, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_ADDRESS })
-                    </div>
-                </div>
-                @*<div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_IMAGE
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.HINHANH, new { @class = "form-control", placeholder = ViewText.TITLE_IMAGE })
-                    </div>
-                </div>*@
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_CHUC_DANH
-                    </div>
-                    <div class="col-md-7">
-                        @Html.DropDownListFor(model => model.MANHOMNGUOIDUNG, null, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_USERNAME
-                        <span class="requit">*</span>
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.TENDANGNHAPNHANVIEN, new { @class = "form-control", @autocomplete = "off", placeholder = ViewText.PLACEHOLDER_INPUT_USERNAME })
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_PASSWORD
-                        <span class="requit">*</span>
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_PASSWORD
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.PasswordFor(model => model.MATKHAUNHANVIEN, new { @class = "form-control form-input", name = "MANGONNGU", @autocomplete = "new-password", placeholder = ViewText.PLACEHOLDER_INPUT_PASSWORD })
+                        </div>
                     </div>
-                    <div class="col-md-7">
-                        @Html.PasswordFor(model => model.MATKHAUNHANVIEN, new { @class = "form-control", @autocomplete = "new-password", placeholder = ViewText.PLACEHOLDER_INPUT_PASSWORD })
+                    <div class="form-group row">
+                        <div class="col-md-2 title-input centerY">
+                            @ViewText.TITLE_CONFIM_PASSWORD
+                            <span class="requit">*</span>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_COMFIRM_PASSWORD })
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-2 title-input centerY">
-                        @ViewText.TITLE_CONFIM_PASSWORD
-                        <span class="requit">*</span>
-                    </div>
-                    <div class="col-md-7">
-                        @Html.PasswordFor(model => model.ConfimPassword, new { @class = "form-control", placeholder = ViewText.PLACEHOLDER_INPUT_COMFIRM_PASSWORD })
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-9 text-right">
-                        <input type="submit" value="Create" class="btn btn-success" />
-                    </div>
+            }
+            <div class="form-group row">
+                <div class="col-md-9 text-right">
+                    <button onclick="fnCreateEmloyee()" class="btn btn-success" >@ViewText.BUTTON_ADD</button>
                 </div>
             </div>
-            }
         </div>
     </div>
 </div>
 @section scripts{
     <script src="~/Scripts/Custom/Employee.js"></script>
     <script>
-
+        var form = $("#frmTaoMoiNhanVien");
         initKeydownNumber();
         initValidation();
 
         $("#MANHOMNGUOIDUNG").kendoDropDownList();
-        $("#NGAYSINH").kendoDatePicker({
-            popup: {
-                position: "top right",
-                origin: "bottom right"
+        //$("#NGAYSINH").kendoDatePicker({
+        //    popup: {
+        //        position: "top right",
+        //        origin: "bottom right"
+        //    }
+        //});
+        function fnCreateEmloyee() {
+            form.serialize();
+            if (form.valid()) {
+                 $.ajax({
+                    url: '@Url.Action("Create", "Emloyee")',
+                     data: form.serialize(),
+                    //enctype: 'multipart/form-data',
+                    dataType: "json",
+                    //contentType: false,
+                    //processData: false,
+                    type: 'POST',
+                    success: function (res) {
+                        if (res == 1) {
+                            clearForms();
+                            showSuccess("Thêm nhân viên thành công");
+                        }else if (res == -1) {
+                            showError("Nhân viên đã tồn tại");
+                        } else if (res == -2) {
+                            showError("Email đã được đăng ký");
+                        } else {
+                            showError("Thêm nhân viên thất bại");
+                        }
+                    },
+                    error: function () {
+                        showError("Thêm nhân viên thất bại");
+                    }
+                });
             }
-        });
+        }
     </script>
 }
 

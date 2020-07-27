@@ -213,13 +213,21 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             foreach (var item in listPL)
             {
                 var product = res.Where(x => x.PHANLOAI == item.id).ToList();
+                
                 foreach (var x in product)
                 {
+                    var giaban = new SanPhamDao().getGiaBan(x.MASANPHAM);
+                    var gia = x.DONGIA;
+                    if(giaban != null)
+                    {
+                        gia = giaban.DONGIABAN;
+                    }
                     model.Add(new BookModel
                     {
                         MASACH = x.MASANPHAM,
                         TENSACH = x.TENSANPHAM,
                         TACGIA = x.TACGIA,
+                        GIABAN = gia,
                         GIASACH = x.DONGIA,
                         TRONGLUONG = x.TRONGLUONG,
                         SOTRANG = x.SOTRANG,
@@ -494,6 +502,12 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 foreach (var x in product)
                 {
                     var ncc = new SanPhamDao().GetItemNCC(x.NHACUNGCAP);
+                    var giaban = new SanPhamDao().getGiaBan(x.MASANPHAM);
+                    var gia = x.DONGIA;
+                    if(giaban!= null)
+                    {
+                        gia = giaban.DONGIABAN;
+                    }
                     string tenNCC = "";
                     string tenNSX = "";
                     if(ncc != null)
@@ -511,6 +525,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                         TENSP = x.TENSANPHAM,
                         MAUSAC = x.MAUSAC,
                         DONGIA = x.DONGIA,
+                        GIABAN = gia,
                         TRONGLUONG = x.TRONGLUONG,
                         CHATLIEU = x.CHATLIEU,
                         KICHTHUOC = x.KICHTHUOC,
@@ -563,6 +578,46 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             };
             var result = new BookDao().UpdateVPP(model);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdatedQuantily(string id)
+        {
+            var product = new SanPhamDao().getProduct(id);
+            var model = new BookModel()
+            {
+                MASACH = id,
+                TENSACH = product.TENSANPHAM,
+                SoLuong = (int)product.SOLUONG,
+            };
+            return PartialView("_UpdatedQuantily", model);
+        }
+        public ActionResult UpdateQuantity(string id, int sl)
+        {
+            var message = new SanPhamDao().UpdateQuantily(id, sl);
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult UpdatedPrice(string id)
+        {
+            var product = new SanPhamDao().getProduct(id);
+            var giaban = new SanPhamDao().getGiaBan(id);
+            decimal gia = product.DONGIA;
+            if(giaban != null)
+            {
+                gia = giaban.DONGIABAN;
+            }
+            
+            var model = new BookModel()
+            {
+                MASACH = id,
+                TENSACH = product.TENSANPHAM,
+                GIABAN = gia,
+            };
+            return PartialView("_UpdatedPrice", model);
+        }
+        public ActionResult SaveUpdatePrice(string id, decimal gia)
+        {
+            var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+            var message = new SanPhamDao().UpdateGiaBan(id, gia,session.UserID);
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
     }
 }

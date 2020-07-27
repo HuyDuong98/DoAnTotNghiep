@@ -25,7 +25,7 @@ function addclassFocus(idInput, idSearch) {
     })
 }
 function initKeydownNumber() {
-    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number, #input-money-2, #CMND", function (e) {
+    $(document).on("keydown", "#txtPhoneNumber, #input-money, #input-number, #input-money-2, #CMND,.input-number", function (e) {
         if (e.keyCode === 110 || e.keyCode === 190)
             e.preventDefault();
 

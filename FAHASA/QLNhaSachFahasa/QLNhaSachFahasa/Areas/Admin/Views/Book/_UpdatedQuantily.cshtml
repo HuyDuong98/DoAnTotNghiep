@@ -1,0 +1,72 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.BookModel
+@using QLNhaSachFahasa.Resources
+    <div class="mb-3">@Model.TENSACH</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmUpdateQuantily" }))
+{
+    <div class="form-group row">
+        <div class="col-md-5 title-input centerY">
+            @ViewText.TITLE_QUANTITY
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-7">
+            @Html.TextBoxFor(model => model.SoLuong, new { @class = "form-control form-input quantity input-number", type = "number", min = "0", name = "SoLuong" })
+        </div>
+    </div>
+}
+<div class="form-group row">
+    <div class="col-md-12 text-right">
+        <button onclick="fnSubmitQuantily()" class="btn btn-success">@ViewText.BUTTON_SUBMIT </button>
+    </div>
+</div>
+<script>
+        var formUpdateQuantily = $("#frmUpdateQuantily");
+        initValidationQuantily();
+        initKeydownNumber();
+        function initValidationQuantily() {
+
+            formUpdateQuantily.validate({
+                ignore: '',
+                rules: {
+                    "SoLuong": {
+                        required: true,
+                        min:0
+                    },
+                },
+                messages:
+                {
+                    "SoLuong": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                        min: "Số lượng sản phẩm không được nhỏ hơn 0",
+                    },
+                },
+                success: function (error) {
+                    error.remove();
+                }
+            });
+        }
+        function fnSubmitQuantily() {
+            if (formUpdateQuantily.valid()) {
+                var sl = parseInt($("#SoLuong").val());
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "Book")',
+                    data: {
+                        id:"@Model.MASACH",
+                        sl:sl
+                    },
+                    dataType: "json",
+                    type: 'POST',
+                    success: function (res) {
+                        if (res == 1) {
+                            $("#popupEdit").data("kendoWindow").close();
+                            showSuccess("@Html.Raw(ViewText.Message_Update_Product_Success)");
+                        } else {
+                            showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                        }
+                    },
+                    error: function () {
+                        showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                    }
+                });
+            }
+        }
+</script>

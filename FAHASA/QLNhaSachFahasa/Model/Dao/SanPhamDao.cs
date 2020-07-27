@@ -337,5 +337,19 @@ namespace Model.Dao
                 return 0;
             }
         }
+        public int UpdateQuantily(string id, int sl)
+        {
+            try
+            {
+                var product = db.SANPHAMs.Find(id);
+                product.SOLUONG = sl;
+                db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

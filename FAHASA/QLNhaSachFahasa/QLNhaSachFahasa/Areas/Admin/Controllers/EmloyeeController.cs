@@ -57,62 +57,61 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 CHUCVU = model.CHUCVU,
                 TRANGTHAI = model.TRANGTHAI,
                 MANHOMNGUOIDUNG = model.MANHOMNGUOIDUNG,
-                NameGroup= new AdminDao().getNameGroup(model.MANHOMNGUOIDUNG)
+                NameGroup = new AdminDao().getNameGroup(model.MANHOMNGUOIDUNG)
             };
-           
-            return PartialView("~/Areas/Admin/Views/Emloyee/_InfoEmployee.cshtml",emp);
+
+            return PartialView("~/Areas/Admin/Views/Emloyee/_InfoEmployee.cshtml", emp);
         }
 
 
         [HttpPost]
         public ActionResult Create(NhaVienModel model)
         {
-            if (ModelState.IsValid)
+            var message = 0;
+            var dao = new AdminDao();
+            if (dao.CheckUserNameEmloyee(model.TENDANGNHAPNHANVIEN))
             {
-                var dao = new AdminDao();
-                if (dao.CheckUserNameEmloyee(model.TENDANGNHAPNHANVIEN))
-                {
-                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại.");
-                }
-                else if (dao.CheckEmailEmloyee(model.EMAIL))
-                {
-                    ModelState.AddModelError("", "Email đã tồn tại.");
+                message = -1;
+            }
+            else if (dao.CheckEmailEmloyee(model.EMAIL))
+            {
+                message = -2;
 
-                } 
+            }
+            else
+            {
+                var user = new NHANVIEN()
+                {
+                    MANHANVIEN = dao.CreateIDAuto("NV"),
+                    TENNHANVIEN = model.TENNHANVIEN,
+                    TENDANGNHAPNHANVIEN = model.TENDANGNHAPNHANVIEN,
+                    MATKHAUNHANVIEN = Encryptor.MD5Hash(model.MATKHAUNHANVIEN),
+                    DIACHINHANVIEN = model.DIACHINHANVIEN,
+                    EMAIL = model.EMAIL,
+                    SDT = model.SDT,
+                    NGAYSINH = model.NGAYSINH,
+                    CMND = model.CMND,
+                    HINHANH = model.HINHANH,
+                    LOAIHINHCONGVIEC = model.LOAIHINHCONGVIEC,
+                    CHUCVU = model.CHUCVU,
+                    NGAYTAO = DateTime.Now,
+                    MANHOMNGUOIDUNG = model.MANHOMNGUOIDUNG,
+                    TRANGTHAI = true
+                };
+
+                var result = dao.InsertEmloyee(user);
+                if (result != null)
+                {
+                    message = 1;
+                    //model = new RegisterEmloyeeModel();
+                }
                 else
                 {
-                    var user = new NHANVIEN() { 
-                        MANHANVIEN=dao.CreateIDAuto("NV"),
-                        TENNHANVIEN=model.TENNHANVIEN,
-                        TENDANGNHAPNHANVIEN=model.TENDANGNHAPNHANVIEN,
-                        MATKHAUNHANVIEN = Encryptor.MD5Hash(model.MATKHAUNHANVIEN),
-                        DIACHINHANVIEN=model.DIACHINHANVIEN,
-                        EMAIL= model.EMAIL,
-                        SDT= model.SDT,
-                        NGAYSINH = model.NGAYSINH,
-                        CMND = model.CMND,
-                        HINHANH = model.HINHANH,
-                        LOAIHINHCONGVIEC = model.LOAIHINHCONGVIEC,
-                        CHUCVU = model.CHUCVU,
-                        NGAYTAO= DateTime.Now,
-                        MANHOMNGUOIDUNG= model.MANHOMNGUOIDUNG,
-                        TRANGTHAI= true
-                    };
-                    
-                    var result = dao.InsertEmloyee(user);
-                    if (result != null)
-                    {
-                        ViewBag.Success = "Đăng ký thành công";
-                        return RedirectToAction("Index", "Emloyee");
-                        //model = new RegisterEmloyeeModel();
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Đăng ký không thành công.");
-                    }
+                    message = 0;
                 }
             }
-            return View(model);
+
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         [HasCredential(RoleId = "EIDT_EMPLOYEE")]
@@ -137,19 +136,19 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             };
             return PartialView("~/Areas/Admin/Views/Emloyee/_EditEmloyee.cshtml", emp);
         }
-        
-      
+
+
         //public ActionResult GetListEmloyee(string keywork)
         //{
         //    var res = new AdminDao().GetDataEmloyee(keywork);
         //    return Json(res, JsonRequestBehavior.AllowGet);
         //}
         [HttpPost]
-        public ActionResult GetList(string keywork , string status)
+        public ActionResult GetList(string keywork, string status)
         {
             var res = new AdminDao().GetDataEmloyee(keywork, status);
 
-            return Json(res.Select(x=>new
+            return Json(res.Select(x => new
             {
                 MANV = x.MANHANVIEN,
                 TENNV = x.TENNHANVIEN,
@@ -177,14 +176,14 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
 
             return PartialView("~/Areas/Admin/Views/Emloyee/_UpdateStatusEmployee.cshtml", model);
         }
-        [HttpPost] 
+        [HttpPost]
         public JsonResult ChangeStatusEmployee(string id)
         {
             var result = new AdminDao().ChangeStatus(id);
             return Json(new
             {
                 status = result
-            }) ;
+            });
 
         }
         [HttpPost]
@@ -193,16 +192,16 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new AdminDao();
-                if(!string.IsNullOrEmpty(employee.MATKHAUNHANVIEN))
+                if (!string.IsNullOrEmpty(employee.MATKHAUNHANVIEN))
                 {
                     employee.MATKHAUNHANVIEN = Encryptor.MD5Hash(employee.MATKHAUNHANVIEN);
-                }    
+                }
                 var result = dao.UpdateEmloyee(employee);
                 return Json(result);
             }
             return RedirectToAction("Index", "Emloyee");
         }
 
-       
+
     }
 }
