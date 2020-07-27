@@ -39,6 +39,9 @@
 <div id="popupEditWindows">
     <div id="wndEditContent"></div>
 </div>
+<div id="popupEdit">
+    <div id="wndEdit"></div>
+</div>
 <div id="popupViewsWindows">
     <div id="wndViewsContent"></div>
 </div>
@@ -46,9 +49,11 @@
     <script src="/Scripts/Custom/Books.js"></script>
     <script id="status-template" type="text/x-kendo-template">
         <div class="d-flex w-100 text-center">
-            <a onclick='popupUploadImage("#=MASACH#")' class="button buttonEdit rounded-circle btn-i-center"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
-            <a onclick='popupEditBook("#=MASACH#")' class="button buttonEdit ml-2 rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a href="javascript:void(0)" onclick='funcDeleteBook("#=MASACH#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            <a onclick='popupUpdatedQuantily("#=MASACH#")' title="Cập nhật số lượng" class="button buttonEdit rounded-circle btn-i-center"><i class="fa fa-sort" aria-hidden="true"></i></a>
+            <a onclick='popupUpdatePrice("#=MASACH#")' title="Cập nhật giá bán" class="button buttonEdit rounded-circle btn-i-center ml-2"><i class="fa fa-usd" aria-hidden="true"></i></a>
+            <a onclick='popupUploadImage("#=MASACH#")' title="Tải ảnh lên" class="button buttonEdit rounded-circle btn-i-center ml-2"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+            <a onclick='popupEditBook("#=MASACH#")' title="Chỉnh sửa" class="button buttonEdit ml-2 rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" title="Xóa" onclick='funcDeleteBook("#=MASACH#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         </div>
     </script>
     <script type="text/x-kendo-template" id="template">
@@ -97,7 +102,15 @@
             draggable: true,
             scrollable: true
         });
-
+         $("#popupEdit").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+            //maxHeight: 600,
+            width: 300,
+            draggable: true,
+            scrollable: true
+        });
         $("#popupViewsWindows").kendoWindow({
             title: "@Html.Raw(ViewText.TITLE_INFO_BOOK)",
             visible: false,
@@ -113,7 +126,7 @@
             attributes: { style: "cursor:pointer", },
             groupable: false,
             sortable: true,
-            filterable: true,
+            filterable: false,
             pageable: {
                 refresh: true,
                 pageSizes: true
@@ -141,7 +154,7 @@
                     headerAttributes: {
                         class: "header-table",
                     },
-                    width: "auto",
+                    width: "200px",
                 }, {
                     field: "TACGIA",
                     title: "Tác giả",
@@ -153,15 +166,16 @@
                         class: "header-table",
                     },
                     width: "auto",
-                }, {
-                    field: "NHAXUATBAN",
-                    title: "Nhà xuất bản",
-                    template: "<span>#=NHAXUATBAN#</span>",
-                    headerAttributes: {
-                        class: "header-table",
-                    },
-                    width: "auto",
                 },
+                //{
+                //    field: "NHAXUATBAN",
+                //    title: "Nhà xuất bản",
+                //    template: "<span>#=NHAXUATBAN#</span>",
+                //    headerAttributes: {
+                //        class: "header-table",
+                //    },
+                //    width: "auto",
+                //},
                 {
                     field: "IDLOAI",
                     title: "Loại",
@@ -173,15 +187,23 @@
                 },
                 {
                     field: "GIASACH",
-                    title: "Giá sách",
-                    template: "<span>#=GIASACH# vnd</span>",
+                    title: "Giá nhập",
+                    template: "<span>#=kendo.toString(GIASACH,'n0')# vnd</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "GIABAN",
+                    title: "Giá bán",
+                    template: "<span>#=kendo.toString(GIABAN,'n0')# vnd</span>",
                     headerAttributes: {
                         class: "header-table",
                     },
                     width: "auto",
                 }, {
                     template: kendo.template($("#status-template").html()),
-                    width: 160,
+                    width: 260,
                 }],
             groupable: false,
             filterable: true,
@@ -204,5 +226,18 @@
         });
 
         GetData();
+
+        function popupUpdatedQuantily(id) {
+            $('#wndEdit').load("/Admin/Book/UpdatedQuantily?id=" + id, function () {
+                $("#popupEdit").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+
+        function popupUpdatePrice(id) {
+            $('#wndEdit').load("/Admin/Book/UpdatedPrice?id=" + id, function () {
+                $("#popupEdit").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+       
     </script>
 }

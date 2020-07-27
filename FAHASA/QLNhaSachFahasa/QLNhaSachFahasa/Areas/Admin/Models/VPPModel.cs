@@ -20,6 +20,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string CHATLIEU { get; set; }
         public string MAUSAC { get; set; }
         public decimal DONGIA { get; set; }
+        public decimal GIABAN { get; set; }
         public string NCC { get; set; }
         public string THUONGHIEU { get; set; }
         public string GHICHU { get; set; }
