@@ -1141,8 +1141,7 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit
-        ///Edit.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string TITLE_EDIT {
             get {
