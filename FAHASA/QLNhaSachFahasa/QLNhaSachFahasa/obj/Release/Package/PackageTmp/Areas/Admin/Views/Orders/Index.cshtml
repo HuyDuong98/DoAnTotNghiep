@@ -1,0 +1,227 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.Orders
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-order">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                    <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-order','#ico-search','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <input id="selectStatus" style="width:200px" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-custom-100 mt-2">
+            <div id="gridOrder"></div>
+        </div>
+    </div>
+</div>
+<div id="popupViewsDetail">
+    <div id="wndViewsDetail"></div>
+</div>
+<div id="popupChangeStatus">
+    <div id="wndChangeStatus"></div>
+</div>
+<script id="status-template" type="text/x-kendo-template">
+        <a onclick='popupViewDetailOrder("#=MaDDH#","#=PhiShip#","#=TongTien#")' class="button buttonEdit ml-2 rounded-circle"><i class="fa fa-eye" aria-hidden="true"></i></a>
+</script>
+@section scripts{
+    <script>
+        var selectStatus = $("#selectStatus").kendoDropDownList({
+            optionLabel: false,
+            dataTextField: "Text",
+            dataValueField: "Value",
+            height: 310,
+            change: function (e) {
+                var value = this.value();
+                GetDataGridOrder(value);
+            },
+            dataSource: {
+                data: [{ Text: "@Html.Raw(ViewText.TITLE_ALL)", Value: null },
+                    { Text: "@Html.Raw(ViewText.Status_New)", Value: 0 },
+                    { Text: "@Html.Raw(ViewText.Status_Shipping)", Value: 2 },
+                    { Text: "@Html.Raw(ViewText.Status_Success)", Value: 1 },
+                    { Text: "@Html.Raw(ViewText.Status_Cancel)", Value: -1 }
+                ]}
+        }).data("kendoDropDownList");
+
+        var gridOrder = $("#gridOrder").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            //selectable: "multiple",
+            groupable: false,
+            sortable: true,
+            filterable: false,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MaDDH",
+                    title: "Mã đơn hàng",
+                    template: "<span>#=MaDDH#</span>",
+                    width: 60,
+                }, {
+                    field: "TenKH",
+                    title: "Tên khách hàng",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 150,
+                }, {
+                    field: "SDT",
+                    title: "Số điện thoại",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 140,
+                }, {
+                    field: "DiaChi",
+                    title: "Địa chỉ", 
+                    template: "<span>#=DiaChi#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 200,
+                },
+                @*{
+                    field: "PhiShip",
+                    title: "Phí ship",
+                    template: "<span>#=kendo.toString(PhiShip,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "TongTien",
+                    title: "Tổng tiền",
+                    template: "<span>#=kendo.toString(TongTien,\"n0\")#@Html.Raw(ViewText.VND)</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },*@
+                {
+                    field: "TrangThai",
+                    title: "Trạng thái",
+                    template: "<a href='javascript:void(0)' #=TrangThai==1?'disabled':'onclick=fnchangeStatus(\"'+MaDDH+'\",\"'+TrangThai+'\")'# class=\" #=TrangThai==0?'color-blue':TrangThai==1?'color-green':TrangThai==-1?'color-red':'color-violet'#\">#=TrangThai==0?'@Html.Raw(ViewText.Status_New)':TrangThai==1?'@Html.Raw(ViewText.Status_Success)':TrangThai==-1?'@Html.Raw(ViewText.Status_Cancel)':'@Html.Raw(ViewText.Status_Shipping)'#</a>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "150px",
+                }, {
+                    field: "TenNguoiCapNhat",
+                    title: "Nhân viên",
+                    template: "<span>#=TenNguoiCapNhat#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    field: "NgayCapNhat",
+                    title: "Ngày cập nhật",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NgayCapNhat),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },  {
+                    template: kendo.template($("#status-template").html()),
+                    width: 80,
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [100,"All"],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+
+        function GetDataGridOrder(status) {
+            var keyword = $('#txtSearchDataTable').val();
+
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url:"@Url.Action("GetDataGridOrder", "Orders")",
+                            data: {
+                                keyword: keyword,
+                                status: status
+                            },
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        });
+                    }
+                },
+                pageSize: 100
+            });
+            gridOrder.setDataSource(dataSource);
+        }
+        GetDataGridOrder(null);
+        $("#popupViewsDetail").kendoWindow({
+            title: "@Html.Raw(ViewText.Title_Detail_Order)",
+            visible: false,
+            modal: true,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+        $("#popupChangeStatus").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_STATUS)",
+            visible: false,
+            modal: true,
+            minWidth: 300,
+            draggable: true,
+            scrollable: true
+        });
+        function popupViewDetailOrder(id, ship, sum) {
+            debugger;
+            $('#wndViewsDetail').load("/Admin/Orders/ViewDetail?id=" + id + "&ship=" + ship + "&tongTien=" + sum, function () {
+                $("#popupViewsDetail").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+        function fnchangeStatus(id, status) {
+            $('#wndChangeStatus').load("/Admin/Orders/ChangeStatus?id=" + id + "&status=" + status, function () {
+                $("#popupChangeStatus").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keyup(function () {
+                setTimeout(function () {
+                    GetDataGridOrder();
+                }, 1000);
+            });
+        });
+    </script>
+}
+

@@ -33,25 +33,7 @@ function fnUpdateStatusEmp(id) {
 
     })
 }
-function funcDeleteEmployee(id) {
-    var Ok = confirm('Bạn có muốn xóa nhân viên ' + id + "?");
-    if (Ok)
-        $.ajax({
-            url: "/Emloyee/DeleteEmployee",
-            data: { id: id },
-            dataType: "json",
-            type: "POST",
-            success: function (response) {
-                if (response.result == true) {
-                    GetData();
-                } else {
-                    GetData();
-                }
-            },
-        })
-    else
-        return false;
-}
+
 function GetData() {
     var keywork = $('#txtSearchDataTable').val();
     dataSource = new kendo.data.DataSource({

@@ -65,7 +65,15 @@ function showError(message) {
     //    $('.popup').remove();
     //}, 10000);
 }
-
+function showSuccessOrder() {
+    $(".text-mesage-order").remove();
+    $(".message-cart").append('<span class="text-mesage-order">Đã thêm sản phẩm vào giỏ hàng!</span>');
+    $(".message-cart").show();
+    setTimeout(function () {
+        $(".message-cart").hide('fast');
+        $(".text-mesage-order").remove();
+    }, 5000);
+}
 function showSuccess(message) {
     $('.popup').remove();
     var div =

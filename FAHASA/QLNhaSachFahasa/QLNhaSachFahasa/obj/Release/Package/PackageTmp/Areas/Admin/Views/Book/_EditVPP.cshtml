@@ -1,0 +1,353 @@
+﻿@model QLNhaSachFahasa.Areas.Admin.Models.ProductModel
+@using QLNhaSachFahasa.Resources
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditVPP" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_PRODUCT_NAME
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.TenSanPham, new { @class = "form-input form-control", name = "TenSanPham" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_PHAN_LOAI
+            <span class="requit">*</span>
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.PhanLoai, new { @class = "w-100 form-input", name = "TenSanPham" })
+            <label id="PhanLoai-error" class="error" for="PhanLoai"></label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_MATERIAL
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.ChatLieu, new { @class = "form-control form-input", name = "ChatLieu" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input ">
+            @ViewText.TITLE_COLOR
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.MauSac, new { @class = "form-input", name = "MauSac" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_TRONG_LUONG
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.TrongLuong, new { @class = "form-control form-input", @id = "input-number", placeholder = ViewText.DV_GAM, name = "TrongLuong" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_KICH_THUOC
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.KichThuoc, new { @class = "form-control form-input", placeholder = ViewText.EXAM_KICH_THUOC, name = "KichThuoc" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY ">
+            @ViewText.TITLE_BRAND
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.NhaSanXuat, new { @class = " form-input", name = "NhaSanXuat" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY ">
+            @ViewText.Title_Provider
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.NhaCungCap, new { @class = " form-input", name = "NhaCungCap" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input centerY">
+            @ViewText.TITLE_COUNTRY
+        </div>
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.QuocGia, new { @class = "form-input", name = "QuocGia" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4 title-input">
+            @ViewText.TITLE_MORE_INFORMATION
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.GhiChu, new { @class = "form-control form-input", name = "GhiChu" })
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.MaSanPham,new { @class = "form-input", name = "MaSanPham" })
+}
+
+<div class="form-group row">
+    <div class="col-md-12 text-right">
+        <button id="btnSaveEdit" class="btn btn-success">@ViewText.BUTTON_UPDATE</button>
+    </div>
+</div>
+
+
+<script>
+        initKeydownNumber();
+        var editor = $("#GhiChu").kendoEditor();
+        var phanloai = $("#PhanLoai").kendoDropDownTree({
+            placeholder: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            height: "auto",
+            dataTextField: "text",
+            dataValueField: "id"
+        }).data("kendoDropDownTree");
+
+        var dataSourcePL = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataPhanLoaiVPP", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    children: "items"
+                }
+            }
+        });
+
+        phanloai.setDataSource(dataSourcePL);
+        $("#PhanLoai").data("kendoDropDownTree").value("@Model.PhanLoai");
+        $("#PhanLoai").data("kendoDropDownTree").trigger("change");
+
+        var color = $("#MauSac").kendoColorPicker({
+            value: "#ffffff",
+            buttons: false,
+        });
+        var NhaSanXuat = $("#NhaSanXuat").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNSX",
+            dataValueField: "MaNSX",
+            height: 310,
+        }).data("kendoDropDownList");
+
+        var NhaCungCap = $("#NhaCungCap").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenNCC",
+            dataValueField: "MaNCC",
+            height: 310,
+        }).data("kendoDropDownList");
+
+        var QuocGia = $("#QuocGia").kendoDropDownList({
+            optionLabel: "@Html.Raw(ViewText.TXT_CHOOSE_STATUS)",
+            dataTextField: "TenQG",
+            dataValueField: "MaQG",
+            height: 310,
+        }).data("kendoDropDownList");
+
+        var dataSourcePL = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataPhanLoaiVPP", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    children: "items"
+                }
+            }
+        });
+
+        phanloai.setDataSource(dataSourcePL);
+        var dataSourceNSX = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNSX", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+    NhaSanXuat.setDataSource(dataSourceNSX);
+      $("#NhaSanXuat").data("kendoDropDownList").value("@Model.NhaSanXuat");
+    $("#NhaSanXuat").data("kendoDropDownList").trigger("change");
+        var dataSourceNCC = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataNCC", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+    NhaCungCap.setDataSource(dataSourceNCC);
+    $("#NhaCungCap").data("kendoDropDownList").value("@Model.NhaCungCap");
+    $("#NhaCungCap").data("kendoDropDownList").trigger("change");
+           var dataSourceQG = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: '@Url.Action("GetDataQG", "Book")',
+                        dataType: "json",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        }
+                    });
+                }
+            },
+        });
+
+    QuocGia.setDataSource(dataSourceQG);
+     $("#QuocGia").data("kendoDropDownList").value("@Model.QuocGia");
+    $("#QuocGia").data("kendoDropDownList").trigger("change");
+        $(".quantity").keyup(function () {
+            var value = parseInt($(this).val()),
+                min = $(this).attr("min");
+            if (value <= min) {
+                value = min;
+            }
+            $(this).val(value);
+            $(this).trigger("change");
+        });
+
+        $('input[name=fileImage]').kendoUpload({
+            async: {
+                saveUrl: "save",
+                removeUrl: "remove",
+                autoUpload: true
+            },
+            multiple: true,
+            validation: {
+                maxFileSize: 5000000,//Dung lượng file upload 5mb
+                allowedExtensions: [".jpeg", ".jpg", ".png"],//Định dạng file
+            }
+        }).data("kendoUpload");
+
+        function CheckFileUpload() {
+            if ($('input[name=fileImage]').length > 0) {
+                var upload = $('input[name=fileImage]').getKendoUpload();
+                var fileExtension = [".jpeg", ".jpg", ".png"];
+                files = upload.getFiles();
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].size > 5000000 || fileExtension.find(x => x == files[i].extension) == undefined) {
+                        return false;
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+    $("#btnSaveEdit").click(function (e) {
+        e.preventDefault;
+        initValidationCreateStationery();
+        var form = $("#frmEditVPP");
+        var formCreate = $(".form-input");
+        var formData = new FormData();
+
+        var lengthForm = formCreate.length;
+        for (var i = 0; i < lengthForm; i++) {
+            formData.append(formCreate[i].name, formCreate[i].value);
+            console.log(formCreate[i].name);
+            console.log(formCreate[i].value);
+        }
+        var nhacungcap = $("#NhaCungCap").data("kendoDropDownList").value();
+        var QuocGia = $("#QuocGia").data("kendoDropDownList").value();
+        var NhaSanXuat = $("#NhaSanXuat").data("kendoDropDownList").value();
+        var phanloai = $("#PhanLoai").data("kendoDropDownTree").value();
+        formData.append("NhaCungCap", nhacungcap);
+        formData.append("QuocGia", QuocGia);
+        formData.append("NhaSanXuat", NhaSanXuat);
+        formData.append("MAPHANLOAISACH", phanloai);
+        if (form.valid() && CheckFileUpload()) {
+            $.ajax({
+                url: '@Url.Action("SaveEditVPP", "Book")',
+                data: formData,
+                enctype: 'multipart/form-data',
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (res) {
+                    if (res == 1) {
+                        $("#popupEditWindows").data("kendoWindow").close();
+                        showSuccess("@Html.Raw(ViewText.Message_Update_Product_Success)");
+                    } else {
+                        showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                    }
+                },
+                error: function () {
+                    showError("@Html.Raw(ViewText.Message_Update_Product_Failed)");
+                }
+            });
+        }
+    });
+
+        function initValidationCreateStationery() {
+            $("#frmCreateStationery").validate({
+                ignore: '',
+                rules: {
+                    "TenSanPham": {
+                        required: true
+                    },
+                    "PhanLoai": {
+                        required: true
+                    },
+                },
+                messages:
+                {
+                    "TenSanPham": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                    "PhanLoai": {
+                        required: "@Html.Raw(ViewText.Message_Required)",
+                    },
+                },
+                success: function (error) {
+                    error.remove();
+                }
+            });
+        }
+</script>

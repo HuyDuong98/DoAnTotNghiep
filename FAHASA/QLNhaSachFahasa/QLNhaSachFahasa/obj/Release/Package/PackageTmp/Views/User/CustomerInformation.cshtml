@@ -1,0 +1,37 @@
+﻿@using QLNhaSachFahasa.Resources
+@using QLNhaSachFahasa.Common;
+@{
+    ViewBag.Title = "FAHASA - " + ViewText.TITLE_INFO_CUSTOMER;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
+}
+<div class="container mt-4">
+    <div class="d-flex">
+        <div class="menu-left">
+            <ul>
+                <li>
+                    <div class="d-flex">
+                        <img src="/Content/images/icon/User-Login.png" />
+                        <div class="row">
+                            <div class="col-12">
+                                Tài khoản của
+                            </div>
+                            <div class="col-12">
+                                @session.Name
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    Thông tin tài khoản
+                </li>
+                <li>
+                    Lịch sử đơn hàng
+                </li>
+            </ul>
+        </div>
+        <div class=""></div>
+    </div>
+</div>
+
+

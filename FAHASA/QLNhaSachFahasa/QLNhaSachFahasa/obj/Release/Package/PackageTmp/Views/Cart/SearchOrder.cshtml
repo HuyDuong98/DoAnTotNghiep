@@ -1,0 +1,141 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "FAHASA - " + ViewText.Title_Search_Orders;
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<div class="container mt-4">
+    <form>
+        <div class="search-input w-50 search-content search-content-hover" id="search-customer">
+            @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.Id_Orders, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-customer')" })
+            <i class="fa fa-search py-2" id="ico-customer" onclick=" deleteValInput('#search-customer','#ico-customer','#txtSearchDataTable') "></i>
+        </div>
+        <div class="orders-content row  mt-4 d-none">
+            <div class="col-md-6">
+                <h5>Thông tin nhận hàng</h5>
+                <div id="infoCustomerBox"></div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="message-order py-3"></div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
+                <div class="info-orderer border-0">
+                    <div class="row">
+                        <div class="col-12 checkout-summary-label">
+                            @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:TENKH||"..."#</span>
+                        </div>
+                        <div class="col-12 checkout-summary-label">
+                            @Html.Raw(ViewText.TITLE_PHONE): <span class="info-orderer-value">#:DIENTHOAI||"..."#</span>
+                        </div>
+                        <div class="col-12 checkout-summary-label">
+                            @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:EMAIL||"..."#</span>
+                        </div>
+                        <div class="col-12 checkout-summary-label d-flex">
+                            @Html.Raw(ViewText.TITLE_ADDRESS): <span class="@*location-value*@ info-orderer-value ml-1">#:DIACHI||"..."#</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </script>
+            <div class="col-md-6">
+                <h5>Chi tiết đơn hàng</h5>
+                <div id="listDDH"></div>
+                <script type="text/x-kendo-template" id="templateDDH">
+                    <div class="item-cart">
+                        <div class="image">
+                            <img src="/UploadFile/#:linkImage#" alt="#:nameProduct#" height="100px" />
+                        </div>
+                        <div class="info-cart">
+                            <div class="title-cart-item d-flex align-items-center">
+                                #:nameProduct#
+                            </div>
+                            <div class="text-price">#:kendo.toString(thanhtien,"n0")# @Html.Raw(ViewText.VND)</div>
+
+                        </div>
+                        <div class="quantity-box d-flex">
+                            <span>Số lượng: #:soluong#</span>
+                        </div>
+                    </div>
+                </script>
+                <div class="total"></div>
+            </div>
+          
+        </div>
+    </form>
+    
+</div>
+<script>
+     var listDDH = $("#listDDH").kendoListView({
+            template: kendo.template($("#templateDDH").html()),
+            dataSource: { type: "json" },
+            dataBound: function (e) {
+                if (this.dataSource.data().length == 0) {
+                    $("#listDDH").append("<div class='w-100 text-center border p-2'>@Html.Raw(ViewText.TEXT_NO_DATA_FOUND)</div>");
+                }
+            },
+        }).data("kendoListView");
+        function fnGetDataListDDH(keyword) {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListDH", "Cart")',
+                            dataType: "json",
+                            data: {
+                                id: keyword
+                            },
+                            type: "POST",
+                            success: function (result) {
+                                $(".total").html("<div class='d-flex justify-content-between'><p>Phí ship:<span>" + kendo.toString(result.ship, "n0") + "@Html.Raw(ViewText.VND)</span> </p><p>Thành tiền: <span>" + kendo.toString(result.total, "n0") + " @Html.Raw(ViewText.VND)</span> </p></div>");
+                                if (result.status == 1) {
+                                    $(".message-order").html("<span class='color-green'>Đơn hàng của bạn đã được giao thành công</span>");
+                                } else if (result.status == 0) {
+                                    $(".message-order").html("<span class='color-blue'>Đơn hàng của bạn đang được xử lý</span>");
+                                } else if (result.status == -1) {
+                                    $(".message-order").html("<span class='color-red'>Đơn hàng của bạn đã hủy</span>");
+                                } else if (result.status == 2) {
+                                    $(".message-order").html("<span class='color-violet'>Đơn hàng của bạn đang vận chuyển</span>");
+                                }
+                                options.success(result.model);
+                            },
+                            error: function (result) {
+                                options.error(result.model);
+                            }
+                        });
+                    }
+                },
+            });
+            listDDH.setDataSource(dataSource);
+    }
+     function templateInfoOrder(keyword) {
+        $.ajax({
+            url: '@Url.Action("GetInforDetailOrder", "Cart")',
+            data: {
+                idDH: keyword
+            },
+            dataType: "json",
+            type: "POST",
+            success: function (result) {
+                var templateOrder = kendo.template($("#templateInfoCustomerOrder").html());
+                $("#infoCustomerBox").html(templateOrder(result));
+            },
+        });
+    }
+    fnGetDataListDDH($("#txtSearchDataTable").val()); templateInfoOrder($("#txtSearchDataTable").val());
+    $(document).ready(function () {
+        $("#txtSearchDataTable").keyup(function () {
+            if ($("#txtSearchDataTable").val().trim() == "") {
+                $(".orders-content").addClass("d-none");
+            } else {
+                $(".orders-content").removeClass("d-none");
+                setTimeout(function () {
+                    fnGetDataListDDH($("#txtSearchDataTable").val());
+                    templateInfoOrder($("#txtSearchDataTable").val());
+                }, 1000)
+            }
+        });
+    });
+
+
+</script>

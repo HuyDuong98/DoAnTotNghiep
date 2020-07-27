@@ -22,7 +22,7 @@ namespace Model.Dao
             }
             else
             {
-                return db.KHACHHANGs.Where(x => x.TENKHACHHANG.Contains(keyWord) || x.HOKHACHHANG.Contains(keyWord)).OrderByDescending(x => x.NGAYTAO).ToList<KHACHHANG>();
+                return db.KHACHHANGs.Where(x => (x.TENKHACHHANG.Contains(keyWord) || x.HOKHACHHANG.Contains(keyWord))&& x.TRANGTHAI == 1).OrderByDescending(x => x.NGAYTAO).ToList<KHACHHANG>();
             }
         }
         public KHACHHANG ViewDetail(string id)
@@ -38,10 +38,10 @@ namespace Model.Dao
                 customer.TENKHACHHANG = entity.TENKHACHHANG;
                 customer.EMAIL = entity.EMAIL;
                 customer.DIENTHOAI = entity.DIENTHOAI;
-                customer.QUOCGIA = entity.QUOCGIA;
-                customer.THANHPHO = entity.THANHPHO;
-                customer.QUAN = entity.QUAN;
-                customer.PHUONG = entity.PHUONG;
+                //customer.QUOCGIA = entity.QUOCGIA;
+                //customer.THANHPHO = entity.THANHPHO;
+                //customer.QUAN = entity.QUAN;
+                //customer.PHUONG = entity.PHUONG;
                 customer.DIACHI = entity.DIACHI;
                 customer.TENDANGNHAPKHACHHANG = entity.TENDANGNHAPKHACHHANG;
                 if (!string.IsNullOrEmpty(entity.MATKHAUKHACHHANG))
@@ -62,7 +62,7 @@ namespace Model.Dao
             try
             {
                 var entity = db.KHACHHANGs.Find(id);
-                db.KHACHHANGs.Remove(entity);
+                entity.TRANGTHAI = -1;
                 db.SaveChanges();
                 return true;
             }

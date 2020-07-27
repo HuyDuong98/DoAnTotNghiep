@@ -47,7 +47,7 @@
     <script id="status-template" type="text/x-kendo-template">
         <div class="d-flex w-100 text-center">
             <a onclick='popupEditEmployee("#:MANV#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-            <a href="javascript:void(0)" onclick='funcDeleteEmployee("#:MANV#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+            @*<a href="javascript:void(0)" onclick='funcDeleteEmployee("#:MANV#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>*@
         </div>
     </script>
     <script type="text/javascript">
@@ -166,7 +166,7 @@
                 },
                  {
                     template: kendo.template($("#status-template").html()),
-                    width: 110,
+                    width: 60,
                 }],
             groupable: false,
             filterable: true,

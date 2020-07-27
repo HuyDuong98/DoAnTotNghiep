@@ -40,12 +40,14 @@
     </div>
     <div class="row">
         <div class="col-md-12 text-right">
-            <a href="javascript:void(0)" onclick="fnSubmitUpdate()" class="btn btn-submit-order">@ViewText.BUTTON_UPDATE</a>
+            <a href="javascript:void(0)" onclick="fnSubmitUpdate()" class="btn btn-submit-order m-0" style="width:100px">@ViewText.BUTTON_UPDATE</a>
         </div>
     </div>
     @Html.HiddenFor(x => x.MAKH)
 }
 <script>
+    initKeydownNumber();
+    initValidForm();
     function initValidForm() {
         $("#frmInfoCustomer").validate({
             ignore: '',
@@ -87,10 +89,4 @@
             }
         });
     }
-    $(document).ready(function () {
-        initKeydownNumber();
-        initValidForm();
-        
-        
-    });
 </script>

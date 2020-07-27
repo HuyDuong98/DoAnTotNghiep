@@ -1,7 +1,7 @@
 ﻿
 @using QLNhaSachFahasa.Resources
 @{
-    ViewBag.Title = "Thêm mới Sách";
+    ViewBag.Title = "Danh Sách Văn Phòng Phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
 }
 @section slider{
@@ -9,5 +9,217 @@
 }
 @section title{
     @ViewText.TITLE_STATIONERY_LIST
+}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <div class="search-input w-100 search-content search-content-hover" id="search-book">
+                    @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+                    <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-book','#ico-search','#txtSearchDataTable') "></i>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 col-custom-100 mt-2">
+            <div id="gridBook"></div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div id="listView"></div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+<div id="popupViewsWindows">
+    <div id="wndViewsContent"></div>
+</div>
+@section scripts{
+    <script src="/Scripts/Custom/Books.js"></script>
+    <script id="status-template" type="text/x-kendo-template">
+        <div class="d-flex w-100 text-center">
+            <a onclick='popupUploadImage("#=MASP#")' class="button buttonEdit rounded-circle btn-i-center"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+            <a onclick='popupEditVPP("#=MASP#")' class="button buttonEdit ml-2 rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a href="javascript:void(0)" onclick='funcDeleteBook("#=MASP#")' class="button buttonDelete ml-2 rounded-circle"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        </div>
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="@Url.Content("~/UploadFile/637274163493780773.jpg")" alt="#:TENSANPHAM#" />
+            <h3>#:TENSANPHAM#</h3>
+            <p class="text-danger">#:DONGIA#</p>
+        </div>
+    </script>
+    <script>
+        $("#listView").kendoListView({
+            template: kendo.template($("#template").html()),
+        }).data("kendoListView");
+        var data = [];
+        $.ajax({
+            url: '/Home/GetListBook',
+            dataType: "json",
+            type: "POST",
+            success: function (res) {
+                data = res
+            },
+            error: function (res) {
+                data = res
+            }
+        });
+        var dataSource = new kendo.data.DataSource({
+            data: data
+        })
+        $("#listView").data("kendoListView").setDataSource(dataSource);
+        function popupUploadImage(id) {
+            $('#wndEditContent').load("/Admin/Book/UploadImage?id=" + id, function () {
+                $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        addclassFocus("#txtSearchDataTable", "#search-book");
+
+        var dataSource = new kendo.data.DataSource();
+         $("#popupEditWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+             //maxHeight: 600,
+             width: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        $("#popupViewsWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_INFO_BOOK)",
+            visible: false,
+            modal: true,
+            //maxHeight: 600,
+            minWidth: 600,
+            draggable: true,
+            scrollable: true
+        });
+
+        var GridData = $("#gridBook").kendoGrid({
+            //dataSource: data,
+            attributes: { style: "cursor:pointer", },
+            groupable: false,
+            filterable: false,
+            sortable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true
+            },
+            columns: [
+                {
+                    field: "MASP",
+                    title: "ID",
+                    template: "<span>#=MASP#</span>",
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 80,
+                }, {
+                    field: "TENSP",
+                    title: "Tên sách",
+                    template: "<div class='title-grid' onclick ='itemClick(\"#:MASP#\")'>#=TENSP#</span>",
+                    attributes: {
+                        style: "cursor:pointer",
+                        "id": "item-#:TENSP#",
+                    },
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 200,
+                }, {
+                    field: "MAUSAC",
+                    title: "Màu sắc",
+                    template: '<div class="color" style="background-color:#:MAUSAC#"></div>',
+                    //attributes: {
+                    //    style: "cursor:pointer",
+                    //},
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width:80,
+                }, {
+                    field: "THUONGHIEU",
+                    title: "Nhà sản xuất",
+                    template: "<span>#=THUONGHIEU#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                {
+                    field: "NCC",
+                    title: "Nhà cung cấp",
+                    template: "<span>#=NCC#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                },
+                {
+                    field: "DONGIA",
+                    title: "Đơn giá",
+                    template: "<span>#=DONGIA# vnd</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "auto",
+                }, {
+                    template: kendo.template($("#status-template").html()),
+                    width: 160,
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [5, 10, 25, 100],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+
+        $(document).ready(function () {
+            $("#txtSearchDataTable").keyup(function () {
+                GetDataVPP();
+            });
+        });
+
+        GetDataVPP();
+        function GetDataVPP() {
+            var keyword = $('#txtSearchDataTable').val();
+            dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListDataVPP", "Book")',
+                            data: {
+                                keyword: keyword,
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            }
+                        });
+                    }
+                },
+                pageSize: 25
+            });
+            GridData.setDataSource(dataSource);
+        }
+    </script>
 }
 

@@ -132,7 +132,7 @@ namespace QLNhaSachFahasa.Controllers
                 Session.Add(CommonConstants.CODE_SESSION, session);
                 //Gửi mail
                 string smtpUserName = "duongngochuy.hufi@gmail.com";
-                string smtpPassword = "ngochuy123";
+                string smtpPassword = "NgocHuy@123";
                 string smtpHost = "smtp.gmail.com";
                 int smtpPort = 587;
 

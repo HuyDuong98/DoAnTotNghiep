@@ -1,0 +1,205 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "OrderSuccess";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+    <div class="container mt-4">
+        <div class="w-100">
+            <nav id="stepper"></nav>
+        </div>
+        <div class="header-box-order pt-0 mt-4">
+            3. @Html.Raw(ViewText.Title_Confirm_Order)
+        </div>
+        <div class="box-order-success pdf-page">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/Content/images/icon/cart-success.png" />
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-12"><h5>Cảm ơn bạn đã mua hàng tại Fahasa!</h5></div>
+                        <div class="col-12">
+                            <p>Mã đơn hàng của bạn là:</p>
+                            <div class="id-DDH">@ViewBag.ID</div>
+                        </div>
+                        <div class="col-12 mt-4">
+
+                            <div id="infoCustomerBox"></div>
+                        </div>
+                        <script type="text/x-kendo-template" id="templateInfoCustomerOrder">
+                            <h6>THÔNG TIN ĐƠN HÀNG <span class="date-order">(Ngày #:kendo.toString(kendo.parseDate(NgayTaoDon),"dd")# tháng #:kendo.toString(kendo.parseDate(NgayTaoDon),"MM")# năm #:kendo.toString(kendo.parseDate(NgayTaoDon),"yyyy")# #:kendo.toString(kendo.parseDate(NgayTaoDon),"HH:mm:ss")#) </span></h6>
+                            <div class="info-orderer border-0">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-12 checkout-summary-label">
+                                                @Html.Raw(ViewText.TITLE_NAME): <span class="info-orderer-value">#:TENKH||"..."#</span>
+                                            </div>
+                                            <div class="col-12 checkout-summary-label">
+                                                @Html.Raw(ViewText.TITLE_EMAIL): <span class="info-orderer-value">#:EMAIL||"..."#</span>
+                                            </div>
+                                            <div class="col-12 checkout-summary-label">
+                                                @Html.Raw(ViewText.TITLE_PHONE): <span class="info-orderer-value">#:DIENTHOAI||"..."#</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-12 checkout-summary-label">
+                                                Địa chỉ giao hàng:<br /> <span class="@*location-value*@ info-orderer-value ml-1">#:DIACHI||"..."#</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="row">
+                                            <div class="col-md-12 checkout-summary-label">Phí vận chuyển: <span class="info-orderer-value">#:kendo.toString(Ship,"n0")# @Html.Raw(ViewText.VND)</span></div>
+                                            <div class="col-md-12 checkout-summary-label">Phương thức thanh toán: <span class="info-orderer-value">#:PhuongThucThanhToan#</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </script>
+                        <div class="col-12 mt-4">
+                            <h6>CHI TIẾT ĐƠN HÀNG</h6>
+                            @*<div id="listDDH"></div>*@
+                            <div id="gridDDH"></div>
+                            <script type="text/x-kendo-template" id="templateDDH">
+                                <div class="item-cart">
+                                    <div class="image">
+                                        <img src="/UploadFile/#:linkImage#" alt="#:nameProduct#" height="100px" />
+                                    </div>
+                                    <div class="info-cart">
+                                        <div class="title-cart-item d-flex align-items-center">
+                                            #:nameProduct#
+                                        </div>
+                                        <div class="text-price">#:kendo.toString(thanhtien,"n0")# @Html.Raw(ViewText.VND)</div>
+
+                                    </div>
+                                    <div class="quantity-box d-flex">
+                                        <span>Số lượng: #:soluong#</span>
+                                    </div>
+                                </div>
+                            </script>
+
+                            <div class="total"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="export-pdf k-button float-right mt-3" onclick="getPDF('.pdf-page')">@ViewText.Button_Export</button>
+    </div>
+@section scripts{
+    <script>
+        $("#stepper").kendoStepper({
+            linear: false,
+            steps: [{
+                label: "Cart",
+                icon: "k-icon k-i-cart"
+            }, {
+                label: "Personal infor",
+                icon: "dictionary-add",
+            }, {
+                label: "Confirm",
+                icon: "k-icon k-i-check",
+                selected: true
+            }]
+        });
+        var listDDH = $("#listDDH").kendoListView({
+            template: kendo.template($("#templateDDH").html()),
+            dataSource: { type: "json" },
+        }).data("kendoListView");
+        templateInfoOrder("@ViewBag.ID");
+        function templateInfoOrder(keyword) {
+            $.ajax({
+                url: '@Url.Action("GetInforDetailOrder", "Cart")',
+                data: {
+                    idDH: keyword
+                },
+                dataType: "json",
+                type: "POST",
+                success: function (result) {
+                    var templateOrder = kendo.template($("#templateInfoCustomerOrder").html());
+                    $("#infoCustomerBox").html(templateOrder(result));
+                },
+            });
+        }
+        var gridDDH = $("#gridDDH").kendoGrid({
+            //dataSource: data,
+            groupable: false,
+            sortable: false,
+            filterable: false,
+            pageable: false,
+            columns: [
+                {
+                    field: "nameProduct",
+                    title: "Tên sản phẩm",
+                    template: "<span>#=nameProduct#</span>",
+                    width: 250,
+                }, {
+                    field: "thanhtien",
+                    template: '<span>#=kendo.toString(thanhtien,"n0")# @Html.Raw(ViewText.VND)</span>',
+                    title: "Đơn giá",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 150,
+                }, {
+                    field: "soluong",
+                    title: "Số lượng",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 90,
+                }, {
+                    title: "Tổng tạm",
+                    template: '<div class="text-right">#=kendo.toString(soluong*thanhtien,"n0")# @Html.Raw(ViewText.VND)</div>',
+                    headerTemplate:'<div class="text-right">Tổng tạm</div>',
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 150,
+                }]
+        }).data('kendoGrid');
+        function fnGetDataListDDH() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url: '@Url.Action("GetListDH", "Cart")',
+                            dataType: "json",
+                            data: {
+                                id:"@ViewBag.ID"
+                            },
+                            type: "POST",
+                            success: function (result) {
+                                $(".total").html("<div class='d-flex justify-content-end'><p>Tổng giá trị đơn hàng: </p> <span>" + kendo.toString(result.total, "n0") + " @Html.Raw(ViewText.VND)</span></div>");
+                                options.success(result.model);
+                            },
+                            error: function (result) {
+                                options.error(result.model);
+                            }
+                        });
+                    }
+                },
+            });
+            //listDDH.setDataSource(dataSource);
+            gridDDH.setDataSource(dataSource);
+        }
+        fnGetDataListDDH();
+
+        $(".k-grid-content").css("overflow", "hidden");
+        $(".k-grid-header").css("padding-right", "0").css("background-color", "#d36565").css("color", "#fff").css("font-weight","bold");
+        $(".k-grid th").css("border-width", "0");
+        $("td").css("border-width", "0");
+
+        function getPDF(selector) {
+            kendo.drawing.drawDOM($(selector)).then(function (group) {
+                kendo.drawing.pdf.saveAs(group, "Invoice.pdf");
+            });
+        }
+    </script>
+}

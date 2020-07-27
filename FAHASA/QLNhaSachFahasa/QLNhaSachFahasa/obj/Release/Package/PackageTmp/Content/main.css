@@ -42,6 +42,7 @@ body {
     padding-left: 15px;
     margin-right: auto !important;
     margin-left: auto !important;
+    min-height: 176px;
 }
 
 a:visited {

@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="form-group row">
+        @*<div class="form-group row">
             <div class="col-md-3">
                 @ViewText.TITLE_QUOC_GIA
             </div>          
@@ -84,7 +84,7 @@
             <div class="col-md-9">
                 @Html.TextBoxFor(model => model.PHUONG, new { @class = "form-control" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group row">
             <div class="col-md-3">
@@ -110,7 +110,7 @@
             <div class="col-md-3">
                 @ViewText.TITLE_PASSWORD
             </div>
-            <div class="col-8">
+            <div class="col-9">
                 @Html.PasswordFor(model => model.PASSWORD, new { @class = "form-control", @autocomplete = "off" })
             </div>
         </div>

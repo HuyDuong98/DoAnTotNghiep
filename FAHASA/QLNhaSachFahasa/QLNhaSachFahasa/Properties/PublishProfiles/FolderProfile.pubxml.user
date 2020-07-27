@@ -11,25 +11,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/29/2020 17:15:12</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/Create.cshtml">
-      <publishTime>06/30/2020 21:55:44</publishTime>
+      <publishTime>07/24/2020 09:26:13</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/CreateStationery.cshtml">
-      <publishTime>07/01/2020 23:35:53</publishTime>
+      <publishTime>07/26/2020 15:30:57</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/Index.cshtml">
-      <publishTime>06/30/2020 22:16:04</publishTime>
+      <publishTime>07/26/2020 01:45:25</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/Stationery.cshtml">
-      <publishTime>06/30/2020 21:59:26</publishTime>
+      <publishTime>07/26/2020 17:00:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/_EditBook.cshtml">
-      <publishTime>06/12/2020 14:12:20</publishTime>
+      <publishTime>07/26/2020 16:10:00</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Book/_EditVPP.cshtml">
+      <publishTime>07/26/2020 18:09:23</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/_InfoBook.cshtml">
       <publishTime>05/24/2020 21:28:36</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Book/_MenuLeft.cshtml">
       <publishTime>06/30/2020 20:56:21</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Book/_UploadImage.cshtml">
+      <publishTime>07/12/2020 18:48:51</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Customer/Index.cshtml">
       <publishTime>06/29/2020 20:01:04</publishTime>
@@ -41,25 +47,52 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/29/2020 15:23:28</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Emloyee/Index.cshtml">
-      <publishTime>06/29/2020 19:10:54</publishTime>
+      <publishTime>07/09/2020 10:53:30</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Emloyee/_EditEmloyee.cshtml">
       <publishTime>05/31/2020 16:54:13</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Emloyee/_InfoEmployee.cshtml">
-      <publishTime>05/29/2020 15:14:31</publishTime>
+      <publishTime>07/09/2020 11:03:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Emloyee/_UpdateStatusEmployee.cshtml">
       <publishTime>06/23/2020 23:37:49</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Login/Index.cshtml">
-      <publishTime>06/29/2020 18:58:54</publishTime>
+      <publishTime>07/12/2020 18:37:22</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Orders/Index.cshtml">
+      <publishTime>07/21/2020 22:50:18</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Orders/_ChangeStatus.cshtml">
+      <publishTime>07/20/2020 15:21:27</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Orders/_MenuLeft.cshtml">
+      <publishTime>07/15/2020 00:06:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Orders/_ViewDetail.cshtml">
+      <publishTime>07/12/2020 19:38:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Report/Index.cshtml">
+      <publishTime>07/23/2020 10:33:48</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Report/ReportProduct.cshtml">
+      <publishTime>07/23/2020 10:42:54</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Report/SalesReport.cshtml">
+      <publishTime>07/24/2020 08:42:18</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Report/_MenuLeft.cshtml">
+      <publishTime>07/23/2020 19:00:09</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Setting/Classification.cshtml">
-      <publishTime>06/29/2020 09:36:58</publishTime>
+      <publishTime>07/23/2020 10:44:50</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Setting/Index.cshtml">
       <publishTime>05/18/2020 20:11:43</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Setting/_AddNewPL.cshtml">
+      <publishTime>07/21/2020 23:29:29</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/Error401.cshtml">
       <publishTime>04/29/2020 17:51:28</publishTime>
@@ -178,6 +211,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/ko/System.Spatial.resources.dll">
       <publishTime>11/20/2015 22:35:32</publishTime>
     </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>03/08/2017 19:26:22</publishTime>
+    </File>
     <File Include="bin/Microsoft.Azure.KeyVault.Core.dll">
       <publishTime>07/29/2015 17:56:38</publishTime>
     </File>
@@ -221,13 +257,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/06/2016 20:02:28</publishTime>
     </File>
     <File Include="bin/Model.dll">
-      <publishTime>07/02/2020 23:00:30</publishTime>
+      <publishTime>07/26/2020 20:43:09</publishTime>
     </File>
     <File Include="bin/Model.dll.config">
       <publishTime>06/15/2020 23:35:06</publishTime>
     </File>
     <File Include="bin/Model.pdb">
-      <publishTime>07/02/2020 23:00:30</publishTime>
+      <publishTime>07/26/2020 20:43:09</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>04/21/2020 12:54:44</publishTime>
@@ -244,14 +280,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/PagedList.Mvc.dll">
       <publishTime>09/30/2013 18:15:20</publishTime>
     </File>
+    <File Include="bin/PayPal.dll">
+      <publishTime>10/23/2017 16:17:36</publishTime>
+    </File>
     <File Include="bin/Pri.LongPath.dll">
       <publishTime>05/20/2017 03:31:42</publishTime>
     </File>
     <File Include="bin/QLNhaSachFahasa.dll">
-      <publishTime>07/02/2020 23:00:32</publishTime>
+      <publishTime>07/26/2020 20:43:10</publishTime>
     </File>
     <File Include="bin/QLNhaSachFahasa.pdb">
-      <publishTime>07/02/2020 23:00:32</publishTime>
+      <publishTime>07/26/2020 20:43:10</publishTime>
     </File>
     <File Include="bin/RestSharp.dll">
       <publishTime>08/26/2015 21:33:34</publishTime>
@@ -455,7 +494,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/21/2020 12:54:41</publishTime>
     </File>
     <File Include="bin/vi/QLNhaSachFahasa.resources.dll">
-      <publishTime>07/02/2020 23:00:32</publishTime>
+      <publishTime>07/26/2020 20:43:10</publishTime>
+    </File>
+    <File Include="bin/WebApplication2.dll">
+      <publishTime>03/18/2015 17:37:50</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/21/2020 12:54:46</publishTime>
@@ -568,11 +610,14 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>04/21/2020 12:54:39</publishTime>
     </File>
+    <File Include="Content/changeMoney/money.min.js">
+      <publishTime>07/11/2020 20:54:48</publishTime>
+    </File>
     <File Include="Content/Custom-kendo.css">
-      <publishTime>06/30/2020 21:53:41</publishTime>
+      <publishTime>07/21/2020 21:24:57</publishTime>
     </File>
     <File Include="Content/custom/HomePage.css">
-      <publishTime>07/02/2020 22:58:26</publishTime>
+      <publishTime>07/26/2020 19:15:52</publishTime>
     </File>
     <File Include="Content/custom/LoginPage.css">
       <publishTime>06/29/2020 19:21:52</publishTime>
@@ -748,6 +793,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/images/background-Home.png">
       <publishTime>05/24/2020 11:17:00</publishTime>
     </File>
+    <File Include="Content/images/background_login.png">
+      <publishTime>07/03/2020 19:14:49</publishTime>
+    </File>
     <File Include="Content/images/Banner/13244162321525ed9cc01f66d94e8a71.jpg">
       <publishTime>06/29/2020 14:49:51</publishTime>
     </File>
@@ -811,11 +859,32 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/images/icon/book-icon.png">
       <publishTime>06/14/2020 15:57:00</publishTime>
     </File>
+    <File Include="Content/images/icon/cart-success.png">
+      <publishTime>07/05/2020 22:05:45</publishTime>
+    </File>
+    <File Include="Content/images/icon/Chat.png">
+      <publishTime>07/12/2020 23:16:24</publishTime>
+    </File>
+    <File Include="Content/images/icon/computer-icons-send-thumbnail.jpg">
+      <publishTime>07/13/2020 01:25:28</publishTime>
+    </File>
+    <File Include="Content/images/icon/excel_export.png">
+      <publishTime>04/22/2020 09:50:05</publishTime>
+    </File>
+    <File Include="Content/images/icon/feb-business-color-go-34-512.png">
+      <publishTime>07/05/2020 22:01:16</publishTime>
+    </File>
     <File Include="Content/images/icon/flag-us.png">
       <publishTime>06/14/2020 14:40:35</publishTime>
     </File>
     <File Include="Content/images/icon/flag-vi.png">
       <publishTime>06/14/2020 14:40:32</publishTime>
+    </File>
+    <File Include="Content/images/icon/ico_fahasa.png">
+      <publishTime>07/13/2020 00:58:35</publishTime>
+    </File>
+    <File Include="Content/images/icon/images.png">
+      <publishTime>07/13/2020 01:30:56</publishTime>
     </File>
     <File Include="Content/images/icon/Location-01-WF.png">
       <publishTime>06/22/2020 22:03:29</publishTime>
@@ -835,14 +904,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/images/icon/RedLogout.png">
       <publishTime>04/29/2020 13:23:51</publishTime>
     </File>
+    <File Include="Content/images/icon/Report-Next.png">
+      <publishTime>07/13/2020 00:30:18</publishTime>
+    </File>
     <File Include="Content/images/icon/Shopping-Cart-03.png">
       <publishTime>06/29/2020 21:14:02</publishTime>
     </File>
     <File Include="Content/images/icon/Telephone -04.png">
       <publishTime>06/22/2020 22:30:25</publishTime>
     </File>
+    <File Include="Content/images/icon/telesale.png">
+      <publishTime>07/14/2020 20:16:48</publishTime>
+    </File>
+    <File Include="Content/images/icon/Untitled.png">
+      <publishTime>07/03/2020 09:57:42</publishTime>
+    </File>
     <File Include="Content/images/icon/User Profile 1-WF.png">
       <publishTime>06/22/2020 22:30:25</publishTime>
+    </File>
+    <File Include="Content/images/icon/User-Login.png">
+      <publishTime>07/09/2020 11:32:15</publishTime>
     </File>
     <File Include="Content/images/icon/user.png">
       <publishTime>06/14/2020 23:19:29</publishTime>
@@ -864,6 +945,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Content/images/MenuHome/Group-Cluster.png">
       <publishTime>06/28/2020 12:51:53</publishTime>
+    </File>
+    <File Include="Content/images/MenuHome/Sales Order-WF.png">
+      <publishTime>07/08/2020 19:47:53</publishTime>
     </File>
     <File Include="Content/images/MenuHome/Stationery-02.png">
       <publishTime>04/29/2020 12:17:27</publishTime>
@@ -895,6 +979,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/images/wallpaper2you_322470.jpg">
       <publishTime>04/25/2020 18:05:11</publishTime>
     </File>
+    <File Include="Content/ImageViewer/viewer.css">
+      <publishTime>07/21/2020 01:06:14</publishTime>
+    </File>
+    <File Include="Content/ImageViewer/viewer.js">
+      <publishTime>07/21/2020 01:05:55</publishTime>
+    </File>
     <File Include="Content/kendo/css/kendo.bootstrap-v4.min.css">
       <publishTime>07/01/2020 20:30:48</publishTime>
     </File>
@@ -923,7 +1013,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/01/2020 20:18:28</publishTime>
     </File>
     <File Include="Content/main.css">
-      <publishTime>06/26/2020 15:07:27</publishTime>
+      <publishTime>07/22/2020 20:32:14</publishTime>
     </File>
     <File Include="Content/owlCarousel/css/owl.carousel.css">
       <publishTime>06/17/2020 20:15:02</publishTime>
@@ -973,11 +1063,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Mvc.sitemap">
       <publishTime>04/25/2020 18:05:11</publishTime>
     </File>
+    <File Include="Onepay/vpc_dr.aspx">
+      <publishTime>07/10/2020 09:58:33</publishTime>
+    </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>04/21/2020 12:54:39</publishTime>
     </File>
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>04/21/2020 12:54:39</publishTime>
+    </File>
+    <File Include="Scripts/chat.js">
+      <publishTime>07/24/2020 14:22:35</publishTime>
     </File>
     <File Include="Scripts/Custom/Books.js">
       <publishTime>05/02/2020 20:32:05</publishTime>
@@ -986,7 +1082,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/29/2020 19:54:17</publishTime>
     </File>
     <File Include="Scripts/Custom/Employee.js">
-      <publishTime>04/29/2020 15:42:47</publishTime>
+      <publishTime>07/09/2020 10:35:18</publishTime>
     </File>
     <File Include="Scripts/fontawesome.min.js">
       <publishTime>04/21/2020 12:54:39</publishTime>
@@ -1034,7 +1130,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/21/2020 12:54:39</publishTime>
     </File>
     <File Include="Scripts/QLFahasa.js">
-      <publishTime>06/29/2020 21:21:29</publishTime>
+      <publishTime>07/26/2020 19:27:44</publishTime>
     </File>
     <File Include="UploadFile/637274163493780773.jpg">
       <publishTime>06/10/2020 20:05:49</publishTime>
@@ -1214,19 +1310,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/15/2020 00:39:27</publishTime>
     </File>
     <File Include="Views/Cart/Index.cshtml">
-      <publishTime>06/29/2020 22:25:38</publishTime>
+      <publishTime>07/26/2020 19:35:14</publishTime>
+    </File>
+    <File Include="Views/Cart/OrderSuccess.cshtml">
+      <publishTime>07/26/2020 01:25:14</publishTime>
+    </File>
+    <File Include="Views/Cart/ProcessOrder.cshtml">
+      <publishTime>07/26/2020 01:41:53</publishTime>
+    </File>
+    <File Include="Views/Cart/SearchOrder.cshtml">
+      <publishTime>07/24/2020 08:14:00</publishTime>
     </File>
     <File Include="Views/Cart/_OrderBox.cshtml">
-      <publishTime>06/29/2020 21:09:20</publishTime>
+      <publishTime>07/03/2020 11:10:24</publishTime>
     </File>
     <File Include="Views/Cart/_UpdateInfoOrder.cshtml">
-      <publishTime>06/30/2020 12:32:40</publishTime>
+      <publishTime>07/03/2020 13:06:58</publishTime>
     </File>
     <File Include="Views/Home/Detail.cshtml">
-      <publishTime>06/27/2020 21:00:27</publishTime>
+      <publishTime>07/26/2020 19:34:06</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/02/2020 22:44:27</publishTime>
+      <publishTime>07/26/2020 19:21:15</publishTime>
+    </File>
+    <File Include="Views/Home/ProductsByPL.cshtml">
+      <publishTime>07/26/2020 19:31:12</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/21/2020 12:54:39</publishTime>
@@ -1235,7 +1343,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/29/2020 12:38:03</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutHome.cshtml">
-      <publishTime>07/02/2020 22:44:49</publishTime>
+      <publishTime>07/26/2020 19:28:15</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutLogin.cshtml">
       <publishTime>05/24/2020 11:37:03</publishTime>
@@ -1243,20 +1351,35 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/Shared/_LibKendo.cshtml">
       <publishTime>06/12/2020 15:29:26</publishTime>
     </File>
+    <File Include="Views/User/CustomerInformation.cshtml">
+      <publishTime>07/10/2020 08:45:41</publishTime>
+    </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>04/21/2020 15:56:36</publishTime>
+      <publishTime>07/26/2020 01:39:45</publishTime>
+    </File>
+    <File Include="Views/User/_ChangePassword.cshtml">
+      <publishTime>07/07/2020 22:00:53</publishTime>
+    </File>
+    <File Include="Views/User/_ForgotPassword.cshtml">
+      <publishTime>07/07/2020 00:09:37</publishTime>
+    </File>
+    <File Include="Views/User/_InputCode.cshtml">
+      <publishTime>07/07/2020 22:22:32</publishTime>
     </File>
     <File Include="Views/User/_Register.cshtml">
-      <publishTime>06/29/2020 20:52:10</publishTime>
+      <publishTime>07/03/2020 18:32:53</publishTime>
+    </File>
+    <File Include="Views/VNPay/Index.cshtml">
+      <publishTime>07/24/2020 20:30:08</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>04/21/2020 12:54:39</publishTime>
+      <publishTime>07/10/2020 16:58:36</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
       <publishTime>04/21/2020 12:54:39</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/02/2020 23:00:33</publishTime>
+      <publishTime>07/26/2020 20:43:12</publishTime>
     </File>
   </ItemGroup>
 </Project>
