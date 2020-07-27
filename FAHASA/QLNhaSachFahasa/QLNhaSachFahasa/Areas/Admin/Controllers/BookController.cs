@@ -238,6 +238,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         public ActionResult GetCreateBook(BookModel inputData, HttpPostedFileBase[] fileImages)
         {
             string path = Server.MapPath("~/UploadFile/");
+            string path2 = "C:\\xampp\\htdocs\\apiFahasa\\image\\";
             int result;
             var dao = new BookDao();
             var phanloaidao = new GroupPhanLoaiDao();
@@ -290,6 +291,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                             var fileInfo = new FileInfo(file.FileName);
                             string finalFileName = DateTime.Now.Ticks.ToString() + extensionName;
                             file.SaveAs(path + finalFileName);
+                            file.SaveAs(path2 + finalFileName);
                             //Insert database
                             images.LINKHINHANH = finalFileName;
                             images.MASANPHAM = book.MASANPHAM;
@@ -306,6 +308,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         public ActionResult CreateVPP(ProductModel inputData, HttpPostedFileBase[] fileImages)
         {
             string path = Server.MapPath("~/UploadFile/");
+            string path2 = "C:\\xampp\\htdocs\\apiFahasa\\image\\";
             var session = (UserLogin)Session[QLNhaSachFahasa.Common.CommonConstants.USER_SEESION];
             int res;
             var product = new SANPHAM()
@@ -348,6 +351,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                         var fileInfo = new FileInfo(file.FileName);
                         string finalFileName = DateTime.Now.Ticks.ToString() + extensionName;
                         file.SaveAs(path + finalFileName);
+                        file.SaveAs(path2 + finalFileName);
                         //Insert database
                         images.LINKHINHANH = finalFileName;
                         images.MASANPHAM = product.MASANPHAM;
@@ -451,6 +455,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
         {
             var message = 0;
             string path = Server.MapPath("~/UploadFile/");
+            string path2 = "C:\\xampp\\htdocs\\apiFahasa\\image\\";
             var delete = new BookDao().DeleteImage(id);
             if (fileImages != null)
             {
@@ -464,6 +469,7 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                         var fileInfo = new FileInfo(file.FileName);
                         string finalFileName = DateTime.Now.Ticks.ToString() + extensionName;
                         file.SaveAs(path + finalFileName);
+                        file.SaveAs(path2 + finalFileName);
                         //Insert database
                         images.LINKHINHANH = finalFileName;
                         images.MASANPHAM = id;
