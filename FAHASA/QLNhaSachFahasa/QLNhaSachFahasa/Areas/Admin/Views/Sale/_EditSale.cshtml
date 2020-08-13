@@ -82,7 +82,27 @@
             $(".message-date").text("Ngày bắt đầu không được sau ngày kết thúc.");
         } else {
             if (form.valid()) {
-
+                var data = $("#frmEditSale").serialize();
+                $.ajax({
+                    url: "@Url.Action("SaveEdit", "Sale")",
+                    data: {
+                        ngayBD: kendo.parseDate($("#NgayBatDau").val(), "dd/MM/yyyy").toJSON(),
+                        ngKT: kendo.parseDate($("#NgayKetThuc").val(), "dd/MM/yyyy").toJSON(),
+                        MucGiam: parseInt($("#PhanTramGiamGia").val()),
+                        idCTKM: "@Model.MaCTKM",
+                        idTG: "@Model.MaThoiGian"
+                    },
+                    dataType: "json",
+                    type: "POST",
+                    success: function (result) {
+                        showSuccess("Cập nhật thành công.");
+                        $("#popupEditWindows").data("kendoWindow").close();
+                        GetDataGridOrder();
+                    },
+                    error: function (result) {
+                        
+                    },
+                });
             }
         }
     }

@@ -407,5 +407,24 @@ namespace Model.Dao
                 return 0;
             }
         }
+
+        public int updateCTKM(THOIGIAN tg , CHUONGTRINH_KHUYENMAI ct)
+        {
+            try
+            {
+                var thoigian = db.THOIGIANs.Find(tg.MATHOIGIAN);
+                thoigian.THOIGIANBATDAU = tg.THOIGIANBATDAU;
+                thoigian.THOIGIANKETTHUC = tg.THOIGIANKETTHUC;
+
+                var chuongtrinh = db.CHUONGTRINH_KHUYENMAI.Find(ct.MACHUONGTRINHKHUYENMAI);
+                chuongtrinh.MUCGIAMGIA = ct.MUCGIAMGIA;
+                db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

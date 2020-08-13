@@ -1,4 +1,5 @@
 ﻿using Model.Dao;
+using Model.EF;
 using QLNhaSachFahasa.Areas.Admin.Models;
 using System;
 using System.Collections.Generic;
@@ -44,11 +45,26 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 TenCTKM = item.TENCHUONGTRINHKHUYENMAI,
                 NgayBatDau = date.THOIGIANBATDAU,
                 NgayKetThuc = date.THOIGIANKETTHUC,
-                PhanTramGiamGia = (int)item.MUCGIAMGIA
+                PhanTramGiamGia = (int)item.MUCGIAMGIA,
+                MaThoiGian = item.MATHOIGIAN,
             };
             return PartialView("~/Areas/Admin/Views/Sale/_EditSale.cshtml",model);
         }
+        public ActionResult SaveEdit(DateTime ngayBD, DateTime ngKT, int MucGiam, string idCTKM, string idTG)
+        {
+            var message = 0;
+            var thoigian = new THOIGIAN();
+            thoigian.MATHOIGIAN = idTG;
+            thoigian.THOIGIANBATDAU = ngayBD;
+            thoigian.THOIGIANKETTHUC = ngKT;
 
+            var giatri = new CHUONGTRINH_KHUYENMAI();
+            giatri.MACHUONGTRINHKHUYENMAI = idCTKM;
+            giatri.MUCGIAMGIA = MucGiam;
+
+            message = new SanPhamDao().updateCTKM(thoigian, giatri);
+            return Json(message, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ProductSale(string id)
         {
             var item = new SanPhamDao().FindCTKM(id);
