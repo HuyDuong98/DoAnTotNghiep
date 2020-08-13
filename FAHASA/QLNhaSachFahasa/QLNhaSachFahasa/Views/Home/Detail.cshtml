@@ -67,8 +67,14 @@
                     <div class="col-md-6">@Html.Raw(ViewText.TITLE_TRONG_LUONG):<span class="text-value"> #:TRONGLUONG# gram</span></div>
                 </div>
 
-                <div class="row">
-                    <div class="col-12 text-price"><em>#:kendo.toString(GIABAN,"n0")# @Html.Raw(ViewText.VND)</em></div>
+                <div class="row mb-4 mt-3">
+                    <div class="col-12 text-price">
+
+                        <em>@Html.Raw(ViewText.Tilte_Price): #:GIABAN==0?kendo.toString(DONGIA,"n0"):kendo.toString(GIABAN,"n0")#@Html.Raw(ViewText.VND)</em>
+
+                    </div>
+                    <div class="col-12 font-size-16"><em>@Html.Raw(ViewText.price_current): <span class="price-old">#:PhanTram==0?'':kendo.toString(DONGIA,"n0")+'@Html.Raw(ViewText.VND)'# </span></em></div>
+
                 </div>
                 <div class="quantity-box d-flex ">
                     <span>Số lượng:</span>
@@ -99,14 +105,14 @@
             </div><span class="view-b-icon"></span>
         </a>
         <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
-            <span class="title-card">#:TENSANPHAM#</span>
+            <span class="title-card-1">#:TENSANPHAM#</span>
         </a>
         <span class="flash-position #:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
         <div class="text-price"><span class="text-title-product">Đơn giá:</span> <em>#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</em></div>
         @*<div class="t-card-book-infor-description">
 
-            #= htmlDecode(GHICHU||"")#
-        </div>*@
+                #= htmlDecode(GHICHU||"")#
+            </div>*@
     </div>
 </script>
 <script>

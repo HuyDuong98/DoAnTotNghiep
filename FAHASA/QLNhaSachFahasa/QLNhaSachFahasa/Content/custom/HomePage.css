@@ -12,6 +12,9 @@
     border: 1px solid #ced4da !important;
     border-radius: 4px !important
 }
+.k-widget.form-control {
+    border: none!important;
+}
 
     .form-control:focus {
         background-color: #fff !important;
@@ -461,7 +464,7 @@ ul.main-menu {
         background-color: #00000096
     }
 
-.t-card-book-infor .title-card {
+.title-card {
     font-size: 0.8em;
     font-weight: 600;
     text-transform: uppercase;
@@ -3032,7 +3035,7 @@ input[type=radio].btn-filter {
     border-radius: 50%;
 }
 
-textarea:hover,
+/*textarea:hover,
 input:hover,
 textarea:active,
 input:active,
@@ -3044,7 +3047,7 @@ button:hover {
     outline: 0px !important;
     -webkit-appearance: none;
 }
-
+*/
 .wrapper-chat {
     position: fixed;
     bottom: 105px;
@@ -3349,4 +3352,41 @@ button:hover {
     color: #fff;
     font-size: 16px;
     display:none;
+}
+.icon-sale {
+    color: #f56400;
+    width: 40px;
+    font-size: 18px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fbe100d9;
+    position: absolute;
+    z-index: 1;
+    font-weight: 900;
+    line-height: 40px;
+    text-align: center;
+}
+.price-old {
+    text-decoration: line-through;
+    color: #8e8d8df7
+}
+.font-size-16{
+    font-size:16px;
+}
+.title-card-1 {
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.4rem;
+    border-bottom: 1px solid #ccc;
+    margin: 0 0 10px 0;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    vertical-align: bottom;
+    color: #000;
+    margin-top: 10px;
 }

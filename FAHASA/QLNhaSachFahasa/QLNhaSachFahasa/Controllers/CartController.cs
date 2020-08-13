@@ -134,8 +134,9 @@ namespace QLNhaSachFahasa.Controllers
                         SOLUONGMUA = item.SOLUONG,
                         SOLUONGTON = item.SANPHAM.SOLUONG,
                         TACGIA = item.SANPHAM.TACGIA,
-                        DONGIA = item.SANPHAM.GIABAN,
-                        CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai
+                        DONGIA = item.SANPHAM.DONGIA,
+                        CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
+                        PhanTram = item.SANPHAM.PhanTram
                     });
                 }
             }
@@ -144,13 +145,22 @@ namespace QLNhaSachFahasa.Controllers
         public ActionResult AddIItem(string maSanPham, int soluong)
         {
             var dao = new BookDao().ViewDetail(maSanPham);
+            var ctkm = new SanPhamDao().getCTKM(maSanPham);
+            int phanTram = 0;
+            string chuongtrinhkhuyenmai = "";
+          
             var giaban = new SanPhamDao().getGiaBan(maSanPham);
             var dongiaban = dao.DONGIA;
-            string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(maSanPham);
             if (giaban != null)
             {
                 dongiaban = giaban.DONGIABAN;
             }
+            if (ctkm != null)
+            {
+                phanTram = (int)ctkm.MUCGIAMGIA;
+                chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+            }
+            
             var hinhanh = new SanPhamDao().getListImages(maSanPham);
             var model = new SanPhamModel()
             {
@@ -160,13 +170,14 @@ namespace QLNhaSachFahasa.Controllers
                 NGONNGU = dao.NGONNGU,
                 HINHTHUC = dao.HINHTHUC,
                 TACGIA = dao.TACGIA,
-                DONGIA = dao.DONGIA,
+                DONGIA = dongiaban,
                 NHAXUATBAN = dao.NHAXUATBAN,
                 MAUSAC = dao.MAUSAC,
                 SOLUONG = (int)dao.SOLUONG,
-                GIABAN = dongiaban,
+                GIABAN = dongiaban - dongiaban * phanTram / 100,
                 LINKHINHANH = hinhanh[0].LINKHINHANH,
-                CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai
+                CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
+                PhanTram = phanTram,
             };
             var cart = Session[CartSession.CartSesstion];
             if (cart != null)
@@ -186,7 +197,7 @@ namespace QLNhaSachFahasa.Controllers
                 {
                     var item = new CartModel();
                     item.SANPHAM = model;
-                    item.SOLUONG = soluong;
+                    item.SOLUONG += soluong;
                     list.Add(item);
                 }
                 Session.Add(CartSession.CartSesstion, list);
@@ -196,7 +207,7 @@ namespace QLNhaSachFahasa.Controllers
                 var item = new CartModel();
                 item.SANPHAM = model;
                 item.SOLUONG = soluong;
-                item.SANPHAM.GIABAN = dongiaban;
+                item.SANPHAM.GIABAN = model.GIABAN;
                 var list = new List<CartModel>();
                 list.Add(item);
                 //Session[CartSession.CartSesstion] = list;

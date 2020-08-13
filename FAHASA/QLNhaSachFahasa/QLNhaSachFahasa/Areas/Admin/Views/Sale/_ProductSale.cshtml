@@ -1,0 +1,156 @@
+﻿@using QLNhaSachFahasa.Resources
+<form>
+    <div class="search-input w-100 search-content search-content-hover" id="search-product">
+        @Html.TextBox("txtSearchDataTable", @Request.QueryString["txtSearchDataTable"], new { @class = "form-control na-font-txt-small", @placeholder = ViewText.LABLE_SEARCH, @maxlength = "20", @onkeyup = "checkInput('#txtSearchDataTable','#ico-search')" })
+        <i class="fa fa-search py-2" id="ico-search" onclick=" deleteValInput('#search-product','#ico-search','#txtSearchDataTable') "></i>
+    </div>
+</form>
+<div id="gridPoduct" class="mt-4"></div>
+
+<div class="row mt-3">
+    <div class="col-12 text-right"><button type="button" id="saveChange" class="btn buttonSave">@ViewText.BUTTON_SUBMIT</button></div>
+</div>
+<script>
+    var dem = 0;
+    var selectCustomTemp = [];
+    var dataSource = new kendo.data.DataSource();
+    var gridPoduct = $("#gridPoduct").kendoGrid({
+        height: 380,
+        groupable: false,
+        sortable: false,
+        filterable: false,
+        pageable: false,
+        dataSource: dataSource,
+        columns: [
+            {
+                field: "select",
+                template: "<input type='checkbox' value='#=MaSanPham#' data-bind='checked:#:select#' name='checkProduct'/>",
+                headerTemplate: "<input id='checkAll' type='checkbox' onclick='checkAll(this)'/>",
+                filterable: false,
+                sortable: false,
+                width: 40,
+                attributes: {
+                    class: "text-center",
+                },
+                headerAttributes: {
+                    class: "text-center",
+                },
+            },
+            {
+                field: "MaSanPham",
+                title: "Mã sản phẩm",
+                template: "<span>#=MaSanPham#</span>",
+
+                attributes: {
+                    class: "text-center",
+                },
+                headerAttributes: {
+                    class: "text-center",
+                },
+            },{
+                field: "TenSanPham",
+                title: "Tên sản phẩm",
+                template: "<span>#=TenSanPham#</span>",
+
+
+                attributes: {
+                    class: "text-center",
+                },
+                headerAttributes: {
+                    class: "text-center",
+                },
+            }],
+        change: function (e) {
+        },
+        dataBound: function (e) {
+            e.sender.items().each(function () {
+                var dataItem = e.sender.dataItem(this);
+                kendo.bind(this, dataItem);
+                if (dataItem.select) {
+                    $(this).addClass("k-state-selected");
+                    $(this).find("input").prop("checked", true);
+                }
+            })
+
+            $("#checkAll")[0].checked = e.sender.items().find(":checked").length == e.sender.dataSource.view().length;
+        },
+    }).data('kendoGrid');
+
+    function GetDataGridOrder() {
+        var keyword = $("#txtSearchDataTable").val();
+        dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    $.ajax({
+                        url: "@Url.Action("GetProduct", "Sale")",
+                        data: {
+                            id: '@Model.MaCTKM',
+                            keyword: keyword
+                        },
+                        beforeSend: function () {
+                            $(".loading").show();
+                        },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (result) {
+                            options.success(result);
+                        },
+                        error: function (result) {
+                            options.error(result);
+                        },
+                        complete: function () {
+                            $(".loading").hide();
+                        },
+                    });
+                }
+            },
+        });
+        gridPoduct.setDataSource(dataSource);
+    }
+    function checkAll(input) {
+        var items = gridPoduct.items();
+
+        items.each(function () {
+
+            var dataItem = gridPoduct.dataItem(this);
+            if (dataItem.select != input.checked) {
+                dataItem.select = input.checked;
+            }
+        })
+        gridPoduct.dataSource.sync();
+        gridPoduct.refresh();
+    }
+    $("#saveChange").click(function () {
+        var data = [];
+        $("input[name='checkProduct']:checked").each(function (i) {
+            data[i] = $(this).val();
+        });
+        $.ajax({
+            url: "@Url.Action("SaveProductSave", "Sale")",
+            data: {
+                data: data,
+                idCTKM:'@Model.MaCTKM',
+            },
+            beforeSend: function () {
+                $(".loading").show();
+            },
+            dataType: "json",
+            type: "POST",
+            success: function (result) {
+                if (result == 1) {
+                    showSuccess("@Html.Raw(ViewText.Message_Add_Product_Success)");
+                    $("#popupAddWindows").data("kendoWindow").close();
+                }
+            },
+            complete: function () {
+                $(".loading").hide();
+            },
+        });
+    });
+    $(document).ready(function () {
+        $("#txtSearchDataTable").keyup(function () {
+            GetDataGridOrder()
+        });
+        GetDataGridOrder();
+    });
+</script>

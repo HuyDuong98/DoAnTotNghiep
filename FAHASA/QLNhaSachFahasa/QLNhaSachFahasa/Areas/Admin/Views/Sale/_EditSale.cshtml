@@ -1,0 +1,89 @@
+﻿@using QLNhaSachFahasa.Resources
+@model QLNhaSachFahasa.Areas.Admin.Models.SaleModel
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditSale" }))
+{
+    <div class="d-flex">Tên chương trình khuyến mãi: <h5 class="ml-2"><strong> @Model.TenCTKM</strong></h5></div>
+    <div class="row mb-4">
+        <div class="col-6"><p>Ngày bắt đầu:</p></div>
+        <div class="col-6"><p>Ngày kết thúc:</p></div>
+        <div class="col-6" style="width:100px"> @Html.TextBoxFor(model => model.NgayBatDau, new { @class = "w-100" })</div>
+        <div class="col-6" style="width:100px">    @Html.TextBoxFor(model => model.NgayKetThuc, new { @class = "w-100" })</div>
+        <div class="col-12 text-danger w-100 text-center"><small class="message-date"></small></div>
+    </div>
+    <div class="d-flex  text-nowrap">
+        <p>Mức giảm giá (%):</p>
+        @Html.TextBoxFor(model => model.PhanTramGiamGia, new { @class = "form-control mx-4 w-25 text-right", @type = "number", max = 100 })
+    </div>
+
+
+}
+<div class="row">
+    <div class="col-md-12 text-right mt-4">
+        <button onclick="fnUpdateSale()" class="btn btn-success">@ViewText.BUTTON_UPDATE</button>
+    </div>
+</div>
+<script>
+    var form = $("#frmEditSale");
+    $("#NgayBatDau").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        change: function () {
+            var NgayBatDau = $("#NgayBatDau").data("kendoDatePicker").value();
+            var NgayKetThuc = $("#NgayKetThuc").data("kendoDatePicker").value();
+            if (NgayBatDau > NgayKetThuc) {
+                $(".message-date").text("Ngày bắt đầu không được sau ngày kết thúc.");
+                $(".btn-success").attr("disabled", "disabled");
+            } else {
+                $(".message-date").text("");
+                $(".btn-success").removeAttr("disabled");
+            }
+        }
+    });
+    $("#NgayKetThuc").kendoDatePicker({
+        format: "dd/MM/yyyy",
+        change: function () {
+            var NgayBatDau = $("#NgayBatDau").data("kendoDatePicker").value();
+            var NgayKetThuc = $("#NgayKetThuc").data("kendoDatePicker").value();
+            if (NgayBatDau > NgayKetThuc) {
+                $(".message-date").text("Ngày bắt đầu không được sau ngày kết thúc.");
+            } else {
+                $(".message-date").text("");
+            }
+        }
+    });
+    initValidation();
+    function initValidation() {
+
+        form.validate({
+            ignore: '',
+            rules: {
+                "PhanTramGiamGia": {
+                    required: true,
+                    min: 0,
+                    max: 100
+                },
+            },
+            messages:
+            {
+                "PhanTramGiamGia": {
+                    required: "Mức giảm giá không được trống",
+                    min: "Mức giảm giá tối thiểu 0%",
+                    max: "Mức giảm giá tối đa 100%"
+                },
+            },
+            success: function (error) {
+                error.remove();
+            }
+        });
+    }
+    function fnUpdateSale() {
+        var NgayBatDau = $("#NgayBatDau").data("kendoDatePicker").value();
+        var NgayKetThuc = $("#NgayKetThuc").data("kendoDatePicker").value();
+        if (NgayBatDau > NgayKetThuc) {
+            $(".message-date").text("Ngày bắt đầu không được sau ngày kết thúc.");
+        } else {
+            if (form.valid()) {
+
+            }
+        }
+    }
+</script>

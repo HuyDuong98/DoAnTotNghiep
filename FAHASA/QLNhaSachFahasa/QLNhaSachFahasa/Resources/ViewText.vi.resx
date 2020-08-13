@@ -309,6 +309,9 @@
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>Tên đăng nhập</value>
   </data>
+  <data name="price_current" xml:space="preserve">
+    <value>Giá thị trường</value>
+  </data>
   <data name="Question_Delete_Employee" xml:space="preserve">
     <value>Bạn muốn xóa nhân viên</value>
   </data>
@@ -653,6 +656,15 @@
   </data>
   <data name="Title_Revenue" xml:space="preserve">
     <value>Doanh thu</value>
+  </data>
+  <data name="Title_Sale" xml:space="preserve">
+    <value>Chương trình khuyến mãi</value>
+  </data>
+  <data name="Title_Sale_Product" xml:space="preserve">
+    <value>Sản phẩm giảm giá</value>
+  </data>
+  <data name="Title_Saving" xml:space="preserve">
+    <value>Tiết kiệm</value>
   </data>
   <data name="Title_Search_Orders" xml:space="preserve">
     <value>Tìm kiếm đơn hàng</value>

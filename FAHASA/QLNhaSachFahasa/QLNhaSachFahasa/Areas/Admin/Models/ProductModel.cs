@@ -28,5 +28,6 @@ namespace QLNhaSachFahasa.Areas.Admin.Models
         public string NguoiCapNhat { get; set; }
         public int TrangThai { get; set; }
         public int LuotXem { get; set; }
+        public bool select { get; set; }
     }
 }

@@ -309,6 +309,9 @@
   <data name="PLACEHOLDER_USERNAME" xml:space="preserve">
     <value>UserName</value>
   </data>
+  <data name="price_current" xml:space="preserve">
+    <value>Price current</value>
+  </data>
   <data name="Question_Delete_Employee" xml:space="preserve">
     <value>Do you want to delete employee</value>
   </data>
@@ -655,6 +658,15 @@ Access rights</value>
   </data>
   <data name="Title_Revenue" xml:space="preserve">
     <value>Revenue</value>
+  </data>
+  <data name="Title_Sale" xml:space="preserve">
+    <value>Sale</value>
+  </data>
+  <data name="Title_Sale_Product" xml:space="preserve">
+    <value>Sale product</value>
+  </data>
+  <data name="Title_Saving" xml:space="preserve">
+    <value>Saving</value>
   </data>
   <data name="Title_Search_Orders" xml:space="preserve">
     <value>Search orders</value>

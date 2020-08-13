@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -63,7 +64,7 @@ namespace Model.Dao
         }
         public GIABAN getGiaBan(string masp)
         {
-            return db.GIABANs.Where(x=>x.MASANPHAM == masp).OrderByDescending(x => x.NGAYCAPNHATGIA).FirstOrDefault();
+            return db.GIABANs.Where(x => x.MASANPHAM == masp).OrderByDescending(x => x.NGAYCAPNHATGIA).FirstOrDefault();
         }
 
         public string getChuongTrinhKhuyenMai(string masp)
@@ -98,9 +99,24 @@ namespace Model.Dao
 
             return list;
         }
+        public List<CT_CHUONGTRINH_KHUYENMAI> getListctCTKM(string id)
+        {
+            return db.CT_CHUONGTRINH_KHUYENMAI.Where(x => x.MACHUONGTRINHKHUYENMAI == id).ToList();
+        }
+        public CHUONGTRINH_KHUYENMAI getCTKM (string masp)
+        {
+            List<CT_CHUONGTRINH_KHUYENMAI> CTKM = db.CT_CHUONGTRINH_KHUYENMAI.Where(x => x.MASANPHAM == masp).ToList();
+            List<CHUONGTRINH_KHUYENMAI> list = new List<CHUONGTRINH_KHUYENMAI>();
+            foreach(var item in CTKM)
+            {
+                var temp = db.CHUONGTRINH_KHUYENMAI.Where(x => x.MACHUONGTRINHKHUYENMAI == item.MACHUONGTRINHKHUYENMAI).FirstOrDefault();
+                list.Add(temp);
+            }
+            return list.OrderByDescending(x => x.MUCGIAMGIA).FirstOrDefault();
+        }
         public List<SANPHAM> getListProduct(string idPL)
         {
-            return  db.SANPHAMs.Where(x => x.PHANLOAI == idPL && x.TRANGTHAI == 1).Take(10).ToList();
+            return db.SANPHAMs.Where(x => x.PHANLOAI == idPL && x.TRANGTHAI == 1).Take(10).ToList();
         }
         public int setViewsProduct(string productID)
         {
@@ -344,6 +360,46 @@ namespace Model.Dao
                 var product = db.SANPHAMs.Find(id);
                 product.SOLUONG = sl;
                 db.SaveChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public List<CHUONGTRINH_KHUYENMAI> GetListCTKM()
+        {
+            return db.CHUONGTRINH_KHUYENMAI.ToList();
+        }
+        public CHUONGTRINH_KHUYENMAI FindCTKM(string id)
+        {
+            return db.CHUONGTRINH_KHUYENMAI.Find(id);
+        }
+        public THOIGIAN GetTimeSale(string id)
+        {
+            return db.THOIGIANs.Where(x => x.MATHOIGIAN == id).FirstOrDefault();
+        }
+
+        public int ChangeProductSale(string idCTKM, List<string> data)
+        {
+            try
+            {
+                var ct = db.CT_CHUONGTRINH_KHUYENMAI.Where(x => x.MACHUONGTRINHKHUYENMAI == idCTKM).ToList();
+                foreach(var i in ct)
+                {
+                    db.CT_CHUONGTRINH_KHUYENMAI.Remove(i);
+                    db.SaveChanges();
+                }
+
+                foreach (var item in data)
+                {
+                    var model = new CT_CHUONGTRINH_KHUYENMAI();
+                    model.MACHUONGTRINHKHUYENMAI = idCTKM;
+                    model.MASANPHAM = item;
+                    db.CT_CHUONGTRINH_KHUYENMAI.Add(model);
+                    db.SaveChanges();
+                }
                 return 1;
             }
             catch

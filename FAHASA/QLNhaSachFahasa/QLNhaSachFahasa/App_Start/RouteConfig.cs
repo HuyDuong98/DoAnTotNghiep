@@ -35,6 +35,11 @@ namespace QLNhaSachFahasa
                  url: "{controller}/{action}/{id}",
                  defaults: new { controller = "Order", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                 name: "Sale",
+                 url: "{controller}/{action}/{id}",
+                 defaults: new { controller = "Sale", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

@@ -48,9 +48,16 @@ namespace QLNhaSachFahasa.Controllers
             foreach (SANPHAM item in model)
             {
                 List<HINHANH> images = new SanPhamDao().getListImages(item.MASANPHAM);
-                string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.MASANPHAM);
+                string chuongtrinhkhuyenmai = "";
                 var giaban = new SanPhamDao().getGiaBan(item.MASANPHAM);
                 var gia = item.DONGIA;
+                var ctkm = new SanPhamDao().getCTKM(item.MASANPHAM);
+                int phanTram = 0;
+                if(ctkm != null)
+                {
+                    phanTram = (int)ctkm.MUCGIAMGIA;
+                    chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+                }
                 if (giaban != null)
                 {
                     gia = giaban.DONGIABAN;
@@ -60,10 +67,11 @@ namespace QLNhaSachFahasa.Controllers
                     TENSANPHAM = item.TENSANPHAM,
                     MASANPHAM = item.MASANPHAM,
                     DONGIA = gia,
-                    //GIABAN = giaban.DONGIABAN,
+                    GIABAN = gia - gia * phanTram / 100,
                     GHICHU = System.Web.HttpUtility.HtmlDecode(item.GHICHU),
                     CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
-                    LUOTXEM = item.LUOTXEM
+                    LUOTXEM = item.LUOTXEM,
+                    PhanTram = phanTram,
                 };
                 if (images.Count >0)
                 {
@@ -88,15 +96,22 @@ namespace QLNhaSachFahasa.Controllers
                     TENLUUTEPTIN = img.TENLUUTEPTIN
                 });
             }
-            string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(model.MASANPHAM);
+            var ctkm = new SanPhamDao().getCTKM(model.MASANPHAM);
+            int phanTram = 0;
+            string chuongtrinhkhuyenmai = "";
+            if (ctkm != null)
+            {
+                phanTram = (int)ctkm.MUCGIAMGIA;
+                chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+            }
             string link = "";
             if(images != null && images.Count > 0)
             {
                 link = images[0].LINKHINHANH;
             }
-            var giaban = new SanPhamDao().getGiaBan(model.MASANPHAM);
             decimal dongiaban = model.DONGIA;
-            if(giaban != null)
+            var giaban = new SanPhamDao().getGiaBan(model.MASANPHAM);
+            if (giaban != null)
             {
                 dongiaban = giaban.DONGIABAN;
             }
@@ -110,8 +125,8 @@ namespace QLNhaSachFahasa.Controllers
             {
                 TENSANPHAM = model.TENSANPHAM,
                 MASANPHAM = model.MASANPHAM,
-                GIABAN = dongiaban,
-                DONGIA = model.DONGIA,
+                GIABAN = dongiaban - dongiaban * phanTram / 100,
+                DONGIA = dongiaban,
                 LINKHINHANH = link,
                 GHICHU = System.Web.HttpUtility.HtmlDecode(model.GHICHU),
                 CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
@@ -123,7 +138,8 @@ namespace QLNhaSachFahasa.Controllers
                 HINHANH = listImg,
                 MAUSAC = model.MAUSAC,
                 KICHTHUOC = model.KICHTHUOC,
-                TRONGLUONG = (float)model.TRONGLUONG
+                TRONGLUONG = (float)model.TRONGLUONG,
+                PhanTram = phanTram,
             };
             var oModel = new
             {
@@ -144,18 +160,33 @@ namespace QLNhaSachFahasa.Controllers
             List<SanPhamModel> listProduct = new List<SanPhamModel>();
             foreach (SANPHAM item in model)
             {
+                var ctkm = new SanPhamDao().getCTKM(item.MASANPHAM);
+                int phanTram = 0;
+                string chuongtrinhkhuyenmai = "";
+                var gia = item.DONGIA;
+                if (ctkm != null)
+                {
+                    phanTram = (int)ctkm.MUCGIAMGIA;
+                    chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+                }
+                var giaban = new SanPhamDao().getGiaBan(item.MASANPHAM);
+                if (giaban != null)
+                {
+                    gia = giaban.DONGIABAN;
+                }
                 List<HINHANH> images = new SanPhamDao().getListImages(item.MASANPHAM);
-                string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.MASANPHAM);
+                
                 listProduct.Add(new SanPhamModel
                 {
-
                     TENSANPHAM = item.TENSANPHAM,
                     MASANPHAM = item.MASANPHAM,
-                    DONGIA = item.DONGIA,
+                    DONGIA = gia,
+                    GIABAN = gia - gia * phanTram / 100,
                     LINKHINHANH = images[0].LINKHINHANH,
                     GHICHU = item.GHICHU,
                     CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
-                    LUOTXEM = item.LUOTXEM
+                    LUOTXEM = item.LUOTXEM,
+                    PhanTram = phanTram,
                 });
             }
             return Json(listProduct, JsonRequestBehavior.AllowGet);
@@ -170,13 +201,28 @@ namespace QLNhaSachFahasa.Controllers
                 foreach (SANPHAM item in model)
                 {
                     List<HINHANH> images = new SanPhamDao().getListImages(item.MASANPHAM);
-                    string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(item.MASANPHAM);
+                    var giaban = new SanPhamDao().getGiaBan(item.MASANPHAM);
+                    decimal gia = item.DONGIA;
+                    if (giaban != null)
+                    {
+                        gia = giaban.DONGIABAN;
+                    }
+                    var ctkm = new SanPhamDao().getCTKM(item.MASANPHAM);
+                    int phanTram = 0;
+                    string chuongtrinhkhuyenmai = "";
+                    if (ctkm != null)
+                    {
+                        phanTram = (int)ctkm.MUCGIAMGIA;
+                        chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+                        gia = gia - gia * phanTram / 100;
+                    }
+                   
                     listProduct.Add(new SanPhamModel
                     {
 
                         TENSANPHAM = item.TENSANPHAM,
                         MASANPHAM = item.MASANPHAM,
-                        DONGIA = item.DONGIA,
+                        DONGIA = gia,
                         LINKHINHANH = images[0].LINKHINHANH,
                         GHICHU = item.GHICHU,
                         CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,

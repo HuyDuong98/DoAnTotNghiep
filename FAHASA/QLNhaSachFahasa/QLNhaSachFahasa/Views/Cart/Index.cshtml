@@ -63,7 +63,8 @@
                                     #:TACGIA#
                                 </small>
                                 #}#
-                                <div class="text-price">#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</div>
+                                <div class="text-price"><em>#:GIABAN==0?kendo.toString(DONGIA,"n0"):kendo.toString(GIABAN,"n0") # @Html.Raw(ViewText.VND)</em></div>
+                                <div class="price-old"><small>#:PhanTram==0?'':kendo.toString(DONGIA,"n0")+'@Html.Raw(ViewText.VND)'# </small></div>
 
                             </div>
                             <div class="quantity-box d-flex">

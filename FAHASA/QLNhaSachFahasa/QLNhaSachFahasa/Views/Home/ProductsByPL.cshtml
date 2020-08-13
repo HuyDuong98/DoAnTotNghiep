@@ -80,7 +80,8 @@
 @section scripts{
     <script>
         function htmlDecode(value) {
-            return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+            //return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+            return value.replace(/<[^>]*>?/gm, '');
         }
         var listView = $("#listView").kendoListView({
             template: kendo.template($("#template").html()),

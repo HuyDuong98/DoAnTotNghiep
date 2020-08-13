@@ -1,0 +1,145 @@
+﻿@using QLNhaSachFahasa.Resources
+@{
+    ViewBag.Title = "Fahasa - " + Html.Raw(ViewText.Title_Sale);
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutHome.cshtml";
+}
+@section slider{
+    @Html.Partial("_MenuLeft")
+}
+@section title{
+    @ViewText.Title_Sale
+}
+<div class="container">
+    <div id="gridSale"></div>
+</div>
+<div id="popupEditWindows">
+    <div id="wndEditContent"></div>
+</div>
+<div id="popupAddWindows">
+    <div id="wndAddContent"></div>
+</div>
+<script id="status-template" type="text/x-kendo-template">
+    <div class="d-flex w-100 text-center">
+        <a onclick='popupEditCTKM("#:MaCTKM#")' class="button buttonEdit rounded-circle"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        <a onclick='popupAddProductCTKM("#:MaCTKM#")' class="button buttonEdit rounded-circle ml-2"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    </div>
+</script>
+@section scripts{
+    <script>
+        $("#popupEditWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.TITLE_EDIT)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            width: 600,
+            draggable: true,
+            scrollable: true
+        });
+        $("#popupAddWindows").kendoWindow({
+            title: "@Html.Raw(ViewText.Title_Sale_Product)",
+            visible: false,
+            modal: true,
+            maxHeight: 600,
+            width: 800,
+            draggable: true,
+            scrollable: true
+        });
+        var gridSale = $("#gridSale").kendoGrid({
+            groupable: false,
+            sortable: true,
+            filterable: false,
+            columns: [
+                {
+                    field: "MaCTKM",
+                    title: "Mã",
+                    template: "<span>#=MaCTKM#</span>",
+                    width: 50,
+                },
+                {
+                    field: "TenCTKM",
+                    title: "Tên chương trình khuyến mãi",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: 150,
+                },
+                {
+                    field: "NgayBatDau",
+                    title: "Ngày bắt đầu",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NgayBatDau),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "NgayKetThuc",
+                    title: "Ngày kết thúc",
+                    template: "<span>#=kendo.toString(kendo.parseDate(NgayKetThuc),\"dd/MM/yyyy\")#</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                },
+                {
+                    field: "PhanTramGiamGia",
+                    title: "Phần trăm giảm giá",
+                    template: "<span>#=PhanTramGiamGia#%</span>",
+                    headerAttributes: {
+                        class: "header-table",
+                    },
+                    width: "123px",
+                }, {
+                    template: kendo.template($("#status-template").html()),
+                    width: 80,
+                }],
+            pageable: {
+                pageSizes: true,
+                pageSizes: [10, 50, 100, "All"],
+                responsive: false,
+                messages: {
+                    display: "{0}-{1} trong số {2} mục",
+                    itemsPerPage: "mục trên mỗi trang"
+                }
+            }
+        }).data('kendoGrid');
+        GetDataGridOrder();
+         function GetDataGridOrder() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        $.ajax({
+                            url:"@Url.Action("GetDataGridSale", "Sale")",
+                            beforeSend: function () {
+                                $(".loading").show();
+                            },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (result) {
+                                options.success(result);
+                            },
+                            error: function (result) {
+                                options.error(result);
+                            },
+                            complete: function () {
+                                $(".loading").hide();
+                            },
+                        });
+                    }
+                },
+                pageSize: 10
+            });
+             gridSale.setDataSource(dataSource);
+        }
+        function popupEditCTKM(id) {
+            $('#wndEditContent').load("/Admin/Sale/EditSale?id=" + id, function () {
+                $("#popupEditWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+        function popupAddProductCTKM(id) {
+            $('#wndAddContent').load("/Admin/Sale/ProductSale?id=" + id, function () {
+                $("#popupAddWindows").data("kendoWindow").center().open().element.closest(".k-window").css({ top: 20 });
+            });
+        }
+    </script>
+}

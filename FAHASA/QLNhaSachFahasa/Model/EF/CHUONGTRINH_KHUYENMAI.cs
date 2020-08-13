@@ -26,6 +26,8 @@ namespace Model.EF
         public string TENCHUONGTRINHKHUYENMAI { get; set; }
 
         public virtual THOIGIAN THOIGIAN { get; set; }
+        public int? MUCGIAMGIA { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_CHUONGTRINH_KHUYENMAI> CT_CHUONGTRINH_KHUYENMAI { get; set; }

@@ -95,6 +95,9 @@
 </div>
 <script type="text/x-kendo-template" id="template">
     <div class="item col-md-3 col-sm-3 col-3">
+        #if(PhanTram != 0){#
+        <div class="icon-sale">#:PhanTram#%</div>
+        #}#
         <div class="t-card-book" style="width: 100%;">
             <a href="/Home/Detail?productID=#:MASANPHAM#" class="t-card-book-img relative ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Read">
                 <div class="book-bg-1">
@@ -105,8 +108,9 @@
                 <a href="/Home/Detail?productID=#:MASANPHAM#" title="#:TENSANPHAM#" class="t-card-book-infor-title ga_click" data-gacategory="Home" data-gaaction="Click MienphiHot" data-galabel="Detail">
                     <span class="title-card">#:TENSANPHAM#</span>
                 </a>
-                <span class="#:CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':''#">#:CHUONGTRINHKHUYENMAI#</span>
-                <div class="text-price"><em>#:kendo.toString(DONGIA,"n0")# @Html.Raw(ViewText.VND)</em></div>
+                <span class="#:CHUONGTRINHKHUYENMAI=='Flash Sale'?'card-flash-sale':CHUONGTRINHKHUYENMAI=='Deal Hot'?'card-deal-hot':''#">#:CHUONGTRINHKHUYENMAI#</span>
+                <div class="text-price"><em>#:GIABAN==0?kendo.toString(DONGIA,"n0"):kendo.toString(GIABAN,"n0") # @Html.Raw(ViewText.VND)</em></div>
+                <div class="price-old"><small>#:PhanTram==0?'':kendo.toString(DONGIA,"n0")+'@Html.Raw(ViewText.VND)'# </small></div>
                 <div class="t-card-book-infor-description">
 
                     #= htmlDecode(GHICHU||"")#
@@ -145,7 +149,8 @@
             dataSource: dataSource
         }).data("kendoListView");
         function htmlDecode(value) {
-            return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+            //return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+            return value.replace(/<[^>]*>?/gm, '');
         }
         var dataSource = new kendo.data.DataSource({
             transport: {

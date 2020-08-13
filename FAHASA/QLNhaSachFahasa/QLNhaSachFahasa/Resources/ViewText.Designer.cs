@@ -637,6 +637,15 @@ namespace QLNhaSachFahasa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price current.
+        /// </summary>
+        public static string price_current {
+            get {
+                return ResourceManager.GetString("price_current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete employee.
         /// </summary>
         public static string Question_Delete_Employee {
@@ -1670,6 +1679,33 @@ namespace QLNhaSachFahasa.Resources {
         public static string Title_Revenue {
             get {
                 return ResourceManager.GetString("Title_Revenue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sale.
+        /// </summary>
+        public static string Title_Sale {
+            get {
+                return ResourceManager.GetString("Title_Sale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sale product.
+        /// </summary>
+        public static string Title_Sale_Product {
+            get {
+                return ResourceManager.GetString("Title_Sale_Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving.
+        /// </summary>
+        public static string Title_Saving {
+            get {
+                return ResourceManager.GetString("Title_Saving", resourceCulture);
             }
         }
         

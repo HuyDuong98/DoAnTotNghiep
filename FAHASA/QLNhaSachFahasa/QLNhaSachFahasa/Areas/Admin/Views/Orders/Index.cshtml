@@ -52,7 +52,6 @@
             dataSource: {
                 data: [{ Text: "@Html.Raw(ViewText.TITLE_ALL)", Value: null },
                     { Text: "@Html.Raw(ViewText.Status_New)", Value: 0 },
-                    { Text: "@Html.Raw(ViewText.Status_Shipping)", Value: 2 },
                     { Text: "@Html.Raw(ViewText.Status_Success)", Value: 1 },
                     { Text: "@Html.Raw(ViewText.Status_Cancel)", Value: -1 }
                 ]}
@@ -74,7 +73,7 @@
                     field: "MaDDH",
                     title: "Mã đơn hàng",
                     template: "<span>#=MaDDH#</span>",
-                    width: 60,
+                    width: "auto",
                 }, {
                     field: "TenKH",
                     title: "Tên khách hàng",

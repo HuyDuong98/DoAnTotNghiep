@@ -38,6 +38,6 @@ namespace QLNhaSachFahasa.Models
         public int NHAP { get; set; }
         public int XUAT { get; set; }
         public int TON { get;set; }
-
+        public int PhanTram { get; set; }
     }
 }
