@@ -44,6 +44,7 @@ namespace Model.Dao
                 emloyee.SDT = entity.SDT;
                 emloyee.EMAIL = entity.EMAIL;
                 emloyee.TENNHANVIEN = entity.TENNHANVIEN;
+                emloyee.MANHOMNGUOIDUNG = entity.MANHOMNGUOIDUNG;
                 //emloyee.NGAYTAO = DateTime.Now;
                 //emloyee.TRANGTHAI = entity.TRANGTHAI;
                 db.SaveChanges();

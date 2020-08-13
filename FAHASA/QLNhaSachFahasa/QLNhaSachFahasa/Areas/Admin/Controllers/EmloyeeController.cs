@@ -132,8 +132,11 @@ namespace QLNhaSachFahasa.Areas.Admin.Controllers
                 HINHANH = model.HINHANH,
                 LOAIHINHCONGVIEC = model.LOAIHINHCONGVIEC,
                 CHUCVU = model.CHUCVU,
-                TRANGTHAI = model.TRANGTHAI
+                TRANGTHAI = model.TRANGTHAI,
+                MANHOMNGUOIDUNG = model.MANHOMNGUOIDUNG,
             };
+            var dao = new GroupUserDao();
+            ViewBag.MANHOMNGUOIDUNG = new SelectList(dao.ListAll(), "MANHOMNGUOIDUNG", "TENNHOMNGUOIDUNG", emp.MANHOMNGUOIDUNG);
             return PartialView("~/Areas/Admin/Views/Emloyee/_EditEmloyee.cshtml", emp);
         }
 

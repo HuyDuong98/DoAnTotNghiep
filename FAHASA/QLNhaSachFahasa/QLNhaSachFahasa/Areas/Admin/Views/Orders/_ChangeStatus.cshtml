@@ -34,7 +34,8 @@
                     GetDataGridOrder(data);
                     $("#popupChangeStatus").data("kendoWindow").close();
                 } else if (result.model == 0){
-                    showError(result.text+ "không đủ số lượng.");
+                    showError(result.text + "không đủ số lượng.");
+                    $("#popupChangeStatus").data("kendoWindow").close();
                 }
             },
             error: function (result) {
