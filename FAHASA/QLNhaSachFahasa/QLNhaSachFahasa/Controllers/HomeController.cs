@@ -357,8 +357,15 @@ namespace QLNhaSachFahasa.Controllers
                 {
                     foreach(var sp in temp)
                     {
+                        var ctkm = new SanPhamDao().getCTKM(sp.MASANPHAM);
+                        int phanTram = 0;
+                        string chuongtrinhkhuyenmai = "";
+                        if (ctkm != null)
+                        {
+                            phanTram = (int)ctkm.MUCGIAMGIA;
+                            chuongtrinhkhuyenmai = ctkm.TENCHUONGTRINHKHUYENMAI;
+                        }
                         List<HINHANH> images = new SanPhamDao().getListImages(sp.MASANPHAM);
-                        string chuongtrinhkhuyenmai = new SanPhamDao().getChuongTrinhKhuyenMai(sp.MASANPHAM);
                         var giaban = new SanPhamDao().getGiaBan(sp.MASANPHAM);
                         var gia = sp.DONGIA;
                         if (giaban != null)
@@ -369,11 +376,12 @@ namespace QLNhaSachFahasa.Controllers
                         {
                             TENSANPHAM = sp.TENSANPHAM,
                             MASANPHAM = sp.MASANPHAM,
-                            DONGIA = sp.DONGIA,
-                            GIABAN = gia,
+                            DONGIA = gia,
+                            GIABAN = gia - gia * phanTram / 100,
                             GHICHU = System.Web.HttpUtility.HtmlDecode(sp.GHICHU),
                             CHUONGTRINHKHUYENMAI = chuongtrinhkhuyenmai,
-                            LUOTXEM = sp.LUOTXEM
+                            LUOTXEM = sp.LUOTXEM,
+                            PhanTram = phanTram
                         };
                         if (images.Count > 0)
                         {
